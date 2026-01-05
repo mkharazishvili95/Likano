@@ -14,28 +14,35 @@ namespace Likano.Application.Features.Category.Queries.GetAll
 
         public async Task<GetAllCategoriesResponse> Handle(GetAllCategoriesQuery request, CancellationToken cancellationToken)
         {
-            var categories = await _repository.GetAll();
+            var pageNumber = request.Pagination?.PageNumber > 0 ? request.Pagination.PageNumber : 1;
+            var pageSize = request.Pagination?.PageSize > 0 ? request.Pagination.PageSize : 20;
+            var search = request.SearchString?.Trim();
 
-            if (categories == null || categories.Count == 0)
+            var categories = await _repository.GetAll() ?? new List<Domain.Entities.Category>();
+
+            if (!string.IsNullOrWhiteSpace(search))
             {
-                return new GetAllCategoriesResponse
-                {
-                    Success = true,
-                    StatusCode = 200,
-                    Message = "No categories found.",
-                    Items = new List<GetAllCategoriesItemsResponse>(),
-                    TotalCount = 0
-                };
+                categories = categories
+                    .Where(c =>
+                        (!string.IsNullOrEmpty(c.Name) && c.Name.Contains(search, StringComparison.OrdinalIgnoreCase)) ||
+                        (!string.IsNullOrEmpty(c.Description) && c.Description.Contains(search, StringComparison.OrdinalIgnoreCase)))
+                    .ToList();
             }
 
             var totalCount = categories.Count;
+
+            var paged = categories
+                .OrderBy(c => c.Id)
+                .Skip((pageNumber - 1) * pageSize)
+                .Take(pageSize)
+                .ToList();
 
             return new GetAllCategoriesResponse
             {
                 Success = true,
                 StatusCode = 200,
                 TotalCount = totalCount,
-                Items = categories.Select(c => new GetAllCategoriesItemsResponse
+                Items = paged.Select(c => new GetAllCategoriesItemsResponse
                 {
                     Id = c.Id,
                     Name = c.Name,

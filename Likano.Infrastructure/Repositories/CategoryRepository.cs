@@ -14,7 +14,6 @@ namespace Likano.Infrastructure.Repositories
         }
 
         public async Task<Category?> Get(int id) => await _db.Categories.FindAsync(id);
-
         public async Task<List<Category>?> GetAll() => await _db.Categories.AsNoTracking().ToListAsync(); 
     }
 }

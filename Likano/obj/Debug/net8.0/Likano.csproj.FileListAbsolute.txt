@@ -149,3 +149,4 @@ D:\G\Likano\Likano\bin\Debug\net8.0\Microsoft.Extensions.DependencyInjection.Abs
 D:\G\Likano\Likano\bin\Debug\net8.0\Microsoft.Extensions.Logging.Abstractions.dll
 D:\G\Likano\Likano\bin\Debug\net8.0\System.Diagnostics.DiagnosticSource.dll
 D:\G\Likano\Likano\bin\Debug\net8.0\MediatR.Extensions.Microsoft.DependencyInjection.dll
+D:\G\Likano\Likano\obj\Debug\net8.0\Likano.sourcelink.json

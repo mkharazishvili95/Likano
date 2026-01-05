@@ -17,3 +17,4 @@ D:\G\Likano\Likano.Infrastructure\bin\Debug\net8.0\Likano.Infrastructure.runtime
 D:\G\Likano\Likano.Infrastructure\bin\Debug\net8.0\Likano.Application.dll
 D:\G\Likano\Likano.Infrastructure\bin\Debug\net8.0\Likano.Application.pdb
 D:\G\Likano\Likano.Infrastructure\obj\Debug\net8.0\Likano.Infrastructure.genruntimeconfig.cache
+D:\G\Likano\Likano.Infrastructure\obj\Debug\net8.0\Likano.Infrastructure.sourcelink.json

@@ -9,3 +9,4 @@ D:\G\Likano\Likano.Domain\obj\Debug\net8.0\Likano.Domain.dll
 D:\G\Likano\Likano.Domain\obj\Debug\net8.0\refint\Likano.Domain.dll
 D:\G\Likano\Likano.Domain\obj\Debug\net8.0\Likano.Domain.pdb
 D:\G\Likano\Likano.Domain\obj\Debug\net8.0\ref\Likano.Domain.dll
+D:\G\Likano\Likano.Domain\obj\Debug\net8.0\Likano.Domain.sourcelink.json

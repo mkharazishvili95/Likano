@@ -15,7 +15,7 @@
 	  <Folder Include="Features\Category\Commands\" />
 	  <Folder Include="Features\Manage\" />
 	  <Folder Include="Features\Auth\" />
-	  <Folder Include="Features\Product\" />
+	  <Folder Include="Features\Product\Commands\" />
 	</ItemGroup>
 
 	<ItemGroup>
