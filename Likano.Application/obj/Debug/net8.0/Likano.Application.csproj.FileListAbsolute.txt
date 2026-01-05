@@ -1,0 +1,15 @@
+D:\G\Likano\Likano.Application\bin\Debug\net8.0\Likano.Application.deps.json
+D:\G\Likano\Likano.Application\bin\Debug\net8.0\Likano.Application.dll
+D:\G\Likano\Likano.Application\bin\Debug\net8.0\Likano.Application.pdb
+D:\G\Likano\Likano.Application\obj\Debug\net8.0\Likano.Application.GeneratedMSBuildEditorConfig.editorconfig
+D:\G\Likano\Likano.Application\obj\Debug\net8.0\Likano.Application.AssemblyInfoInputs.cache
+D:\G\Likano\Likano.Application\obj\Debug\net8.0\Likano.Application.AssemblyInfo.cs
+D:\G\Likano\Likano.Application\obj\Debug\net8.0\Likano.Application.csproj.CoreCompileInputs.cache
+D:\G\Likano\Likano.Application\obj\Debug\net8.0\Likano.Application.dll
+D:\G\Likano\Likano.Application\obj\Debug\net8.0\refint\Likano.Application.dll
+D:\G\Likano\Likano.Application\obj\Debug\net8.0\Likano.Application.pdb
+D:\G\Likano\Likano.Application\obj\Debug\net8.0\ref\Likano.Application.dll
+D:\G\Likano\Likano.Application\bin\Debug\net8.0\Likano.Domain.dll
+D:\G\Likano\Likano.Application\bin\Debug\net8.0\Likano.Domain.pdb
+D:\G\Likano\Likano.Application\obj\Debug\net8.0\Likano.Application.csproj.AssemblyReference.cache
+D:\G\Likano\Likano.Application\obj\Debug\net8.0\Likano.A.4522F656.Up2Date

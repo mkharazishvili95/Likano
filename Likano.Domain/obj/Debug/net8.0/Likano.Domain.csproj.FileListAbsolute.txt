@@ -1,0 +1,11 @@
+D:\G\Likano\Likano.Domain\bin\Debug\net8.0\Likano.Domain.deps.json
+D:\G\Likano\Likano.Domain\bin\Debug\net8.0\Likano.Domain.dll
+D:\G\Likano\Likano.Domain\bin\Debug\net8.0\Likano.Domain.pdb
+D:\G\Likano\Likano.Domain\obj\Debug\net8.0\Likano.Domain.GeneratedMSBuildEditorConfig.editorconfig
+D:\G\Likano\Likano.Domain\obj\Debug\net8.0\Likano.Domain.AssemblyInfoInputs.cache
+D:\G\Likano\Likano.Domain\obj\Debug\net8.0\Likano.Domain.AssemblyInfo.cs
+D:\G\Likano\Likano.Domain\obj\Debug\net8.0\Likano.Domain.csproj.CoreCompileInputs.cache
+D:\G\Likano\Likano.Domain\obj\Debug\net8.0\Likano.Domain.dll
+D:\G\Likano\Likano.Domain\obj\Debug\net8.0\refint\Likano.Domain.dll
+D:\G\Likano\Likano.Domain\obj\Debug\net8.0\Likano.Domain.pdb
+D:\G\Likano\Likano.Domain\obj\Debug\net8.0\ref\Likano.Domain.dll
