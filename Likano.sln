@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.14.36429.23 d17.14
+VisualStudioVersion = 17.14.36429.23
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Likano", "Likano\Likano.csproj", "{556EA3B7-9BF0-4E32-AC7A-AF401DF4EF40}"
 EndProject
@@ -10,6 +10,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Likano.Infrastructure", "Likano.Infrastructure\Likano.Infrastructure.csproj", "{5014DAF6-AC04-444B-9967-71058B20C115}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Likano.Application", "Likano.Application\Likano.Application.csproj", "{54FFA998-58F3-4515-92DD-C54A0B2E37BB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Likano.Web", "Likano.Web\Likano.Web.csproj", "{B96AC6A6-8EF9-4133-B31B-8702866D90DA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{54FFA998-58F3-4515-92DD-C54A0B2E37BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{54FFA998-58F3-4515-92DD-C54A0B2E37BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{54FFA998-58F3-4515-92DD-C54A0B2E37BB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B96AC6A6-8EF9-4133-B31B-8702866D90DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B96AC6A6-8EF9-4133-B31B-8702866D90DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B96AC6A6-8EF9-4133-B31B-8702866D90DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B96AC6A6-8EF9-4133-B31B-8702866D90DA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
