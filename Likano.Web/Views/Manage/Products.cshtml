@@ -1,6 +1,5 @@
 ﻿@model Likano.Web.Models.Manage.ProductsManageViewModel
 @using Likano.Domain.Enums
-
 @{
     ViewData["Title"] = "პროდუქცია - ადმინი";
     var pageNumber = Model.Filter.PageNumber <= 0 ? 1 : Model.Filter.PageNumber;
@@ -26,61 +25,47 @@
     });
 }
 
-<meta charset="utf-8" />
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
 
-<h2>პროდუქცია</h2>
+<div class="container-fluid py-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="h3 mb-0 text-primary fw-bold">პროდუქტების მართვა</h2>
+        <a asp-action="Create" asp-controller="Manage" class="btn btn-success shadow-sm">
+            <i class="fas fa-plus me-2"></i>ახალი პროდუქტი
+        </a>
+    </div>
 
-<form asp-action="Products" method="get">
-    <table class="table table-bordered table-striped align-middle">
-        <thead class="thead-dark">
-            <tr>
-                <th>ID</th>
-                <th>დასახელება</th>
-                <th>აღწერა</th>
-                <th>ფოტო</th>
-                <th>სტატუსი</th>
-                <th>ხელმისაწვდომია</th>
-                <th>ფასი</th>
-                <th>კატეგორია</th>
-                <th>შექმნის თარიღი</th>
-                <th>განახლების თარიღი</th>
-                <th></th>
-            </tr>
+    <div class="card shadow border-0 rounded-4 overflow-hidden mb-4">
+        <div class="card-header bg-gradient-primary text-white py-3">
+            <h5 class="mb-0"><i class="fas fa-filter me-2"></i>ფილტრები</h5>
+        </div>
+        <div class="card-body p-4">
+            <form asp-action="Products" method="get" class="row g-3">
+                <div class="col-6 col-md-1">
+                    <label class="form-label small fw-medium">ID</label>
+                    <input type="number" name="Id" value="@Model.Filter.Id" 
+                           class="form-control form-control-sm no-spinner" placeholder="ID" />
+                </div>
 
-            <tr>
-                <th>
-                    <input type="number" name="Id"
-                   value="@Model.Filter.Id"
-                   class="form-control form-control-sm no-spinner"
-                   placeholder="Id"
-                   style="width:80px;" />
-                </th>
+                <div class="col-6 col-md-2">
+                    <label class="form-label small fw-medium">დასახელება</label>
+                    <input type="text" name="Title" value="@Model.Filter.Title" 
+                           class="form-control form-control-sm" placeholder="დასახელება" />
+                </div>
 
-                <th>
-                    <input type="text" name="Title"
-                           value="@Model.Filter.Title"
-                           class="form-control form-control-sm"
-                           placeholder="დასახელება" />
-                </th>
+                <div class="col-12 col-md-3">
+                    <label class="form-label small fw-medium">აღწერა</label>
+                    <input type="text" name="Description" value="@Model.Filter.Description" 
+                           class="form-control form-control-sm" placeholder="აღწერა" />
+                </div>
 
-                <th>
-                    <input type="text" name="Description"
-                           value="@Model.Filter.Description"
-                           class="form-control form-control-sm"
-                           placeholder="აღწერა" />
-                </th>
-
-                <th>
-                    @* ფოტო *@
-                </th>
-
-                <th>
-                    @Html.DropDownList(
-                        "Status",
+                <div class="col-6 col-md-2">
+                    <label class="form-label small fw-medium">სტატუსი</label>
+                    @Html.DropDownList("Status",
                         new SelectList(
                             Enum.GetValues<ProductStatus>()
-                                .Select(x => new { 
-                                    Id = x, 
+                                .Select(x => new {
+                                    Id = x,
                                     Name = x switch
                                     {
                                         ProductStatus.Active => "აქტიური",
@@ -89,215 +74,288 @@
                                         _ => x.ToString()
                                     }
                                 }),
-                            "Id",
-                            "Name",
-                            Model.Filter.Status
-                        ),
+                            "Id", "Name", Model.Filter.Status),
                         "ყველა",
-                        new { @class = "form-control form-control-sm" }
-                    )
-                </th>
-
-                <th>
-                    @Html.DropDownList(
-                                        "IsAvailable",
-                                        new List<SelectListItem>
-                                        {
-                                        new SelectListItem { Text = "ყველა", Value = "" },
-                                        new SelectListItem { Text = "კი", Value = "true" },
-                                        new SelectListItem { Text = "არა", Value = "false" }
-                                        },
-                                        new { @class = "form-control form-control-sm" }
-                                        )
-                </th>
-
-            <th>
-                <div class="d-flex flex-column">
-                    <input type="number" step="0.01"
-                           name="PriceFrom"
-                           value="@(Model.Filter.PriceFrom?.ToString(System.Globalization.CultureInfo.InvariantCulture))"
-                           class="form-control mb-1 no-spinner"
-                           placeholder="დან"
-                           style="height:38px; font-size:14px; width:120px;" />
-                    <input type="number" step="0.01"
-                           name="PriceTo"
-                           value="@(Model.Filter.PriceTo?.ToString(System.Globalization.CultureInfo.InvariantCulture))"
-                           class="form-control no-spinner"
-                           placeholder="მდე"
-                           style="height:38px; font-size:14px; width:120px;" />
+                        new { @class = "form-select form-select-sm" })
                 </div>
-            </th>
 
+                <div class="col-6 col-md-2">
+                    <label class="form-label small fw-medium">ხელმისაწვდომია</label>
+                    @Html.DropDownList("IsAvailable",
+                        new List<SelectListItem>
+                        {
+                            new SelectListItem { Text = "ყველა", Value = "" },
+                            new SelectListItem { Text = "კი", Value = "true" },
+                            new SelectListItem { Text = "არა", Value = "false" }
+                        },
+                        new { @class = "form-select form-select-sm" })
+                </div>
 
-                <th>
-                    @Html.DropDownList(
-                        "CategoryId",
+                <div class="col-12"></div>
+
+                <div class="col-6 col-md-2">
+                    <label class="form-label small fw-medium">ფასი (დან)</label>
+                    <input type="number" step="0.01" name="PriceFrom"
+                           value="@(Model.Filter.PriceFrom?.ToString(System.Globalization.CultureInfo.InvariantCulture))"
+                           class="form-control form-control-sm no-spinner" placeholder="0.00" />
+                </div>
+
+                <div class="col-6 col-md-2">
+                    <label class="form-label small fw-medium">ფასი (მდე)</label>
+                    <input type="number" step="0.01" name="PriceTo"
+                           value="@(Model.Filter.PriceTo?.ToString(System.Globalization.CultureInfo.InvariantCulture))"
+                           class="form-control form-control-sm no-spinner" placeholder="999.99" />
+                </div>
+
+                <div class="col-12 col-md-2">
+                    <label class="form-label small fw-medium">კატეგორია</label>
+                    @Html.DropDownList("CategoryId",
                         new SelectList(Model.Categories, "Id", "Name", Model.Filter.CategoryId),
                         "ყველა კატეგორია",
-                        new { @class = "form-control form-control-sm" }
-                    )
-                </th>
+                        new { @class = "form-select form-select-sm" })
+                </div>
 
-                <th>
-                    <input type="date" name="CreateDateFrom"
-                           value="@Model.Filter.CreateDateFrom?.ToString("yyyy-MM-dd")"
-                           class="form-control form-control-sm mb-1" />
-                    <input type="date" name="CreateDateTo"
-                           value="@Model.Filter.CreateDateTo?.ToString("yyyy-MM-dd")"
+                <div class="col-12 mt-2"></div>
+
+                <div class="col-6 col-md-2">
+                    <label class="form-label small fw-medium">შექმნა (დან)</label>
+                    <input type="date" name="CreateDateFrom" value="@Model.Filter.CreateDateFrom?.ToString("yyyy-MM-dd")" 
                            class="form-control form-control-sm" />
-                </th>
-
-                <th>
-                    <input type="date" name="UpdateDateFrom"
-                           value="@Model.Filter.UpdateDateFrom?.ToString("yyyy-MM-dd")"
-                           class="form-control form-control-sm mb-1" />
-                    <input type="date" name="UpdateDateTo"
-                           value="@Model.Filter.UpdateDateTo?.ToString("yyyy-MM-dd")"
+                </div>
+                <div class="col-6 col-md-2">
+                    <label class="form-label small fw-medium">შექმნა (მდე)</label>
+                    <input type="date" name="CreateDateTo" value="@Model.Filter.CreateDateTo?.ToString("yyyy-MM-dd")" 
                            class="form-control form-control-sm" />
-                </th>
+                </div>
+                <div class="col-6 col-md-2">
+                    <label class="form-label small fw-medium">განახლება (დან)</label>
+                    <input type="date" name="UpdateDateFrom" value="@Model.Filter.UpdateDateFrom?.ToString("yyyy-MM-dd")" 
+                           class="form-control form-control-sm" />
+                </div>
+                <div class="col-6 col-md-2">
+                    <label class="form-label small fw-medium">განახლება (მდე)</label>
+                    <input type="date" name="UpdateDateTo" value="@Model.Filter.UpdateDateTo?.ToString("yyyy-MM-dd")" 
+                           class="form-control form-control-sm" />
+                </div>
 
-                <th>
-                    <div class="d-flex justify-content-end">
-                        <button type="submit" class="btn btn-primary btn-sm">
-                            ძიება
-                        </button>
-                        <a href="@Url.Action("Products", "Manage")"
-                           class="btn btn-secondary btn-sm ms-2">
-                            გასუფთავება
-                        </a>
-                    </div>
-                </th>
-            </tr>
-        </thead>
-
-        <tbody>
-            @if (Model.Response?.Items?.Any() == true)
-            {
-                foreach (var p in Model.Response.Items)
-                {
-                    var categoryName = Model.Categories.FirstOrDefault(c => c.Id == p.CategoryId)?.Name ?? p.CategoryId.ToString();
-
-                    <tr>
-                        <td>@p.Id</td>
-
-                        <td>
-                            <strong>@p.Title</strong>
-                        </td>
-
-                        <td>
-                            <span class="small text-muted">@p.Description</span>
-                        </td>
-
-                        <td>
-                            @if (!string.IsNullOrWhiteSpace(p.ImageUrl))
-                            {
-                                <img src="@p.ImageUrl"
-                                     alt="პროდუქტის სურათი"
-                                     style="max-width:80px; max-height:80px; object-fit:cover;" />
-                            }
-                        </td>
-
-                        <td>
-                            @(
-                                p.Status switch
-                                {
-                                    ProductStatus.Active => "აქტიური",
-                                    ProductStatus.Deleted => "წაშლილი",
-                                    ProductStatus.Hiden => "დამალული",
-                                    _ => p.Status.ToString()
-                                }
-                            )
-                        </td>
-
-                        <td class="@(p.IsAvailable == true ? "approved-text" : "blocked-text")">
-                            @(p.IsAvailable == true ? "კი" : "არა")
-                        </td>
-
-                        <td>@p.Price?.ToString("0.##")</td>
-
-                        <td>@categoryName</td>
-
-                        <td>@p.CreateDate?.ToString("yyyy-MM-dd HH:mm:ss")</td>
-
-                        <td>@p.UpdateDate?.ToString("yyyy-MM-dd HH:mm:ss")</td>
-
-                        <td></td>
-                    </tr>
-                }
-            }
-            else
-            {
-                <tr>
-                    <td colspan="11" class="text-center text-muted">
-                        პროდუქტები ვერ მოიძებნა
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
-</form>
-
-@if (totalCount > 0)
-{
-    <nav aria-label="Product pagination">
-        <ul class="pagination justify-content-center">
-            <li class="page-item @(pageNumber <= 1 ? "disabled" : "")">
-                <a class="page-link"
-                   href="@(pageNumber <= 1 ? "#" : Url.Action("Products", "Manage", BuildRoute(pageNumber - 1)))"
-                   tabindex="@(pageNumber <= 1 ? "-1" : "0")"
-                   aria-disabled="@(pageNumber <= 1 ? "true" : "false")">
-                    წინა
-                </a>
-            </li>
-
-            @{
-                var start = Math.Max(1, pageNumber - 2);
-                var end = Math.Min(totalPages, start + 4);
-                start = Math.Max(1, end - 4);
-            }
-            @for (int i = start; i <= end; i++)
-            {
-                <li class="page-item @(i == pageNumber ? "active" : "")">
-                    <a class="page-link" href="@Url.Action("Products", "Manage", BuildRoute(i))">@i</a>
-                </li>
-            }
-
-            <li class="page-item @(pageNumber >= totalPages ? "disabled" : "")">
-                <a class="page-link"
-                   href="@(pageNumber >= totalPages ? "#" : Url.Action("Products", "Manage", BuildRoute(pageNumber + 1)))"
-                   tabindex="@(pageNumber >= totalPages ? "-1" : "0")"
-                   aria-disabled="@(pageNumber >= totalPages ? "true" : "false")">
-                    შემდეგი
-                </a>
-            </li>
-        </ul>
-        <div class="text-center text-muted small">
-            გვერდი @pageNumber/@totalPages • სულ: @totalCount • გვერდზე: @pageSize
+                <div class="col-12 col-md-2 d-flex align-items-end">
+                    <button type="submit" class="btn btn-primary shadow-sm w-100">
+                        <i class="fas fa-search me-2"></i>ძიება
+                    </button>
+                </div>
+                <div class="col-12 col-md-2 d-flex align-items-end">
+                    <a href="@Url.Action("Products", "Manage")" class="btn btn-outline-secondary shadow-sm w-100">
+                        <i class="fas fa-times me-2"></i>გასუფთავება
+                    </a>
+                </div>
+            </form>
         </div>
-    </nav>
-}
-else
-{
-    <div class="text-center text-muted small">
-        შედეგი არ მოიძებნა
     </div>
-}
+
+    <div class="card shadow border-0 rounded-4 overflow-hidden">
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table table-hover mb-0">
+                    <thead class="bg-light">
+                        <tr>
+                            <th class="ps-4">ID</th>
+                            <th>ფოტო</th>
+                            <th>დასახელება</th>
+                            <th>აღწერა</th>
+                            <th>ფასი</th>
+                            <th>კატეგორია</th>
+                            <th>სტატუსი</th>
+                            <th>ხელმისაწვდომია</th>
+                            <th>შექმნა</th>
+                            <th>განახლება</th>
+                            <th class="text-end pe-4">ქმედებები</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model.Response?.Items?.Any() == true)
+                        {
+                            foreach (var p in Model.Response.Items)
+                            {
+                                var categoryName = Model.Categories.FirstOrDefault(c => c.Id == p.CategoryId)?.Name ?? "-";
+                                <tr class="align-middle">
+                                    <td class="ps-4 fw-medium">#@p.Id</td>
+                                    <td>
+                                        @if (!string.IsNullOrWhiteSpace(p.ImageUrl))
+                                        {
+                                            <img src="@p.ImageUrl" alt="@p.Title"
+                                                 class="rounded shadow-sm"
+                                                 style="width:60px; height:60px; object-fit:cover;" />
+                                        }
+                                        else
+                                        {
+                                            <div class="bg-light rounded d-flex align-items-center justify-content-center"
+                                                 style="width:60px; height:60px;">
+                                                <i class="fas fa-image text-muted fa-lg"></i>
+                                            </div>
+                                        }
+                                    </td>
+                                    <td class="fw-bold text-dark">@p.Title</td>
+                                    <td class="text-muted small" style="max-width:200px;">@p.Description</td>
+                                    <td class="fw-bold text-primary">@p.Price?.ToString("0.## ₾")</td>
+                                    <td>@categoryName</td>
+                                    <td>
+                                        <span class="badge rounded-pill @(p.Status == ProductStatus.Active ? "bg-success" : p.Status == ProductStatus.Hiden ? "bg-warning" : "bg-danger")">
+                                            @(p.Status switch
+                                            {
+                                                ProductStatus.Active => "აქტიური",
+                                                ProductStatus.Deleted => "წაშლილი",
+                                                ProductStatus.Hiden => "დამალული",
+                                                _ => p.Status.ToString()
+                                            })
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <span class="badge @(p.IsAvailable == true ? "bg-success" : "bg-secondary")">
+                                            @(p.IsAvailable == true ? "კი" : "არა")
+                                        </span>
+                                    </td>
+                                    <td class="small text-muted">@p.CreateDate?.ToString("dd.MM.yyyy HH:mm")</td>
+                                    <td class="small text-muted">@p.UpdateDate?.ToString("dd.MM.yyyy HH:mm")</td>
+                                    <td class="text-end pe-4">
+                                        <a asp-action="Edit" asp-route-id="@p.Id" class="btn btn-sm btn-outline-primary">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                        <a asp-action="Delete" asp-route-id="@p.Id" class="btn btn-sm btn-outline-danger ms-1">
+                                            <i class="fas fa-trash"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+                            <tr>
+                                <td colspan="11" class="text-center py-5 text-muted">
+                                    <i class="fas fa-inbox fa-3x mb-3 opacity-50"></i>
+                                    <p class="mb-0">პროდუქტები არ მოიძებნა</p>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+            @if (totalCount > 0)
+            {
+                <div class="card-footer bg-light border-0 py-4">
+                    <div class="row align-items-center">
+                        <div class="col-md-6 text-muted small">
+                            ნაჩვენებია @(pageNumber * pageSize - pageSize + 1)–@(Math.Min(pageNumber * pageSize, totalCount)) 
+                            სულ @totalCount-დან • გვერდი @pageNumber / @totalPages
+                        </div>
+                        <div class="col-md-6">
+                            <nav aria-label="Page navigation">
+                                <ul class="pagination pagination-primary justify-content-end mb-0">
+                                    <li class="page-item @(pageNumber <= 1 ? "disabled" : "")">
+                                        <a class="page-link" href="@(pageNumber <= 1 ? "#" : Url.Action("Products", "Manage", BuildRoute(pageNumber - 1)))">
+                                            <i class="fas fa-chevron-left"></i>
+                                        </a>
+                                    </li>
+                                    @{
+                                        var start = Math.Max(1, pageNumber - 2);
+                                        var end = Math.Min(totalPages, start + 4);
+                                        start = Math.Max(1, end - 4);
+                                    }
+                                    @for (int i = start; i <= end; i++)
+                                    {
+                                        <li class="page-item @(i == pageNumber ? "active" : "")">
+                                            <a class="page-link" href="@Url.Action("Products", "Manage", BuildRoute(i))">@i</a>
+                                        </li>
+                                    }
+                                    <li class="page-item @(pageNumber >= totalPages ? "disabled" : "")">
+                                        <a class="page-link" href="@(pageNumber >= totalPages ? "#" : Url.Action("Products", "Manage", BuildRoute(pageNumber + 1)))">
+                                            <i class="fas fa-chevron-right"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
 
 <style>
-.no-spinner::-webkit-outer-spin-button,
-.no-spinner::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-}
+    body { font-family: 'Roboto', sans-serif; }
 
-.no-spinner {
-    -moz-appearance: textfield;
-}
+    .no-spinner::-webkit-inner-spin-button,
+    .no-spinner::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+    .no-spinner {
+        -moz-appearance: textfield;
+    }
 
-.no-spinner::-ms-clear,
-.no-spinner::-ms-reveal {
-    display: none;
-    width: 0;
-    height: 0;
-}
+    .bg-gradient-primary {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    }
+
+    .card {
+        transition: transform 0.2s ease;
+    }
+    .card:hover {
+        transform: translateY(-2px);
+    }
+
+    .table th {
+        border-top: none;
+        font-weight: 500;
+        color: #495057;
+    }
+
+    .badge {
+        font-size: 0.8rem;
+    }
+
+    .pagination-primary .page-item.active .page-link {
+        background: #667eea;
+        border-color: #667eea;
+    }
+
+    .btn-outline-primary:hover, .btn-outline-danger:hover {
+        transform: scale(1.08);
+        transition: all 0.2s;
+    }
+
+    @@media (max-width: 768px) {
+        .table thead { 
+            display: none; 
+        }
+        .table tr {
+            display: block;
+            margin-bottom: 1rem;
+            border: 1px solid #dee2e6;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            background: #fff;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .table td {
+            display: block;
+            text-align: right;
+            padding: 0.5rem 0;
+            border: none;
+        }
+        .table td:before {
+            content: attr(data-label);
+            float: left;
+            font-weight: bold;
+            color: #6c757d;
+        }
+        .table td:last-child {
+            text-align: center;
+        }
+    }
 </style>
+
+@section Scripts {
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+}
