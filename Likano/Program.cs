@@ -2,6 +2,7 @@ using Likano.Application.Features.Category.Queries.Get;
 using Likano.Application.Interfaces;
 using Likano.Infrastructure.Data;
 using Likano.Infrastructure.Repositories;
+using Likano.Middleware;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
@@ -25,6 +26,8 @@ builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped<IManageRepository, ManageRepository>();
 
 var app = builder.Build();
+
+app.UseMiddleware<GlobalExceptionMiddleware>();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

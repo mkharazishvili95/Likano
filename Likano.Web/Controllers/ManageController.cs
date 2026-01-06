@@ -114,13 +114,20 @@ namespace Likano.Web.Controllers
 
             if (!apiResponse.IsSuccessStatusCode)
             {
-                return StatusCode((int)apiResponse.StatusCode, $"API error: {(int)apiResponse.StatusCode}");
+                return View("NotFound", new GetProductForManageResponse
+                {
+                    Success = false,
+                    Message = $"API error: {(int)apiResponse.StatusCode}"
+                });
             }
-
             var product = await apiResponse.Content.ReadFromJsonAsync<GetProductForManageResponse>();
             if (product == null || product.Success == false)
             {
-                return NotFound(product?.Message ?? "Product not found");
+                return View("NotFound", product ?? new GetProductForManageResponse
+                {
+                    Success = false,
+                    Message = "Product not found"
+                });
             }
 
             return View("Details", product);
