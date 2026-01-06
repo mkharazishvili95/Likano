@@ -1,5 +1,6 @@
 ﻿using Likano.Application.Interfaces;
 using MediatR;
+using System.Linq.Expressions;
 
 namespace Likano.Application.Features.Manage.Product.Queries.GetAll
 {
@@ -19,48 +20,12 @@ namespace Likano.Application.Features.Manage.Product.Queries.GetAll
 
             var products = await _manageRepository.GetAllProducts() ?? new List<Domain.Entities.Product>();
 
-            if (request.Id.HasValue)
-                products = products.Where(p => p.Id == request.Id.Value).ToList();
+            Expression<Func<Likano.Domain.Entities.Product, bool>> predicate = GetAllProductsForManageHelper.BuildWhereClause(request);
+            var filtered = products.AsQueryable().Where(predicate).ToList();
 
-            if (!string.IsNullOrWhiteSpace(request.Title))
-                products = products.Where(p => !string.IsNullOrEmpty(p.Title) && p.Title.Contains(request.Title, StringComparison.OrdinalIgnoreCase)).ToList();
+            var totalCount = filtered.Count;
 
-            if (!string.IsNullOrWhiteSpace(request.Description))
-                products = products.Where(p => !string.IsNullOrEmpty(p.Description) && p.Description.Contains(request.Description, StringComparison.OrdinalIgnoreCase)).ToList();
-
-            if (request.PriceFrom.HasValue)
-                products = products.Where(p => p.Price >= request.PriceFrom.Value).ToList();
-
-            if (request.PriceTo.HasValue)
-                products = products.Where(p => p.Price <= request.PriceTo.Value).ToList();
-
-            if (request.IsAvailable.HasValue)
-                products = products.Where(p => p.IsAvailable == request.IsAvailable.Value).ToList();
-
-            if (!string.IsNullOrWhiteSpace(request.ImageUrl))
-                products = products.Where(p => !string.IsNullOrEmpty(p.ImageUrl) && p.ImageUrl.Contains(request.ImageUrl, StringComparison.OrdinalIgnoreCase)).ToList();
-
-            if (request.CategoryId.HasValue)
-                products = products.Where(p => p.CategoryId == request.CategoryId.Value).ToList();
-
-            if (request.Status.HasValue)
-                products = products.Where(p => p.Status == request.Status.Value).ToList();
-
-            if (request.CreateDateFrom.HasValue)
-                products = products.Where(p => p.CreateDate >= request.CreateDateFrom.Value).ToList();
-
-            if (request.CreateDateTo.HasValue)
-                products = products.Where(p => p.CreateDate <= request.CreateDateTo.Value).ToList();
-
-            if (request.UpdateDateFrom.HasValue)
-                products = products.Where(p => p.UpdateDate.HasValue && p.UpdateDate.Value >= request.UpdateDateFrom.Value).ToList();
-
-            if (request.UpdateDateTo.HasValue)
-                products = products.Where(p => p.UpdateDate.HasValue && p.UpdateDate.Value <= request.UpdateDateTo.Value).ToList();
-
-            var totalCount = products.Count;
-
-            var paged = products
+            var paged = filtered
                 .OrderByDescending(p => p.CreateDate)
                 .ThenByDescending(p => p.Id)
                 .Skip((pageNumber - 1) * pageSize)

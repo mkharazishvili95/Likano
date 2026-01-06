@@ -3,6 +3,27 @@
 
 @{
     ViewData["Title"] = "პროდუქცია - ადმინი";
+    var pageNumber = Model.Filter.PageNumber <= 0 ? 1 : Model.Filter.PageNumber;
+    var pageSize = Model.Filter.PageSize <= 0 ? 10 : Model.Filter.PageSize;
+    var totalCount = Model.Response?.TotalCount ?? 0;
+    var totalPages = totalCount == 0 ? 1 : (int)Math.Ceiling(totalCount / (double)pageSize);
+
+    RouteValueDictionary BuildRoute(int targetPage) => new RouteValueDictionary(new {
+        Id = Model.Filter.Id,
+        Title = Model.Filter.Title,
+        Description = Model.Filter.Description,
+        Status = Model.Filter.Status,
+        IsAvailable = Model.Filter.IsAvailable,
+        PriceFrom = Model.Filter.PriceFrom,
+        PriceTo = Model.Filter.PriceTo,
+        CategoryId = Model.Filter.CategoryId,
+        CreateDateFrom = Model.Filter.CreateDateFrom?.ToString("yyyy-MM-dd"),
+        CreateDateTo = Model.Filter.CreateDateTo?.ToString("yyyy-MM-dd"),
+        UpdateDateFrom = Model.Filter.UpdateDateFrom?.ToString("yyyy-MM-dd"),
+        UpdateDateTo = Model.Filter.UpdateDateTo?.ToString("yyyy-MM-dd"),
+        PageNumber = targetPage,
+        PageSize = pageSize
+    });
 }
 
 <meta charset="utf-8" />
@@ -30,7 +51,8 @@
                 <th>
                     <input type="number" name="Id"
                    value="@Model.Filter.Id"
-                   class="form-control form-control-sm"
+                   class="form-control form-control-sm no-spinner"
+                   placeholder="Id"
                    style="width:80px;" />
                 </th>
 
@@ -89,27 +111,31 @@
                                         )
                 </th>
 
-             <th>
+            <th>
                 <div class="d-flex flex-column">
                     <input type="number" step="0.01"
                            name="PriceFrom"
                            value="@(Model.Filter.PriceFrom?.ToString(System.Globalization.CultureInfo.InvariantCulture))"
-                           class="form-control mb-1"
+                           class="form-control mb-1 no-spinner"
                            placeholder="დან"
                            style="height:38px; font-size:14px; width:120px;" />
                     <input type="number" step="0.01"
                            name="PriceTo"
                            value="@(Model.Filter.PriceTo?.ToString(System.Globalization.CultureInfo.InvariantCulture))"
-                           class="form-control"
+                           class="form-control no-spinner"
                            placeholder="მდე"
                            style="height:38px; font-size:14px; width:120px;" />
                 </div>
             </th>
 
+
                 <th>
-                    <input type="number" name="CategoryId"
-                           value="@Model.Filter.CategoryId"
-                           class="form-control form-control-sm" />
+                    @Html.DropDownList(
+                        "CategoryId",
+                        new SelectList(Model.Categories, "Id", "Name", Model.Filter.CategoryId),
+                        "ყველა კატეგორია",
+                        new { @class = "form-control form-control-sm" }
+                    )
                 </th>
 
                 <th>
@@ -149,6 +175,8 @@
             {
                 foreach (var p in Model.Response.Items)
                 {
+                    var categoryName = Model.Categories.FirstOrDefault(c => c.Id == p.CategoryId)?.Name ?? p.CategoryId.ToString();
+
                     <tr>
                         <td>@p.Id</td>
 
@@ -170,16 +198,16 @@
                         </td>
 
                         <td>
-                        @(
-                            p.Status switch
-                            {
-                                ProductStatus.Active => "აქტიური",
-                                ProductStatus.Deleted => "წაშლილი",
-                                ProductStatus.Hiden => "დამალული",
-                                _ => p.Status.ToString()
-                            }
-                        )
-                    </td>
+                            @(
+                                p.Status switch
+                                {
+                                    ProductStatus.Active => "აქტიური",
+                                    ProductStatus.Deleted => "წაშლილი",
+                                    ProductStatus.Hiden => "დამალული",
+                                    _ => p.Status.ToString()
+                                }
+                            )
+                        </td>
 
                         <td class="@(p.IsAvailable == true ? "approved-text" : "blocked-text")">
                             @(p.IsAvailable == true ? "კი" : "არა")
@@ -187,7 +215,7 @@
 
                         <td>@p.Price?.ToString("0.##")</td>
 
-                        <td>@p.CategoryId</td>
+                        <td>@categoryName</td>
 
                         <td>@p.CreateDate?.ToString("yyyy-MM-dd HH:mm:ss")</td>
 
@@ -208,3 +236,68 @@
         </tbody>
     </table>
 </form>
+
+@if (totalCount > 0)
+{
+    <nav aria-label="Product pagination">
+        <ul class="pagination justify-content-center">
+            <li class="page-item @(pageNumber <= 1 ? "disabled" : "")">
+                <a class="page-link"
+                   href="@(pageNumber <= 1 ? "#" : Url.Action("Products", "Manage", BuildRoute(pageNumber - 1)))"
+                   tabindex="@(pageNumber <= 1 ? "-1" : "0")"
+                   aria-disabled="@(pageNumber <= 1 ? "true" : "false")">
+                    წინა
+                </a>
+            </li>
+
+            @{
+                var start = Math.Max(1, pageNumber - 2);
+                var end = Math.Min(totalPages, start + 4);
+                start = Math.Max(1, end - 4);
+            }
+            @for (int i = start; i <= end; i++)
+            {
+                <li class="page-item @(i == pageNumber ? "active" : "")">
+                    <a class="page-link" href="@Url.Action("Products", "Manage", BuildRoute(i))">@i</a>
+                </li>
+            }
+
+            <li class="page-item @(pageNumber >= totalPages ? "disabled" : "")">
+                <a class="page-link"
+                   href="@(pageNumber >= totalPages ? "#" : Url.Action("Products", "Manage", BuildRoute(pageNumber + 1)))"
+                   tabindex="@(pageNumber >= totalPages ? "-1" : "0")"
+                   aria-disabled="@(pageNumber >= totalPages ? "true" : "false")">
+                    შემდეგი
+                </a>
+            </li>
+        </ul>
+        <div class="text-center text-muted small">
+            გვერდი @pageNumber/@totalPages • სულ: @totalCount • გვერდზე: @pageSize
+        </div>
+    </nav>
+}
+else
+{
+    <div class="text-center text-muted small">
+        შედეგი არ მოიძებნა
+    </div>
+}
+
+<style>
+.no-spinner::-webkit-outer-spin-button,
+.no-spinner::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.no-spinner {
+    -moz-appearance: textfield;
+}
+
+.no-spinner::-ms-clear,
+.no-spinner::-ms-reveal {
+    display: none;
+    width: 0;
+    height: 0;
+}
+</style>

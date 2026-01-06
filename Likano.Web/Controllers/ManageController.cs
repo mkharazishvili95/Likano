@@ -1,4 +1,6 @@
 ﻿using Likano.Application.Common.Models;
+using Likano.Application.DTOs;
+using Likano.Application.Features.Category.Queries.GetAll;
 using Likano.Application.Features.Manage.Product.Queries.GetAll;
 using Likano.Web.Models.Manage;
 using Microsoft.AspNetCore.Mvc;
@@ -42,31 +44,50 @@ namespace Likano.Web.Controllers
 
             var apiUrl = $"{_baseUrl}/manage/products";
             var apiResponse = await _httpClient.PostAsJsonAsync(apiUrl, request);
+            GetAllProductsForManageResponse data;
             if (!apiResponse.IsSuccessStatusCode)
             {
-                var vmError = new ProductsManageViewModel
+                data = new GetAllProductsForManageResponse
                 {
-                    Filter = filter,
-                    Response = new GetAllProductsForManageResponse
-                    {
-                        Success = false,
-                        StatusCode = (int)apiResponse.StatusCode,
-                        Message = $"API error: {(int)apiResponse.StatusCode}",
-                        TotalCount = 0,
-                        Items = new List<GetAllProductsForManageItemsResponse>()
-                    }
+                    Success = false,
+                    StatusCode = (int)apiResponse.StatusCode,
+                    Message = $"API error: {(int)apiResponse.StatusCode}",
+                    TotalCount = 0,
+                    Items = new List<GetAllProductsForManageItemsResponse>()
                 };
-                return View("Products", vmError);
             }
-
-            var data = await apiResponse.Content.ReadFromJsonAsync<GetAllProductsForManageResponse>()
+            else
+            {
+                data = await apiResponse.Content.ReadFromJsonAsync<GetAllProductsForManageResponse>()
                        ?? new GetAllProductsForManageResponse
                        {
                            Success = false,
                            StatusCode = 500,
                            Message = "Invalid API response",
-                           TotalCount = 0
+                           TotalCount = 0,
+                           Items = new List<GetAllProductsForManageItemsResponse>()
                        };
+            }
+
+            var categoriesUrl = $"{_baseUrl}/category/all";
+            var categoriesRequest = new GetAllCategoriesQuery
+            {
+                Pagination = new Pagination { PageNumber = 1, PageSize = 1000 },
+                SearchString = null 
+            };
+            var categoriesResponse = await _httpClient.PostAsJsonAsync(categoriesUrl, categoriesRequest);
+
+            var categories = new List<CategoryDtoForManage>();
+            if (categoriesResponse.IsSuccessStatusCode)
+            {
+                var categoriesData = await categoriesResponse.Content.ReadFromJsonAsync<GetAllCategoriesResponse>();
+                if (categoriesData?.Items != null)
+                {
+                    categories = categoriesData.Items
+                        .Select(c => new CategoryDtoForManage { Id = c.Id, Name = c.Name })
+                        .ToList();
+                }
+            }
 
             filter.PageNumber = pageNumber;
             filter.PageSize = pageSize;
@@ -74,7 +95,8 @@ namespace Likano.Web.Controllers
             var vm = new ProductsManageViewModel
             {
                 Filter = filter,
-                Response = data
+                Response = data,
+                Categories = categories
             };
 
             return View("Products", vm);

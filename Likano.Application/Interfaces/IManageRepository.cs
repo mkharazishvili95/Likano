@@ -1,4 +1,5 @@
-﻿using Likano.Domain.Entities;
+﻿using Likano.Application.DTOs;
+using Likano.Domain.Entities;
 using Likano.Domain.Enums;
 
 namespace Likano.Application.Interfaces
@@ -8,5 +9,6 @@ namespace Likano.Application.Interfaces
         Task<Product?> GetProduct(int id);
         Task<List<Product>?> GetAllProducts();
         Task<bool> ChangeStatus(int id, ProductStatus status);
+        Task<List<CategoryDtoForManage>?> Categories(string? searchString, int? id);
     }
 }
