@@ -1,0 +1,170 @@
+﻿@model Likano.Application.Features.Manage.Product.Queries.Get.GetProductForManageResponse
+@using Likano.Domain.Enums
+@{
+    ViewData["Title"] = "პროდუქტის დეტალები";
+
+    var statusText = Model?.Status switch
+    {
+        ProductStatus.Active => "აქტიური",
+        ProductStatus.Hiden => "დამალული",
+        ProductStatus.Deleted => "წაშლილი",
+        _ => "—"
+    };
+
+    var statusClass = Model?.Status switch
+    {
+        ProductStatus.Active => "bg-success",
+        ProductStatus.Hiden => "bg-warning",
+        ProductStatus.Deleted => "bg-danger",
+        _ => "bg-secondary"
+    };
+}
+
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+<div class="container-fluid py-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="h3 mb-0 text-primary fw-bold">პროდუქტის დეტალები</h2>
+    </div>
+
+    @if (Model == null || Model.Success == false)
+    {
+    <div class="alert alert-danger shadow-sm rounded-4">
+        <i class="fas fa-exclamation-triangle me-2"></i>
+        @Model?.Message ?? "პროდუქტის დეტალების ჩატვირთვა ვერ მოხერხდა."
+    </div>
+    }
+    else
+    {
+    <div class="card shadow border-0 rounded-4 overflow-hidden">
+        <div class="card-header bg-gradient-primary text-white py-3">
+            <h5 class="mb-0">
+                <i class="fas fa-box-open me-2"></i>ID: @Model.Id – @Model.Title
+            </h5>
+        </div>
+        <div class="card-body p-4">
+            <div class="row g-4">
+                
+                <div class="col-lg-4">
+                    <div class="text-center">
+                        @if (!string.IsNullOrWhiteSpace(Model.ImageUrl))
+                        {
+                        <img src="@Model.ImageUrl" alt="@Model.Title"
+                             class="img-fluid rounded shadow-sm"
+                             style="max-height: 400px; width: 100%; object-fit: cover;" />
+                        }
+                        else
+                        {
+                        <div class="bg-light rounded d-flex align-items-center justify-content-center shadow-sm"
+                             style="height: 400px;">
+                            <i class="fas fa-image text-muted fa-5x opacity-50"></i>
+                        </div>
+                        }
+                    </div>
+                </div>
+
+                <div class="col-lg-8">
+                    <h4 class="fw-bold text-dark mb-3">@Model.Title</h4>
+
+                    <div class="mb-4">
+                        <p class="text-muted">
+                            @if (!string.IsNullOrWhiteSpace(Model.Description))
+                            {
+                            @Model.Description
+                            }
+                            else
+                            {
+                            <em>აღწერა არ არის მითითებული</em>
+                            }
+                        </p>
+                    </div>
+
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <div class="d-flex">
+                                <strong class="text-muted me-3" style="min-width: 120px;">ფასი:</strong>
+                                <span class="fw-bold text-primary h5 mb-0">
+                                    @((Model.Price.HasValue) ? $"{Model.Price:0.##} ₾" : "—")
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="d-flex">
+                                <strong class="text-muted me-3" style="min-width: 120px;">კატეგორია ID:</strong>
+                                <span>@Model.CategoryId</span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="d-flex">
+                                <strong class="text-muted me-3" style="min-width: 120px;">ხელმისაწვდომია:</strong>
+                                <span class="badge @(Model.IsAvailable == true ? " bg-success" : "bg-secondary" ) px-3 py-2">
+                                    @(Model.IsAvailable == true ? "კი" : "არა")
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="d-flex">
+                                <strong class="text-muted me-3" style="min-width: 120px;">სტატუსი:</strong>
+                                <span class="badge rounded-pill @statusClass px-3 py-2">
+                                    @statusText
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="d-flex">
+                                <strong class="text-muted me-3" style="min-width: 120px;">შექმნის თარიღი:</strong>
+                                <span>@(Model.CreateDate?.ToString("dd.MM.yyyy HH:mm") ?? "—")</span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="d-flex">
+                                <strong class="text-muted me-3" style="min-width: 120px;">განახლების თარიღი:</strong>
+                                <span>@(Model.UpdateDate?.ToString("dd.MM.yyyy HH:mm") ?? "—")</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr class="my-4">
+
+                    <div class="text-end">
+                        <a asp-controller="Manage" asp-action="Edit" asp-route-id="@Model.Id"
+                           class="btn btn-outline-primary shadow-sm me-2">
+                            <i class="fas fa-edit me-2"></i>რედაქტირება
+                        </a>
+                        <a asp-controller="Manage" asp-action="Products"
+                           class="btn btn-secondary shadow-sm">
+                            <i class="fas fa-arrow-left me-2"></i>უკან დაბრუნება
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    }
+</div>
+
+<style>
+    body {
+        font-family: 'Roboto', sans-serif;
+    }
+
+    .bg-gradient-primary {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    }
+
+    .card {
+        transition: transform 0.2s ease;
+    }
+
+        .card:hover {
+            transform: translateY(-2px);
+        }
+
+    .badge {
+        font-size: 0.9rem;
+    }
+</style>
+
+@section Scripts {
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+}

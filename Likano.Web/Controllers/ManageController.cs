@@ -1,6 +1,7 @@
 ﻿using Likano.Application.Common.Models;
 using Likano.Application.DTOs;
 using Likano.Application.Features.Category.Queries.GetAll;
+using Likano.Application.Features.Manage.Product.Queries.Get;
 using Likano.Application.Features.Manage.Product.Queries.GetAll;
 using Likano.Web.Models.Manage;
 using Microsoft.AspNetCore.Mvc;
@@ -73,7 +74,7 @@ namespace Likano.Web.Controllers
             var categoriesRequest = new GetAllCategoriesQuery
             {
                 Pagination = new Pagination { PageNumber = 1, PageSize = 1000 },
-                SearchString = null 
+                SearchString = null
             };
             var categoriesResponse = await _httpClient.PostAsJsonAsync(categoriesUrl, categoriesRequest);
 
@@ -100,6 +101,29 @@ namespace Likano.Web.Controllers
             };
 
             return View("Products", vm);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Details(int id)
+        {
+            if (id <= 0)
+                return NotFound();
+
+            var apiUrl = $"{_baseUrl}/manage/product/{id}";
+            var apiResponse = await _httpClient.GetAsync(apiUrl);
+
+            if (!apiResponse.IsSuccessStatusCode)
+            {
+                return StatusCode((int)apiResponse.StatusCode, $"API error: {(int)apiResponse.StatusCode}");
+            }
+
+            var product = await apiResponse.Content.ReadFromJsonAsync<GetProductForManageResponse>();
+            if (product == null || product.Success == false)
+            {
+                return NotFound(product?.Message ?? "Product not found");
+            }
+
+            return View("Details", product);
         }
     }
 }

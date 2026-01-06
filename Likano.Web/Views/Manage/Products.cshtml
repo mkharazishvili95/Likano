@@ -178,7 +178,7 @@
                             {
                                 var categoryName = Model.Categories.FirstOrDefault(c => c.Id == p.CategoryId)?.Name ?? "-";
                                 <tr class="align-middle">
-                                    <td class="ps-4 fw-medium">#@p.Id</td>
+                                    <td class="ps-4 fw-medium">@p.Id</td>
                                     <td>
                                         @if (!string.IsNullOrWhiteSpace(p.ImageUrl))
                                         {
@@ -194,7 +194,14 @@
                                             </div>
                                         }
                                     </td>
-                                    <td class="fw-bold text-dark">@p.Title</td>
+                                    <td class="fw-bold text-dark">
+                                        <a asp-controller="Manage"
+                                           asp-action="Details"
+                                           asp-route-id="@p.Id"
+                                           class="link-primary text-decoration-none">
+                                            @p.Title
+                                        </a>
+                                    </td>
                                     <td class="text-muted small" style="max-width:200px;">@p.Description</td>
                                     <td class="fw-bold text-primary">@p.Price?.ToString("0.## ₾")</td>
                                     <td>@categoryName</td>
