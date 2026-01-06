@@ -95,3 +95,4 @@ D:\G\Likano\Likano.Web\obj\Debug\net8.0\refint\Likano.Web.dll
 D:\G\Likano\Likano.Web\obj\Debug\net8.0\Likano.Web.pdb
 D:\G\Likano\Likano.Web\obj\Debug\net8.0\Likano.Web.genruntimeconfig.cache
 D:\G\Likano\Likano.Web\obj\Debug\net8.0\ref\Likano.Web.dll
+D:\G\Likano\Likano.Web\bin\Debug\net8.0\Newtonsoft.Json.dll

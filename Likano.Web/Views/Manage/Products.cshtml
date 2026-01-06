@@ -1,0 +1,210 @@
+﻿@model Likano.Web.Models.Manage.ProductsManageViewModel
+@using Likano.Domain.Enums
+
+@{
+    ViewData["Title"] = "პროდუქცია - ადმინი";
+}
+
+<meta charset="utf-8" />
+
+<h2>პროდუქცია</h2>
+
+<form asp-action="Products" method="get">
+    <table class="table table-bordered table-striped align-middle">
+        <thead class="thead-dark">
+            <tr>
+                <th>ID</th>
+                <th>დასახელება</th>
+                <th>აღწერა</th>
+                <th>ფოტო</th>
+                <th>სტატუსი</th>
+                <th>ხელმისაწვდომია</th>
+                <th>ფასი</th>
+                <th>კატეგორია</th>
+                <th>შექმნის თარიღი</th>
+                <th>განახლების თარიღი</th>
+                <th></th>
+            </tr>
+
+            <tr>
+                <th>
+                    <input type="number" name="Id"
+                   value="@Model.Filter.Id"
+                   class="form-control form-control-sm"
+                   style="width:80px;" />
+                </th>
+
+                <th>
+                    <input type="text" name="Title"
+                           value="@Model.Filter.Title"
+                           class="form-control form-control-sm"
+                           placeholder="დასახელება" />
+                </th>
+
+                <th>
+                    <input type="text" name="Description"
+                           value="@Model.Filter.Description"
+                           class="form-control form-control-sm"
+                           placeholder="აღწერა" />
+                </th>
+
+                <th>
+                    @* ფოტო *@
+                </th>
+
+                <th>
+                    @Html.DropDownList(
+                        "Status",
+                        new SelectList(
+                            Enum.GetValues<ProductStatus>()
+                                .Select(x => new { 
+                                    Id = x, 
+                                    Name = x switch
+                                    {
+                                        ProductStatus.Active => "აქტიური",
+                                        ProductStatus.Deleted => "წაშლილი",
+                                        ProductStatus.Hiden => "დამალული",
+                                        _ => x.ToString()
+                                    }
+                                }),
+                            "Id",
+                            "Name",
+                            Model.Filter.Status
+                        ),
+                        "ყველა",
+                        new { @class = "form-control form-control-sm" }
+                    )
+                </th>
+
+                <th>
+                    @Html.DropDownList(
+                                        "IsAvailable",
+                                        new List<SelectListItem>
+                                        {
+                                        new SelectListItem { Text = "ყველა", Value = "" },
+                                        new SelectListItem { Text = "კი", Value = "true" },
+                                        new SelectListItem { Text = "არა", Value = "false" }
+                                        },
+                                        new { @class = "form-control form-control-sm" }
+                                        )
+                </th>
+
+             <th>
+                <div class="d-flex flex-column">
+                    <input type="number" step="0.01"
+                           name="PriceFrom"
+                           value="@(Model.Filter.PriceFrom?.ToString(System.Globalization.CultureInfo.InvariantCulture))"
+                           class="form-control mb-1"
+                           placeholder="დან"
+                           style="height:38px; font-size:14px; width:120px;" />
+                    <input type="number" step="0.01"
+                           name="PriceTo"
+                           value="@(Model.Filter.PriceTo?.ToString(System.Globalization.CultureInfo.InvariantCulture))"
+                           class="form-control"
+                           placeholder="მდე"
+                           style="height:38px; font-size:14px; width:120px;" />
+                </div>
+            </th>
+
+                <th>
+                    <input type="number" name="CategoryId"
+                           value="@Model.Filter.CategoryId"
+                           class="form-control form-control-sm" />
+                </th>
+
+                <th>
+                    <input type="date" name="CreateDateFrom"
+                           value="@Model.Filter.CreateDateFrom?.ToString("yyyy-MM-dd")"
+                           class="form-control form-control-sm mb-1" />
+                    <input type="date" name="CreateDateTo"
+                           value="@Model.Filter.CreateDateTo?.ToString("yyyy-MM-dd")"
+                           class="form-control form-control-sm" />
+                </th>
+
+                <th>
+                    <input type="date" name="UpdateDateFrom"
+                           value="@Model.Filter.UpdateDateFrom?.ToString("yyyy-MM-dd")"
+                           class="form-control form-control-sm mb-1" />
+                    <input type="date" name="UpdateDateTo"
+                           value="@Model.Filter.UpdateDateTo?.ToString("yyyy-MM-dd")"
+                           class="form-control form-control-sm" />
+                </th>
+
+                <th>
+                    <div class="d-flex justify-content-end">
+                        <button type="submit" class="btn btn-primary btn-sm">
+                            ძიება
+                        </button>
+                        <a href="@Url.Action("Products", "Manage")"
+                           class="btn btn-secondary btn-sm ms-2">
+                            გასუფთავება
+                        </a>
+                    </div>
+                </th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @if (Model.Response?.Items?.Any() == true)
+            {
+                foreach (var p in Model.Response.Items)
+                {
+                    <tr>
+                        <td>@p.Id</td>
+
+                        <td>
+                            <strong>@p.Title</strong>
+                        </td>
+
+                        <td>
+                            <span class="small text-muted">@p.Description</span>
+                        </td>
+
+                        <td>
+                            @if (!string.IsNullOrWhiteSpace(p.ImageUrl))
+                            {
+                                <img src="@p.ImageUrl"
+                                     alt="პროდუქტის სურათი"
+                                     style="max-width:80px; max-height:80px; object-fit:cover;" />
+                            }
+                        </td>
+
+                        <td>
+                        @(
+                            p.Status switch
+                            {
+                                ProductStatus.Active => "აქტიური",
+                                ProductStatus.Deleted => "წაშლილი",
+                                ProductStatus.Hiden => "დამალული",
+                                _ => p.Status.ToString()
+                            }
+                        )
+                    </td>
+
+                        <td class="@(p.IsAvailable == true ? "approved-text" : "blocked-text")">
+                            @(p.IsAvailable == true ? "კი" : "არა")
+                        </td>
+
+                        <td>@p.Price?.ToString("0.##")</td>
+
+                        <td>@p.CategoryId</td>
+
+                        <td>@p.CreateDate?.ToString("yyyy-MM-dd HH:mm:ss")</td>
+
+                        <td>@p.UpdateDate?.ToString("yyyy-MM-dd HH:mm:ss")</td>
+
+                        <td></td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="11" class="text-center text-muted">
+                        პროდუქტები ვერ მოიძებნა
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</form>

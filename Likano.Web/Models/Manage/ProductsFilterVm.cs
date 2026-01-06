@@ -1,0 +1,23 @@
+using Likano.Domain.Enums;
+
+namespace Likano.Web.Models.Manage
+{
+    public class ProductsFilterVm
+    {
+        public int PageNumber { get; set; } = 1;
+        public int PageSize { get; set; } = 10;
+        public int? Id { get; set; }
+        public string? Title { get; set; }
+        public string? Description { get; set; }
+        public decimal? PriceFrom { get; set; }
+        public decimal? PriceTo { get; set; }
+        public bool? IsAvailable { get; set; }
+        public string? ImageUrl { get; set; }
+        public int? CategoryId { get; set; }
+        public ProductStatus? Status { get; set; }
+        public DateTime? CreateDateFrom { get; set; }
+        public DateTime? CreateDateTo { get; set; }
+        public DateTime? UpdateDateFrom { get; set; }
+        public DateTime? UpdateDateTo { get; set; }
+    }
+}

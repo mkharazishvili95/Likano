@@ -28,8 +28,11 @@ namespace Likano.Application.Features.Manage.Product.Queries.GetAll
             if (!string.IsNullOrWhiteSpace(request.Description))
                 products = products.Where(p => !string.IsNullOrEmpty(p.Description) && p.Description.Contains(request.Description, StringComparison.OrdinalIgnoreCase)).ToList();
 
-            if (request.Price.HasValue)
-                products = products.Where(p => p.Price == request.Price.Value).ToList();
+            if (request.PriceFrom.HasValue)
+                products = products.Where(p => p.Price >= request.PriceFrom.Value).ToList();
+
+            if (request.PriceTo.HasValue)
+                products = products.Where(p => p.Price <= request.PriceTo.Value).ToList();
 
             if (request.IsAvailable.HasValue)
                 products = products.Where(p => p.IsAvailable == request.IsAvailable.Value).ToList();

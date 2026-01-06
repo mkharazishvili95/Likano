@@ -486,7 +486,12 @@
             "type": "string",
             "nullable": true
           },
-          "price": {
+          "priceFrom": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "priceTo": {
             "type": "number",
             "format": "double",
             "nullable": true

@@ -3,6 +3,50 @@
   "WorkspaceRootPath": "D:\\G\\Likano\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{B96AC6A6-8EF9-4133-B31B-8702866D90DA}|Likano.Web\\Likano.Web.csproj|d:\\g\\likano\\likano.web\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B96AC6A6-8EF9-4133-B31B-8702866D90DA}|Likano.Web\\Likano.Web.csproj|solutionrelative:likano.web\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B96AC6A6-8EF9-4133-B31B-8702866D90DA}|Likano.Web\\Likano.Web.csproj|d:\\g\\likano\\likano.web\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{B96AC6A6-8EF9-4133-B31B-8702866D90DA}|Likano.Web\\Likano.Web.csproj|solutionrelative:likano.web\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B96AC6A6-8EF9-4133-B31B-8702866D90DA}|Likano.Web\\Likano.Web.csproj|d:\\g\\likano\\likano.web\\views\\manage\\products.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{B96AC6A6-8EF9-4133-B31B-8702866D90DA}|Likano.Web\\Likano.Web.csproj|solutionrelative:likano.web\\views\\manage\\products.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9CB747A0-E1C5-4981-82F9-FADCA66EC773}|Likano.Domain\\Likano.Domain.csproj|d:\\g\\likano\\likano.domain\\entities\\product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9CB747A0-E1C5-4981-82F9-FADCA66EC773}|Likano.Domain\\Likano.Domain.csproj|solutionrelative:likano.domain\\entities\\product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B96AC6A6-8EF9-4133-B31B-8702866D90DA}|Likano.Web\\Likano.Web.csproj|d:\\g\\likano\\likano.web\\controllers\\managecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B96AC6A6-8EF9-4133-B31B-8702866D90DA}|Likano.Web\\Likano.Web.csproj|solutionrelative:likano.web\\controllers\\managecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B96AC6A6-8EF9-4133-B31B-8702866D90DA}|Likano.Web\\Likano.Web.csproj|d:\\g\\likano\\likano.web\\models\\manage\\productsfiltervm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B96AC6A6-8EF9-4133-B31B-8702866D90DA}|Likano.Web\\Likano.Web.csproj|solutionrelative:likano.web\\models\\manage\\productsfiltervm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{54FFA998-58F3-4515-92DD-C54A0B2E37BB}|Likano.Application\\Likano.Application.csproj|d:\\g\\likano\\likano.application\\common\\models\\pagination.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{54FFA998-58F3-4515-92DD-C54A0B2E37BB}|Likano.Application\\Likano.Application.csproj|solutionrelative:likano.application\\common\\models\\pagination.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B96AC6A6-8EF9-4133-B31B-8702866D90DA}|Likano.Web\\Likano.Web.csproj|d:\\g\\likano\\likano.web\\models\\manage\\productsmanageviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B96AC6A6-8EF9-4133-B31B-8702866D90DA}|Likano.Web\\Likano.Web.csproj|solutionrelative:likano.web\\models\\manage\\productsmanageviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{54FFA998-58F3-4515-92DD-C54A0B2E37BB}|Likano.Application\\Likano.Application.csproj|d:\\g\\likano\\likano.application\\features\\manage\\product\\queries\\getall\\getallproductsformanagequery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{54FFA998-58F3-4515-92DD-C54A0B2E37BB}|Likano.Application\\Likano.Application.csproj|solutionrelative:likano.application\\features\\manage\\product\\queries\\getall\\getallproductsformanagequery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{54FFA998-58F3-4515-92DD-C54A0B2E37BB}|Likano.Application\\Likano.Application.csproj|d:\\g\\likano\\likano.application\\features\\manage\\product\\queries\\getall\\getallproductsformanagehandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{54FFA998-58F3-4515-92DD-C54A0B2E37BB}|Likano.Application\\Likano.Application.csproj|solutionrelative:likano.application\\features\\manage\\product\\queries\\getall\\getallproductsformanagehandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{556EA3B7-9BF0-4E32-AC7A-AF401DF4EF40}|Likano\\Likano.csproj|d:\\g\\likano\\likano\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{556EA3B7-9BF0-4E32-AC7A-AF401DF4EF40}|Likano\\Likano.csproj|solutionrelative:likano\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{B96AC6A6-8EF9-4133-B31B-8702866D90DA}|Likano.Web\\Likano.Web.csproj|d:\\g\\likano\\likano.web\\likano.web.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
       "RelativeMoniker": "D:0:0:{B96AC6A6-8EF9-4133-B31B-8702866D90DA}|Likano.Web\\Likano.Web.csproj|solutionrelative:likano.web\\likano.web.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
     },
@@ -35,20 +79,8 @@
       "RelativeMoniker": "D:0:0:{54FFA998-58F3-4515-92DD-C54A0B2E37BB}|Likano.Application\\Likano.Application.csproj|solutionrelative:likano.application\\features\\manage\\product\\queries\\get\\getproductformanagehandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{54FFA998-58F3-4515-92DD-C54A0B2E37BB}|Likano.Application\\Likano.Application.csproj|d:\\g\\likano\\likano.application\\features\\manage\\product\\queries\\getall\\getallproductsformanagehandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{54FFA998-58F3-4515-92DD-C54A0B2E37BB}|Likano.Application\\Likano.Application.csproj|solutionrelative:likano.application\\features\\manage\\product\\queries\\getall\\getallproductsformanagehandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{54FFA998-58F3-4515-92DD-C54A0B2E37BB}|Likano.Application\\Likano.Application.csproj|d:\\g\\likano\\likano.application\\features\\manage\\product\\queries\\getall\\getallproductsformanagequery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{54FFA998-58F3-4515-92DD-C54A0B2E37BB}|Likano.Application\\Likano.Application.csproj|solutionrelative:likano.application\\features\\manage\\product\\queries\\getall\\getallproductsformanagequery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{54FFA998-58F3-4515-92DD-C54A0B2E37BB}|Likano.Application\\Likano.Application.csproj|d:\\g\\likano\\likano.application\\features\\manage\\product\\queries\\getall\\getallproductsformanageresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{54FFA998-58F3-4515-92DD-C54A0B2E37BB}|Likano.Application\\Likano.Application.csproj|solutionrelative:likano.application\\features\\manage\\product\\queries\\getall\\getallproductsformanageresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{9CB747A0-E1C5-4981-82F9-FADCA66EC773}|Likano.Domain\\Likano.Domain.csproj|d:\\g\\likano\\likano.domain\\entities\\product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9CB747A0-E1C5-4981-82F9-FADCA66EC773}|Likano.Domain\\Likano.Domain.csproj|solutionrelative:likano.domain\\entities\\product.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{54FFA998-58F3-4515-92DD-C54A0B2E37BB}|Likano.Application\\Likano.Application.csproj|d:\\g\\likano\\likano.application\\features\\product\\queries\\getall\\getallproductsquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -115,10 +147,6 @@
       "RelativeMoniker": "D:0:0:{556EA3B7-9BF0-4E32-AC7A-AF401DF4EF40}|Likano\\Likano.csproj|solutionrelative:likano\\controllers\\categorycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{54FFA998-58F3-4515-92DD-C54A0B2E37BB}|Likano.Application\\Likano.Application.csproj|d:\\g\\likano\\likano.application\\common\\models\\pagination.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{54FFA998-58F3-4515-92DD-C54A0B2E37BB}|Likano.Application\\Likano.Application.csproj|solutionrelative:likano.application\\common\\models\\pagination.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{54FFA998-58F3-4515-92DD-C54A0B2E37BB}|Likano.Application\\Likano.Application.csproj|d:\\g\\likano\\likano.application\\features\\category\\queries\\get\\getcategoryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{54FFA998-58F3-4515-92DD-C54A0B2E37BB}|Likano.Application\\Likano.Application.csproj|solutionrelative:likano.application\\features\\category\\queries\\get\\getcategoryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -167,10 +195,6 @@
       "RelativeMoniker": "D:0:0:{556EA3B7-9BF0-4E32-AC7A-AF401DF4EF40}|Likano\\Likano.csproj|solutionrelative:likano\\likano.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{556EA3B7-9BF0-4E32-AC7A-AF401DF4EF40}|Likano\\Likano.csproj|d:\\g\\likano\\likano\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{556EA3B7-9BF0-4E32-AC7A-AF401DF4EF40}|Likano\\Likano.csproj|solutionrelative:likano\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{556EA3B7-9BF0-4E32-AC7A-AF401DF4EF40}|Likano\\Likano.csproj|d:\\g\\likano\\likano\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{556EA3B7-9BF0-4E32-AC7A-AF401DF4EF40}|Likano\\Likano.csproj|solutionrelative:likano\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -202,7 +226,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Bookmark",
@@ -210,44 +234,144 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Products.cshtml",
+              "DocumentMoniker": "D:\\G\\Likano\\Likano.Web\\Views\\Manage\\Products.cshtml",
+              "RelativeDocumentMoniker": "Likano.Web\\Views\\Manage\\Products.cshtml",
+              "ToolTip": "D:\\G\\Likano\\Likano.Web\\Views\\Manage\\Products.cshtml",
+              "RelativeToolTip": "Likano.Web\\Views\\Manage\\Products.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-01-06T16:36:52.011Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "ManageController.cs",
+              "DocumentMoniker": "D:\\G\\Likano\\Likano.Web\\Controllers\\ManageController.cs",
+              "RelativeDocumentMoniker": "Likano.Web\\Controllers\\ManageController.cs",
+              "ToolTip": "D:\\G\\Likano\\Likano.Web\\Controllers\\ManageController.cs",
+              "RelativeToolTip": "Likano.Web\\Controllers\\ManageController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAARAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-06T16:28:48.968Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "ProductsFilterVm.cs",
+              "DocumentMoniker": "D:\\G\\Likano\\Likano.Web\\Models\\Manage\\ProductsFilterVm.cs",
+              "RelativeDocumentMoniker": "Likano.Web\\Models\\Manage\\ProductsFilterVm.cs",
+              "ToolTip": "D:\\G\\Likano\\Likano.Web\\Models\\Manage\\ProductsFilterVm.cs",
+              "RelativeToolTip": "Likano.Web\\Models\\Manage\\ProductsFilterVm.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAqwAcAAAAuAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-06T16:37:52.918Z"
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "Likano.Web",
-              "DocumentMoniker": "D:\\G\\Likano\\Likano.Web\\Likano.Web.csproj",
-              "RelativeDocumentMoniker": "Likano.Web\\Likano.Web.csproj",
-              "ToolTip": "D:\\G\\Likano\\Likano.Web\\Likano.Web.csproj",
-              "RelativeToolTip": "Likano.Web\\Likano.Web.csproj",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAtAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2026-01-06T16:20:49.374Z",
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\G\\Likano\\Likano.Web\\Program.cs",
+              "RelativeDocumentMoniker": "Likano.Web\\Program.cs",
+              "ToolTip": "D:\\G\\Likano\\Likano.Web\\Program.cs",
+              "RelativeToolTip": "Likano.Web\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAArAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-06T16:27:40.605Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "D:\\G\\Likano\\Likano.Web\\appsettings.json",
+              "RelativeDocumentMoniker": "Likano.Web\\appsettings.json",
+              "ToolTip": "D:\\G\\Likano\\Likano.Web\\appsettings.json",
+              "RelativeToolTip": "Likano.Web\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-01-06T16:22:50.803Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "ChangeProductStatusHandler.cs",
-              "DocumentMoniker": "D:\\G\\Likano\\Likano.Application\\Features\\Manage\\Product\\Commands\\ChangeStatus\\ChangeProductStatusHandler.cs",
-              "RelativeDocumentMoniker": "Likano.Application\\Features\\Manage\\Product\\Commands\\ChangeStatus\\ChangeProductStatusHandler.cs",
-              "ToolTip": "D:\\G\\Likano\\Likano.Application\\Features\\Manage\\Product\\Commands\\ChangeStatus\\ChangeProductStatusHandler.cs",
-              "RelativeToolTip": "Likano.Application\\Features\\Manage\\Product\\Commands\\ChangeStatus\\ChangeProductStatusHandler.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAqwBcAAAAxAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-06T16:10:30.672Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
               "Title": "Product.cs",
               "DocumentMoniker": "D:\\G\\Likano\\Likano.Domain\\Entities\\Product.cs",
               "RelativeDocumentMoniker": "Likano.Domain\\Entities\\Product.cs",
               "ToolTip": "D:\\G\\Likano\\Likano.Domain\\Entities\\Product.cs",
               "RelativeToolTip": "Likano.Domain\\Entities\\Product.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAIAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAyAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-05T19:39:08.084Z"
+              "WhenOpened": "2026-01-05T19:39:08.084Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 7,
+              "Title": "ProductsManageViewModel.cs",
+              "DocumentMoniker": "D:\\G\\Likano\\Likano.Web\\Models\\Manage\\ProductsManageViewModel.cs",
+              "RelativeDocumentMoniker": "Likano.Web\\Models\\Manage\\ProductsManageViewModel.cs",
+              "ToolTip": "D:\\G\\Likano\\Likano.Web\\Models\\Manage\\ProductsManageViewModel.cs",
+              "RelativeToolTip": "Likano.Web\\Models\\Manage\\ProductsManageViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAqwAcAAABFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-06T16:37:37.399Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Pagination.cs",
+              "DocumentMoniker": "D:\\G\\Likano\\Likano.Application\\Common\\Models\\Pagination.cs",
+              "RelativeDocumentMoniker": "Likano.Application\\Common\\Models\\Pagination.cs",
+              "ToolTip": "D:\\G\\Likano\\Likano.Application\\Common\\Models\\Pagination.cs",
+              "RelativeToolTip": "Likano.Application\\Common\\Models\\Pagination.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAqwAIAAAARAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-05T20:48:47.658Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "GetAllProductsForManageQuery.cs",
+              "DocumentMoniker": "D:\\G\\Likano\\Likano.Application\\Features\\Manage\\Product\\Queries\\GetAll\\GetAllProductsForManageQuery.cs",
+              "RelativeDocumentMoniker": "Likano.Application\\Features\\Manage\\Product\\Queries\\GetAll\\GetAllProductsForManageQuery.cs",
+              "ToolTip": "D:\\G\\Likano\\Likano.Application\\Features\\Manage\\Product\\Queries\\GetAll\\GetAllProductsForManageQuery.cs",
+              "RelativeToolTip": "Likano.Application\\Features\\Manage\\Product\\Queries\\GetAll\\GetAllProductsForManageQuery.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAqwAgAAAAZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-06T16:01:18.284Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "GetAllProductsForManageHandler.cs",
+              "DocumentMoniker": "D:\\G\\Likano\\Likano.Application\\Features\\Manage\\Product\\Queries\\GetAll\\GetAllProductsForManageHandler.cs",
+              "RelativeDocumentMoniker": "Likano.Application\\Features\\Manage\\Product\\Queries\\GetAll\\GetAllProductsForManageHandler.cs",
+              "ToolTip": "D:\\G\\Likano\\Likano.Application\\Features\\Manage\\Product\\Queries\\GetAll\\GetAllProductsForManageHandler.cs",
+              "RelativeToolTip": "Likano.Application\\Features\\Manage\\Product\\Queries\\GetAll\\GetAllProductsForManageHandler.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAAA4AAABeAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-06T16:01:23.545Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "Likano.Web.csproj",
+              "DocumentMoniker": "D:\\G\\Likano\\Likano.Web\\Likano.Web.csproj",
+              "RelativeDocumentMoniker": "Likano.Web\\Likano.Web.csproj",
+              "ToolTip": "D:\\G\\Likano\\Likano.Web\\Likano.Web.csproj",
+              "RelativeToolTip": "Likano.Web\\Likano.Web.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2026-01-06T16:20:49.374Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
               "Title": "ManageController.cs",
               "DocumentMoniker": "D:\\G\\Likano\\Likano\\Controllers\\ManageController.cs",
               "RelativeDocumentMoniker": "Likano\\Controllers\\ManageController.cs",
@@ -259,7 +383,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 13,
               "Title": "IManageRepository.cs",
               "DocumentMoniker": "D:\\G\\Likano\\Likano.Application\\Interfaces\\IManageRepository.cs",
               "RelativeDocumentMoniker": "Likano.Application\\Interfaces\\IManageRepository.cs",
@@ -271,7 +395,32 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 10,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "D:\\G\\Likano\\Likano\\appsettings.json",
+              "RelativeDocumentMoniker": "Likano\\appsettings.json",
+              "ToolTip": "D:\\G\\Likano\\Likano\\appsettings.json",
+              "RelativeToolTip": "Likano\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAASAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-01-05T19:46:23.456Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "ChangeProductStatusHandler.cs",
+              "DocumentMoniker": "D:\\G\\Likano\\Likano.Application\\Features\\Manage\\Product\\Commands\\ChangeStatus\\ChangeProductStatusHandler.cs",
+              "RelativeDocumentMoniker": "Likano.Application\\Features\\Manage\\Product\\Commands\\ChangeStatus\\ChangeProductStatusHandler.cs",
+              "ToolTip": "D:\\G\\Likano\\Likano.Application\\Features\\Manage\\Product\\Commands\\ChangeStatus\\ChangeProductStatusHandler.cs",
+              "RelativeToolTip": "Likano.Application\\Features\\Manage\\Product\\Commands\\ChangeStatus\\ChangeProductStatusHandler.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAqwBcAAAAxAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-06T16:10:30.672Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
               "Title": "ManageRepository.cs",
               "DocumentMoniker": "D:\\G\\Likano\\Likano.Infrastructure\\Repositories\\ManageRepository.cs",
               "RelativeDocumentMoniker": "Likano.Infrastructure\\Repositories\\ManageRepository.cs",
@@ -279,12 +428,11 @@
               "RelativeToolTip": "Likano.Infrastructure\\Repositories\\ManageRepository.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAA4AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-06T15:50:12.912Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-06T15:50:12.912Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 17,
               "Title": "ChangeProductStatusResponse.cs",
               "DocumentMoniker": "D:\\G\\Likano\\Likano.Application\\Features\\Manage\\Product\\Commands\\ChangeStatus\\ChangeProductStatusResponse.cs",
               "RelativeDocumentMoniker": "Likano.Application\\Features\\Manage\\Product\\Commands\\ChangeStatus\\ChangeProductStatusResponse.cs",
@@ -296,7 +444,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 16,
               "Title": "ChangeProductStatusCommand.cs",
               "DocumentMoniker": "D:\\G\\Likano\\Likano.Application\\Features\\Manage\\Product\\Commands\\ChangeStatus\\ChangeProductStatusCommand.cs",
               "RelativeDocumentMoniker": "Likano.Application\\Features\\Manage\\Product\\Commands\\ChangeStatus\\ChangeProductStatusCommand.cs",
@@ -308,7 +456,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 18,
               "Title": "GetProductForManageHandler.cs",
               "DocumentMoniker": "D:\\G\\Likano\\Likano.Application\\Features\\Manage\\Product\\Queries\\Get\\GetProductForManageHandler.cs",
               "RelativeDocumentMoniker": "Likano.Application\\Features\\Manage\\Product\\Queries\\Get\\GetProductForManageHandler.cs",
@@ -320,7 +468,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 19,
               "Title": "GetAllProductsForManageResponse.cs",
               "DocumentMoniker": "D:\\G\\Likano\\Likano.Application\\Features\\Manage\\Product\\Queries\\GetAll\\GetAllProductsForManageResponse.cs",
               "RelativeDocumentMoniker": "Likano.Application\\Features\\Manage\\Product\\Queries\\GetAll\\GetAllProductsForManageResponse.cs",
@@ -332,31 +480,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "GetAllProductsForManageQuery.cs",
-              "DocumentMoniker": "D:\\G\\Likano\\Likano.Application\\Features\\Manage\\Product\\Queries\\GetAll\\GetAllProductsForManageQuery.cs",
-              "RelativeDocumentMoniker": "Likano.Application\\Features\\Manage\\Product\\Queries\\GetAll\\GetAllProductsForManageQuery.cs",
-              "ToolTip": "D:\\G\\Likano\\Likano.Application\\Features\\Manage\\Product\\Queries\\GetAll\\GetAllProductsForManageQuery.cs",
-              "RelativeToolTip": "Likano.Application\\Features\\Manage\\Product\\Queries\\GetAll\\GetAllProductsForManageQuery.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAqwAYAAABZAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-06T16:01:18.284Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "GetAllProductsForManageHandler.cs",
-              "DocumentMoniker": "D:\\G\\Likano\\Likano.Application\\Features\\Manage\\Product\\Queries\\GetAll\\GetAllProductsForManageHandler.cs",
-              "RelativeDocumentMoniker": "Likano.Application\\Features\\Manage\\Product\\Queries\\GetAll\\GetAllProductsForManageHandler.cs",
-              "ToolTip": "D:\\G\\Likano\\Likano.Application\\Features\\Manage\\Product\\Queries\\GetAll\\GetAllProductsForManageHandler.cs",
-              "RelativeToolTip": "Likano.Application\\Features\\Manage\\Product\\Queries\\GetAll\\GetAllProductsForManageHandler.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-06T16:01:23.545Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 20,
               "Title": "GetAllProductsQuery.cs",
               "DocumentMoniker": "D:\\G\\Likano\\Likano.Application\\Features\\Product\\Queries\\GetAll\\GetAllProductsQuery.cs",
               "RelativeDocumentMoniker": "Likano.Application\\Features\\Product\\Queries\\GetAll\\GetAllProductsQuery.cs",
@@ -368,7 +492,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 47,
+              "DocumentIndex": 53,
               "Title": "20260106155807_AddedParamsIntoProductEntityModel.cs",
               "DocumentMoniker": "D:\\G\\Likano\\Likano.Infrastructure\\Migrations\\20260106155807_AddedParamsIntoProductEntityModel.cs",
               "RelativeDocumentMoniker": "Likano.Infrastructure\\Migrations\\20260106155807_AddedParamsIntoProductEntityModel.cs",
@@ -380,7 +504,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 21,
               "Title": "GetProductHandler.cs",
               "DocumentMoniker": "D:\\G\\Likano\\Likano.Application\\Features\\Product\\Queries\\Get\\GetProductHandler.cs",
               "RelativeDocumentMoniker": "Likano.Application\\Features\\Product\\Queries\\Get\\GetProductHandler.cs",
@@ -392,7 +516,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 22,
               "Title": "GetProductForManageResponse.cs",
               "DocumentMoniker": "D:\\G\\Likano\\Likano.Application\\Features\\Manage\\Product\\Queries\\Get\\GetProductForManageResponse.cs",
               "RelativeDocumentMoniker": "Likano.Application\\Features\\Manage\\Product\\Queries\\Get\\GetProductForManageResponse.cs",
@@ -404,7 +528,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 23,
               "Title": "GetProductForManageQuery.cs",
               "DocumentMoniker": "D:\\G\\Likano\\Likano.Application\\Features\\Manage\\Product\\Queries\\Get\\GetProductForManageQuery.cs",
               "RelativeDocumentMoniker": "Likano.Application\\Features\\Manage\\Product\\Queries\\Get\\GetProductForManageQuery.cs",
@@ -416,7 +540,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 25,
               "Title": "ProductRepository.cs",
               "DocumentMoniker": "D:\\G\\Likano\\Likano.Infrastructure\\Repositories\\ProductRepository.cs",
               "RelativeDocumentMoniker": "Likano.Infrastructure\\Repositories\\ProductRepository.cs",
@@ -428,7 +552,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 26,
               "Title": "GetAllProductsHandler.cs",
               "DocumentMoniker": "D:\\G\\Likano\\Likano.Application\\Features\\Product\\Queries\\GetAll\\GetAllProductsHandler.cs",
               "RelativeDocumentMoniker": "Likano.Application\\Features\\Product\\Queries\\GetAll\\GetAllProductsHandler.cs",
@@ -440,7 +564,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 24,
               "Title": "Program.cs",
               "DocumentMoniker": "D:\\G\\Likano\\Likano\\Program.cs",
               "RelativeDocumentMoniker": "Likano\\Program.cs",
@@ -452,7 +576,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 20,
+              "DocumentIndex": 28,
               "Title": "GetAllProductsResponse.cs",
               "DocumentMoniker": "D:\\G\\Likano\\Likano.Application\\Features\\Product\\Queries\\GetAll\\GetAllProductsResponse.cs",
               "RelativeDocumentMoniker": "Likano.Application\\Features\\Product\\Queries\\GetAll\\GetAllProductsResponse.cs",
@@ -464,7 +588,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 27,
               "Title": "ProductStatus.cs",
               "DocumentMoniker": "D:\\G\\Likano\\Likano.Domain\\Enums\\ProductStatus.cs",
               "RelativeDocumentMoniker": "Likano.Domain\\Enums\\ProductStatus.cs",
@@ -476,7 +600,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 21,
+              "DocumentIndex": 29,
               "Title": "IProductRepository.cs",
               "DocumentMoniker": "D:\\G\\Likano\\Likano.Application\\Interfaces\\IProductRepository.cs",
               "RelativeDocumentMoniker": "Likano.Application\\Interfaces\\IProductRepository.cs",
@@ -488,7 +612,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 22,
+              "DocumentIndex": 30,
               "Title": "GetProductResponse.cs",
               "DocumentMoniker": "D:\\G\\Likano\\Likano.Application\\Features\\Product\\Queries\\Get\\GetProductResponse.cs",
               "RelativeDocumentMoniker": "Likano.Application\\Features\\Product\\Queries\\Get\\GetProductResponse.cs",
@@ -500,7 +624,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 25,
+              "DocumentIndex": 33,
               "Title": "GetCategoryQuery.cs",
               "DocumentMoniker": "D:\\G\\Likano\\Likano.Application\\Features\\Category\\Queries\\Get\\GetCategoryQuery.cs",
               "RelativeDocumentMoniker": "Likano.Application\\Features\\Category\\Queries\\Get\\GetCategoryQuery.cs",
@@ -512,7 +636,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 24,
+              "DocumentIndex": 32,
               "Title": "GetAllCategoriesQuery.cs",
               "DocumentMoniker": "D:\\G\\Likano\\Likano.Application\\Features\\Category\\Queries\\GetAll\\GetAllCategoriesQuery.cs",
               "RelativeDocumentMoniker": "Likano.Application\\Features\\Category\\Queries\\GetAll\\GetAllCategoriesQuery.cs",
@@ -524,7 +648,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 23,
+              "DocumentIndex": 31,
               "Title": "ProductController.cs",
               "DocumentMoniker": "D:\\G\\Likano\\Likano\\Controllers\\ProductController.cs",
               "RelativeDocumentMoniker": "Likano\\Controllers\\ProductController.cs",
@@ -536,7 +660,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 26,
+              "DocumentIndex": 34,
               "Title": "GetAllCategoriesHandler.cs",
               "DocumentMoniker": "D:\\G\\Likano\\Likano.Application\\Features\\Category\\Queries\\GetAll\\GetAllCategoriesHandler.cs",
               "RelativeDocumentMoniker": "Likano.Application\\Features\\Category\\Queries\\GetAll\\GetAllCategoriesHandler.cs",
@@ -548,7 +672,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 27,
+              "DocumentIndex": 35,
               "Title": "CategoryController.cs",
               "DocumentMoniker": "D:\\G\\Likano\\Likano\\Controllers\\CategoryController.cs",
               "RelativeDocumentMoniker": "Likano\\Controllers\\CategoryController.cs",
@@ -560,19 +684,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 28,
-              "Title": "Pagination.cs",
-              "DocumentMoniker": "D:\\G\\Likano\\Likano.Application\\Common\\Models\\Pagination.cs",
-              "RelativeDocumentMoniker": "Likano.Application\\Common\\Models\\Pagination.cs",
-              "ToolTip": "D:\\G\\Likano\\Likano.Application\\Common\\Models\\Pagination.cs",
-              "RelativeToolTip": "Likano.Application\\Common\\Models\\Pagination.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-05T20:48:47.658Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 30,
+              "DocumentIndex": 37,
               "Title": "GetProductQuery.cs",
               "DocumentMoniker": "D:\\G\\Likano\\Likano.Application\\Features\\Product\\Queries\\Get\\GetProductQuery.cs",
               "RelativeDocumentMoniker": "Likano.Application\\Features\\Product\\Queries\\Get\\GetProductQuery.cs",
@@ -584,7 +696,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 31,
+              "DocumentIndex": 38,
               "Title": "GetCategoryResponse.cs",
               "DocumentMoniker": "D:\\G\\Likano\\Likano.Application\\Features\\Category\\Queries\\Get\\GetCategoryResponse.cs",
               "RelativeDocumentMoniker": "Likano.Application\\Features\\Category\\Queries\\Get\\GetCategoryResponse.cs",
@@ -596,7 +708,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 29,
+              "DocumentIndex": 36,
               "Title": "GetCategoryHandler.cs",
               "DocumentMoniker": "D:\\G\\Likano\\Likano.Application\\Features\\Category\\Queries\\Get\\GetCategoryHandler.cs",
               "RelativeDocumentMoniker": "Likano.Application\\Features\\Category\\Queries\\Get\\GetCategoryHandler.cs",
@@ -608,7 +720,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 34,
+              "DocumentIndex": 41,
               "Title": "UnitOfWork.cs",
               "DocumentMoniker": "D:\\G\\Likano\\Likano.Infrastructure\\Data\\UnitOfWork.cs",
               "RelativeDocumentMoniker": "Likano.Infrastructure\\Data\\UnitOfWork.cs",
@@ -620,7 +732,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 32,
+              "DocumentIndex": 39,
               "Title": "ICategoryRepository.cs",
               "DocumentMoniker": "D:\\G\\Likano\\Likano.Application\\Interfaces\\ICategoryRepository.cs",
               "RelativeDocumentMoniker": "Likano.Application\\Interfaces\\ICategoryRepository.cs",
@@ -632,7 +744,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 33,
+              "DocumentIndex": 40,
               "Title": "CategoryRepository.cs",
               "DocumentMoniker": "D:\\G\\Likano\\Likano.Infrastructure\\Repositories\\CategoryRepository.cs",
               "RelativeDocumentMoniker": "Likano.Infrastructure\\Repositories\\CategoryRepository.cs",
@@ -644,7 +756,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 36,
+              "DocumentIndex": 43,
               "Title": "GetAllCategoriesResponse.cs",
               "DocumentMoniker": "D:\\G\\Likano\\Likano.Application\\Features\\Category\\Queries\\GetAll\\GetAllCategoriesResponse.cs",
               "RelativeDocumentMoniker": "Likano.Application\\Features\\Category\\Queries\\GetAll\\GetAllCategoriesResponse.cs",
@@ -656,7 +768,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 35,
+              "DocumentIndex": 42,
               "Title": "IUnitOfWork.cs",
               "DocumentMoniker": "D:\\G\\Likano\\Likano.Application\\Interfaces\\IUnitOfWork.cs",
               "RelativeDocumentMoniker": "Likano.Application\\Interfaces\\IUnitOfWork.cs",
@@ -668,7 +780,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 37,
+              "DocumentIndex": 44,
               "Title": "Category.cs",
               "DocumentMoniker": "D:\\G\\Likano\\Likano.Domain\\Entities\\Category.cs",
               "RelativeDocumentMoniker": "Likano.Domain\\Entities\\Category.cs",
@@ -680,7 +792,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 38,
+              "DocumentIndex": 45,
               "Title": "BaseResponse.cs",
               "DocumentMoniker": "D:\\G\\Likano\\Likano.Application\\Common\\Models\\BaseResponse.cs",
               "RelativeDocumentMoniker": "Likano.Application\\Common\\Models\\BaseResponse.cs",
@@ -692,7 +804,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 46,
+              "DocumentIndex": 52,
               "Title": "20260105194838_InitialEntities.cs",
               "DocumentMoniker": "D:\\G\\Likano\\Likano.Infrastructure\\Migrations\\20260105194838_InitialEntities.cs",
               "RelativeDocumentMoniker": "Likano.Infrastructure\\Migrations\\20260105194838_InitialEntities.cs",
@@ -704,7 +816,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 44,
+              "DocumentIndex": 50,
               "Title": "appsettings.Development.json",
               "DocumentMoniker": "D:\\G\\Likano\\Likano\\appsettings.Development.json",
               "RelativeDocumentMoniker": "Likano\\appsettings.Development.json",
@@ -716,7 +828,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 39,
+              "DocumentIndex": 46,
               "Title": "Likano.Application.csproj",
               "DocumentMoniker": "D:\\G\\Likano\\Likano.Application\\Likano.Application.csproj",
               "RelativeDocumentMoniker": "Likano.Application\\Likano.Application.csproj",
@@ -724,12 +836,11 @@
               "RelativeToolTip": "Likano.Application\\Likano.Application.csproj",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2026-01-05T19:37:36.285Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-05T19:37:36.285Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 40,
+              "DocumentIndex": 47,
               "Title": "Likano.csproj",
               "DocumentMoniker": "D:\\G\\Likano\\Likano\\Likano.csproj",
               "RelativeDocumentMoniker": "Likano\\Likano.csproj",
@@ -737,12 +848,11 @@
               "RelativeToolTip": "Likano\\Likano.csproj",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2026-01-05T19:33:15.682Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-05T19:33:15.682Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 42,
+              "DocumentIndex": 48,
               "Title": "AuthController.cs",
               "DocumentMoniker": "D:\\G\\Likano\\Likano\\Controllers\\AuthController.cs",
               "RelativeDocumentMoniker": "Likano\\Controllers\\AuthController.cs",
@@ -754,19 +864,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 41,
-              "Title": "appsettings.json",
-              "DocumentMoniker": "D:\\G\\Likano\\Likano\\appsettings.json",
-              "RelativeDocumentMoniker": "Likano\\appsettings.json",
-              "ToolTip": "D:\\G\\Likano\\Likano\\appsettings.json",
-              "RelativeToolTip": "Likano\\appsettings.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2026-01-05T19:46:23.456Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 43,
+              "DocumentIndex": 49,
               "Title": "ApplicationDbContext.cs",
               "DocumentMoniker": "D:\\G\\Likano\\Likano.Infrastructure\\Data\\ApplicationDbContext.cs",
               "RelativeDocumentMoniker": "Likano.Infrastructure\\Data\\ApplicationDbContext.cs",
@@ -778,7 +876,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 45,
+              "DocumentIndex": 51,
               "Title": "Likano.Infrastructure.csproj",
               "DocumentMoniker": "D:\\G\\Likano\\Likano.Infrastructure\\Likano.Infrastructure.csproj",
               "RelativeDocumentMoniker": "Likano.Infrastructure\\Likano.Infrastructure.csproj",
@@ -786,8 +884,7 @@
               "RelativeToolTip": "Likano.Infrastructure\\Likano.Infrastructure.csproj",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2026-01-05T19:37:51.261Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-05T19:37:51.261Z"
             }
           ]
         }
