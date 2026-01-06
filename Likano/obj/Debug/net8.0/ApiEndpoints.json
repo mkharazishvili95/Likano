@@ -52,6 +52,32 @@
     ]
   },
   {
+    "ContainingType": "Likano.Controllers.ManageController",
+    "Method": "GetProduct",
+    "RelativePath": "api/Manage/product/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Likano.Application.Features.Manage.Product.Queries.Get.GetProductForManageResponse",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
     "ContainingType": "Likano.Controllers.ProductController",
     "Method": "Get",
     "RelativePath": "api/Product/{id}",

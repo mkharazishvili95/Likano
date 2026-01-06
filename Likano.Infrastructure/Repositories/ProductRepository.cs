@@ -13,7 +13,12 @@ namespace Likano.Infrastructure.Repositories
             _db = db;
         }
 
-        public async Task<Product?> Get(int id) => await _db.Products.FindAsync(id);
-        public async Task<List<Product>?> GetAll() => await _db.Products.AsNoTracking().ToListAsync();
+        public async Task<Product?> Get(int id) 
+            => await _db.Products.FirstOrDefaultAsync(x => x.Id == id && x.Status == Domain.Enums.ProductStatus.Active);
+
+        public async Task<List<Product>?> GetAll() => await _db.Products
+            .Where(x => x.Status == Domain.Enums.ProductStatus.Active)
+            .AsNoTracking()
+            .ToListAsync();
     }
 }

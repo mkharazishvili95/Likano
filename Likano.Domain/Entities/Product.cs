@@ -1,4 +1,6 @@
-﻿namespace Likano.Domain.Entities
+﻿using Likano.Domain.Enums;
+
+namespace Likano.Domain.Entities
 {
     public class Product
     {
@@ -10,5 +12,8 @@
         public string? ImageUrl { get; set; }
         public Category Category { get; set; }
         public int CategoryId { get; set; }
+        public ProductStatus? Status { get; set; }
+        public DateTime? CreateDate { get; set; }
+        public DateTime? UpdateDate { get; set; }
     }
 }

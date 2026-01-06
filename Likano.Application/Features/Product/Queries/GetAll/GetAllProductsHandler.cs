@@ -56,7 +56,9 @@ namespace Likano.Application.Features.Product.Queries.GetAll
                     Price = p.Price,
                     IsAvailable = p.IsAvailable,
                     ImageUrl = p.ImageUrl,
-                    CategoryId = p.CategoryId
+                    CategoryId = p.CategoryId,
+                    CreateDate = p.CreateDate,
+                    UpdateDate = p.UpdateDate
                 }).ToList()
             };
         }

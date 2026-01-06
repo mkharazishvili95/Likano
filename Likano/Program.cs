@@ -22,6 +22,8 @@ builder.Services.AddMediatR(x => x.RegisterServicesFromAssemblyContaining<GetCat
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
+builder.Services.AddScoped<IManageRepository, ManageRepository>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

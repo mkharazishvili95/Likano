@@ -30,6 +30,8 @@ namespace Likano.Application.Features.Product.Queries.Get
                 Price = product.Price,
                 IsAvailable = product.IsAvailable,
                 Description = product.Description,
+                CreateDate = product.CreateDate,
+                UpdateDate = product.UpdateDate,
                 Success = true,
                 StatusCode = 200
             };
