@@ -1,4 +1,5 @@
-﻿using Likano.Application.Features.Manage.Product.Queries.Get;
+﻿using Likano.Application.Features.Manage.Product.Commands.ChangeStatus;
+using Likano.Application.Features.Manage.Product.Queries.Get;
 using Likano.Application.Features.Manage.Product.Queries.GetAll;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -22,5 +23,9 @@ namespace Likano.Controllers
         [HttpPost("products")]
         public async Task<GetAllProductsForManageResponse> GetAllProducts([FromBody] GetAllProductsForManageQuery query)
             => await _mediator.Send(query);
+
+        [HttpPut("product/status")]
+        public async Task<ChangeProductStatusResponse> ChangeProductStatus([FromBody] ChangeProductStatusCommand command)
+            => await _mediator.Send(command);
     }
 }
