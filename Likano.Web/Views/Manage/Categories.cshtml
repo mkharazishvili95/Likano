@@ -1,0 +1,286 @@
+﻿@model Likano.Web.Models.Manage.CategoriesManageViewModel
+@{
+    ViewData["Title"] = "კატეგორიები - ადმინი";
+
+    var pageNumber = Model.Filter.PageNumber <= 0 ? 1 : Model.Filter.PageNumber;
+    var pageSize = Model.Filter.PageSize <= 0 ? 10 : Model.Filter.PageSize;
+    var totalCount = Model.Response?.TotalCount ?? 0;
+    var totalPages = totalCount == 0 ? 1 : (int)Math.Ceiling(totalCount / (double)pageSize);
+
+    RouteValueDictionary BuildRoute(int targetPage) => new RouteValueDictionary(new
+    {
+        Id = Model.Filter.Id,
+        Name = Model.Filter.Name,
+        Description = Model.Filter.Description,
+        IsActive = Model.Filter.IsActive,
+        PageNumber = targetPage,
+        PageSize = pageSize
+    });
+}
+
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+<div class="container-fluid py-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="h3 mb-0 text-primary fw-bold">კატეგორიების მართვა</h2>
+        <a asp-action="CreateCategory" asp-controller="Manage" class="btn btn-success shadow-sm">
+            <i class="fas fa-plus me-2"></i>ახალი კატეგორია
+        </a>
+    </div>
+
+    <div class="card shadow border-0 rounded-4 overflow-hidden mb-4">
+        <div class="card-header bg-gradient-primary text-white py-3">
+            <h5 class="mb-0"><i class="fas fa-filter me-2"></i>ფილტრები</h5>
+        </div>
+        <div class="card-body p-4">
+            <form asp-action="Categories" method="get" class="row g-3">
+                <div class="col-6 col-md-1">
+                    <label class="form-label small fw-medium">ID</label>
+                    <input type="number" name="Id" value="@Model.Filter.Id"
+                           class="form-control form-control-sm no-spinner" placeholder="ID" />
+                </div>
+
+                <div class="col-6 col-md-3">
+                    <label class="form-label small fw-medium">დასახელება</label>
+                    <input type="text" name="Name" value="@Model.Filter.Name"
+                           class="form-control form-control-sm" placeholder="დასახელება" />
+                </div>
+
+                <div class="col-12 col-md-5">
+                    <label class="form-label small fw-medium">აღწერა</label>
+                    <input type="text" name="Description" value="@Model.Filter.Description"
+                           class="form-control form-control-sm" placeholder="აღწერა" />
+                </div>
+
+                <div class="col-6 col-md-2">
+                    <label class="form-label small fw-medium">აქტიურია</label>
+                    @Html.DropDownList("IsActive",
+                    new List<SelectListItem>
+                                        {
+                                        new SelectListItem { Text = "ყველა", Value = "" },
+                                        new SelectListItem { Text = "კი", Value = "true" },
+                                        new SelectListItem { Text = "არა", Value = "false" }
+                                        },
+                                        new { @class = "form-select form-select-sm" })
+                </div>
+
+                <div class="col-12 mt-2"></div>
+
+                <div class="col-6 col-md-2 d-flex align-items-end">
+                    <button type="submit" class="btn btn-primary shadow-sm w-100">
+                        <i class="fas fa-search me-2"></i>ძიება
+                    </button>
+                </div>
+                <div class="col-6 col-md-2 d-flex align-items-end">
+                    <a href="@Url.Action("Categories", "Manage")" class="btn btn-outline-secondary shadow-sm w-100">
+                        <i class="fas fa-times me-2"></i>გასუფთავება
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="card shadow border-0 rounded-4 overflow-hidden">
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table table-hover mb-0">
+                    <thead class="bg-light">
+                        <tr>
+                            <th class="ps-4">ID</th>
+                            <th>ლოგო</th>
+                            <th>დასახელება</th>
+                            <th>აღწერა</th>
+                            <th>სტატუსი</th>
+                            <th class="text-end pe-4">ქმედებები</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model.Response?.Items?.Any() == true)
+                        {
+                            foreach (var c in Model.Response.Items)
+                            {
+                                <tr class="align-middle">
+                                    <td class="ps-4 fw-medium">@c.Id</td>
+                                    <td>
+                                        @if (!string.IsNullOrWhiteSpace(c.Logo))
+                                        {
+                                            <img src="@c.Logo" alt="@c.Name"
+                                                 class="rounded shadow-sm"
+                                                 style="width:60px; height:60px; object-fit:cover;" />
+                                        }
+                                        else
+                                        {
+                                            <div class="bg-light rounded d-flex align-items-center justify-content-center"
+                                                 style="width:60px; height:60px;">
+                                                <i class="fas fa-image text-muted fa-lg"></i>
+                                            </div>
+                                        }
+                                    </td>
+                                    <td class="fw-bold text-dark">@c.Name</td>
+                                    <td class="text-muted small" style="max-width:300px;">@c.Description</td>
+                                    <td>
+                                        <span class="badge @(c.IsActive == true ? "bg-success" : "bg-secondary")">
+                                            @(c.IsActive == true ? "აქტიური" : "არაქტიური")
+                                        </span>
+                                    </td>
+                                    <td class="text-end pe-4">
+                                        <a asp-action="EditCategory" asp-controller="Manage" asp-route-id="@c.Id"
+                                           class="btn btn-sm btn-outline-primary">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                        <a asp-action="DetailsCategory" asp-controller="Manage" asp-route-id="@c.Id"
+                                           class="btn btn-sm btn-outline-secondary ms-1">
+                                            <i class="fas fa-eye"></i>
+                                        </a>
+                                        <form asp-action="ToggleCategoryActive" asp-controller="Manage" method="post" class="d-inline">
+                                            <input type="hidden" name="id" value="@c.Id" />
+                                            <input type="hidden" name="intoGrid" value="true" />
+                                            <button type="submit" class="btn btn-sm @(c.IsActive == true ? "btn-warning" : "btn-success") shadow-sm ms-1"
+                                                    onclick="return confirm('@(c.IsActive == true ? "გსურთ კატეგორიის გამორთვა?" : "გსურთ კატეგორიის ჩართვა?")')">
+                                                <i class="fas @(c.IsActive == true ? "fa-toggle-off" : "fa-toggle-on")"></i>
+                                            </button>
+                                        </form>
+                                        <form asp-action="DeleteCategory" asp-controller="Manage" method="post" class="d-inline">
+                                            <input type="hidden" name="id" value="@c.Id" />
+                                            <input type="hidden" name="intoGrid" value="true" />
+                                            <button type="submit" class="btn btn-sm btn-danger shadow-sm ms-1"
+                                                    onclick="return confirm('ნამდვილად გსურთ კატეგორიის წაშლა? ეს ქმედება შეუქცევადია!')">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+                            <tr>
+                                <td colspan="6" class="text-center py-5 text-muted">
+                                    <i class="fas fa-inbox fa-3x mb-3 opacity-50"></i>
+                                    <p class="mb-0">კატეგორიები არ მოიძებნა</p>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+            @if (totalCount > 0)
+            {
+                <div class="card-footer bg-light border-0 py-4">
+                    <div class="row align-items-center">
+                        <div class="col-md-6 text-muted small">
+                            ნაჩვენებია @(pageNumber* pageSize - pageSize + 1)–@(Math.Min(pageNumber * pageSize, totalCount))
+                            სულ @totalCount-დან • გვერდი @pageNumber / @totalPages
+                        </div>
+                        <div class="col-md-6">
+                            <nav aria-label="Page navigation">
+                                <ul class="pagination pagination-primary justify-content-end mb-0">
+                                    <li class="page-item @(pageNumber <= 1 ? "disabled" : "")">
+                                        <a class="page-link" href="@(pageNumber <= 1 ? "#" : Url.Action("Categories", "Manage", BuildRoute(pageNumber - 1)))">
+                                            <i class="fas fa-chevron-left"></i>
+                                        </a>
+                                    </li>
+                                    @{
+                                        var start = Math.Max(1, pageNumber - 2);
+                                        var end = Math.Min(totalPages, start + 4);
+                                        start = Math.Max(1, end - 4);
+                                    }
+                                    @for (int i = start; i <= end; i++)
+                                    {
+                                        <li class="page-item @(i == pageNumber ? "active" : "")">
+                                            <a class="page-link" href="@Url.Action("Categories", "Manage", BuildRoute(i))">@i</a>
+                                        </li>
+                                    }
+                                    <li class="page-item @(pageNumber >= totalPages ? "disabled" : "")">
+                                        <a class="page-link" href="@(pageNumber >= totalPages ? "#" : Url.Action("Categories", "Manage", BuildRoute(pageNumber + 1)))">
+                                            <i class="fas fa-chevron-right"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<style>
+    body { font-family: 'Roboto', sans-serif; }
+
+    .no-spinner::-webkit-inner-spin-button,
+    .no-spinner::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+    .no-spinner {
+        -moz-appearance: textfield;
+    }
+
+    .bg-gradient-primary {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    }
+
+    .card {
+        transition: transform 0.2s ease;
+    }
+    .card:hover {
+        transform: translateY(-2px);
+    }
+
+    .table th {
+        border-top: none;
+        font-weight: 500;
+        color: #495057;
+    }
+
+    .badge {
+        font-size: 0.8rem;
+    }
+
+    .pagination-primary .page-item.active .page-link {
+        background: #667eea;
+        border-color: #667eea;
+    }
+
+    .btn-outline-primary:hover, .btn-outline-secondary:hover, .btn-outline-danger:hover {
+        transform: scale(1.08);
+        transition: all 0.2s;
+    }
+
+    @@media (max-width: 768px) {
+        .table thead {
+            display: none;
+        }
+        .table tr {
+            display: block;
+            margin-bottom: 1rem;
+            border: 1px solid #dee2e6;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            background: #fff;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .table td {
+            display: block;
+            text-align: right;
+            padding: 0.5rem 0;
+            border: none;
+        }
+        .table td:before {
+            content: attr(data-label);
+            float: left;
+            font-weight: bold;
+            color: #6c757d;
+        }
+        .table td:last-child {
+            text-align: center;
+        }
+    }
+</style>
+
+@section Scripts {
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+}

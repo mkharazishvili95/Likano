@@ -1,6 +1,7 @@
 ﻿using Likano.Application.Common.Models;
 using Likano.Application.DTOs;
 using Likano.Application.Features.Category.Queries.GetAll;
+using Likano.Application.Features.Manage.Category.Queries.GetAll;
 using Likano.Application.Features.Manage.Product.Commands.ChangeStatus;
 using Likano.Application.Features.Manage.Product.Queries.Get;
 using Likano.Application.Features.Manage.Product.Queries.GetAll;
@@ -104,7 +105,7 @@ namespace Likano.Web.Controllers
 
             return View("Products", vm);
         }
-
+        //Products:
         [HttpGet]
         public async Task<IActionResult> Details(int id)
         {
@@ -135,7 +136,6 @@ namespace Likano.Web.Controllers
             return View("Details", product);
         }
 
-
         public async Task<IActionResult> ChangeProductStatus(int productId, ProductStatus status, bool? intoGrid)
         {
             var apiUrl = $"{_baseUrl}/manage/product/status";
@@ -158,6 +158,60 @@ namespace Likano.Web.Controllers
             TempData[(bool)result!.Success ? "SuccessMessage" : "ErrorMessage"] = result.Message;
 
             return intoGrid == true ? RedirectToAction("Products") : RedirectToAction("Details", new { id = productId });
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Categories([FromQuery] CategoriesFilterVm filter)
+        {
+            var pageNumber = filter.PageNumber <= 0 ? 1 : filter.PageNumber;
+            var pageSize = filter.PageSize <= 0 ? 10 : filter.PageSize;
+
+            var request = new GetAllCategoriesForManageQuery
+            {
+                Pagination = new Pagination { PageNumber = pageNumber, PageSize = pageSize },
+                Id = filter.Id,
+                Description = filter.Description,
+                IsActive = filter.IsActive,
+                Name = filter.Name
+            };
+
+            var apiUrl = $"{_baseUrl}/manage/categories";
+            var apiResponse = await _httpClient.PostAsJsonAsync(apiUrl, request);
+            GetAllCategoriesForManageResponse data;
+            if (!apiResponse.IsSuccessStatusCode)
+            {
+                data = new GetAllCategoriesForManageResponse
+                {
+                    Success = false,
+                    StatusCode = (int)apiResponse.StatusCode,
+                    Message = $"API error: {(int)apiResponse.StatusCode}",
+                    TotalCount = 0,
+                    Items = new List<GetAllCategoriesForManageItemsResponse>()
+                };
+            }
+            else
+            {
+                data = await apiResponse.Content.ReadFromJsonAsync<GetAllCategoriesForManageResponse>()
+                       ?? new GetAllCategoriesForManageResponse
+                       {
+                           Success = false,
+                           StatusCode = 500,
+                           Message = "Invalid API response",
+                           TotalCount = 0,
+                           Items = new List<GetAllCategoriesForManageItemsResponse>()
+                       };
+            }
+
+            filter.PageNumber = pageNumber;
+            filter.PageSize = pageSize;
+
+            var vm = new CategoriesManageViewModel
+            {
+                Filter = filter,
+                Response = data
+            };
+
+            return View("Categories", vm);
         }
     }
 }
