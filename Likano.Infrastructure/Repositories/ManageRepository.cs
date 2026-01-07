@@ -19,7 +19,7 @@ namespace Likano.Infrastructure.Repositories
 
         public async Task<List<Product>?> GetAllProducts() => await _db.Products.ToListAsync();
         public async Task<List<Category>?> GetAllCategories() => await _db.Categories.ToListAsync();
-
+        //Product Status Change:
         public async Task<bool> ChangeStatus(int id, ProductStatus status)
         {
             var product = await _db.Products.FindAsync(id);
@@ -53,5 +53,19 @@ namespace Likano.Infrastructure.Repositories
                 .ToListAsync();
             return categories.Count > 0 ? categories : null;
         }
+
+        public async Task<bool> ChangeActiveStatusCategory(int id)
+        {
+            var category = await _db.Categories.FindAsync(id);
+
+            if (category == null)
+                return false;
+
+            category.IsActive = category.IsActive.HasValue && category.IsActive.Value ? false : true;
+            await _db.SaveChangesAsync();
+            return true;
+        }
+
+        public async Task<Category?> GetCategory(int id) => await _db.Categories.FindAsync(id);
     }
 }

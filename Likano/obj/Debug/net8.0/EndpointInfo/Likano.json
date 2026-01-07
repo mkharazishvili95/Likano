@@ -181,6 +181,54 @@
         }
       }
     },
+    "/api/Manage/product/status": {
+      "post": {
+        "tags": [
+          "Manage"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChangeProductStatusCommand"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChangeProductStatusCommand"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChangeProductStatusCommand"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ChangeProductStatusResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ChangeProductStatusResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ChangeProductStatusResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/Manage/categories": {
       "post": {
         "tags": [
@@ -229,7 +277,7 @@
         }
       }
     },
-    "/api/Manage/product/status": {
+    "/api/Manage/category/status": {
       "post": {
         "tags": [
           "Manage"
@@ -238,17 +286,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/ChangeProductStatusCommand"
+                "$ref": "#/components/schemas/ChangeActiveStatusCommand"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/ChangeProductStatusCommand"
+                "$ref": "#/components/schemas/ChangeActiveStatusCommand"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/ChangeProductStatusCommand"
+                "$ref": "#/components/schemas/ChangeActiveStatusCommand"
               }
             }
           }
@@ -259,17 +307,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/ChangeProductStatusResponse"
+                  "$ref": "#/components/schemas/ChangeActiveStatusResponse"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ChangeProductStatusResponse"
+                  "$ref": "#/components/schemas/ChangeActiveStatusResponse"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ChangeProductStatusResponse"
+                  "$ref": "#/components/schemas/ChangeActiveStatusResponse"
                 }
               }
             }
@@ -368,6 +416,35 @@
   },
   "components": {
     "schemas": {
+      "ChangeActiveStatusCommand": {
+        "type": "object",
+        "properties": {
+          "categoryId": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ChangeActiveStatusResponse": {
+        "type": "object",
+        "properties": {
+          "statusCode": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "success": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "ChangeProductStatusCommand": {
         "type": "object",
         "properties": {

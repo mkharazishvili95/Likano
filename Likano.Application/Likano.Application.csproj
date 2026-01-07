@@ -13,7 +13,6 @@
 	<ItemGroup>
 	  <Folder Include="Features\Category\Commands\" />
 	  <Folder Include="Features\Auth\" />
-	  <Folder Include="Features\Manage\Category\Commands\" />
 	  <Folder Include="Features\Product\Commands\" />
 	</ItemGroup>
 
