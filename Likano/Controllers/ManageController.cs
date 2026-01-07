@@ -1,4 +1,5 @@
-﻿using Likano.Application.Features.Manage.Product.Commands.ChangeStatus;
+﻿using Likano.Application.Features.Manage.Category.Queries.GetAll;
+using Likano.Application.Features.Manage.Product.Commands.ChangeStatus;
 using Likano.Application.Features.Manage.Product.Queries.Get;
 using Likano.Application.Features.Manage.Product.Queries.GetAll;
 using MediatR;
@@ -22,6 +23,10 @@ namespace Likano.Controllers
 
         [HttpPost("products")]
         public async Task<GetAllProductsForManageResponse> GetAllProducts([FromBody] GetAllProductsForManageQuery query)
+            => await _mediator.Send(query);
+
+        [HttpPost("categories")]
+        public async Task<GetAllCategoriesForManageResponse> GetAllCategories([FromBody] GetAllCategoriesForManageQuery query)
             => await _mediator.Send(query);
 
         [HttpPost("product/status")]

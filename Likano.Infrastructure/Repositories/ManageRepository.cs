@@ -18,6 +18,7 @@ namespace Likano.Infrastructure.Repositories
         public async Task<Product?> GetProduct(int id) => await _db.Products.FindAsync(id);
 
         public async Task<List<Product>?> GetAllProducts() => await _db.Products.ToListAsync();
+        public async Task<List<Category>?> GetAllCategories() => await _db.Categories.ToListAsync();
 
         public async Task<bool> ChangeStatus(int id, ProductStatus status)
         {

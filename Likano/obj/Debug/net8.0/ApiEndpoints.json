@@ -53,6 +53,32 @@
   },
   {
     "ContainingType": "Likano.Controllers.ManageController",
+    "Method": "GetAllCategories",
+    "RelativePath": "api/Manage/categories",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "query",
+        "Type": "Likano.Application.Features.Manage.Category.Queries.GetAll.GetAllCategoriesForManageQuery",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Likano.Application.Features.Manage.Category.Queries.GetAll.GetAllCategoriesForManageResponse",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Likano.Controllers.ManageController",
     "Method": "GetProduct",
     "RelativePath": "api/Manage/product/{id}",
     "HttpMethod": "GET",

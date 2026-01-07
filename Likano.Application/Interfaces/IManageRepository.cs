@@ -10,5 +10,6 @@ namespace Likano.Application.Interfaces
         Task<List<Product>?> GetAllProducts();
         Task<bool> ChangeStatus(int id, ProductStatus status);
         Task<List<CategoryDtoForManage>?> Categories(string? searchString, int? id);
+        Task<List<Category>?> GetAllCategories();
     }
 }
