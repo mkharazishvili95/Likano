@@ -15,7 +15,7 @@ namespace Likano.Infrastructure.Repositories
             _db = db;
         }
 
-        public async Task<Product?> GetProduct(int id) => await _db.Products.FindAsync(id);
+        public async Task<Product?> GetProduct(int id) => await _db.Products.Include(x => x.Category).FirstOrDefaultAsync(x => x.Id == id);
 
         public async Task<List<Product>?> GetAllProducts() => await _db.Products.ToListAsync();
         public async Task<List<Category>?> GetAllCategories() => await _db.Categories.ToListAsync();

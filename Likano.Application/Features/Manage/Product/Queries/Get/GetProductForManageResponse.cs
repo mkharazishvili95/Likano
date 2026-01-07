@@ -12,6 +12,7 @@ namespace Likano.Application.Features.Manage.Product.Queries.Get
         public bool? IsAvailable { get; set; }
         public string? ImageUrl { get; set; }
         public int CategoryId { get; set; }
+        public string? CategoryTitle { get; set; }
         public ProductStatus? Status { get; set; }
         public DateTime? CreateDate { get; set; }
         public DateTime? UpdateDate { get; set; }

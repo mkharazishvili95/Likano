@@ -25,6 +25,7 @@ namespace Likano.Application.Features.Manage.Product.Queries.Get
             {
                 Id = product.Id,
                 CategoryId = product.CategoryId,
+                CategoryTitle = product.Category?.Name,
                 Title = product.Title,
                 ImageUrl = product.ImageUrl,
                 Price = product.Price,

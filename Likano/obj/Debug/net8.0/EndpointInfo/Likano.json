@@ -1026,6 +1026,10 @@
             "type": "integer",
             "format": "int32"
           },
+          "categoryTitle": {
+            "type": "string",
+            "nullable": true
+          },
           "status": {
             "$ref": "#/components/schemas/ProductStatus"
           },
