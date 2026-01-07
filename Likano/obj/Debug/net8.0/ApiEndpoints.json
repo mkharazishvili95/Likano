@@ -81,7 +81,7 @@
     "ContainingType": "Likano.Controllers.ManageController",
     "Method": "ChangeProductStatus",
     "RelativePath": "api/Manage/product/status",
-    "HttpMethod": "PUT",
+    "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [

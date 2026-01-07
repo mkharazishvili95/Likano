@@ -1,4 +1,5 @@
 using Likano.Application.Features.Category.Queries.Get;
+using Likano.Application.Features.Manage.Product.Commands.ChangeStatus;
 using Likano.Application.Interfaces;
 using Likano.Infrastructure.Data;
 using Likano.Infrastructure.Repositories;
@@ -19,6 +20,7 @@ builder.Services.AddDbContext<ApplicationDbContext>
     (options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddMediatR(x => x.RegisterServicesFromAssemblyContaining<GetCategoryHandler>());
+builder.Services.AddMediatR(x => x.RegisterServicesFromAssemblyContaining<ChangeProductStatusHandler>());
 
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();

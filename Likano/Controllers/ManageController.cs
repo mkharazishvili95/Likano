@@ -24,7 +24,7 @@ namespace Likano.Controllers
         public async Task<GetAllProductsForManageResponse> GetAllProducts([FromBody] GetAllProductsForManageQuery query)
             => await _mediator.Send(query);
 
-        [HttpPut("product/status")]
+        [HttpPost("product/status")]
         public async Task<ChangeProductStatusResponse> ChangeProductStatus([FromBody] ChangeProductStatusCommand command)
             => await _mediator.Send(command);
     }

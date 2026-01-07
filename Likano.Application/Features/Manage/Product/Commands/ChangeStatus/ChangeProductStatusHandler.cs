@@ -23,8 +23,8 @@ namespace Likano.Application.Features.Manage.Product.Commands.ChangeStatus
 
             var result = await _manageRepository.ChangeStatus(request.ProductId, request.Status);
             if (!result)
-                return new ChangeProductStatusResponse { Message = "Failed to change product status.", Success = false, StatusCode = 500 };
-            return new ChangeProductStatusResponse { Message = "Product status changed successfully.", Success = true, StatusCode = 200 };
+                return new ChangeProductStatusResponse { Message = "სტატუსის შეცვლისას მოხდა შეცდომა", Success = false, StatusCode = 500 };
+            return new ChangeProductStatusResponse { Message = "სტატუსი წარმატებით შეიცვალა", Success = true, StatusCode = 200 };
         }
     }
 }

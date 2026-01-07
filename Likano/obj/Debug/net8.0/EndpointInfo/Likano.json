@@ -182,7 +182,7 @@
       }
     },
     "/api/Manage/product/status": {
-      "put": {
+      "post": {
         "tags": [
           "Manage"
         ],

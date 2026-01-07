@@ -1,8 +1,10 @@
 ﻿using Likano.Application.Common.Models;
 using Likano.Application.DTOs;
 using Likano.Application.Features.Category.Queries.GetAll;
+using Likano.Application.Features.Manage.Product.Commands.ChangeStatus;
 using Likano.Application.Features.Manage.Product.Queries.Get;
 using Likano.Application.Features.Manage.Product.Queries.GetAll;
+using Likano.Domain.Enums;
 using Likano.Web.Models.Manage;
 using Microsoft.AspNetCore.Mvc;
 
@@ -131,6 +133,31 @@ namespace Likano.Web.Controllers
             }
 
             return View("Details", product);
+        }
+
+
+        public async Task<IActionResult> ChangeProductStatus(int productId, ProductStatus status, bool? intoGrid)
+        {
+            var apiUrl = $"{_baseUrl}/manage/product/status";
+
+            var command = new ChangeProductStatusCommand
+            {
+                ProductId = productId,
+                Status = status
+            };
+
+            var response = await _httpClient.PostAsJsonAsync(apiUrl, command);
+
+            if (!response.IsSuccessStatusCode)
+            {
+                TempData["ErrorMessage"] = "პროდუქტის სტატუსის ცვლილება ვერ მოხერხდა";
+                return intoGrid == true ? RedirectToAction("Products") : RedirectToAction("Details", new { id = productId });
+            }
+
+            var result = await response.Content.ReadFromJsonAsync<ChangeProductStatusResponse>();
+            TempData[(bool)result!.Success ? "SuccessMessage" : "ErrorMessage"] = result.Message;
+
+            return intoGrid == true ? RedirectToAction("Products") : RedirectToAction("Details", new { id = productId });
         }
     }
 }

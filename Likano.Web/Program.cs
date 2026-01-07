@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Localization;
+using Microsoft.AspNetCore.Mvc.ApplicationParts;
 using System.Globalization;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,7 +14,12 @@ builder.Services.AddHttpClient("API", client =>
 });
 
 // Add services to the container.
-builder.Services.AddControllersWithViews();
+var mvcBuilder = builder.Services.AddControllersWithViews();
+
+// Remove API controllers from discovery in the Web app
+mvcBuilder.PartManager.ApplicationParts.Remove(
+    mvcBuilder.PartManager.ApplicationParts
+        .FirstOrDefault(p => p.Name == "Likano"));
 
 var app = builder.Build();
 
@@ -29,7 +35,6 @@ app.UseRequestLocalization(new RequestLocalizationOptions
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 
