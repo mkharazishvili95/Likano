@@ -6,5 +6,6 @@ namespace Likano.Web.Models.Manage
     {
         public CategoriesFilterVm Filter { get; set; } = new();
         public GetAllCategoriesForManageResponse? Response { get; set; }
+        public bool? IntoGrid { get; set; } = true;
     }
 }

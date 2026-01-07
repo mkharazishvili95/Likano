@@ -2,10 +2,12 @@
 using Likano.Application.DTOs;
 using Likano.Application.Features.Category.Queries.GetAll;
 using Likano.Application.Features.Manage.Category.Commands.ChangeStatus;
+using Likano.Application.Features.Manage.Category.Queries.Get;
 using Likano.Application.Features.Manage.Category.Queries.GetAll;
 using Likano.Application.Features.Manage.Product.Commands.ChangeStatus;
 using Likano.Application.Features.Manage.Product.Queries.Get;
 using Likano.Application.Features.Manage.Product.Queries.GetAll;
+using Likano.Domain.Entities;
 using Likano.Domain.Enums;
 using Likano.Web.Models.Manage;
 using Microsoft.AspNetCore.Mvc;
@@ -221,7 +223,37 @@ namespace Likano.Web.Controllers
             return View("Categories", vm);
         }
 
-        public async Task<IActionResult> ChangeCategoryStatus(int categoryId)
+        [HttpGet]
+        public async Task<IActionResult> CategoryDetails(int id)
+        {
+            if (id <= 0)
+                return NotFound();
+
+            var apiUrl = $"{_baseUrl}/manage/category/{id}";
+            var apiResponse = await _httpClient.GetAsync(apiUrl);
+
+            if (!apiResponse.IsSuccessStatusCode)
+            {
+                return View("NotFound", new GetCategoryForManageResponse
+                {
+                    Success = false,
+                    Message = $"API error: {(int)apiResponse.StatusCode}"
+                });
+            }
+            var category = await apiResponse.Content.ReadFromJsonAsync<GetCategoryForManageResponse>();
+            if (category == null || category.Success == false)
+            {
+                return View("NotFound", category ?? new GetCategoryForManageResponse
+                {
+                    Success = false,
+                    Message = "Category not found"
+                });
+            }
+
+            return View("CategoryDetails", category);
+        }
+
+        public async Task<IActionResult> ChangeCategoryStatus(int categoryId, bool? intoGrid)
         {
             var apiUrl = $"{_baseUrl}/manage/category/status";
 
@@ -241,7 +273,7 @@ namespace Likano.Web.Controllers
             var result = await response.Content.ReadFromJsonAsync<ChangeActiveStatusResponse>();
             TempData[(bool)result!.Success ? "SuccessMessage" : "ErrorMessage"] = result.Message;
 
-            return RedirectToAction("Categories");
+            return intoGrid == true ? RedirectToAction("Categories") : RedirectToAction("CategoryDetails", new { id = categoryId });
         }
     }
 }

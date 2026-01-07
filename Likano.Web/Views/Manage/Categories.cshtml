@@ -116,7 +116,14 @@
                                             </div>
                                         }
                                     </td>
-                                    <td class="fw-bold text-dark">@c.Name</td>
+                                    <td class="fw-bold text-dark">
+                                        <a asp-controller="Manage"
+                                           asp-action="CategoryDetails"
+                                           asp-route-id="@c.Id"
+                                           class="link-primary text-decoration-none">
+                                            @c.Name
+                                        </a>
+                                    </td>
                                     <td class="text-muted small" style="max-width:300px;">@c.Description</td>
                                     <td>
                                         <span class="badge @(c.IsActive == true ? "bg-success" : "bg-secondary")">
@@ -127,6 +134,7 @@
 
                                         <form asp-action="ChangeCategoryStatus" asp-controller="Manage" method="post" class="d-inline">
                                             <input type="hidden" name="categoryId" value="@c.Id" />
+                                            <input type="hidden" name="intoGrid" value="true" />
                                             <button type="submit"
                                                     class="btn btn-sm @(c.IsActive == true ? "btn-warning" : "btn-success") shadow-sm"
                                                     title="@(c.IsActive == true ? "დეაქტივაცია" : "აქტივაცია")"
