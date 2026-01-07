@@ -20,8 +20,9 @@ namespace Likano.Application.Features.Manage.Category.Commands.ChangeStatus
             return new ChangeActiveStatusResponse 
             { 
                 StatusCode = result ? 200 : 500, Success = result, Message = result 
-                ? "Category active status changed successfully" 
-                : "Error changing category active status" };
+                ? "კატეგორიის სტატუსი წარმატებით შეიცვალა" 
+                : "მოხდა შეცდომა" 
+            };
         }
     }
 }

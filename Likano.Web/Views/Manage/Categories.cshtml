@@ -124,30 +124,17 @@
                                         </span>
                                     </td>
                                     <td class="text-end pe-4">
-                                        <a asp-action="EditCategory" asp-controller="Manage" asp-route-id="@c.Id"
-                                           class="btn btn-sm btn-outline-primary">
-                                            <i class="fas fa-edit"></i>
-                                        </a>
-                                        <a asp-action="DetailsCategory" asp-controller="Manage" asp-route-id="@c.Id"
-                                           class="btn btn-sm btn-outline-secondary ms-1">
-                                            <i class="fas fa-eye"></i>
-                                        </a>
-                                        <form asp-action="ToggleCategoryActive" asp-controller="Manage" method="post" class="d-inline">
-                                            <input type="hidden" name="id" value="@c.Id" />
-                                            <input type="hidden" name="intoGrid" value="true" />
-                                            <button type="submit" class="btn btn-sm @(c.IsActive == true ? "btn-warning" : "btn-success") shadow-sm ms-1"
-                                                    onclick="return confirm('@(c.IsActive == true ? "გსურთ კატეგორიის გამორთვა?" : "გსურთ კატეგორიის ჩართვა?")')">
+
+                                        <form asp-action="ChangeCategoryStatus" asp-controller="Manage" method="post" class="d-inline">
+                                            <input type="hidden" name="categoryId" value="@c.Id" />
+                                            <button type="submit"
+                                                    class="btn btn-sm @(c.IsActive == true ? "btn-warning" : "btn-success") shadow-sm"
+                                                    title="@(c.IsActive == true ? "დეაქტივაცია" : "აქტივაცია")"
+                                                    onclick="return confirm('@(c.IsActive == true ? "ნამდვილად გსურთ კატეგორიის დეაქტივაცია?" : "ნამდვილად გსურთ კატეგორიის აქტივაცია?")')">
                                                 <i class="fas @(c.IsActive == true ? "fa-toggle-off" : "fa-toggle-on")"></i>
                                             </button>
                                         </form>
-                                        <form asp-action="DeleteCategory" asp-controller="Manage" method="post" class="d-inline">
-                                            <input type="hidden" name="id" value="@c.Id" />
-                                            <input type="hidden" name="intoGrid" value="true" />
-                                            <button type="submit" class="btn btn-sm btn-danger shadow-sm ms-1"
-                                                    onclick="return confirm('ნამდვილად გსურთ კატეგორიის წაშლა? ეს ქმედება შეუქცევადია!')">
-                                                <i class="fas fa-trash"></i>
-                                            </button>
-                                        </form>
+
                                     </td>
                                 </tr>
                             }
@@ -208,13 +195,16 @@
 </div>
 
 <style>
-    body { font-family: 'Roboto', sans-serif; }
+    body {
+        font-family: 'Roboto', sans-serif;
+    }
 
     .no-spinner::-webkit-inner-spin-button,
     .no-spinner::-webkit-outer-spin-button {
         -webkit-appearance: none;
         margin: 0;
     }
+
     .no-spinner {
         -moz-appearance: textfield;
     }
@@ -226,9 +216,10 @@
     .card {
         transition: transform 0.2s ease;
     }
-    .card:hover {
-        transform: translateY(-2px);
-    }
+
+        .card:hover {
+            transform: translateY(-2px);
+        }
 
     .table th {
         border-top: none;
@@ -245,7 +236,9 @@
         border-color: #667eea;
     }
 
-    .btn-outline-primary:hover, .btn-outline-secondary:hover, .btn-outline-danger:hover {
+    .btn-outline-primary:hover,
+    .btn-outline-secondary:hover,
+    .btn-outline-danger:hover {
         transform: scale(1.08);
         transition: all 0.2s;
     }
@@ -254,6 +247,7 @@
         .table thead {
             display: none;
         }
+
         .table tr {
             display: block;
             margin-bottom: 1rem;
@@ -263,21 +257,24 @@
             background: #fff;
             box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         }
+
         .table td {
             display: block;
             text-align: right;
             padding: 0.5rem 0;
             border: none;
         }
-        .table td:before {
-            content: attr(data-label);
-            float: left;
-            font-weight: bold;
-            color: #6c757d;
-        }
-        .table td:last-child {
-            text-align: center;
-        }
+
+            .table td:before {
+                content: attr(data-label);
+                float: left;
+                font-weight: bold;
+                color: #6c757d;
+            }
+
+            .table td:last-child {
+                text-align: center;
+            }
     }
 </style>
 

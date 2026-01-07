@@ -1,6 +1,7 @@
 ﻿using Likano.Application.Common.Models;
 using Likano.Application.DTOs;
 using Likano.Application.Features.Category.Queries.GetAll;
+using Likano.Application.Features.Manage.Category.Commands.ChangeStatus;
 using Likano.Application.Features.Manage.Category.Queries.GetAll;
 using Likano.Application.Features.Manage.Product.Commands.ChangeStatus;
 using Likano.Application.Features.Manage.Product.Queries.Get;
@@ -212,6 +213,29 @@ namespace Likano.Web.Controllers
             };
 
             return View("Categories", vm);
+        }
+
+        public async Task<IActionResult> ChangeCategoryStatus(int categoryId)
+        {
+            var apiUrl = $"{_baseUrl}/manage/category/status";
+
+            var command = new ChangeActiveStatusCommand
+            {
+                CategoryId = categoryId
+            };
+
+            var response = await _httpClient.PostAsJsonAsync(apiUrl, command);
+
+            if (!response.IsSuccessStatusCode)
+            {
+                TempData["ErrorMessage"] = "კატეგორიის სტატუსის ცვლილება ვერ მოხერხდა";
+                return RedirectToAction("Categories");
+            }
+
+            var result = await response.Content.ReadFromJsonAsync<ChangeActiveStatusResponse>();
+            TempData[(bool)result!.Success ? "SuccessMessage" : "ErrorMessage"] = result.Message;
+
+            return RedirectToAction("Categories");
         }
     }
 }
