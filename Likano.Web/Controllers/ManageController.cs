@@ -24,6 +24,12 @@ namespace Likano.Web.Controllers
         }
 
         [HttpGet]
+        public IActionResult Main()
+        {
+            return View("Main");
+        }
+
+        [HttpGet]
         public async Task<IActionResult> Products([FromQuery] ProductsFilterVm filter)
         {
             var pageNumber = filter.PageNumber <= 0 ? 1 : filter.PageNumber;

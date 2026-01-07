@@ -28,7 +28,7 @@ namespace Likano.Infrastructure.Repositories
                 return false;
 
             product.Status = status;
-            product.UpdateDate = DateTime.UtcNow;
+            product.UpdateDate = DateTime.UtcNow.AddHours(4);
             await _db.SaveChangesAsync();
             return true;
         }
