@@ -4,6 +4,7 @@ using Likano.Application.Features.Category.Queries.GetAll;
 using Likano.Application.Features.Manage.Category.Commands.ChangeStatus;
 using Likano.Application.Features.Manage.Category.Queries.Get;
 using Likano.Application.Features.Manage.Category.Queries.GetAll;
+using Likano.Application.Features.Manage.Product.Commands.ChangeCategory;
 using Likano.Application.Features.Manage.Product.Commands.ChangeStatus;
 using Likano.Application.Features.Manage.Product.Queries.Get;
 using Likano.Application.Features.Manage.Product.Queries.GetAll;
@@ -274,6 +275,30 @@ namespace Likano.Web.Controllers
             TempData[(bool)result!.Success ? "SuccessMessage" : "ErrorMessage"] = result.Message;
 
             return intoGrid == true ? RedirectToAction("Categories") : RedirectToAction("CategoryDetails", new { id = categoryId });
+        }
+
+        public async Task<IActionResult> ChangeProductCategory(int productId, int newCategoryId, int categoryId)
+        {
+            var apiUrl = $"{_baseUrl}/manage/product/change-category";
+
+            var command = new ChangeCategoryCommand
+            {
+                ProductId = productId,
+                NewCategoryId = newCategoryId
+            };
+
+            var response = await _httpClient.PostAsJsonAsync(apiUrl, command);
+
+            if (!response.IsSuccessStatusCode)
+            {
+                TempData["ErrorMessage"] = "კატეგორიის ცვლილება ვერ მოხერხდა";
+                return RedirectToAction("Details", new { id = productId });
+            }
+
+            var result = await response.Content.ReadFromJsonAsync<ChangeCategoryResponse>();
+            TempData[(bool)result!.Success ? "SuccessMessage" : "ErrorMessage"] = result.Message;
+
+            return RedirectToAction("Details", new { id = productId });
         }
     }
 }

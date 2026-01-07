@@ -67,5 +67,16 @@ namespace Likano.Infrastructure.Repositories
         }
 
         public async Task<Category?> GetCategory(int id) => await _db.Categories.FindAsync(id);
+
+        public async Task<bool> ChangeCategory(int productId, int newCategoryId)
+        {
+            var product = await _db.Products.FindAsync(productId);
+            if (product == null)
+                return false;
+
+            product.CategoryId = newCategoryId;
+            await _db.SaveChangesAsync();
+            return true;
+        }
     }
 }

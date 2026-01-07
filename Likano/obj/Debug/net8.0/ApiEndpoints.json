@@ -157,6 +157,32 @@
   },
   {
     "ContainingType": "Likano.Controllers.ManageController",
+    "Method": "ChangeProductCategory",
+    "RelativePath": "api/Manage/product/change-category",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "command",
+        "Type": "Likano.Application.Features.Manage.Product.Commands.ChangeCategory.ChangeCategoryCommand",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Likano.Application.Features.Manage.Product.Commands.ChangeCategory.ChangeCategoryResponse",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Likano.Controllers.ManageController",
     "Method": "ChangeProductStatus",
     "RelativePath": "api/Manage/product/status",
     "HttpMethod": "POST",

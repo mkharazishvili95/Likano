@@ -127,3 +127,9 @@ D:\G\Likano\Likano\obj\Debug\net8.0\staticwebassets.build.json
 D:\G\Likano\Likano\obj\Debug\net8.0\staticwebassets.build.json
 D:\G\Likano\Likano\obj\Debug\net8.0\staticwebassets.build.json
 D:\G\Likano\Likano\obj\Debug\net8.0\staticwebassets.build.json
+D:\G\Likano\Likano\obj\Debug\net8.0\staticwebassets.build.json
+D:\G\Likano\Likano\obj\Debug\net8.0\staticwebassets.build.json
+D:\G\Likano\Likano\obj\Debug\net8.0\staticwebassets.build.json
+D:\G\Likano\Likano\obj\Debug\net8.0\staticwebassets.build.json
+D:\G\Likano\Likano\obj\Debug\net8.0\staticwebassets.build.json
+D:\G\Likano\Likano\obj\Debug\net8.0\staticwebassets.build.json

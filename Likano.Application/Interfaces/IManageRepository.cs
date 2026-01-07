@@ -13,5 +13,6 @@ namespace Likano.Application.Interfaces
         Task<List<Category>?> GetAllCategories();
         Task<Category?> GetCategory(int id);
         Task<bool> ChangeActiveStatusCategory(int id);
+        Task<bool> ChangeCategory(int productId, int newCategoryId);
     }
 }

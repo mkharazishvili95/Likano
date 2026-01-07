@@ -1,6 +1,7 @@
 ﻿using Likano.Application.Features.Manage.Category.Commands.ChangeStatus;
 using Likano.Application.Features.Manage.Category.Queries.Get;
 using Likano.Application.Features.Manage.Category.Queries.GetAll;
+using Likano.Application.Features.Manage.Product.Commands.ChangeCategory;
 using Likano.Application.Features.Manage.Product.Commands.ChangeStatus;
 using Likano.Application.Features.Manage.Product.Queries.Get;
 using Likano.Application.Features.Manage.Product.Queries.GetAll;
@@ -41,6 +42,10 @@ namespace Likano.Controllers
 
         [HttpPost("category/status")]
         public async Task<ChangeActiveStatusResponse> ChangeCategoryStatus([FromBody] ChangeActiveStatusCommand command)
+            => await _mediator.Send(command);
+
+        [HttpPost("product/change-category")]
+        public async Task<ChangeCategoryResponse> ChangeProductCategory([FromBody] ChangeCategoryCommand command)
             => await _mediator.Send(command);
     }
 }
