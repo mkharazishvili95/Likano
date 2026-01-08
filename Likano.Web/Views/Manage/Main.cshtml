@@ -1,31 +1,22 @@
 ﻿@{
     ViewData["Title"] = "სამართავი პანელი";
+    Layout = "_AdminLayout";
 }
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-<div class="dashboard-header mb-5 text-center pt-5">
-    <div class="brand-title mb-4">
-        <h1 class="brand-logo fw-bold text-gradient mb-1">
-            LIKANO<span class="text-primary">.GE</span>
-        </h1>
-    </div>
-    <h2 class="fw-bold mb-3 text-gradient fs-3">
-        <i class="fas fa-sliders-h me-2"></i>სამართავი პანელი
-    </h2>
-    <p class="text-muted fs-5">მართეთ კატეგორიები და პროდუქცია მარტივად და სწრაფად</p>
+<div class="text-center mb-5">
+    <p class="text-muted fs-5 mb-0">მართეთ კატეგორიები, ბრენდები და პროდუქცია მარტივად და სწრაფად</p>
 </div>
 
 <div class="row g-4 justify-content-center">
-   
-    <div class="col-12 col-md-6 col-lg-5">
+    <div class="col-12 col-md-8 col-lg-6 col-xl-5">
         <a asp-controller="Manage" asp-action="Categories" class="dashboard-link">
-            <div class="dashboard-card glass">
+            <div class="dashboard-card">
                 <div class="card-icon bg-purple">
-                    <i class="fas fa-sitemap"></i>
+                    <i class="fas fa-th-large fa-2x"></i>
                 </div>
                 <div class="card-content">
-                    <h5>კატეგორიები</h5>
-                    <p>კატეგორიების ნახვა, ფილტრი და სტატუსის ცვლილება</p>
+                    <h4>კატეგორიები</h4>
+                    <p class="mb-0">ნახვა • დამატება • რედაქტირება • სტატუსის ცვლილება</p>
                 </div>
                 <div class="card-arrow">
                     <i class="fas fa-arrow-right"></i>
@@ -34,15 +25,32 @@
         </a>
     </div>
 
-    <div class="col-12 col-md-6 col-lg-5">
-        <a asp-controller="Manage" asp-action="Products" class="dashboard-link">
-            <div class="dashboard-card glass">
-                <div class="card-icon bg-blue">
-                    <i class="fas fa-box-open"></i>
+    <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+        <a asp-controller="Manage" asp-action="Brands" class="dashboard-link">
+            <div class="dashboard-card">
+                <div class="card-icon bg-orange">
+                    <i class="fas fa-copyright fa-2x"></i>
                 </div>
                 <div class="card-content">
-                    <h5>პროდუქცია</h5>
-                    <p>პროდუქტების ნახვა, ფილტრი და სტატუსის ცვლილება</p>
+                    <h4>ბრენდები</h4>
+                    <p class="mb-0">ნახვა • დამატება • რედაქტირება • სტატუსის ცვლილება</p>
+                </div>
+                <div class="card-arrow">
+                    <i class="fas fa-arrow-right"></i>
+                </div>
+            </div>
+        </a>
+    </div>
+
+    <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+        <a asp-controller="Manage" asp-action="Products" class="dashboard-link">
+            <div class="dashboard-card">
+                <div class="card-icon bg-blue">
+                    <i class="fas fa-boxes-stacked fa-2x"></i>
+                </div>
+                <div class="card-content">
+                    <h4>პროდუქცია</h4>
+                    <p class="mb-0">ნახვა • დამატება • რედაქტირება • სტატუსის ცვლილება</p>
                 </div>
                 <div class="card-arrow">
                     <i class="fas fa-arrow-right"></i>
@@ -53,115 +61,118 @@
 </div>
 
 <style>
-    body {
-        font-family: 'Inter', sans-serif;
-        background: radial-gradient(circle at top, #f4f6fb, #eef1f7);
-    }
-
-    .text-gradient {
-        background: linear-gradient(135deg, #667eea, #764ba2);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-    }
-
-    .brand-logo {
-        font-size: 3.2rem; 
-        letter-spacing: -1px;
-        margin: 0;
-    }
-
     .dashboard-link {
         text-decoration: none;
+        display: block;
+        transition: transform 0.3s ease;
     }
 
     .dashboard-card {
-        position: relative;
         display: flex;
         align-items: center;
-        gap: 20px;
-        padding: 28px;
-        border-radius: 22px;
-        transition: all 0.35s ease;
-        cursor: pointer;
+        gap: 24px;
+        padding: 32px;
+        background: rgba(255, 255, 255, 0.9);
+        backdrop-filter: blur(12px);
+        border-radius: 24px;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+        border: 1px solid rgba(255, 255, 255, 0.6);
+        transition: all 0.4s ease;
     }
 
-    .glass {
-        background: rgba(255, 255, 255, 0.75);
-        backdrop-filter: blur(14px);
-        box-shadow: 0 20px 40px rgba(0,0,0,0.08);
-        border: 1px solid rgba(255,255,255,0.5);
-    }
-
-    .dashboard-card:hover {
-        transform: translateY(-6px) scale(1.01);
-        box-shadow: 0 30px 60px rgba(102,126,234,0.25);
-    }
+        .dashboard-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 50px rgba(102, 126, 234, 0.2);
+        }
 
     .card-icon {
-        width: 64px;
-        height: 64px;
-        min-width: 64px;
-        border-radius: 18px;
+        width: 80px;
+        height: 80px;
+        border-radius: 20px;
         display: flex;
         align-items: center;
         justify-content: center;
-        color: #fff;
-        font-size: 26px;
-        box-shadow: 0 10px 24px rgba(0,0,0,0.25);
+        color: white;
+        flex-shrink: 0;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.2);
     }
 
     .bg-purple {
         background: linear-gradient(135deg, #667eea, #764ba2);
     }
 
+    .bg-orange {
+        background: linear-gradient(135deg, #f093fb, #f5576c);
+    }
+
     .bg-blue {
         background: linear-gradient(135deg, #43cea2, #185a9d);
     }
 
-    .card-content h5 {
-        margin: 0 0 6px;
+    .card-content h4 {
+        margin: 0 0 8px;
         font-weight: 600;
-        color: #2d2f36;
+        font-size: 1.5rem;
+        color: #2d3748;
     }
 
     .card-content p {
-        margin: 0;
-        font-size: 14px;
-        color: #6c757d;
+        color: #718096;
+        font-size: 1rem;
     }
 
     .card-arrow {
         margin-left: auto;
-        font-size: 20px;
+        font-size: 1.8rem;
         color: #667eea;
-        transition: transform 0.3s ease;
+        opacity: 0.7;
+        transition: all 0.3s ease;
     }
 
     .dashboard-card:hover .card-arrow {
-        transform: translateX(6px);
+        transform: translateX(8px);
+        opacity: 1;
     }
 
-    @@media (max-width: 768px) {
-        .brand-logo
+    @@media (max-width: 992px) {
+        .dashboard-card
 
     {
-        font-size: 2.5rem;
-    }
-
-    .dashboard-card {
-        padding: 20px;
+        padding: 28px;
     }
 
     .card-icon {
-        width: 54px;
-        height: 54px;
-        font-size: 22px;
+        width: 70px;
+        height: 70px;
+    }
+
+    }
+
+    @@media (max-width: 576px) {
+        .dashboard-card
+
+    {
+        flex-direction: column;
+        text-align: center;
+        gap: 20px;
+        padding: 30px 20px;
+    }
+
+    .card-arrow {
+        margin: 10px auto 0;
+        transform: rotate(90deg);
+    }
+
+    .dashboard-card:hover .card-arrow {
+        transform: rotate(90deg) translateX(8px);
+    }
+
+    .card-content h4 {
+        font-size: 1.4rem;
     }
 
     }
 </style>
 
 @section Scripts {
-    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 }
