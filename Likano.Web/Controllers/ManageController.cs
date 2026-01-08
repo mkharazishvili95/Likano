@@ -2,6 +2,7 @@
 using Likano.Application.DTOs;
 using Likano.Application.Features.Category.Queries.GetAll;
 using Likano.Application.Features.Manage.Brand.Commands.Change;
+using Likano.Application.Features.Manage.Brand.Queries.GetAll;
 using Likano.Application.Features.Manage.Category.Commands.ChangeStatus;
 using Likano.Application.Features.Manage.Category.Queries.Get;
 using Likano.Application.Features.Manage.Category.Queries.GetAll;
@@ -324,6 +325,60 @@ namespace Likano.Web.Controllers
             TempData[(bool)result!.Success ? "SuccessMessage" : "ErrorMessage"] = result.Message;
 
             return RedirectToAction("Details", new { id = productId });
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Brands([FromQuery] BrandsFilterVm filter)
+        {
+            var pageNumber = filter.PageNumber <= 0 ? 1 : filter.PageNumber;
+            var pageSize = filter.PageSize <= 0 ? 10 : filter.PageSize;
+
+            var request = new GetAllBrandsForManageQuery
+            {
+                Pagination = new Pagination { PageNumber = pageNumber, PageSize = pageSize },
+                Id = filter.Id,
+                Description = filter.Description, 
+                IsActive = filter.IsActive ?? true,
+                Name = filter.Name
+            };
+
+            var apiUrl = $"{_baseUrl}/manage/brands";
+            var apiResponse = await _httpClient.PostAsJsonAsync(apiUrl, request);
+            GetAllBrandsForManageResponse data;
+            if (!apiResponse.IsSuccessStatusCode)
+            {
+                data = new GetAllBrandsForManageResponse
+                {
+                    Success = false,
+                    StatusCode = (int)apiResponse.StatusCode,
+                    Message = $"API error: {(int)apiResponse.StatusCode}",
+                    TotalCount = 0,
+                    Items = new List<GetAllBrandsForManageItemsResponse>()
+                };
+            }
+            else
+            {
+                data = await apiResponse.Content.ReadFromJsonAsync<GetAllBrandsForManageResponse>()
+                       ?? new GetAllBrandsForManageResponse
+                       {
+                           Success = false,
+                           StatusCode = 500,
+                           Message = "Invalid API response",
+                           TotalCount = 0,
+                           Items = new List<GetAllBrandsForManageItemsResponse>()
+                       };
+            }
+
+            filter.PageNumber = pageNumber;
+            filter.PageSize = pageSize;
+
+            var vm = new BrandsManageViewModel
+            {
+                Filter = filter,
+                Response = data
+            };
+
+            return View("Brands", vm);
         }
     }
 }
