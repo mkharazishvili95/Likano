@@ -435,7 +435,7 @@
               "RelativeDocumentMoniker": "Likano.Infrastructure\\Repositories\\ManageRepository.cs",
               "ToolTip": "D:\\G\\Likano\\Likano.Infrastructure\\Repositories\\ManageRepository.cs",
               "RelativeToolTip": "Likano.Infrastructure\\Repositories\\ManageRepository.cs",
-              "ViewState": "AgIAAFkAAAAAAAAAAAAAAGsAAAAFAAAAAAAAAA==",
+              "ViewState": "AgIAAFkAAAAAAAAAAAAAAGIAAAA3AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-01-06T15:50:12.912Z",
               "EditorCaption": ""
@@ -450,8 +450,7 @@
               "RelativeToolTip": "Likano.Application\\Features\\Manage\\Category\\Queries\\GetAll\\GetAllCategoriesForManageHandler.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABwAAAAsAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-07T10:12:15.502Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-07T10:12:15.502Z"
             },
             {
               "$type": "Document",
@@ -463,8 +462,7 @@
               "RelativeToolTip": "Likano.Application\\Interfaces\\IManageRepository.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAqwA0AAAAsAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-06T15:50:32.183Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-06T15:50:32.183Z"
             },
             {
               "$type": "Document",
@@ -476,8 +474,7 @@
               "RelativeToolTip": "Likano.Application\\Features\\Manage\\Category\\Queries\\Get\\GetCategoryForManageResponse.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-07T11:17:49.451Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-07T11:17:49.451Z"
             },
             {
               "$type": "Document",
@@ -489,8 +486,7 @@
               "RelativeToolTip": "Likano.Application\\Features\\Manage\\Category\\Queries\\Get\\GetCategoryForManageHandler.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAAlAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-07T11:17:58.696Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-07T11:17:58.696Z"
             },
             {
               "$type": "Document",
@@ -514,8 +510,7 @@
               "RelativeToolTip": "Likano.Web\\Views\\Manage\\Categories.cshtml",
               "ViewState": "AgIAAFgAAAAAAAAAAAAgwGYAAAA5AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-01-07T10:26:16.227Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-07T10:26:16.227Z"
             },
             {
               "$type": "Document",

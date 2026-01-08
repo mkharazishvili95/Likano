@@ -15,7 +15,7 @@ namespace Likano.Web.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            return RedirectToAction("Main", "Manage");
         }
 
         public IActionResult Privacy()
