@@ -239,7 +239,7 @@ namespace Likano.Web.Controllers
 
             if (!apiResponse.IsSuccessStatusCode)
             {
-                return View("NotFound", new GetCategoryForManageResponse
+                return View("NotFoundCategory", new GetCategoryForManageResponse
                 {
                     Success = false,
                     Message = $"API error: {(int)apiResponse.StatusCode}"
@@ -248,7 +248,7 @@ namespace Likano.Web.Controllers
             var category = await apiResponse.Content.ReadFromJsonAsync<GetCategoryForManageResponse>();
             if (category == null || category.Success == false)
             {
-                return View("NotFound", category ?? new GetCategoryForManageResponse
+                return View("NotFoundCategory", category ?? new GetCategoryForManageResponse
                 {
                     Success = false,
                     Message = "Category not found"
@@ -394,7 +394,7 @@ namespace Likano.Web.Controllers
 
             if (!apiResponse.IsSuccessStatusCode)
             {
-                return View("NotFound", new GetBrandForManageResponse
+                return View("NotFoundBrand", new GetBrandForManageResponse
                 {
                     Success = false,
                     Message = $"API error: {(int)apiResponse.StatusCode}"
@@ -403,7 +403,7 @@ namespace Likano.Web.Controllers
             var brand = await apiResponse.Content.ReadFromJsonAsync<GetBrandForManageResponse>();
             if (brand == null || brand.Success == false)
             {
-                return View("NotFound", brand ?? new GetBrandForManageResponse
+                return View("NotFoundBrand", brand ?? new GetBrandForManageResponse
                 {
                     Success = false,
                     Message = "Brand not found"

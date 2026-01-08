@@ -1,0 +1,44 @@
+﻿@model Likano.Application.Features.Manage.Brand.Queries.Get.GetBrandForManageResponse
+
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card border-0 shadow-lg rounded-4">
+                <div class="card-header bg-gradient-primary text-white py-3 rounded-top-4">
+                    <h5 class="mb-0">
+                        <i class="fas fa-exclamation-triangle me-2"></i>ბრენდი ვერ მოიძებნა
+                    </h5>
+                </div>
+                <div class="card-body p-5 text-center">
+                    <i class="fas fa-box-open fa-5x text-muted mb-4"></i>
+                    <p class="fs-5 fw-medium mb-2">
+                        ასეთი ბრენდი არ არსებობს
+                    </p>
+                    <p class="text-muted mb-4">
+                        მონაცემები მიუწვდომელია ან ბრენდი წაშლილია
+                    </p>
+                    <a asp-controller="Manage" asp-action="Brands" class="btn btn-secondary">
+                        <i class="fas fa-arrow-left me-2"></i>უკან დაბრუნება
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    body {
+        font-family: 'Roboto', sans-serif;
+        background-color: #f8f9fa;
+    }
+
+    .bg-gradient-primary {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    }
+</style>
+
+@section Scripts {
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+}

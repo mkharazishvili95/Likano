@@ -205,7 +205,7 @@
 </div>
 
 <div class="mt-4">
-    <a asp-controller="Manage" asp-action="Main" class="btn btn-outline-secondary">
+    <a asp-controller="Manage" asp-action="Main" class="btn btn-outline-secondary back-btn shadow-sm">
         <i class="fas fa-arrow-left me-2"></i>უკან დაბრუნება
     </a>
 </div>
@@ -246,6 +246,22 @@
     .badge {
         font-size: 0.8rem;
     }
+
+    .back-btn {
+        border-color: #667eea;
+        color: #667eea;
+        border-width: 2px;
+        border-radius: 999px;
+        padding: 0.5rem 1rem;
+        transition: all 0.2s ease;
+    }
+
+        .back-btn:hover {
+            background-color: #667eea;
+            color: #fff;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.35);
+        }
 
     .pagination-primary .page-item.active .page-link {
         background: #667eea;
