@@ -33,11 +33,11 @@
             var client = httpClientFactory?.CreateClient();
             if (client is not null)
             {
-                var categoriesUrl = $"{baseUrl}/category/all";
-                var categoriesRequest = new Likano.Application.Features.Category.Queries.GetAll.GetAllCategoriesQuery
+                var categoriesUrl = $"{baseUrl}/manage/categories";
+                var categoriesRequest = new Likano.Application.Features.Manage.Category.Queries.GetAll.GetAllCategoriesForManageQuery
                 {
                     Pagination = new Likano.Application.Common.Models.Pagination { PageNumber = 1, PageSize = 1000 },
-                    SearchString = null
+                    IsActive = true
                 };
                 var apiResponse = await client.PostAsJsonAsync(categoriesUrl, categoriesRequest);
                 if (apiResponse.IsSuccessStatusCode)
