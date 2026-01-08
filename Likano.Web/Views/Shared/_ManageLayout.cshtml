@@ -1,0 +1,142 @@
+﻿<!DOCTYPE html>
+<html lang="ka">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+          integrity="sha512-Avb2QiuDEEv6k8x6KXhP7f5oZfLb6p/" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gold-accent: #ffd700;
+            --card-shadow: 0 25px 70px rgba(0, 0, 0, 0.12);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #f0f4ff 0%, #e0e7ff 100%);
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .manage-wrapper {
+            padding: 30px 15px;
+            min-height: 100vh;
+        }
+
+        .manage-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.88);
+            backdrop-filter: blur(20px);
+            border-radius: 28px;
+            box-shadow: var(--card-shadow);
+            overflow: hidden;
+        }
+
+        .manage-header {
+            background: var(--primary-gradient);
+            padding: 45px 40px;
+            text-align: center;
+            color: white;
+        }
+
+            .manage-header h1 {
+                font-size: 2.8rem;
+                font-weight: 700;
+                margin: 0;
+                letter-spacing: -1px;
+            }
+
+                .manage-header h1 .gold {
+                    color: var(--gold-accent);
+                    text-shadow: 0 3px 12px rgba(0,0,0,0.5);
+                }
+
+            .manage-header p {
+                font-size: 1.3rem;
+                opacity: 0.95;
+                margin-top: 14px;
+                font-weight: 500;
+            }
+
+        .manage-content {
+            padding: 50px 40px;
+            background: white;
+            min-height: 60vh;
+        }
+
+        .btn-back {
+            margin-top: 40px;
+            padding: 12px 28px;
+            font-size: 1.1rem;
+        }
+
+        @@media (max-width: 992px) {
+            .manage-header
+
+        {
+            padding: 35px 25px;
+        }
+
+        .manage-header h1 {
+            font-size: 2.4rem;
+        }
+
+        .manage-header p {
+            font-size: 1.15rem;
+        }
+
+        .manage-content {
+            padding: 40px 25px;
+        }
+
+        }
+
+        @@media (max-width: 576px) {
+            .manage-wrapper
+
+        {
+            padding: 15px 10px;
+        }
+
+        .manage-header {
+            padding: 30px 20px;
+        }
+
+            .manage-header h1 {
+                font-size: 2.1rem;
+            }
+
+        .manage-content {
+            padding: 30px 20px;
+        }
+
+        }
+    </style>
+
+    @RenderSection("Styles", required: false)
+</head>
+<body>
+    <div class="manage-wrapper">
+        <div class="manage-container">
+
+            <section class="manage-content">
+                @RenderBody()
+            </section>
+        </div>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

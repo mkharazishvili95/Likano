@@ -1,6 +1,7 @@
 ﻿@model Likano.Web.Models.Manage.CategoriesManageViewModel
 @{
     ViewData["Title"] = "კატეგორიები - ადმინი";
+    Layout = "_ManageLayout";
 
     var pageNumber = Model.Filter.PageNumber <= 0 ? 1 : Model.Filter.PageNumber;
     var pageSize = Model.Filter.PageSize <= 0 ? 10 : Model.Filter.PageSize;
@@ -106,6 +107,7 @@
                                         {
                                             <img src="@c.Logo" alt="@c.Name"
                                                  class="rounded shadow-sm"
+                                                 loading="lazy" decoding="async"
                                                  style="width:60px; height:60px; object-fit:cover;" />
                                         }
                                         else

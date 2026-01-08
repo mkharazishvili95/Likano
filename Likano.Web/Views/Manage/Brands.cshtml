@@ -1,6 +1,7 @@
 ﻿@model Likano.Web.Models.Manage.BrandsManageViewModel
 @{
     ViewData["Title"] = "ბრენდები - ადმინი";
+    Layout = "_ManageLayout";
 
     var pageNumber = Model.Filter.PageNumber <= 0 ? 1 : Model.Filter.PageNumber;
     var pageSize = Model.Filter.PageSize <= 0 ? 10 : Model.Filter.PageSize;

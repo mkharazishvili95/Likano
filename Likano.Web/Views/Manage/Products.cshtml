@@ -2,6 +2,7 @@
 @using Likano.Domain.Enums
 @{
     ViewData["Title"] = "პროდუქცია - ადმინი";
+    Layout = "_ManageLayout";
     var pageNumber = Model.Filter.PageNumber <= 0 ? 1 : Model.Filter.PageNumber;
     var pageSize = Model.Filter.PageSize <= 0 ? 10 : Model.Filter.PageSize;
     var totalCount = Model.Response?.TotalCount ?? 0;
