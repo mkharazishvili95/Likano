@@ -93,5 +93,17 @@ namespace Likano.Infrastructure.Repositories
         public async Task<Brand?> GetBrand(int id) => await _db.Brands.FindAsync(id);
 
         public async Task<List<Brand>?> GetAllBrands() => await _db.Brands.ToListAsync();
+
+        public async Task<bool> ChangeActiveStatusBrand(int id)
+        {
+            var brand = await _db.Brands.FindAsync(id);
+
+            if (brand == null)
+                return false;
+
+            brand.IsActive = brand.IsActive == true ? false : true;
+            await _db.SaveChangesAsync();
+            return true;
+        }
     }
 }

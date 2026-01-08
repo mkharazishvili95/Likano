@@ -79,6 +79,32 @@
   },
   {
     "ContainingType": "Likano.Controllers.ManageController",
+    "Method": "ChangeBrandStatus",
+    "RelativePath": "api/Manage/brand/status",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "command",
+        "Type": "Likano.Application.Features.Manage.Brand.Commands.ChangeStatus.ChangeBrandActiveStatusCommand",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Likano.Application.Features.Manage.Brand.Commands.ChangeStatus.ChangeBrandActiveStatusResponse",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Likano.Controllers.ManageController",
     "Method": "GetAllBrands",
     "RelativePath": "api/Manage/brands",
     "HttpMethod": "POST",

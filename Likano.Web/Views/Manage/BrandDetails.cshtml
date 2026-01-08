@@ -105,8 +105,7 @@
                     <div class="mb-4">
                         <h5 class="fw-bold text-dark mb-3">სტატუსის მართვა</h5>
                         <div class="d-flex flex-wrap gap-2">
-                            @*TODO: შესაცვლელია:*@
-                            <form asp-controller="Manage" asp-action="ChangeCategoryStatus" method="post" class="d-inline">
+                            <form asp-controller="Manage" asp-action="ChangeBrandStatus" method="post" class="d-inline">
                                 <input type="hidden" name="brandId" value="@Model.Id" />
                                 <button type="submit"
                                         class="btn btn-sm @(Model.IsActive == true ? "btn-warning" : "btn-success") shadow-sm"

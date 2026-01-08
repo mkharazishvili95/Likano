@@ -2,6 +2,7 @@
 using Likano.Application.DTOs;
 using Likano.Application.Features.Category.Queries.GetAll;
 using Likano.Application.Features.Manage.Brand.Commands.Change;
+using Likano.Application.Features.Manage.Brand.Commands.ChangeStatus;
 using Likano.Application.Features.Manage.Brand.Queries.Get;
 using Likano.Application.Features.Manage.Brand.Queries.GetAll;
 using Likano.Application.Features.Manage.Category.Commands.ChangeStatus;
@@ -339,7 +340,7 @@ namespace Likano.Web.Controllers
                 Pagination = new Pagination { PageNumber = pageNumber, PageSize = pageSize },
                 Id = filter.Id,
                 Description = filter.Description, 
-                IsActive = filter.IsActive ?? true,
+                IsActive = filter.IsActive,
                 Name = filter.Name
             };
 
@@ -410,6 +411,29 @@ namespace Likano.Web.Controllers
             }
 
             return View("BrandDetails", brand);
+        }
+
+        public async Task<IActionResult> ChangeBrandStatus(int brandId, bool? intoGrid)
+        {
+            var apiUrl = $"{_baseUrl}/manage/brand/status";
+
+            var command = new ChangeBrandActiveStatusCommand
+            {
+                BrandId = brandId
+            };
+
+            var response = await _httpClient.PostAsJsonAsync(apiUrl, command);
+
+            if (!response.IsSuccessStatusCode)
+            {
+                TempData["ErrorMessage"] = "ბრენდის სტატუსის ცვლილება ვერ მოხერხდა";
+                return RedirectToAction("Brands");
+            }
+
+            var result = await response.Content.ReadFromJsonAsync<ChangeBrandActiveStatusResponse>();
+            TempData[(bool)result!.Success ? "SuccessMessage" : "ErrorMessage"] = result.Message;
+
+            return intoGrid == true ? RedirectToAction("Brands") : RedirectToAction("BrandDetails", new { id = brandId });
         }
     }
 }
