@@ -1,4 +1,5 @@
 ﻿using Likano.Application.Features.Manage.Brand.Commands.Change;
+using Likano.Application.Features.Manage.Brand.Queries.Get;
 using Likano.Application.Features.Manage.Brand.Queries.GetAll;
 using Likano.Application.Features.Manage.Category.Commands.ChangeStatus;
 using Likano.Application.Features.Manage.Category.Queries.Get;
@@ -57,5 +58,9 @@ namespace Likano.Controllers
         [HttpPost("brands")]
         public async Task<GetAllBrandsForManageResponse> GetAllBrands([FromBody] GetAllBrandsForManageQuery query)
             => await _mediator.Send(query);
+
+        [HttpGet("brand/{id}")]
+        public async Task<GetBrandForManageResponse> GetBrand(int id)
+            => await _mediator.Send(new GetBrandForManageQuery { BrandId = id });
     }
 }

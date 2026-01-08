@@ -1,0 +1,159 @@
+﻿@model Likano.Application.Features.Manage.Brand.Queries.Get.GetBrandForManageResponse
+
+@{
+    ViewData["Title"] = "ბრენდის დეტალები";
+
+    var statusText = Model?.IsActive == true ? "აქტიური" : "არაქტიური";
+    var statusClass = Model?.IsActive == true ? "bg-success" : "bg-secondary";
+}
+
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+<div class="container-fluid py-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="h3 mb-0 text-primary fw-bold">ბრენდის დეტალები</h2>
+    </div>
+
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show shadow-sm rounded-4" role="alert">
+            <i class="fas fa-check-circle me-2"></i>@TempData["SuccessMessage"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger alert-dismissible fade show shadow-sm rounded-4" role="alert">
+            <i class="fas fa-exclamation-triangle me-2"></i>@TempData["ErrorMessage"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+
+    @if (Model == null || Model.Success == false)
+    {
+        <div class="alert alert-danger shadow-sm rounded-4">
+            <i class="fas fa-exclamation-triangle me-2"></i>
+            @Model?.Message ?? "ბრენდის დეტალების ჩატვირთვა ვერ მოხერხდა."
+        </div>
+        return;
+    }
+
+    <div class="card shadow border-0 rounded-4 overflow-hidden">
+        <div class="card-header bg-gradient-primary text-white py-3">
+            <h5 class="mb-0">
+                <i class="fas fa-sitemap me-2"></i>ID: @Model.Id – @Model.Name
+            </h5>
+        </div>
+
+        <div class="card-body p-4">
+            <div class="row g-4">
+                <div class="col-lg-4">
+                    <div class="text-center">
+                        @if (!string.IsNullOrWhiteSpace(Model.Logo))
+                        {
+                            <img src="@Model.Logo" alt="@Model.Name"
+                                 class="img-fluid rounded shadow-sm"
+                                 style="max-height: 400px; width: 100%; object-fit: cover;" />
+                        }
+                        else
+                        {
+                            <div class="bg-light rounded d-flex align-items-center justify-content-center shadow-sm"
+                                 style="height: 400px;">
+                                <i class="fas fa-image text-muted fa-5x opacity-50"></i>
+                            </div>
+                        }
+                    </div>
+                </div>
+
+                <div class="col-lg-8">
+                    <h4 class="fw-bold text-dark mb-3">@Model.Name</h4>
+
+                    <div class="mb-4">
+                        <p class="text-muted">
+                            @if (!string.IsNullOrWhiteSpace(Model.Description))
+                            {
+                                @Model.Description
+                            }
+                            else
+                            {
+                                <em>აღწერა არ არის მითითებული</em>
+                            }
+                        </p>
+                    </div>
+
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <div class="d-flex">
+                                <strong class="text-muted me-3" style="min-width: 140px;">ბრენდის ID:</strong>
+                                <span>@Model.Id</span>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="d-flex">
+                                <strong class="text-muted me-3" style="min-width: 140px;">სტატუსი:</strong>
+                                <span class="badge rounded-pill @statusClass px-3 py-2">
+                                    @statusText
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr class="my-4">
+
+                    <div class="mb-4">
+                        <h5 class="fw-bold text-dark mb-3">სტატუსის მართვა</h5>
+                        <div class="d-flex flex-wrap gap-2">
+                            @*TODO: შესაცვლელია:*@
+                            <form asp-controller="Manage" asp-action="ChangeCategoryStatus" method="post" class="d-inline">
+                                <input type="hidden" name="brandId" value="@Model.Id" />
+                                <button type="submit"
+                                        class="btn btn-sm @(Model.IsActive == true ? "btn-warning" : "btn-success") shadow-sm"
+                                        onclick="return confirm('@(Model.IsActive == true ? "ნამდვილად გსურთ ბრენდის დეაქტივაცია?" : "ნამდვილად გსურთ ბრენდის აქტივაცია?")')">
+                                    <i class="fas @(Model.IsActive == true ? "fa-toggle-off" : "fa-toggle-on") me-2"></i>
+                                    @(Model.IsActive == true ? "დეაქტივაცია" : "აქტივაცია")
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <hr class="my-4">
+
+                    <div class="text-end">
+                        <a asp-controller="Manage" asp-action="Brands"
+                           class="btn btn-secondary shadow-sm">
+                            <i class="fas fa-arrow-left me-2"></i>უკან დაბრუნება
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    body {
+        font-family: 'Roboto', sans-serif;
+    }
+
+    .bg-gradient-primary {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    }
+
+    .card {
+        transition: transform 0.2s ease;
+    }
+
+        .card:hover {
+            transform: translateY(-2px);
+        }
+
+    .badge {
+        font-size: 0.9rem;
+    }
+</style>
+
+@section Scripts {
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+}

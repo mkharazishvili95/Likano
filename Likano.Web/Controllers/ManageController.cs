@@ -2,6 +2,7 @@
 using Likano.Application.DTOs;
 using Likano.Application.Features.Category.Queries.GetAll;
 using Likano.Application.Features.Manage.Brand.Commands.Change;
+using Likano.Application.Features.Manage.Brand.Queries.Get;
 using Likano.Application.Features.Manage.Brand.Queries.GetAll;
 using Likano.Application.Features.Manage.Category.Commands.ChangeStatus;
 using Likano.Application.Features.Manage.Category.Queries.Get;
@@ -379,6 +380,36 @@ namespace Likano.Web.Controllers
             };
 
             return View("Brands", vm);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> BrandDetails(int id)
+        {
+            if (id <= 0)
+                return NotFound();
+
+            var apiUrl = $"{_baseUrl}/manage/brand/{id}";
+            var apiResponse = await _httpClient.GetAsync(apiUrl);
+
+            if (!apiResponse.IsSuccessStatusCode)
+            {
+                return View("NotFound", new GetBrandForManageResponse
+                {
+                    Success = false,
+                    Message = $"API error: {(int)apiResponse.StatusCode}"
+                });
+            }
+            var brand = await apiResponse.Content.ReadFromJsonAsync<GetBrandForManageResponse>();
+            if (brand == null || brand.Success == false)
+            {
+                return View("NotFound", brand ?? new GetBrandForManageResponse
+                {
+                    Success = false,
+                    Message = "Brand not found"
+                });
+            }
+
+            return View("BrandDetails", brand);
         }
     }
 }
