@@ -137,7 +137,7 @@
                                     <input type="hidden" name="brandId" value="@c.Id" />
                                     <input type="hidden" name="intoGrid" value="true" />
                                     <button type="submit"
-                                            class="btn btn-sm @(c.IsActive == true ? " btn-warning" : "btn-success" ) shadow-sm"
+                                            class="btn btn-sm @(c.IsActive == true ? " btn-warning" : "btn-success" ) shadow-sm status-icon-btn"
                                             title="@(c.IsActive == true ? " დეაქტივაცია" : "აქტივაცია" )"
                                             onclick="return confirm('@(c.IsActive == true ? " ნამდვილად გსურთ ბრენდის დეაქტივაცია?" : "ნამდვილად გსურთ ბრენდის აქტივაცია?" )')">
                                         <i class="fas @(c.IsActive == true ? " fa-toggle-off" : "fa-toggle-on" )"></i>
@@ -274,6 +274,28 @@
         transition: all 0.2s;
     }
 
+    .status-icon-btn {
+        width: 30px; 
+        height: 30px; 
+        padding: 0;
+        border-radius: 999px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        line-height: 1;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+        transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .status-icon-btn i {
+        font-size: 0.9rem;
+    }
+
+    .status-icon-btn:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+    }
+
     @@media (max-width: 768px) {
         .table thead {
             display: none;
@@ -310,5 +332,5 @@
 </style>
 
 @section Scripts {
-<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 }
