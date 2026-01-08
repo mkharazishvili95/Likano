@@ -34,6 +34,8 @@ namespace Likano.Application.Features.Manage.Product.Queries.Get
                 CreateDate = product.CreateDate,
                 UpdateDate = product.UpdateDate,
                 Status = product.Status,
+                BrandId = product.BrandId,
+                BrandTitle = product.Brand?.Name,
                 Success = true,
                 StatusCode = 200
             };

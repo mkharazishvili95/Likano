@@ -53,6 +53,32 @@
   },
   {
     "ContainingType": "Likano.Controllers.ManageController",
+    "Method": "GetAllBrands",
+    "RelativePath": "api/Manage/brands",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "query",
+        "Type": "Likano.Application.Features.Manage.Brand.Queries.GetAll.GetAllBrandsForManageQuery",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Likano.Application.Features.Manage.Brand.Queries.GetAll.GetAllBrandsForManageResponse",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Likano.Controllers.ManageController",
     "Method": "GetAllCategories",
     "RelativePath": "api/Manage/categories",
     "HttpMethod": "POST",
@@ -146,6 +172,32 @@
     "ReturnTypes": [
       {
         "Type": "Likano.Application.Features.Manage.Product.Queries.Get.GetProductForManageResponse",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Likano.Controllers.ManageController",
+    "Method": "ChangeProductBrand",
+    "RelativePath": "api/Manage/product/change-brand",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "command",
+        "Type": "Likano.Application.Features.Manage.Brand.Commands.Change.ChangeBrandCommand",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Likano.Application.Features.Manage.Brand.Commands.Change.ChangeBrandResponse",
         "MediaTypes": [
           "text/plain",
           "application/json",

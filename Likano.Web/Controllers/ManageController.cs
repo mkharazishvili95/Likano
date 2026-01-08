@@ -1,6 +1,7 @@
 ﻿using Likano.Application.Common.Models;
 using Likano.Application.DTOs;
 using Likano.Application.Features.Category.Queries.GetAll;
+using Likano.Application.Features.Manage.Brand.Commands.Change;
 using Likano.Application.Features.Manage.Category.Commands.ChangeStatus;
 using Likano.Application.Features.Manage.Category.Queries.Get;
 using Likano.Application.Features.Manage.Category.Queries.GetAll;
@@ -296,6 +297,30 @@ namespace Likano.Web.Controllers
             }
 
             var result = await response.Content.ReadFromJsonAsync<ChangeCategoryResponse>();
+            TempData[(bool)result!.Success ? "SuccessMessage" : "ErrorMessage"] = result.Message;
+
+            return RedirectToAction("Details", new { id = productId });
+        }
+
+        public async Task<IActionResult> ChangeProductBrand(int productId, int newBrandId, int brandId)
+        {
+            var apiUrl = $"{_baseUrl}/manage/product/change-brand";
+
+            var command = new ChangeBrandCommand
+            {
+                ProductId = productId,
+                NewBrandId = newBrandId
+            };
+
+            var response = await _httpClient.PostAsJsonAsync(apiUrl, command);
+
+            if (!response.IsSuccessStatusCode)
+            {
+                TempData["ErrorMessage"] = "ბრენდის ცვლილება ვერ მოხდა";
+                return RedirectToAction("Details", new { id = productId });
+            }
+
+            var result = await response.Content.ReadFromJsonAsync<ChangeBrandResponse>();
             TempData[(bool)result!.Success ? "SuccessMessage" : "ErrorMessage"] = result.Message;
 
             return RedirectToAction("Details", new { id = productId });

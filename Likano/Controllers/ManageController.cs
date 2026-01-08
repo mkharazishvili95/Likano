@@ -1,4 +1,6 @@
-﻿using Likano.Application.Features.Manage.Category.Commands.ChangeStatus;
+﻿using Likano.Application.Features.Manage.Brand.Commands.Change;
+using Likano.Application.Features.Manage.Brand.Queries.GetAll;
+using Likano.Application.Features.Manage.Category.Commands.ChangeStatus;
 using Likano.Application.Features.Manage.Category.Queries.Get;
 using Likano.Application.Features.Manage.Category.Queries.GetAll;
 using Likano.Application.Features.Manage.Product.Commands.ChangeCategory;
@@ -47,5 +49,13 @@ namespace Likano.Controllers
         [HttpPost("product/change-category")]
         public async Task<ChangeCategoryResponse> ChangeProductCategory([FromBody] ChangeCategoryCommand command)
             => await _mediator.Send(command);
+
+        [HttpPost("product/change-brand")]
+        public async Task<ChangeBrandResponse> ChangeProductBrand([FromBody] ChangeBrandCommand command)
+            => await _mediator.Send(command);
+
+        [HttpPost("brands")]
+        public async Task<GetAllBrandsForManageResponse> GetAllBrands([FromBody] GetAllBrandsForManageQuery query)
+            => await _mediator.Send(query);
     }
 }

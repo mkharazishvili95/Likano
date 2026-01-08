@@ -15,7 +15,7 @@ namespace Likano.Infrastructure.Repositories
             _db = db;
         }
 
-        public async Task<Product?> GetProduct(int id) => await _db.Products.Include(x => x.Category).FirstOrDefaultAsync(x => x.Id == id);
+        public async Task<Product?> GetProduct(int id) => await _db.Products.Include(x => x.Category).Include(x => x.Brand).FirstOrDefaultAsync(x => x.Id == id);
 
         public async Task<List<Product>?> GetAllProducts() => await _db.Products.ToListAsync();
         public async Task<List<Category>?> GetAllCategories() => await _db.Categories.ToListAsync();
@@ -78,5 +78,20 @@ namespace Likano.Infrastructure.Repositories
             await _db.SaveChangesAsync();
             return true;
         }
+
+        public async Task<bool> ChangeBrand(int productId, int newBrandId)
+        {
+            var product = await _db.Products.FindAsync(productId);
+            if (product == null)
+                return false;
+
+            product.BrandId = newBrandId;
+            await _db.SaveChangesAsync();
+            return true;
+        }
+
+        public async Task<Brand?> GetBrand(int id) => await _db.Brands.FindAsync(id);
+
+        public async Task<List<Brand>?> GetAllBrands() => await _db.Brands.ToListAsync();
     }
 }
