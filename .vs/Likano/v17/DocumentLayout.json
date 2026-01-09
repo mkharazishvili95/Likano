@@ -477,8 +477,7 @@
               "RelativeToolTip": "Likano.Infrastructure\\Migrations\\20260109173244_FixedPaswIntoUser.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAgAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-09T17:32:45.3Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-09T17:32:45.3Z"
             },
             {
               "$type": "Document",
@@ -490,8 +489,7 @@
               "RelativeToolTip": "Likano.Application\\Interfaces\\IUserRepository.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAqwAQAAAAVAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-09T17:03:37.388Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-09T17:03:37.388Z"
             },
             {
               "$type": "Document",
@@ -503,8 +501,7 @@
               "RelativeToolTip": "Likano.Infrastructure\\Repositories\\UserRepository.cs",
               "ViewState": "AgIAAAsAAAAAAAAAAAAQwBwAAAAtAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-09T17:03:23.958Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-09T17:03:23.958Z"
             },
             {
               "$type": "Document",
@@ -516,8 +513,7 @@
               "RelativeToolTip": "Likano.Application\\Features\\Auth\\Commands\\Register\\RegisterUserValidator.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAqwAkAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-09T17:16:56.026Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-09T17:16:56.026Z"
             },
             {
               "$type": "Document",
@@ -527,7 +523,7 @@
               "RelativeDocumentMoniker": "Likano\\Controllers\\AuthController.cs",
               "ToolTip": "D:\\G\\Likano\\Likano\\Controllers\\AuthController.cs",
               "RelativeToolTip": "Likano\\Controllers\\AuthController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAhAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAlAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-01-05T19:52:54.759Z",
               "EditorCaption": ""
@@ -555,8 +551,7 @@
               "RelativeToolTip": "Likano\\Controllers\\CategoryController.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAA0AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-05T19:51:29.481Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-05T19:51:29.481Z"
             },
             {
               "$type": "Document",
@@ -568,8 +563,7 @@
               "RelativeToolTip": "Likano\\Program.cs",
               "ViewState": "AgIAAAQAAAAAAAAAAAAAAB8AAAA0AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-05T19:47:20.586Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-05T19:47:20.586Z"
             },
             {
               "$type": "Document",
@@ -581,8 +575,7 @@
               "RelativeToolTip": "Likano.Domain\\Entities\\User.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAqwAgAAAAsAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-09T16:49:36.358Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-09T16:49:36.358Z"
             },
             {
               "$type": "Document",
@@ -594,8 +587,7 @@
               "RelativeToolTip": "Likano.Application\\Features\\Auth\\Commands\\Register\\RegisterUserResponse.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAqwAYAAAAZAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-09T17:14:56.562Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-09T17:14:56.562Z"
             },
             {
               "$type": "Document",
@@ -607,8 +599,7 @@
               "RelativeToolTip": "Likano.Application\\Features\\Auth\\Commands\\Register\\RegisterUserCommand.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAqwAYAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-09T17:15:11.392Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-09T17:15:11.392Z"
             },
             {
               "$type": "Document",
@@ -620,8 +611,7 @@
               "RelativeToolTip": "Likano.Application\\Likano.Application.csproj",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2026-01-05T19:37:36.285Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-05T19:37:36.285Z"
             },
             {
               "$type": "Document",
@@ -633,8 +623,7 @@
               "RelativeToolTip": "Likano.Application\\Interfaces\\IManageRepository.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAqwAYAAAAVAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-06T15:50:32.183Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-06T15:50:32.183Z"
             },
             {
               "$type": "Document",
@@ -646,8 +635,7 @@
               "RelativeToolTip": "Likano.Infrastructure\\Migrations\\20260109165632_AddedUserEntityModel.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAlAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-09T16:56:33.121Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-09T16:56:33.121Z"
             },
             {
               "$type": "Document",
@@ -659,8 +647,7 @@
               "RelativeToolTip": "Likano.Domain\\Enums\\User\\UserType.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-09T16:54:33.414Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-09T16:54:33.414Z"
             },
             {
               "$type": "Document",
@@ -672,8 +659,7 @@
               "RelativeToolTip": "Likano\\Likano.csproj",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAABgAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2026-01-05T19:33:15.682Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-05T19:33:15.682Z"
             },
             {
               "$type": "Document",
@@ -685,8 +671,7 @@
               "RelativeToolTip": "Likano.Application\\Features\\Manage\\Category\\Queries\\GetAll\\GetAllCategoriesForManageHandler.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABwAAAAsAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-07T10:12:15.502Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-07T10:12:15.502Z"
             },
             {
               "$type": "Document",
@@ -698,8 +683,7 @@
               "RelativeToolTip": "Likano.Application\\Features\\Manage\\Category\\Queries\\Get\\GetCategoryForManageResponse.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAArAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-07T11:17:49.451Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-07T11:17:49.451Z"
             },
             {
               "$type": "Document",
@@ -711,8 +695,7 @@
               "RelativeToolTip": "Likano.Infrastructure\\Data\\ApplicationDbContext.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAuAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-05T19:42:39.521Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-05T19:42:39.521Z"
             },
             {
               "$type": "Document",
@@ -737,8 +720,7 @@
               "RelativeToolTip": "Likano.Application\\Features\\Manage\\Category\\Queries\\Get\\GetCategoryForManageHandler.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-07T11:17:58.696Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-07T11:17:58.696Z"
             },
             {
               "$type": "Document",
@@ -750,8 +732,7 @@
               "RelativeToolTip": "Likano.Application\\Features\\Manage\\Category\\Queries\\GetAll\\GetAllCategoriesForManageHelper.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-07T10:12:24.925Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-07T10:12:24.925Z"
             },
             {
               "$type": "Document",
@@ -763,8 +744,7 @@
               "RelativeToolTip": "Likano.Web\\Views\\Manage\\Categories.cshtml",
               "ViewState": "AgIAAFgAAAAAAAAAAAAgwGYAAAA5AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-01-07T10:26:16.227Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-07T10:26:16.227Z"
             },
             {
               "$type": "Document",
@@ -776,8 +756,7 @@
               "RelativeToolTip": "Likano.Web\\Views\\Manage\\Main.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAqAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-01-07T10:57:20.863Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-07T10:57:20.863Z"
             },
             {
               "$type": "Document",
@@ -789,8 +768,7 @@
               "RelativeToolTip": "Likano.Web\\Views\\Manage\\Brands.cshtml",
               "ViewState": "AgIAAHYAAAAAAAAAAAAuwIEAAABTAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-01-08T17:05:12.246Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-08T17:05:12.246Z"
             },
             {
               "$type": "Document",
@@ -802,8 +780,7 @@
               "RelativeToolTip": "Likano.Web\\Views\\Manage\\BrandDetails.cshtml",
               "ViewState": "AgIAAFUAAAAAAAAAAAAuwGIAAAAiAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-01-08T17:26:48.631Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-08T17:26:48.631Z"
             },
             {
               "$type": "Document",
@@ -815,8 +792,7 @@
               "RelativeToolTip": "Likano.Web\\Views\\Manage\\CategoryDetails.cshtml",
               "ViewState": "AgIAAFgAAAAAAAAAAAAuwHUAAAAaAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-01-07T11:22:15.284Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-07T11:22:15.284Z"
             },
             {
               "$type": "Document",
@@ -828,8 +804,7 @@
               "RelativeToolTip": "Likano.Web\\Controllers\\ManageController.cs",
               "ViewState": "AgIAAO4AAAAAAAAAAAAqwAQBAAA9AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-06T16:28:48.968Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-06T16:28:48.968Z"
             },
             {
               "$type": "Document",
@@ -841,8 +816,7 @@
               "RelativeToolTip": "Likano.Web\\Views\\Shared\\_AdminLayout.cshtml",
               "ViewState": "AgIAAEsAAAAAAAAAAAAawFYAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-01-08T18:21:19.529Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-08T18:21:19.529Z"
             },
             {
               "$type": "Document",
@@ -854,8 +828,7 @@
               "RelativeToolTip": "Likano\\Controllers\\ManageController.cs",
               "ViewState": "AgIAACkAAAAAAAAAAAAcwD8AAABFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-05T19:52:19.295Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-05T19:52:19.295Z"
             },
             {
               "$type": "Document",
@@ -867,8 +840,7 @@
               "RelativeToolTip": "Likano.Application\\Features\\Manage\\Brand\\Commands\\ChangeStatus\\ChangeBrandActiveStatusHandler.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAA2AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-08T18:05:34.893Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-08T18:05:34.893Z"
             },
             {
               "$type": "Document",
@@ -880,8 +852,7 @@
               "RelativeToolTip": "Likano.Application\\Features\\Manage\\Brand\\Commands\\ChangeStatus\\ChangeBrandActiveStatusCommand.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-08T18:05:29.8Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-08T18:05:29.8Z"
             },
             {
               "$type": "Document",
@@ -893,8 +864,7 @@
               "RelativeToolTip": "Likano.Application\\Features\\Manage\\Category\\Commands\\ChangeStatus\\ChangeActiveStatusHandler.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABsAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-07T10:32:59.943Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-07T10:32:59.943Z"
             },
             {
               "$type": "Document",
@@ -906,8 +876,7 @@
               "RelativeToolTip": "Likano.Application\\Features\\Manage\\Category\\Commands\\ChangeStatus\\ChangeActiveStatusCommand.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAqwAkAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-07T10:33:04.828Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-07T10:33:04.828Z"
             },
             {
               "$type": "Document",
@@ -919,8 +888,7 @@
               "RelativeToolTip": "Likano.Application\\Features\\Manage\\Brand\\Commands\\ChangeStatus\\ChangeBrandActiveStatusResponse.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-08T18:05:42.756Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-08T18:05:42.756Z"
             },
             {
               "$type": "Document",
@@ -932,8 +900,7 @@
               "RelativeToolTip": "Likano.Application\\Features\\Manage\\Category\\Commands\\ChangeStatus\\ChangeActiveStatusResponse.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAqwAYAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-07T10:32:54.597Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-07T10:32:54.597Z"
             },
             {
               "$type": "Document",
@@ -945,8 +912,7 @@
               "RelativeToolTip": "Likano.Domain\\Entities\\Brand.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAUAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-08T16:00:01.368Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-08T16:00:01.368Z"
             },
             {
               "$type": "Document",
@@ -958,8 +924,7 @@
               "RelativeToolTip": "Likano.Application\\Features\\Manage\\Brand\\Queries\\Get\\GetBrandForManageHandler.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAyAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-08T17:22:28.873Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-08T17:22:28.873Z"
             },
             {
               "$type": "Document",
@@ -971,8 +936,7 @@
               "RelativeToolTip": "Likano.Application\\Features\\Category\\Queries\\Get\\GetCategoryHandler.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAABGAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-05T20:06:52.155Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-05T20:06:52.155Z"
             },
             {
               "$type": "Document",
@@ -984,8 +948,7 @@
               "RelativeToolTip": "Likano.Application\\Features\\Manage\\Product\\Queries\\Get\\GetProductForManageHandler.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAIBJwBkAAAAgAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-06T15:54:23.464Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-06T15:54:23.464Z"
             },
             {
               "$type": "Document",
@@ -997,8 +960,7 @@
               "RelativeToolTip": "Likano.Application\\Features\\Manage\\Product\\Queries\\Get\\GetProductForManageQuery.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-06T15:54:17.084Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-06T15:54:17.084Z"
             },
             {
               "$type": "Document",
@@ -1010,8 +972,7 @@
               "RelativeToolTip": "Likano.Application\\Features\\Manage\\Brand\\Queries\\Get\\GetBrandForManageQuery.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAaAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-08T17:22:24.789Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-08T17:22:24.789Z"
             },
             {
               "$type": "Document",
@@ -1023,8 +984,7 @@
               "RelativeToolTip": "Likano.Application\\Features\\Manage\\Category\\Queries\\Get\\GetCategoryForManageQuery.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-07T11:17:54.368Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-07T11:17:54.368Z"
             },
             {
               "$type": "Document",
@@ -1036,8 +996,7 @@
               "RelativeToolTip": "Likano.Application\\Features\\Manage\\Brand\\Queries\\GetAll\\GetAllBrandsForManageQuery.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-08T17:03:10.403Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-08T17:03:10.403Z"
             },
             {
               "$type": "Document",
@@ -1049,8 +1008,7 @@
               "RelativeToolTip": "Likano.Application\\Features\\Category\\Queries\\Get\\GetCategoryQuery.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAqwAkAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-05T20:06:26.945Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-05T20:06:26.945Z"
             },
             {
               "$type": "Document",
@@ -1062,8 +1020,7 @@
               "RelativeToolTip": "Likano.Application\\Features\\Category\\Queries\\Get\\GetCategoryResponse.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAqwAYAAAAjAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-05T20:06:12.441Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-05T20:06:12.441Z"
             },
             {
               "$type": "Document",
@@ -1075,8 +1032,7 @@
               "RelativeToolTip": "Likano.Application\\Features\\Manage\\Brand\\Queries\\Get\\GetBrandForManageResponse.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAApAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-08T17:22:18.767Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-08T17:22:18.767Z"
             },
             {
               "$type": "Document",
@@ -1088,8 +1044,7 @@
               "RelativeToolTip": "Likano.Application\\Features\\Manage\\Brand\\Queries\\GetAll\\GetAllBrandsForManageHandler.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAIBJwBkAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-08T17:09:00.402Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-08T17:09:00.402Z"
             },
             {
               "$type": "Document",
@@ -1101,8 +1056,7 @@
               "RelativeToolTip": "Likano.Application\\Features\\Manage\\Brand\\Queries\\GetAll\\GetAllBrandsForManageResponse.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAzAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-08T17:03:30.264Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-08T17:03:30.264Z"
             },
             {
               "$type": "Document",
@@ -1114,8 +1068,7 @@
               "RelativeToolTip": "Likano.Application\\Features\\Manage\\Brand\\Queries\\GetAll\\GetAllBrandsForManageHelper.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-08T17:08:53.777Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-08T17:08:53.777Z"
             },
             {
               "$type": "Document",
@@ -1127,8 +1080,7 @@
               "RelativeToolTip": "Likano.Web\\Models\\Manage\\BrandsManageViewModel.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-08T17:04:14.864Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-08T17:04:14.864Z"
             },
             {
               "$type": "Document",
@@ -1140,8 +1092,7 @@
               "RelativeToolTip": "Likano.Web\\Models\\Manage\\BrandsFilterVm.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAqwAkAAAAVAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-08T17:01:41.419Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-08T17:01:41.419Z"
             },
             {
               "$type": "Document",
@@ -1153,8 +1104,7 @@
               "RelativeToolTip": "Likano.Web\\Models\\Manage\\CategoriesFilterVm.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAqwAQAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-07T10:21:50.879Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-07T10:21:50.879Z"
             },
             {
               "$type": "Document",
@@ -1166,8 +1116,7 @@
               "RelativeToolTip": "Likano.Web\\Models\\Manage\\CategoriesManageViewModel.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-07T10:22:35.398Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-07T10:22:35.398Z"
             },
             {
               "$type": "Document",
@@ -1179,8 +1128,7 @@
               "RelativeToolTip": "Likano.Web\\Views\\Manage\\Details.cshtml",
               "ViewState": "AgIAADkAAAAAAAAAAIAwwEUAAABvAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-01-06T19:46:13.412Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-06T19:46:13.412Z"
             },
             {
               "$type": "Document",
@@ -1192,8 +1140,7 @@
               "RelativeToolTip": "Likano.Application\\DTOs\\CategoryDtoForManage.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-06T18:12:31.028Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-06T18:12:31.028Z"
             },
             {
               "$type": "Document",
@@ -1205,8 +1152,7 @@
               "RelativeToolTip": "Likano.Application\\DTOs\\BrandDtoForManage.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-08T16:44:06.733Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-08T16:44:06.733Z"
             },
             {
               "$type": "Document",
@@ -1218,8 +1164,7 @@
               "RelativeToolTip": "Likano.Application\\Features\\Manage\\Brand\\Commands\\Change\\ChangeBrandHandler.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAvAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-08T16:34:08.545Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-08T16:34:08.545Z"
             },
             {
               "$type": "Document",
@@ -1231,8 +1176,7 @@
               "RelativeToolTip": "Likano.Application\\Features\\Manage\\Product\\Commands\\ChangeCategory\\ChangeCategoryHandler.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAACAAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-07T11:50:12.13Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-07T11:50:12.13Z"
             },
             {
               "$type": "Document",
@@ -1244,8 +1188,7 @@
               "RelativeToolTip": "Likano.Application\\Features\\Manage\\Brand\\Commands\\Change\\ChangeBrandResponse.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-08T16:33:58.044Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-08T16:33:58.044Z"
             },
             {
               "$type": "Document",
@@ -1257,8 +1200,7 @@
               "RelativeToolTip": "Likano.Application\\Features\\Manage\\Product\\Commands\\ChangeCategory\\ChangeCategoryResponse.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-07T11:50:03.203Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-07T11:50:03.203Z"
             },
             {
               "$type": "Document",
@@ -1270,8 +1212,7 @@
               "RelativeToolTip": "Likano.Application\\Features\\Manage\\Brand\\Commands\\Change\\ChangeBrandCommand.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-08T16:34:03.641Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-08T16:34:03.641Z"
             },
             {
               "$type": "Document",
@@ -1283,8 +1224,7 @@
               "RelativeToolTip": "Likano.Application\\Features\\Manage\\Product\\Commands\\ChangeCategory\\ChangeCategoryCommand.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAnAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-07T11:50:07.374Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-07T11:50:07.374Z"
             },
             {
               "$type": "Document",
@@ -1296,8 +1236,7 @@
               "RelativeToolTip": "Likano.Application\\Features\\Manage\\Product\\Queries\\Get\\GetProductForManageResponse.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAqwAUAAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-06T15:54:05.958Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-06T15:54:05.958Z"
             },
             {
               "$type": "Document",
@@ -1322,8 +1261,7 @@
               "RelativeToolTip": "Likano.Application\\Features\\Manage\\Product\\Commands\\ChangeStatus\\ChangeProductStatusCommand.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-06T16:10:24.86Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-06T16:10:24.86Z"
             },
             {
               "$type": "Document",
@@ -1335,8 +1273,7 @@
               "RelativeToolTip": "Likano.Application\\Features\\Manage\\Category\\Queries\\GetAll\\GetAllCategoriesForManageQuery.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAqwA4AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-07T10:12:11.142Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-07T10:12:11.142Z"
             },
             {
               "$type": "Document",
@@ -1348,8 +1285,7 @@
               "RelativeToolTip": "Likano.Infrastructure\\Migrations\\20260108160716_AddedBrandIdIntoProductEntity.cs",
               "ViewState": "AgIAABAAAAAAAAAAAAAgwCsAAAAgAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-08T16:07:16.559Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-08T16:07:16.559Z"
             },
             {
               "$type": "Document",
@@ -1361,8 +1297,7 @@
               "RelativeToolTip": "Likano.Infrastructure\\Migrations\\20260108160016_AddedBrandEntityModel.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAABFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-08T16:00:17.179Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-08T16:00:17.179Z"
             },
             {
               "$type": "Document",
@@ -1374,8 +1309,7 @@
               "RelativeToolTip": "Likano.Domain\\Entities\\Product.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAApAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-05T19:39:08.084Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-05T19:39:08.084Z"
             },
             {
               "$type": "Document",
@@ -1387,8 +1321,7 @@
               "RelativeToolTip": "Likano\\Middleware\\GlobalExceptionMiddleware.cs",
               "ViewState": "AgIAAAsAAAAAAAAAAAAxwAkAAAA8AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-07T17:00:18.123Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-07T17:00:18.123Z"
             },
             {
               "$type": "Document",
@@ -1400,8 +1333,7 @@
               "RelativeToolTip": "Likano.Application\\Features\\Manage\\Category\\Queries\\GetAll\\GetAllCategoriesForManageResponse.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-07T10:12:01.51Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-07T10:12:01.51Z"
             },
             {
               "$type": "Document",
@@ -1413,8 +1345,7 @@
               "RelativeToolTip": "Likano.Domain\\Entities\\Category.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-05T19:40:27.485Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-05T19:40:27.485Z"
             },
             {
               "$type": "Document",
@@ -1426,8 +1357,7 @@
               "RelativeToolTip": "Likano.Web\\Views\\Manage\\Products.cshtml",
               "ViewState": "AgIAADQBAAAAAAAAAIBZwFwBAAAKAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-01-06T18:42:50.677Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-06T18:42:50.677Z"
             },
             {
               "$type": "Document",
@@ -1439,8 +1369,7 @@
               "RelativeToolTip": "Likano.Web\\Models\\Manage\\ProductsFilterVm.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAqwBAAAAAyAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-06T16:37:52.918Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-06T16:37:52.918Z"
             },
             {
               "$type": "Document",
@@ -1452,8 +1381,7 @@
               "RelativeToolTip": "Likano.Web\\Models\\Manage\\ProductsManageViewModel.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAqwAUAAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-06T16:37:37.399Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-06T16:37:37.399Z"
             },
             {
               "$type": "Document",
@@ -1465,8 +1393,7 @@
               "RelativeToolTip": "Likano.Infrastructure\\Migrations\\20260107101916_AddedIsActiveIntoCategoryEntityModel.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAAhAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-07T10:19:17.121Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-07T10:19:17.121Z"
             },
             {
               "$type": "Document",
@@ -1478,8 +1405,7 @@
               "RelativeToolTip": "Likano.Application\\Features\\Manage\\Product\\Queries\\GetAll\\GetAllProductsForManageHandler.cs",
               "ViewState": "AgIAABsAAAAAAAAAAAAowDAAAAAmAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-06T16:01:23.545Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-06T16:01:23.545Z"
             },
             {
               "$type": "Document",
@@ -1491,8 +1417,7 @@
               "RelativeToolTip": "Likano.Application\\Features\\Manage\\Product\\Queries\\GetAll\\GetAllProductsForManageHelper.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-06T18:26:05.576Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-06T18:26:05.576Z"
             },
             {
               "$type": "Document",
@@ -1504,8 +1429,7 @@
               "RelativeToolTip": "Likano.Application\\Features\\Manage\\Product\\Queries\\GetAll\\GetAllProductsForManageQuery.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAqwA8AAAAtAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-06T16:01:18.284Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-06T16:01:18.284Z"
             },
             {
               "$type": "Document",
@@ -1515,8 +1439,7 @@
               "ToolTip": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\MSBuild\\Current\\Bin\\amd64\\Microsoft.Common.CurrentVersion.targets",
               "ViewState": "AgIAAM0TAAAAAAAAAAAjwNcTAABAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003801|",
-              "WhenOpened": "2026-01-07T09:52:24.989Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-07T09:52:24.989Z"
             },
             {
               "$type": "Document",
@@ -1528,8 +1451,7 @@
               "RelativeToolTip": "Likano.Web\\Program.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAvAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-06T16:27:40.605Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-06T16:27:40.605Z"
             },
             {
               "$type": "Document",
@@ -1541,8 +1463,7 @@
               "RelativeToolTip": "Likano.Application\\Features\\Manage\\Product\\Commands\\ChangeStatus\\ChangeProductStatusResponse.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAqwAQAAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-06T16:10:15.288Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-06T16:10:15.288Z"
             },
             {
               "$type": "Document",
@@ -1554,8 +1475,7 @@
               "RelativeToolTip": "Likano\\Controllers\\ProductController.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAzAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-05T19:51:52.521Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-05T19:51:52.521Z"
             },
             {
               "$type": "Document",
@@ -1567,8 +1487,7 @@
               "RelativeToolTip": "Likano.Web\\Views\\Manage\\NotFound.cshtml",
               "ViewState": "AgIAAAEAAAAAAAAAAAAqwBYAAABMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-01-06T20:03:57.429Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-06T20:03:57.429Z"
             },
             {
               "$type": "Document",
@@ -1580,8 +1499,7 @@
               "RelativeToolTip": "Likano.Web\\Views\\Shared\\Error.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABkAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-01-06T20:02:38.859Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-06T20:02:38.859Z"
             },
             {
               "$type": "Document",
@@ -1593,8 +1511,7 @@
               "RelativeToolTip": "Likano.Web\\Controllers\\HomeController.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-06T19:08:23.616Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-06T19:08:23.616Z"
             },
             {
               "$type": "Document",
@@ -1606,8 +1523,7 @@
               "RelativeToolTip": "Likano.Web\\appsettings.json",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2026-01-06T16:22:50.803Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-06T16:22:50.803Z"
             },
             {
               "$type": "Document",
@@ -1619,8 +1535,7 @@
               "RelativeToolTip": "Likano.Application\\Common\\Models\\Pagination.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAqwAIAAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-05T20:48:47.658Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-05T20:48:47.658Z"
             },
             {
               "$type": "Document",
@@ -1632,8 +1547,7 @@
               "RelativeToolTip": "Likano.Web\\Likano.Web.csproj",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2026-01-06T16:20:49.374Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-06T16:20:49.374Z"
             },
             {
               "$type": "Document",
@@ -1645,8 +1559,7 @@
               "RelativeToolTip": "Likano\\appsettings.json",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAASAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2026-01-05T19:46:23.456Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-05T19:46:23.456Z"
             },
             {
               "$type": "Document",
@@ -1658,8 +1571,7 @@
               "RelativeToolTip": "Likano.Application\\Features\\Manage\\Product\\Queries\\GetAll\\GetAllProductsForManageResponse.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAAxAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-06T16:01:14.527Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-06T16:01:14.527Z"
             },
             {
               "$type": "Document",
@@ -1671,8 +1583,7 @@
               "RelativeToolTip": "Likano.Application\\Features\\Product\\Queries\\GetAll\\GetAllProductsQuery.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-05T20:46:40.726Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-05T20:46:40.726Z"
             },
             {
               "$type": "Document",
@@ -1684,8 +1595,7 @@
               "RelativeToolTip": "Likano.Infrastructure\\Migrations\\20260106155807_AddedParamsIntoProductEntityModel.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-06T15:58:08.062Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-06T15:58:08.062Z"
             },
             {
               "$type": "Document",
@@ -1697,8 +1607,7 @@
               "RelativeToolTip": "Likano.Application\\Features\\Product\\Queries\\Get\\GetProductHandler.cs",
               "ViewState": "AgIAAAUAAAAAAAAAAAAxwCYAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-05T20:42:00.565Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-05T20:42:00.565Z"
             },
             {
               "$type": "Document",
@@ -1710,8 +1619,7 @@
               "RelativeToolTip": "Likano.Infrastructure\\Repositories\\ProductRepository.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-05T20:37:11.26Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-05T20:37:11.26Z"
             },
             {
               "$type": "Document",
@@ -1723,8 +1631,7 @@
               "RelativeToolTip": "Likano.Application\\Features\\Product\\Queries\\GetAll\\GetAllProductsHandler.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAABDAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-05T20:46:58.112Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-05T20:46:58.112Z"
             },
             {
               "$type": "Document",
@@ -1736,8 +1643,7 @@
               "RelativeToolTip": "Likano.Application\\Features\\Product\\Queries\\GetAll\\GetAllProductsResponse.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-05T20:46:49.03Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-05T20:46:49.03Z"
             },
             {
               "$type": "Document",
@@ -1749,8 +1655,7 @@
               "RelativeToolTip": "Likano.Domain\\Enums\\ProductStatus.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAUAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-06T15:46:14.532Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-06T15:46:14.532Z"
             },
             {
               "$type": "Document",
@@ -1762,8 +1667,7 @@
               "RelativeToolTip": "Likano.Application\\Interfaces\\IProductRepository.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAXAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-05T20:37:04.686Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-05T20:37:04.686Z"
             },
             {
               "$type": "Document",
@@ -1775,8 +1679,7 @@
               "RelativeToolTip": "Likano.Application\\Features\\Product\\Queries\\Get\\GetProductResponse.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAxAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-05T20:42:06.199Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-05T20:42:06.199Z"
             },
             {
               "$type": "Document",
@@ -1788,8 +1691,7 @@
               "RelativeToolTip": "Likano.Application\\Features\\Category\\Queries\\GetAll\\GetAllCategoriesQuery.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-05T20:19:45.389Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-05T20:19:45.389Z"
             },
             {
               "$type": "Document",
@@ -1801,8 +1703,7 @@
               "RelativeToolTip": "Likano.Application\\Features\\Category\\Queries\\GetAll\\GetAllCategoriesHandler.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-05T20:19:59.337Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-05T20:19:59.337Z"
             },
             {
               "$type": "Document",
@@ -1814,8 +1715,7 @@
               "RelativeToolTip": "Likano.Application\\Features\\Product\\Queries\\Get\\GetProductQuery.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-05T20:42:12.348Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-05T20:42:12.348Z"
             },
             {
               "$type": "Document",
@@ -1827,8 +1727,7 @@
               "RelativeToolTip": "Likano.Infrastructure\\Data\\UnitOfWork.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-05T20:28:51.132Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-05T20:28:51.132Z"
             },
             {
               "$type": "Document",
@@ -1840,8 +1739,7 @@
               "RelativeToolTip": "Likano.Application\\Interfaces\\ICategoryRepository.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-05T20:01:25.914Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-05T20:01:25.914Z"
             },
             {
               "$type": "Document",
@@ -1853,8 +1751,7 @@
               "RelativeToolTip": "Likano.Infrastructure\\Repositories\\CategoryRepository.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-05T20:00:54.312Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-05T20:00:54.312Z"
             },
             {
               "$type": "Document",
@@ -1866,8 +1763,7 @@
               "RelativeToolTip": "Likano.Application\\Features\\Category\\Queries\\GetAll\\GetAllCategoriesResponse.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAqwAcAAABPAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-05T20:19:52.13Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-05T20:19:52.13Z"
             },
             {
               "$type": "Document",
@@ -1879,8 +1775,7 @@
               "RelativeToolTip": "Likano.Application\\Interfaces\\IUnitOfWork.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-05T20:29:16.314Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-05T20:29:16.314Z"
             },
             {
               "$type": "Document",
@@ -1892,8 +1787,7 @@
               "RelativeToolTip": "Likano.Application\\Common\\Models\\BaseResponse.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-05T20:08:40.865Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-05T20:08:40.865Z"
             },
             {
               "$type": "Document",
@@ -1905,8 +1799,7 @@
               "RelativeToolTip": "Likano.Infrastructure\\Migrations\\20260105194838_InitialEntities.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAABFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-05T19:48:38.828Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-05T19:48:38.828Z"
             },
             {
               "$type": "Document",
@@ -1918,8 +1811,7 @@
               "RelativeToolTip": "Likano\\appsettings.Development.json",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2026-01-05T19:46:26.395Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-05T19:46:26.395Z"
             },
             {
               "$type": "Document",
@@ -1931,8 +1823,7 @@
               "RelativeToolTip": "Likano.Infrastructure\\Likano.Infrastructure.csproj",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2026-01-05T19:37:51.261Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-05T19:37:51.261Z"
             }
           ]
         }
