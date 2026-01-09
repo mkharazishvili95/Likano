@@ -16,6 +16,7 @@ namespace Likano.Infrastructure.Repositories
             _db = db;
         }
         public async Task<bool> UserNameExists(string userName) => await _db.Users.AnyAsync(u => u.UserName.ToUpper() == userName.ToUpper());
+        public async Task<User?> GetByUserNameAsync(string userName) => await _db.Users.FirstOrDefaultAsync(u => u.UserName.ToUpper() == userName.ToUpper());
         public async Task<User?> Register(User user)
         {
             try
@@ -39,6 +40,13 @@ namespace Likano.Infrastructure.Repositories
                 Console.WriteLine($"Error: {ex.Message}");
                 throw;
             }
+        }
+        public async Task UpdateRefreshTokenAsync(User user, string refreshToken, DateTime expiry)
+        {
+            user.RefreshToken = refreshToken;
+            user.RefreshTokenExpiry = expiry;
+            _db.Users.Update(user);
+            await _db.SaveChangesAsync();
         }
     }
 }

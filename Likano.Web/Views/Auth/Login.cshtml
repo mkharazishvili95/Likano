@@ -1,0 +1,76 @@
+﻿@model Likano.Web.Models.Auth.LoginViewModel
+
+@{
+    ViewData["Title"] = "ავტორიზაცია";
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+}
+
+@if (TempData["SuccessMessage"] is string sm)
+{
+    <div class="alert alert-success mb-4">
+        <i class="fa-solid fa-circle-check me-2"></i>@sm
+    </div>
+}
+@if (TempData["ErrorMessage"] is string em)
+{
+    <div class="alert alert-danger mb-4">
+        <i class="fa-solid fa-triangle-exclamation me-2"></i>@em
+    </div>
+}
+
+<form asp-action="Login" asp-controller="Auth" method="post" novalidate>
+    @Html.AntiForgeryToken()
+
+    <div class="mb-3">
+        <label asp-for="UserName" class="form-label"></label>
+        <input asp-for="UserName" class="form-control" placeholder="შეიყვანეთ მომხმარებლის სახელი" autocomplete="username" />
+        <span asp-validation-for="UserName" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Password" class="form-label"></label>
+        <div class="input-group">
+            <input asp-for="Password" type="password" class="form-control"
+                   placeholder="შეიყვანეთ პაროლი" autocomplete="current-password" id="passwordInput" />
+            <button type="button" class="btn btn-outline-secondary btn-toggle" id="togglePassword" aria-label="პაროლის ხილვადობის გადართვა">
+                <i class="fa-solid fa-eye-slash"></i>
+            </button>
+        </div>
+        <span asp-validation-for="Password" class="text-danger"></span>
+    </div>
+
+    <div class="form-check mb-3">
+        <input class="form-check-input" asp-for="RememberMe" />
+        <label class="form-check-label" asp-for="RememberMe">დამახსოვრება</label>
+    </div>
+
+    <div class="mb-3">
+        @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="d-grid gap-3 mt-2">
+        <button type="submit" class="btn btn-primary">
+            <i class="fa-solid fa-right-to-bracket me-2"></i>ავტორიზაცია
+        </button>
+        <a asp-action="Register" asp-controller="Auth" class="btn btn-link text-center">
+            <i class="fa-solid fa-user-plus me-2"></i>რეგისტრაციაზე გადასვლა
+        </a>
+    </div>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        (function () {
+            const input = document.getElementById('passwordInput');
+            const toggleBtn = document.getElementById('togglePassword');
+            toggleBtn.addEventListener('click', function () {
+                const icon = this.querySelector('i');
+                const isPassword = input.type === 'password';
+                input.type = isPassword ? 'text' : 'password';
+                icon.classList.toggle('fa-eye', isPassword);
+                icon.classList.toggle('fa-eye-slash', !isPassword);
+            });
+        })();
+    </script>
+}

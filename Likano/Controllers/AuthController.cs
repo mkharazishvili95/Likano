@@ -1,4 +1,5 @@
-﻿using Likano.Application.Features.Auth.Commands.Register;
+﻿using Likano.Application.Features.Auth.Commands.Login;
+using Likano.Application.Features.Auth.Commands.Register;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -18,5 +19,9 @@ namespace Likano.Controllers
         [AllowAnonymous]
         [HttpPost("register")]
         public Task<RegisterUserResponse> Register([FromBody] RegisterUserCommand request) => _mediator.Send(request);
+
+        [AllowAnonymous]
+        [HttpPost("login")]
+        public Task<LoginUserResponse> Login([FromBody] LoginUserCommand request) => _mediator.Send(request);
     }
 }

@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Likano")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d1b51a60d774be6756ce056a4e3ec611393a0d0b")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1b143c97d2df912a5b94d9340123c4aa0286340e")]
 [assembly: System.Reflection.AssemblyProductAttribute("Likano")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Likano")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
