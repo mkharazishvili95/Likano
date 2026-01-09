@@ -6,7 +6,7 @@ namespace Likano.Domain.Entities
     {
         public int Id { get; set; }
         public string UserName { get; set; }
-        public string Password { get;  }
+        public string Password { get; set; }
         public UserType UserType { get; set; }
         public string? RefreshToken { get; set; }
         public DateTime? RefreshTokenExpiry { get; set; }

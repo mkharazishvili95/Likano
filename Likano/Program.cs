@@ -1,3 +1,4 @@
+using Likano.Application.Features.Auth.Commands.Register;
 using Likano.Application.Features.Category.Queries.Get;
 using Likano.Application.Features.Manage.Product.Commands.ChangeStatus;
 using Likano.Application.Interfaces;
@@ -26,6 +27,9 @@ builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped<IManageRepository, ManageRepository>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+
+builder.Services.AddScoped<RegisterUserValidator>();
 
 var app = builder.Build();
 
