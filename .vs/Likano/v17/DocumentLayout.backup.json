@@ -569,8 +569,7 @@
               "RelativeToolTip": "Likano.Web\\Controllers\\AuthController.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAKkAAAA5AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-09T19:09:36.308Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-09T19:09:36.308Z"
             },
             {
               "$type": "Document",
@@ -604,7 +603,7 @@
               "RelativeDocumentMoniker": "Likano.Web\\Controllers\\ManageController.cs",
               "ToolTip": "D:\\G\\Likano\\Likano.Web\\Controllers\\ManageController.cs",
               "RelativeToolTip": "Likano.Web\\Controllers\\ManageController.cs",
-              "ViewState": "AgIAAB8AAAAAAAAAAAAgwCUAAAAJAAAAAAAAAA==",
+              "ViewState": "AgIAAB8AAAAAAAAAAAAgwCcAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-01-06T16:28:48.968Z",
               "EditorCaption": ""
@@ -907,8 +906,7 @@
               "RelativeToolTip": "Likano.Application\\Features\\Auth\\Commands\\Register\\RegisterUserHandler.cs",
               "ViewState": "AgIAAA0AAAAAAAAAAAAQwBcAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-09T17:15:04.272Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-09T17:15:04.272Z"
             },
             {
               "$type": "Document",
@@ -1064,8 +1062,7 @@
               "RelativeToolTip": "Likano.Infrastructure\\Repositories\\ManageRepository.cs",
               "ViewState": "AgIAAFMAAAAAAAAAAIBZwF4AAABZAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-06T15:50:12.912Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-06T15:50:12.912Z"
             },
             {
               "$type": "Document",
@@ -1569,8 +1566,7 @@
               "RelativeToolTip": "Likano.Application\\Features\\Manage\\Product\\Commands\\ChangeStatus\\ChangeProductStatusHandler.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAyAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-06T16:10:30.672Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-06T16:10:30.672Z"
             },
             {
               "$type": "Document",
