@@ -84,7 +84,7 @@ pnpm-debug.log*
 # Logs
 *.log
 
-# Packages lock files (keep if you use them—uncomment to ignore)
+# Packages lock files (keep if you use themâ€”uncomment to ignore)
 # package-lock.json
 # yarn.lock
 # pnpm-lock.yaml
