@@ -150,3 +150,6 @@ D:\G\Likano\Likano\bin\Debug\net8.0\Microsoft.Extensions.Logging.Abstractions.dl
 D:\G\Likano\Likano\bin\Debug\net8.0\System.Diagnostics.DiagnosticSource.dll
 D:\G\Likano\Likano\bin\Debug\net8.0\MediatR.Extensions.Microsoft.DependencyInjection.dll
 D:\G\Likano\Likano\obj\Debug\net8.0\Likano.sourcelink.json
+D:\G\Likano\Likano\bin\Debug\net8.0\FluentValidation.dll
+D:\G\Likano\Likano\bin\Debug\net8.0\FluentValidation.AspNetCore.dll
+D:\G\Likano\Likano\bin\Debug\net8.0\FluentValidation.DependencyInjectionExtensions.dll
