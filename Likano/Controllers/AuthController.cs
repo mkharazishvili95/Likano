@@ -1,4 +1,5 @@
 ﻿using Likano.Application.Features.Auth.Commands.Login;
+using Likano.Application.Features.Auth.Commands.Logout;
 using Likano.Application.Features.Auth.Commands.Register;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -23,5 +24,9 @@ namespace Likano.Controllers
         [AllowAnonymous]
         [HttpPost("login")]
         public Task<LoginUserResponse> Login([FromBody] LoginUserCommand request) => _mediator.Send(request);
+
+        [Authorize]
+        [HttpPost("logout")]
+        public Task<LogoutResponse> Logout([FromBody] LogoutCommand request) => _mediator.Send(request);
     }
 }

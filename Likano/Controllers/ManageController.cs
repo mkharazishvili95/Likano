@@ -9,12 +9,15 @@ using Likano.Application.Features.Manage.Product.Commands.ChangeCategory;
 using Likano.Application.Features.Manage.Product.Commands.ChangeStatus;
 using Likano.Application.Features.Manage.Product.Queries.Get;
 using Likano.Application.Features.Manage.Product.Queries.GetAll;
+using Likano.Domain.Enums.User;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Likano.Controllers
 {
     [ApiController]
+    [Authorize(Roles = nameof(UserType.Admin))]
     [Route("api/[controller]")]
     public class ManageController : ControllerBase
     {

@@ -27,6 +27,32 @@
   },
   {
     "ContainingType": "Likano.Controllers.AuthController",
+    "Method": "Logout",
+    "RelativePath": "api/Auth/logout",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "Likano.Application.Features.Auth.Commands.Logout.LogoutCommand",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Likano.Application.Features.Auth.Commands.Logout.LogoutResponse",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Likano.Controllers.AuthController",
     "Method": "Register",
     "RelativePath": "api/Auth/register",
     "HttpMethod": "POST",

@@ -1,6 +1,10 @@
 ﻿using Likano.Application.Features.Auth.Commands.Login;
 using Likano.Web.Models.Auth;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.IdentityModel.Tokens.Jwt;
+using System.Net.Http.Headers;
+using System.Security.Claims;
 
 namespace Likano.Web.Controllers
 {
@@ -11,7 +15,7 @@ namespace Likano.Web.Controllers
 
         public AuthController(IHttpClientFactory httpClientFactory, IConfiguration configuration)
         {
-            _httpClient = httpClientFactory.CreateClient();
+            _httpClient = httpClientFactory.CreateClient("API");
             _baseUrl = configuration["ApiSettings:BaseUrl"]!;
         }
 
@@ -105,8 +109,26 @@ namespace Likano.Web.Controllers
                             Response.Cookies.Append("refresh_token", payload.RefreshToken, refreshOptions);
                         }
 
+                        string? role = null;
+                        try
+                        {
+                            var handler = new JwtSecurityTokenHandler();
+                            var jwt = handler.ReadJwtToken(payload.AccessToken);
+                            role = jwt.Claims.FirstOrDefault(c =>
+                                       c.Type == ClaimTypes.Role ||
+                                       c.Type == "role" ||
+                                       c.Type == "roles")?.Value;
+                        }
+                        catch
+                        {
+                        }
+
                         TempData["SuccessMessage"] = "წარმატებით შეხვდით სისტემაში.";
-                        return RedirectToAction("Main", "Manage");
+                        if (string.Equals(role, nameof(Likano.Domain.Enums.User.UserType.Admin), StringComparison.OrdinalIgnoreCase))
+                        {
+                            return RedirectToAction("Main", "Manage");
+                        }
+                        return RedirectToAction("Index", "Home");
                     }
 
                     TempData["ErrorMessage"] = "არასწორი მომხმარებელი ან პაროლი";
@@ -122,6 +144,43 @@ namespace Likano.Web.Controllers
             }
 
             return View(model);
+        }
+
+        [Authorize]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Logout(bool revokeAll = false)
+        {
+            var baseUrl = _baseUrl?.TrimEnd('/') ?? "";
+            var apiUrl = $"{baseUrl}/api/Auth/logout";
+
+            try
+            {
+                var token = Request.Cookies["access_token"];
+                using var req = new HttpRequestMessage(HttpMethod.Post, apiUrl)
+                {
+                    Content = JsonContent.Create(new { revokeAll })
+                };
+                if (!string.IsNullOrWhiteSpace(token))
+                    req.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
+
+                var resp = await _httpClient.SendAsync(req);
+
+                Response.Cookies.Delete("access_token");
+                Response.Cookies.Delete("refresh_token");
+
+                TempData["SuccessMessage"] = resp.IsSuccessStatusCode
+                    ? "გამოსვლა შესრულებულია."
+                    : "მოხდა შეცდომა.";
+            }
+            catch
+            {
+                Response.Cookies.Delete("access_token");
+                Response.Cookies.Delete("refresh_token");
+                TempData["ErrorMessage"] = "Logout ვერ შესრულდა სრულად, ლოკალური გამოსვლა დასრულებულია.";
+            }
+
+            return RedirectToAction("Index", "Home");
         }
     }
 }

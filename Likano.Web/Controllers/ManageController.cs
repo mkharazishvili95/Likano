@@ -14,11 +14,14 @@ using Likano.Application.Features.Manage.Product.Queries.Get;
 using Likano.Application.Features.Manage.Product.Queries.GetAll;
 using Likano.Domain.Entities;
 using Likano.Domain.Enums;
+using Likano.Domain.Enums.User;
 using Likano.Web.Models.Manage;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Likano.Web.Controllers
 {
+    [Authorize(Roles = nameof(UserType.Admin))]
     public class ManageController : Controller
     {
         readonly HttpClient _httpClient;
@@ -26,7 +29,7 @@ namespace Likano.Web.Controllers
 
         public ManageController(IHttpClientFactory httpClientFactory, IConfiguration configuration)
         {
-            _httpClient = httpClientFactory.CreateClient();
+            _httpClient = httpClientFactory.CreateClient("API");
             _baseUrl = configuration["ApiSettings:BaseUrl"]!;
         }
 
@@ -434,6 +437,12 @@ namespace Likano.Web.Controllers
             TempData[(bool)result!.Success ? "SuccessMessage" : "ErrorMessage"] = result.Message;
 
             return intoGrid == true ? RedirectToAction("Brands") : RedirectToAction("BrandDetails", new { id = brandId });
+        }
+
+        [HttpGet]
+        public IActionResult Forbidden()
+        {
+            return View();
         }
     }
 }
