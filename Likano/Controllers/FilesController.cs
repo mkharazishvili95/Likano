@@ -1,4 +1,5 @@
 ﻿using Likano.Application.Features.Manage.File.Commands.Delete;
+using Likano.Application.Features.Manage.File.Commands.Upload;
 using Likano.Application.Features.Manage.File.Queries.Get;
 using Likano.Domain.Enums.User;
 using MediatR;
@@ -24,5 +25,9 @@ namespace Likano.Controllers
         [Authorize(Roles = nameof(UserType.Admin))]
         [HttpDelete("{id}")]
         public async Task<DeleteFileForManageResponse> DeleteForManage(int id) => await _mediator.Send(new DeleteFileForManageCommand { FileId = id });
+
+        [Authorize(Roles = nameof(UserType.Admin))]
+        [HttpPost("upload")]
+        public async Task<UploadFileForManageResponse> UploadForManage([FromBody] UploadFileForManageCommand request) => await _mediator.Send(request);
     }
 }
