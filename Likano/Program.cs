@@ -1,3 +1,4 @@
+using Likano.Application.Configuration;
 using Likano.Application.Features.Auth.Commands.Register;
 using Likano.Application.Features.Category.Queries.Get;
 using Likano.Application.Features.Manage.Product.Commands.ChangeStatus;
@@ -64,6 +65,9 @@ builder.Services.AddAuthentication(options =>
     };
 });
 
+builder.Services.Configure<ImageKitSettings>(
+    builder.Configuration.GetSection("ImageKit")
+);
 
 builder.Services.AddHttpContextAccessor();
 
