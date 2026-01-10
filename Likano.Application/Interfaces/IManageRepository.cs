@@ -1,6 +1,7 @@
 ﻿using Likano.Application.DTOs;
 using Likano.Domain.Entities;
 using Likano.Domain.Enums;
+using Likano.Domain.Enums.File;
 
 namespace Likano.Application.Interfaces
 {
@@ -18,5 +19,11 @@ namespace Likano.Application.Interfaces
         Task<Brand?> GetBrand(int id);
         Task<List<Brand>?> GetAllBrands();
         Task<bool> ChangeActiveStatusBrand(int id);
+        //ფაილებისთვის - ფოტოებისთვის:
+        Task<FileDto> UploadFileAsync(string? fileName, string? fileUrl, FileType? fileType, int? brandId, int? categoryId, int? productId, int? userId);
+        Task<Likano.Domain.Entities.File?> GetFileAsync(int id);
+        Task<bool> DeleteFileAsync(int fileId);
+        Task EditFile(Likano.Domain.Entities.File? file);
+        Task<List<Likano.Domain.Entities.File>?> GetAll();
     }
 }
