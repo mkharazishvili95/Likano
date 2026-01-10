@@ -1,5 +1,8 @@
-﻿using Likano.Application.Features.Manage.File.Queries.Get;
+﻿using Likano.Application.Features.Manage.File.Commands.Delete;
+using Likano.Application.Features.Manage.File.Queries.Get;
+using Likano.Domain.Enums.User;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Likano.Controllers
@@ -14,7 +17,12 @@ namespace Likano.Controllers
             _mediator = mediator;
         }
 
+        [Authorize(Roles = nameof(UserType.Admin))]
         [HttpGet("{id}")]
         public async Task<GetFileForManageResponse> GetForManage(int id) => await _mediator.Send(new GetFileForManageQuery { FileId = id});
+
+        [Authorize(Roles = nameof(UserType.Admin))]
+        [HttpDelete("{id}")]
+        public async Task<DeleteFileForManageResponse> DeleteForManage(int id) => await _mediator.Send(new DeleteFileForManageCommand { FileId = id });
     }
 }
