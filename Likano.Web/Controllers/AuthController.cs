@@ -22,6 +22,24 @@ namespace Likano.Web.Controllers
         [HttpGet]
         public IActionResult Register()
         {
+            var token = Request.Cookies["access_token"];
+            bool isAuthenticated = false;
+
+            if (!string.IsNullOrWhiteSpace(token))
+            {
+                try
+                {
+                    var handler = new JwtSecurityTokenHandler();
+                    var jwt = handler.ReadJwtToken(token);
+                    isAuthenticated = jwt.ValidTo > DateTime.UtcNow;
+                }
+                catch
+                {
+                    isAuthenticated = false;
+                }
+            }
+
+            ViewBag.IsAuthenticated = isAuthenticated;
             return View(new RegisterViewModel());
         }
 
@@ -63,6 +81,33 @@ namespace Likano.Web.Controllers
         [HttpGet]
         public IActionResult Login()
         {
+            var token = Request.Cookies["access_token"];
+            if (!string.IsNullOrWhiteSpace(token))
+            {
+                try
+                {
+                    var handler = new JwtSecurityTokenHandler();
+                    var jwt = handler.ReadJwtToken(token);
+
+                    var exp = jwt.ValidTo;
+                    if (exp > DateTime.UtcNow)
+                    {
+                        var role = jwt.Claims.FirstOrDefault(c =>
+                            c.Type == ClaimTypes.Role ||
+                            c.Type == "role" ||
+                            c.Type == "roles")?.Value;
+
+                        if (string.Equals(role, nameof(Likano.Domain.Enums.User.UserType.Admin), StringComparison.OrdinalIgnoreCase))
+                            return RedirectToAction("Main", "Manage");
+
+                        return RedirectToAction("Index", "Home");
+                    }
+                }
+                catch
+                {
+                }
+            }
+
             return View(new LoginViewModel());
         }
 
@@ -180,8 +225,7 @@ namespace Likano.Web.Controllers
                 TempData["ErrorMessage"] = "Logout ვერ შესრულდა სრულად, ლოკალური გამოსვლა დასრულებულია.";
             }
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction(nameof(Register));
         }
     }
 }
-//

@@ -3,6 +3,22 @@
 @{
     ViewData["Title"] = "რეგისტრაცია";
     Layout = "~/Views/Shared/_RegisterLayout.cshtml";
+    var isAuthenticated = (bool?)ViewBag.IsAuthenticated ?? false;
+}
+
+@if (isAuthenticated)
+{
+    <div class="alert alert-info mb-3 d-flex align-items-center justify-content-between">
+        <div>
+            <i class="fa-solid fa-circle-info me-2"></i>თქვენ უკვე შესული ხართ სისტემაში.
+        </div>
+        <form asp-action="Logout" asp-controller="Auth" method="post" class="m-0">
+            @Html.AntiForgeryToken()
+            <button type="submit" class="btn btn-sm btn-warning">
+                <i class="fa-solid fa-right-from-bracket me-2"></i>გამოსვლა
+            </button>
+        </form>
+    </div>
 }
 
 @if (TempData["SuccessMessage"] is string sm)
@@ -12,52 +28,55 @@
     </div>
 }
 
-<form asp-action="Register" asp-controller="Auth" method="post" novalidate>
-    @Html.AntiForgeryToken()
+@if (!isAuthenticated)
+{
+    <form asp-action="Register" asp-controller="Auth" method="post" novalidate>
+        @Html.AntiForgeryToken()
 
-    <div class="mb-3">
-        <label asp-for="UserName" class="form-label"></label>
-        <input asp-for="UserName" class="form-control" placeholder="შეიყვანეთ მომხმარებლის სახელი" autocomplete="username" />
-        <span asp-validation-for="UserName" class="text-danger"></span>
-    </div>
-
-    <div class="mb-3">
-        <label asp-for="Password" class="form-label"></label>
-        <div class="input-group">
-            <input asp-for="Password" type="password" class="form-control"
-                   placeholder="შეიყვანეთ პაროლი" autocomplete="new-password" id="passwordInput" />
-            <button type="button" class="btn btn-outline-secondary btn-toggle" id="togglePassword" aria-label="პაროლის ხილვადობის გადართვა">
-                <i class="fa-solid fa-eye-slash"></i>
-            </button>
+        <div class="mb-3">
+            <label asp-for="UserName" class="form-label"></label>
+            <input asp-for="UserName" class="form-control" placeholder="შეიყვანეთ მომხმარებლის სახელი" autocomplete="username" />
+            <span asp-validation-for="UserName" class="text-danger"></span>
         </div>
-        <span asp-validation-for="Password" class="text-danger"></span>
-    </div>
 
-    <div class="mb-3">
-        <label asp-for="ConfirmPassword" class="form-label"></label>
-        <div class="input-group">
-            <input asp-for="ConfirmPassword" type="password" class="form-control"
-                   placeholder="გაიმეორეთ პაროლი" autocomplete="new-password" id="confirmPasswordInput" />
-            <button type="button" class="btn btn-outline-secondary btn-toggle" id="toggleConfirmPassword" aria-label="დადასტურებული პაროლის ხილვადობის გადართვა">
-                <i class="fa-solid fa-eye-slash"></i>
-            </button>
+        <div class="mb-3">
+            <label asp-for="Password" class="form-label"></label>
+            <div class="input-group">
+                <input asp-for="Password" type="password" class="form-control"
+                       placeholder="შეიყვანეთ პაროლი" autocomplete="new-password" id="passwordInput" />
+                <button type="button" class="btn btn-outline-secondary btn-toggle" id="togglePassword" aria-label="პაროლის ხილვადობის გადართვა">
+                    <i class="fa-solid fa-eye-slash"></i>
+                </button>
+            </div>
+            <span asp-validation-for="Password" class="text-danger"></span>
         </div>
-        <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
-    </div>
 
-    <div class="mb-3">
-        @Html.ValidationSummary(false, "", new { @class = "text-danger" })
-    </div>
+        <div class="mb-3">
+            <label asp-for="ConfirmPassword" class="form-label"></label>
+            <div class="input-group">
+                <input asp-for="ConfirmPassword" type="password" class="form-control"
+                       placeholder="გაიმეორეთ პაროლი" autocomplete="new-password" id="confirmPasswordInput" />
+                <button type="button" class="btn btn-outline-secondary btn-toggle" id="toggleConfirmPassword" aria-label="დადასტურებული პაროლის ხილვადობის გადართვა">
+                    <i class="fa-solid fa-eye-slash"></i>
+                </button>
+            </div>
+            <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+        </div>
 
-    <div class="d-grid gap-3 mt-2">
-        <button type="submit" class="btn btn-primary">
-            <i class="fa-solid fa-user-plus me-2"></i>რეგისტრაცია
-        </button>
-        <a asp-action="Login" asp-controller="Auth" class="btn btn-link text-center">
-            <i class="fa-solid fa-arrow-left-long me-2"></i>უკან ავტორიზაციაზე
-        </a>
-    </div>
-</form>
+        <div class="mb-3">
+            @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="d-grid gap-3 mt-2">
+            <button type="submit" class="btn btn-primary">
+                <i class="fa-solid fa-user-plus me-2"></i>რეგისტრაცია
+            </button>
+            <a asp-action="Login" asp-controller="Auth" class="btn btn-link text-center">
+                <i class="fa-solid fa-arrow-left-long me-2"></i>უკან ავტორიზაციაზე
+            </a>
+        </div>
+    </form>
+}
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
@@ -74,14 +93,18 @@
         const togglePasswordBtn = document.getElementById('togglePassword');
         const toggleConfirmBtn = document.getElementById('toggleConfirmPassword');
 
-        togglePasswordBtn.addEventListener('click', function () {
-            const icon = this.querySelector('i');
-            toggleInputVisibility(passwordInput, icon);
-        });
+        if (togglePasswordBtn && passwordInput) {
+            togglePasswordBtn.addEventListener('click', function () {
+                const icon = this.querySelector('i');
+                toggleInputVisibility(passwordInput, icon);
+            });
+        }
 
-        toggleConfirmBtn.addEventListener('click', function () {
-            const icon = this.querySelector('i');
-            toggleInputVisibility(confirmPasswordInput, icon);
-        });
+        if (toggleConfirmBtn && confirmPasswordInput) {
+            toggleConfirmBtn.addEventListener('click', function () {
+                const icon = this.querySelector('i');
+                toggleInputVisibility(confirmPasswordInput, icon);
+            });
+        }
     </script>
 }
