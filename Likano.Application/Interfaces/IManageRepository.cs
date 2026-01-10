@@ -19,6 +19,8 @@ namespace Likano.Application.Interfaces
         Task<Brand?> GetBrand(int id);
         Task<List<Brand>?> GetAllBrands();
         Task<bool> ChangeActiveStatusBrand(int id);
+        Task<int> AddCategoryAsync(Category category);
+        Task<bool> UpdateCategoryLogoAsync(int categoryId, string? logoUrl);
         //ფაილებისთვის - ფოტოებისთვის:
         Task<FileDto> UploadFileAsync(string? fileName, string? fileUrl, FileType? fileType, int? brandId, int? categoryId, int? productId, int? userId);
         Task<Likano.Domain.Entities.File?> GetFileAsync(int id);

@@ -178,5 +178,21 @@ namespace Likano.Infrastructure.Repositories
                 .Where(x => !x.IsDeleted)
                 .ToListAsync();
         }
+
+        public async Task<int> AddCategoryAsync(Category category)
+        {
+            _db.Categories.Add(category);
+            await _db.SaveChangesAsync();
+            return category.Id;
+        }
+
+        public async Task<bool> UpdateCategoryLogoAsync(int categoryId, string? logoUrl)
+        {
+            var cat = await _db.Categories.FirstOrDefaultAsync(c => c.Id == categoryId);
+            if (cat == null) return false;
+            cat.Logo = logoUrl;
+            await _db.SaveChangesAsync();
+            return true;
+        }
     }
 }

@@ -35,8 +35,8 @@ namespace Likano.Application.Features.Manage.File.Commands.Upload
         {
             var userIdClaim = _httpContextAccessor.HttpContext?.User?.FindFirst(ClaimTypes.NameIdentifier)?.Value;
 
-            if (string.IsNullOrWhiteSpace(userIdClaim)) 
-                return new UploadFileForManageResponse { Success = false, StatusCode = 401, Message = "User is not authenticated." }; 
+            if (string.IsNullOrWhiteSpace(userIdClaim))
+                return new UploadFileForManageResponse { Success = false, StatusCode = 401, Message = "User is not authenticated." };
 
             var user = await _userRepository.GetByIdAsync(int.Parse(userIdClaim));
 
