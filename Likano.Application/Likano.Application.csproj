@@ -12,6 +12,7 @@
 
 	<ItemGroup>
 	  <Folder Include="Features\Category\Commands\" />
+	  <Folder Include="Features\Manage\File\Commands\" />
 	  <Folder Include="Features\Product\Commands\" />
 	</ItemGroup>
 
