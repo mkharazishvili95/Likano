@@ -22,6 +22,7 @@ namespace Likano.Domain.Entities
         public decimal? Width { get; set; } // სიგანე
         public decimal? Height { get; set; } // სიმაღლე
         public string? Color { get; set; }
-        public string? ProducerCountry { get; set; } // მწარმოებელი ქვეყანა
+        public ProducerCountry? ProducerCountry { get; set; } // მწარმოებელი ქვეყანა
+        public int? ProducerCountryId { get; set; }
     }
 }
