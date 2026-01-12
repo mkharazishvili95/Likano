@@ -235,5 +235,21 @@ namespace Likano.Infrastructure.Repositories
             await _db.SaveChangesAsync();
             return true;
         }
+
+        public async Task<int> AddBrandAsync(Brand brand)
+        {
+            _db.Brands.Add(brand);
+            await _db.SaveChangesAsync();
+            return brand.Id;
+        }
+
+        public async Task<bool> UpdateBrandLogoAsync(int brandId, string? logoUrl)
+        {
+            var brand = await _db.Brands.FirstOrDefaultAsync(b => b.Id == brandId);
+            if (brand == null) return false;
+            brand.Logo = logoUrl;
+            await _db.SaveChangesAsync();
+            return true;
+        }
     }
 }

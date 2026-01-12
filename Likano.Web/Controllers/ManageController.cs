@@ -3,6 +3,7 @@ using Likano.Application.DTOs;
 using Likano.Application.Features.Category.Queries.GetAll;
 using Likano.Application.Features.Manage.Brand.Commands.Change;
 using Likano.Application.Features.Manage.Brand.Commands.ChangeStatus;
+using Likano.Application.Features.Manage.Brand.Commands.Create;
 using Likano.Application.Features.Manage.Brand.Queries.Get;
 using Likano.Application.Features.Manage.Brand.Queries.GetAll;
 using Likano.Application.Features.Manage.Category.Commands.ChangeStatus;
@@ -591,6 +592,62 @@ namespace Likano.Web.Controllers
         public IActionResult Forbidden()
         {
             return View();
+        }
+
+        [HttpGet]
+        public IActionResult CreateBrand()
+        {
+            return View("CreateBrand");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CreateBrand(string name, string? description, IFormFile? logo, CancellationToken ct)
+        {
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                ModelState.AddModelError(nameof(name), "Name is required.");
+                return View("CreateBrand");
+            }
+
+            string? logoFileName = null;
+            string? logoDataUrl = null;
+            if (logo is not null && logo.Length > 0)
+            {
+                logoFileName = logo.FileName;
+                using var ms = new MemoryStream();
+                await logo.CopyToAsync(ms, ct);
+                var base64 = Convert.ToBase64String(ms.ToArray());
+                var mime = logo.ContentType;
+                logoDataUrl = $"data:{mime};base64,{base64}";
+            }
+
+            var payload = new CreateBrandForManageCommand
+            {
+                Name = name,
+                Description = description,
+                LogoFileName = logoFileName,
+                LogoFileContent = logoDataUrl
+            };
+
+            var apiUrl = $"{_baseUrl}/manage/create/brand";
+            var apiResponse = await _httpClient.PostAsJsonAsync(apiUrl, payload, ct);
+
+            if (!apiResponse.IsSuccessStatusCode)
+            {
+                ModelState.AddModelError(string.Empty, $"API error: {(int)apiResponse.StatusCode}");
+                return View("CreateBrand");
+            }
+
+            var resp = await apiResponse.Content.ReadFromJsonAsync<CreateBrandForManageResponse>();
+            if (resp is null || resp.Success == false)
+            {
+                ModelState.AddModelError(string.Empty, resp?.Message ?? "Failed to create brand.");
+                return View("CreateBrand");
+            }
+
+            TempData["SuccessMessage"] = resp.Message ?? "Brand created.";
+            return RedirectToAction(nameof(Brands));
         }
     }
 }
