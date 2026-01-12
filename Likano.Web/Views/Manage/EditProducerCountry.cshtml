@@ -1,0 +1,58 @@
+﻿@model Likano.Application.Features.Manage.ProducerCountry.Queries.Get.GetProducerCountryForManageResponse
+@{
+    ViewData["Title"] = "რედაქტირება - მწარმოებელი ქვეყანა";
+    Layout = "_AdminLayout";
+}
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h3 class="mb-0">მწარმოებელი ქვეყნის რედაქტირება</h3>
+        <a asp-action="ProducerCountries" asp-controller="Manage" class="btn btn-outline-secondary">
+            <i class="fas fa-arrow-left me-1"></i> უკან სიაში
+        </a>
+    </div>
+
+    @if (!ViewData.ModelState.IsValid)
+    {
+        <div class="alert alert-danger">
+            <ul class="mb-0">
+                @foreach (var err in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+                {
+                    <li>@err.ErrorMessage</li>
+                }
+            </ul>
+        </div>
+    }
+
+    @if (TempData["ErrorMessage"] is string em)
+    {
+        <div class="alert alert-danger">@em</div>
+    }
+    @if (TempData["SuccessMessage"] is string sm)
+    {
+        <div class="alert alert-success">@sm</div>
+    }
+
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <form asp-action="EditProducerCountry" asp-controller="Manage" method="post">
+                <input type="hidden" name="id" value="@Model.Id" />
+
+                <div class="mb-3">
+                    <label class="form-label">ქვეყნის დასახელება</label>
+                    <input type="text" name="name" value="@Model.Name" class="form-control" required />
+                    <div class="form-text">დასახელება სავალდებულოა.</div>
+                </div>
+
+                <div class="d-flex gap-2">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-save me-1"></i> შენახვა
+                    </button>
+                    <a asp-action="ProducerCountries" asp-controller="Manage" class="btn btn-outline-secondary">
+                        გაუქმება
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

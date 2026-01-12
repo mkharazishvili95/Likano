@@ -1,4 +1,4 @@
-using Likano.Application.Interfaces;
+﻿using Likano.Application.Interfaces;
 using MediatR;
 
 namespace Likano.Application.Features.Manage.ProducerCountry.Commands.Create
@@ -40,7 +40,7 @@ namespace Likano.Application.Features.Manage.ProducerCountry.Commands.Create
                 Success = true,
                 StatusCode = 201,
                 Id = country.Id,
-                Message = "Producer country created"
+                Message = "მწარმოებელი ქვეყანა წარმატებით შეიქმნა"
             };
         }
     }

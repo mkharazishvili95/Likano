@@ -1,4 +1,4 @@
-using Likano.Application.Interfaces;
+﻿using Likano.Application.Interfaces;
 using MediatR;
 
 namespace Likano.Application.Features.Manage.ProducerCountry.Commands.Edit
@@ -28,7 +28,7 @@ namespace Likano.Application.Features.Manage.ProducerCountry.Commands.Edit
             {
                 Success = ok,
                 StatusCode = ok ? 200 : 404,
-                Message = ok ? "Producer country updated" : "Producer country not found"
+                Message = ok ? "მწარმოებელი ქვეყანა წარმატებით დარედაქტირდა" : "მონაცემები ვერ მოიძებნა"
             };
         }
     }

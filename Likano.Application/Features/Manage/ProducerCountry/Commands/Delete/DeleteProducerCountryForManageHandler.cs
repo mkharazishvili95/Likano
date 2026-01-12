@@ -1,4 +1,4 @@
-using Likano.Application.Interfaces;
+﻿using Likano.Application.Interfaces;
 using MediatR;
 
 namespace Likano.Application.Features.Manage.ProducerCountry.Commands.Delete
@@ -28,7 +28,7 @@ namespace Likano.Application.Features.Manage.ProducerCountry.Commands.Delete
             {
                 Success = ok,
                 StatusCode = ok ? 200 : 404,
-                Message = ok ? "Producer country deleted" : "Producer country not found"
+                Message = ok ? "მწარმოებელი ქვეყანა წარმატებით წაიშალა" : "მოხდა შეცდომა"
             };
         }
     }

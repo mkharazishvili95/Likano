@@ -4,12 +4,12 @@
 }
 
 <div class="text-center mb-5">
-    <p class="text-muted fs-5 mb-0">მართეთ კატეგორიები, ბრენდები და პროდუქცია მარტივად და სწრაფად</p>
+    <p class="text-muted fs-5 mb-0">მართეთ პროდუქცია, კატეგორიები, ბრენდები და მწარმოებელი ქვეყნები</p>
 </div>
 
-<div class="row g-4 justify-content-center">
+<div class="row g-4 justify-content-center align-items-stretch">
     <div class="col-12 col-md-8 col-lg-6 col-xl-5">
-        <a asp-controller="Manage" asp-action="Categories" class="dashboard-link">
+        <a asp-controller="Manage" asp-action="Categories" class="dashboard-link d-block h-100">
             <div class="dashboard-card">
                 <div class="card-icon bg-purple">
                     <i class="fas fa-th-large fa-2x"></i>
@@ -26,7 +26,7 @@
     </div>
 
     <div class="col-12 col-md-8 col-lg-6 col-xl-5">
-        <a asp-controller="Manage" asp-action="Brands" class="dashboard-link">
+        <a asp-controller="Manage" asp-action="Brands" class="dashboard-link d-block h-100">
             <div class="dashboard-card">
                 <div class="card-icon bg-orange">
                     <i class="fas fa-copyright fa-2x"></i>
@@ -43,7 +43,7 @@
     </div>
 
     <div class="col-12 col-md-8 col-lg-6 col-xl-5">
-        <a asp-controller="Manage" asp-action="Products" class="dashboard-link">
+        <a asp-controller="Manage" asp-action="Products" class="dashboard-link d-block h-100">
             <div class="dashboard-card">
                 <div class="card-icon bg-blue">
                     <i class="fas fa-boxes-stacked fa-2x"></i>
@@ -60,7 +60,7 @@
     </div>
 
     <div class="col-12 col-md-8 col-lg-6 col-xl-5">
-        <a href="@Url.Action("ProducerCountries", "Manage")" class="dashboard-link">
+        <a href="@Url.Action("ProducerCountries", "Manage")" class="dashboard-link d-block h-100">
             <div class="dashboard-card">
                 <div class="card-icon bg-green">
                     <i class="fas fa-globe fa-2x"></i>
@@ -95,6 +95,7 @@
         box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
         border: 1px solid rgba(255, 255, 255, 0.6);
         transition: all 0.4s ease;
+        height: 100%;
     }
 
         .dashboard-card:hover {
@@ -192,6 +193,10 @@
         font-size: 1.4rem;
     }
 
+    }
+
+    @@media (min-width: 576px) {
+        .dashboard-card { min-height: 180px; }
     }
 </style>
 

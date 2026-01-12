@@ -21,8 +21,11 @@
 
 <div class="container-fluid py-4">
     <div class="d-flex justify-content-between align-items-center mb-4">
-        <h2 class="h3 mb-0 text-primary fw-bold">მწარმოებელი ქვეყნების მართვა</h2>
-        <div class="d-flex align-items-center">
+        <h2 class="h3 mb-0 text-primary fw-bold">მწარმოებელი ქვეყნები</h2>
+        <div class="d-flex align-items-center gap-2">
+            <a asp-controller="Manage" asp-action="CreateProducerCountry" class="btn btn-success shadow-sm">
+                <i class="fas fa-plus me-2"></i> ახალი ქვეყანა
+            </a>
             @if (TempData["SuccessMessage"] is string sm)
             {
                 <div class="alert alert-success alert-dismissible fade show shadow-sm rounded-4 mb-0" role="alert">
@@ -82,6 +85,7 @@
                         <tr>
                             <th class="ps-4">ID</th>
                             <th>დასახელება</th>
+                            <th class="text-end pe-4">ქმედებები</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -92,13 +96,34 @@
                                 <tr class="align-middle">
                                     <td class="ps-4 fw-medium">@c.Id</td>
                                     <td class="fw-bold text-dark">@c.Name</td>
+                                    <td class="text-end pe-4">
+                                        <a class="btn btn-sm btn-outline-primary me-2"
+                                           href="@Url.Action("EditProducerCountry", "Manage", new { id = c.Id })">
+                                            <i class="fas fa-pen me-1"></i> რედაქტირება
+                                        </a>
+
+                                        <form asp-controller="Manage"
+                                              asp-action="DeleteProducerCountry"
+                                              method="post"
+                                              class="d-inline">
+                                            @Html.AntiForgeryToken()
+                                            <input type="hidden" name="id" value="@c.Id" />
+                                            <input type="hidden" name="intoGrid" value="true" />
+                                            <button type="submit"
+                                                    class="btn btn-sm btn-outline-danger"
+                                                    onclick="return confirm('ნამდვილად გსურთ ქვეყნის წაშლა?')"
+                                                    title="წაშლა">
+                                                <i class="fas fa-trash-alt me-1"></i> წაშლა
+                                            </button>
+                                        </form>
+                                    </td>
                                 </tr>
                             }
                         }
                         else
                         {
                             <tr>
-                                <td colspan="2" class="text-center py-5 text-muted">
+                                <td colspan="3" class="text-center py-5 text-muted">
                                     <i class="fas fa-inbox fa-3x mb-3 opacity-50"></i>
                                     <p class="mb-0">მონაცემები არ მოიძებნა</p>
                                 </td>

@@ -12,6 +12,10 @@ using Likano.Application.Features.Manage.Category.Commands.Create;
 using Likano.Application.Features.Manage.Category.Commands.Edit;
 using Likano.Application.Features.Manage.Category.Queries.Get;
 using Likano.Application.Features.Manage.Category.Queries.GetAll;
+using Likano.Application.Features.Manage.ProducerCountry.Commands.Create;
+using Likano.Application.Features.Manage.ProducerCountry.Commands.Delete;
+using Likano.Application.Features.Manage.ProducerCountry.Commands.Edit;
+using Likano.Application.Features.Manage.ProducerCountry.Queries.Get;
 using Likano.Application.Features.Manage.ProducerCountry.Queries.GetAll;
 using Likano.Application.Features.Manage.Product.Commands.ChangeCategory;
 using Likano.Application.Features.Manage.Product.Commands.ChangeStatus;
@@ -784,6 +788,134 @@ namespace Likano.Web.Controllers
             };
 
             return View("ProducerCountries", vm);
+        }
+
+        [HttpGet]
+        public IActionResult CreateProducerCountry()
+        {
+            return View("CreateProducerCountry");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CreateProducerCountry(string name, CancellationToken ct)
+        {
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                ModelState.AddModelError(nameof(name), "Name is required.");
+                return View("CreateProducerCountry");
+            }
+
+            var payload = new CreateProducerCountryForManageCommand
+            {
+                Name = name.Trim()
+            };
+
+            var apiUrl = $"{_baseUrl}/manage/create/producer-country";
+            var apiResponse = await _httpClient.PostAsJsonAsync(apiUrl, payload, ct);
+
+            if (!apiResponse.IsSuccessStatusCode)
+            {
+                ModelState.AddModelError(string.Empty, $"API error: {(int)apiResponse.StatusCode}");
+                return View("CreateProducerCountry");
+            }
+
+            var resp = await apiResponse.Content.ReadFromJsonAsync<CreateProducerCountryForManageResponse>();
+            if (resp is null || resp.Success == false)
+            {
+                ModelState.AddModelError(string.Empty, resp?.Message ?? "Failed to create producer country.");
+                return View("CreateProducerCountry");
+            }
+
+            TempData["SuccessMessage"] = resp.Message ?? "Producer country created.";
+            return RedirectToAction(nameof(ProducerCountries));
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> EditProducerCountry(int id)
+        {
+            if (id <= 0) return NotFound();
+
+            var apiUrl = $"{_baseUrl}/manage/producer-country/{id}";
+            var apiResponse = await _httpClient.GetAsync(apiUrl);
+            if (!apiResponse.IsSuccessStatusCode)
+                return View("NotFound");
+
+            var country = await apiResponse.Content.ReadFromJsonAsync<GetProducerCountryForManageResponse>();
+            if (country is null || country.Success == false)
+                return View("NotFound", country);
+
+            return View("EditProducerCountry", country);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditProducerCountry(int id, string name, CancellationToken ct)
+        {
+            if (id <= 0)
+            {
+                ModelState.AddModelError(string.Empty, "Invalid country id.");
+                return RedirectToAction(nameof(ProducerCountries));
+            }
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                ModelState.AddModelError(nameof(name), "Name is required.");
+                return await EditProducerCountry(id);
+            }
+
+            var payload = new EditProducerCountryForManageCommand
+            {
+                Id = id,
+                Name = name.Trim()
+            };
+
+            var apiUrl = $"{_baseUrl}/manage/edit/producer-country";
+            var apiResponse = await _httpClient.PostAsJsonAsync(apiUrl, payload, ct);
+
+            if (!apiResponse.IsSuccessStatusCode)
+            {
+                ModelState.AddModelError(string.Empty, $"API error: {(int)apiResponse.StatusCode}");
+                return await EditProducerCountry(id);
+            }
+
+            var resp = await apiResponse.Content.ReadFromJsonAsync<EditProducerCountryForManageResponse>();
+            if (resp is null || resp.Success == false)
+            {
+                ModelState.AddModelError(string.Empty, resp?.Message ?? "Failed to edit producer country.");
+                return await EditProducerCountry(id);
+            }
+
+            TempData["SuccessMessage"] = resp.Message ?? "Producer country updated.";
+            return RedirectToAction(nameof(ProducerCountries));
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteProducerCountry(int id, bool? intoGrid, CancellationToken ct)
+        {
+            if (id <= 0)
+            {
+                TempData["ErrorMessage"] = "არასწორი ქვეყნის ID.";
+                return RedirectToAction(nameof(ProducerCountries));
+            }
+
+            var apiUrl = $"{_baseUrl}/manage/delete/producer-country/{id}";
+
+            var apiResponse = await _httpClient.DeleteAsync(apiUrl, ct);
+
+            if (!apiResponse.IsSuccessStatusCode)
+            {
+                TempData["ErrorMessage"] = $"ქვეყნის წაშლა ვერ მოხერხდა. API {(int)apiResponse.StatusCode}";
+                return RedirectToAction(nameof(ProducerCountries));
+            }
+
+            var resp = await apiResponse.Content
+                .ReadFromJsonAsync<DeleteProducerCountryForManageResponse>(cancellationToken: ct);
+
+            TempData[(resp?.Success ?? false) ? "SuccessMessage" : "ErrorMessage"]
+                = resp?.Message ?? "ქვეყნის წაშლა ვერ მოხერხდა.";
+
+            return RedirectToAction(nameof(ProducerCountries));
         }
 
         [HttpGet]

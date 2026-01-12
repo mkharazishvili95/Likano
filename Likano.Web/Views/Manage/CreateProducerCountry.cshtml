@@ -1,0 +1,57 @@
+﻿@{
+    ViewData["Title"] = "ახალი მწარმოებელი ქვეყანა";
+    Layout = "_ManageLayout";
+}
+
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+<div class="container-fluid py-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="h3 mb-0 text-primary fw-bold">მწარმოებელი ქვეყნის შექმნა</h2>
+        <a asp-controller="Manage" asp-action="ProducerCountries" class="btn btn-outline-secondary shadow-sm">
+            <i class="fas fa-arrow-left me-2"></i> უკან დაბრუნება
+        </a>
+    </div>
+
+    <div class="card shadow border-0 rounded-4 overflow-hidden">
+        <div class="card-header bg-white border-0 py-3">
+            <h5 class="mb-0 text-primary"><i class="fas fa-plus me-2"></i> ახალი ქვეყანა</h5>
+        </div>
+
+        <div class="card-body p-4">
+            @if (!ViewData.ModelState.IsValid)
+            {
+                @Html.ValidationSummary(false, "", new { @class = "alert alert-danger mb-4" })
+            }
+
+            <form asp-action="CreateProducerCountry" asp-controller="Manage" method="post">
+                @Html.AntiForgeryToken()
+
+                <div class="row g-4">
+                    <div class="col-12 col-lg-8">
+                        <div class="mb-3">
+                            <label for="name" class="form-label small fw-medium">
+                                დასახელება <span class="text-danger">*</span>
+                            </label>
+                            <input name="name" id="name" class="form-control" placeholder="მაგ: იტალია" required />
+                            @Html.ValidationMessage("name", new { @class = "text-danger small d-block mt-1" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="d-flex justify-content-end gap-2 mt-4">
+                    <a asp-controller="Manage" asp-action="ProducerCountries" class="btn btn-outline-secondary">
+                        გაუქმება
+                    </a>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-plus-circle me-2"></i> შექმნა
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+}
