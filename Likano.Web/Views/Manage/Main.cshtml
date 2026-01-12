@@ -58,6 +58,23 @@
             </div>
         </a>
     </div>
+
+    <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+        <a href="@Url.Action("ProducerCountries", "Manage")" class="dashboard-link">
+            <div class="dashboard-card">
+                <div class="card-icon bg-green">
+                    <i class="fas fa-globe fa-2x"></i>
+                </div>
+                <div class="card-content">
+                    <h4>მწარმოებელი ქვეყნები</h4>
+                    <p class="mb-0">ნახვა • ფილტრი • </p>
+                </div>
+                <div class="card-arrow">
+                    <i class="fas fa-arrow-right"></i>
+                </div>
+            </div>
+        </a>
+    </div>
 </div>
 
 <style>
@@ -107,6 +124,10 @@
 
     .bg-blue {
         background: linear-gradient(135deg, #43cea2, #185a9d);
+    }
+
+    .bg-green {
+        background: linear-gradient(135deg, #00c6ff, #0072ff);
     }
 
     .card-content h4 {

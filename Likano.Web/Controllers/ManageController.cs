@@ -12,6 +12,7 @@ using Likano.Application.Features.Manage.Category.Commands.Create;
 using Likano.Application.Features.Manage.Category.Commands.Edit;
 using Likano.Application.Features.Manage.Category.Queries.Get;
 using Likano.Application.Features.Manage.Category.Queries.GetAll;
+using Likano.Application.Features.Manage.ProducerCountry.Queries.GetAll;
 using Likano.Application.Features.Manage.Product.Commands.ChangeCategory;
 using Likano.Application.Features.Manage.Product.Commands.ChangeStatus;
 using Likano.Application.Features.Manage.Product.Queries.Get;
@@ -730,6 +731,59 @@ namespace Likano.Web.Controllers
 
             var body = await apiResponse.Content.ReadAsStringAsync(ct);
             return StatusCode((int)apiResponse.StatusCode, string.IsNullOrWhiteSpace(body) ? null : body);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> ProducerCountries([FromQuery] ProducerCountriesFilterVm filter)
+        {
+            var pageNumber = filter.PageNumber <= 0 ? 1 : filter.PageNumber;
+            var pageSize = filter.PageSize <= 0 ? 10 : filter.PageSize;
+
+            var request = new GetAllProducerCountriesForManageQuery
+            {
+                Pagination = new Pagination { PageNumber = pageNumber, PageSize = pageSize },
+                Id = filter.Id,
+                Name = string.IsNullOrWhiteSpace(filter.Name) ? null : filter.Name.Trim()
+            };
+
+            var apiUrl = $"{_baseUrl}/manage/producer-countries";
+            var apiResponse = await _httpClient.PostAsJsonAsync(apiUrl, request);
+
+            GetAllProducerCountriesForManageResponse data;
+            if (!apiResponse.IsSuccessStatusCode)
+            {
+                data = new GetAllProducerCountriesForManageResponse
+                {
+                    Success = false,
+                    StatusCode = (int)apiResponse.StatusCode,
+                    Message = $"API error: {(int)apiResponse.StatusCode}",
+                    TotalCount = 0,
+                    Items = new List<GetAllProducerCountriesForManageItemsResponse>()
+                };
+            }
+            else
+            {
+                data = await apiResponse.Content.ReadFromJsonAsync<GetAllProducerCountriesForManageResponse>()
+                       ?? new GetAllProducerCountriesForManageResponse
+                       {
+                           Success = false,
+                           StatusCode = 500,
+                           Message = "Invalid API response",
+                           TotalCount = 0,
+                           Items = new List<GetAllProducerCountriesForManageItemsResponse>()
+                       };
+            }
+
+            filter.PageNumber = pageNumber;
+            filter.PageSize = pageSize;
+
+            var vm = new ProducerCountriesManageViewModel
+            {
+                Filter = filter,
+                Response = data
+            };
+
+            return View("ProducerCountries", vm);
         }
 
         [HttpGet]
