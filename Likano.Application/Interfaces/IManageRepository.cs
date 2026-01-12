@@ -22,6 +22,7 @@ namespace Likano.Application.Interfaces
         Task<int> AddCategoryAsync(Category category);
         Task<bool> EditCategoryAsync(int categoryId, string name, string? description);
         Task<int> AddBrandAsync(Brand brand);
+        Task<bool> EditBrandAsync(int brandId, string name, string? description);
         //ფაილებისთვის - ფოტოებისთვის:
         Task<FileDto> UploadFileAsync(string? fileName, string? fileUrl, FileType? fileType, int? brandId, int? categoryId, int? productId, int? userId);
         Task<Likano.Domain.Entities.File?> GetFileAsync(int id);

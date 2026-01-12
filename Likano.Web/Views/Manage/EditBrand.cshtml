@@ -1,0 +1,192 @@
+﻿@model Likano.Application.Features.Manage.Brand.Queries.Get.GetBrandForManageResponse
+@{
+    ViewData["Title"] = "ბრენდის რედაქტირება";
+    Layout = "_ManageLayout";
+}
+
+<div class="container-fluid py-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="h3 mb-0 text-primary fw-bold">ბრენდის რედაქტირება</h2>
+        <a asp-controller="Manage" asp-action="BrandDetails" asp-route-id="@Model.Id" class="btn btn-outline-secondary shadow-sm">
+            <i class="fas fa-arrow-left me-2"></i> უკან დაბრუნება
+        </a>
+    </div>
+
+    <div class="card shadow border-0 rounded-4 overflow-hidden">
+        <div class="card-header bg-white border-0 py-3">
+            <h5 class="mb-0 text-primary"><i class="fas fa-edit me-2"></i> რედაქტირება</h5>
+        </div>
+
+        <div class="card-body p-4">
+            @if (!ViewData.ModelState.IsValid)
+            {
+                @Html.ValidationSummary(false, "", new { @class = "alert alert-danger mb-4" })
+            }
+
+            <form asp-action="EditBrand" asp-controller="Manage" method="post" enctype="multipart/form-data" id="editBrandForm">
+                @Html.AntiForgeryToken()
+                <input type="hidden" name="id" value="@Model.Id" />
+
+                <div class="row g-4">
+                    <div class="col-12 col-lg-8">
+                        <div class="mb-3">
+                            <label class="form-label small fw-medium">დასახელება <span class="text-danger">*</span></label>
+                            <input name="name" class="form-control" value="@Model.Name" required placeholder="მაგ: Nike" />
+                            @Html.ValidationMessage("name", new { @class = "text-danger small d-block mt-1" })
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label small fw-medium">აღწერა (სურვილისამებრ)</label>
+                            <textarea name="description" class="form-control" rows="4" placeholder="მოკლე აღწერა...">@Model.Description</textarea>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-lg-4">
+                        <div class="d-flex align-items-center justify-content-between mb-2">
+                            <label class="form-label small fw-medium mb-0">ლოგო</label>
+                            <div class="d-flex align-items-center gap-2">
+                                <button type="button" class="btn btn-sm btn-outline-danger" id="deleteLogoBtn">
+                                    <i class="fas fa-trash-alt"></i> ლოგოს წაშლა
+                                </button>
+                                <button type="button" class="btn btn-sm btn-outline-secondary" id="clearLogoBtn">
+                                    <i class="fas fa-times-circle"></i> გასუფთავება
+                                </button>
+                            </div>
+                        </div>
+
+                        <input id="logoInput" name="logo" type="file" class="form-control" accept="image/*" />
+                        <div class="form-text text-muted mt-2 small">
+                            PNG / JPG / WEBP • რეკომენდირებული 256×256 ან 512×512
+                        </div>
+
+                        <div class="mt-3">
+                            <div class="border rounded-3 p-3 bg-light">
+                                <div id="logoPreviewWrapper" class="text-center">
+                                    <img id="logoPreview"
+                                         src="@(string.IsNullOrWhiteSpace(Model.Logo) ? "" : Model.Logo)"
+                                         alt="ლოგოს პრევიუ"
+                                         class="rounded shadow-sm"
+                                         style="@(string.IsNullOrWhiteSpace(Model.Logo) ? "display:none;" : "display:block;") max-height:180px; object-fit:contain;" />
+                                    <div id="logoPlaceholder" class="text-muted py-4" style="@(string.IsNullOrWhiteSpace(Model.Logo) ? "display:block;" : "display:none;")">
+                                        <i class="fas fa-image fa-2x opacity-50 d-block mb-2"></i>
+                                        <span class="small">ლოგოს პრევიუ გამოჩნდება აქ</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="deleteLogoAlert" class="alert alert-success mt-3 d-none" role="alert">
+                            ლოგო წარმატებით წაიშალა.
+                        </div>
+                        <div id="deleteLogoError" class="alert alert-danger mt-3 d-none" role="alert">
+                            ლოგოს წაშლა ვერ მოხერხდა.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="d-flex justify-content-end gap-2 mt-4">
+                    <a asp-controller="Manage" asp-action="BrandDetails" asp-route-id="@Model.Id" class="btn btn-outline-secondary">
+                        გაუქმება
+                    </a>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-save me-2"></i> შენახვა
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+<script>
+    const brandId = @Model.Id;
+    const deleteLogoBtn = document.getElementById('deleteLogoBtn');
+    const clearLogoBtn = document.getElementById('clearLogoBtn');
+    const deleteLogoAlert = document.getElementById('deleteLogoAlert');
+    const deleteLogoError = document.getElementById('deleteLogoError');
+    const logoInput = document.getElementById('logoInput');
+    const logoPreview = document.getElementById('logoPreview');
+    const logoPlaceholder = document.getElementById('logoPlaceholder');
+
+    let hasExistingLogo = @(string.IsNullOrWhiteSpace(Model.Logo) ? "false" : "true");
+    let hasSelectedFile = false;
+
+    function updateButtonsVisibility() {
+        if (!hasExistingLogo && hasSelectedFile) {
+            clearLogoBtn.style.display = 'inline-block';
+            deleteLogoBtn.style.display = 'none';
+        } else if (hasExistingLogo && !hasSelectedFile) {
+            clearLogoBtn.style.display = 'none';
+            deleteLogoBtn.style.display = 'inline-block';
+        } else {
+            clearLogoBtn.style.display = (!hasExistingLogo ? 'inline-block' : 'none');
+            deleteLogoBtn.style.display = (hasExistingLogo && !hasSelectedFile) ? 'inline-block' : 'none';
+        }
+    }
+
+    function resetPreview() {
+        logoInput.value = '';
+        logoPreview.src = '';
+        logoPreview.style.display = 'none';
+        logoPlaceholder.style.display = 'block';
+        hasSelectedFile = false;
+        updateButtonsVisibility();
+    }
+    function showAlert(el) { el.classList.remove('d-none'); }
+    function hideAlerts() {
+        deleteLogoAlert.classList.add('d-none');
+        deleteLogoError.classList.add('d-none');
+    }
+
+    (function initPreview() {
+        if (hasExistingLogo) {
+            logoPreview.style.display = 'block';
+            logoPlaceholder.style.display = 'none';
+        } else {
+            logoPreview.style.display = 'none';
+            logoPlaceholder.style.display = 'block';
+        }
+        hasSelectedFile = false;
+        updateButtonsVisibility();
+    })();
+
+    logoInput?.addEventListener('change', function () {
+        const file = this.files?.[0];
+        if (!file) { resetPreview(); return; }
+
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            logoPreview.src = e.target.result;
+            logoPreview.style.display = 'block';
+            logoPlaceholder.style.display = 'none';
+            hasSelectedFile = true;
+            updateButtonsVisibility();
+        };
+        reader.readAsDataURL(file);
+    });
+
+    clearLogoBtn?.addEventListener('click', function () {
+        hideAlerts();
+        resetPreview();
+    });
+
+    deleteLogoBtn?.addEventListener('click', async function () {
+        hideAlerts();
+        const ok = window.confirm('ნამდვილად გსურთ ფოტოს წაშლა?');
+        if (!ok) return;
+
+        try {
+            const res = await fetch(`/Manage/DeleteBrandLogo?id=${brandId}`, { method: 'DELETE' });
+            if (res.status === 204 || res.ok) {
+                hasExistingLogo = false;
+                resetPreview();
+                showAlert(deleteLogoAlert);
+            } else {
+                showAlert(deleteLogoError);
+            }
+        } catch {
+            showAlert(deleteLogoError);
+        }
+    });
+</script>
+}

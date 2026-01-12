@@ -4,6 +4,7 @@ using Likano.Application.Features.Category.Queries.GetAll;
 using Likano.Application.Features.Manage.Brand.Commands.Change;
 using Likano.Application.Features.Manage.Brand.Commands.ChangeStatus;
 using Likano.Application.Features.Manage.Brand.Commands.Create;
+using Likano.Application.Features.Manage.Brand.Commands.Edit;
 using Likano.Application.Features.Manage.Brand.Queries.Get;
 using Likano.Application.Features.Manage.Brand.Queries.GetAll;
 using Likano.Application.Features.Manage.Category.Commands.ChangeStatus;
@@ -589,12 +590,6 @@ namespace Likano.Web.Controllers
         }
 
         [HttpGet]
-        public IActionResult Forbidden()
-        {
-            return View();
-        }
-
-        [HttpGet]
         public IActionResult CreateBrand()
         {
             return View("CreateBrand");
@@ -648,6 +643,99 @@ namespace Likano.Web.Controllers
 
             TempData["SuccessMessage"] = resp.Message ?? "Brand created.";
             return RedirectToAction(nameof(Brands));
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> EditBrand(int id)
+        {
+            if (id <= 0) return NotFound();
+
+            var apiUrl = $"{_baseUrl}/manage/brand/{id}";
+            var apiResponse = await _httpClient.GetAsync(apiUrl);
+            if (!apiResponse.IsSuccessStatusCode)
+                return View("NotFoundBrand");
+
+            var brand = await apiResponse.Content.ReadFromJsonAsync<GetBrandForManageResponse>();
+            if (brand is null || brand.Success == false)
+                return View("NotFoundBrand", brand);
+
+            return View("EditBrand", brand);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditBrand(int id, string name, string? description, IFormFile? logo, bool? removeLogo, CancellationToken ct)
+        {
+            if (id <= 0)
+            {
+                ModelState.AddModelError(string.Empty, "Invalid brand id.");
+                return RedirectToAction(nameof(Brands));
+            }
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                ModelState.AddModelError(nameof(name), "Name is required.");
+                return await EditBrand(id);
+            }
+
+            string? logoFileName = null;
+            string? logoDataUrl = null;
+            if (logo is not null && logo.Length > 0)
+            {
+                logoFileName = logo.FileName;
+                using var ms = new MemoryStream();
+                await logo.CopyToAsync(ms, ct);
+                var base64 = Convert.ToBase64String(ms.ToArray());
+                var mime = logo.ContentType;
+                logoDataUrl = $"data:{mime};base64,{base64}";
+            }
+
+            var payload = new EditBrandForManageCommand
+            {
+                Id = id,
+                Name = name,
+                Description = description,
+                LogoFileName = logoFileName,
+                LogoFileContent = logoDataUrl,
+                RemoveLogo = removeLogo ?? false
+            };
+
+            var apiUrl = $"{_baseUrl}/manage/edit/brand";
+            var apiResponse = await _httpClient.PostAsJsonAsync(apiUrl, payload, ct);
+
+            if (!apiResponse.IsSuccessStatusCode)
+            {
+                ModelState.AddModelError(string.Empty, $"API error: {(int)apiResponse.StatusCode}");
+                return await EditBrand(id);
+            }
+
+            var resp = await apiResponse.Content.ReadFromJsonAsync<EditBrandForManageResponse>();
+            if (resp is null || resp.Success == false)
+            {
+                ModelState.AddModelError(string.Empty, resp?.Message ?? "Failed to edit brand.");
+                return await EditBrand(id);
+            }
+
+            TempData["SuccessMessage"] = resp.Message ?? "Brand updated.";
+            return RedirectToAction(nameof(BrandDetails), new { id });
+        }
+
+        [HttpDelete]
+        public async Task<IActionResult> DeleteBrandLogo(int id, CancellationToken ct)
+        {
+            var apiUrl = $"{_baseUrl}/files/image?brandId={id}";
+            var apiResponse = await _httpClient.DeleteAsync(apiUrl, ct);
+
+            if (apiResponse.StatusCode == System.Net.HttpStatusCode.NoContent)
+                return NoContent();
+
+            var body = await apiResponse.Content.ReadAsStringAsync(ct);
+            return StatusCode((int)apiResponse.StatusCode, string.IsNullOrWhiteSpace(body) ? null : body);
+        }
+
+        [HttpGet]
+        public IActionResult Forbidden()
+        {
+            return View();
         }
     }
 }

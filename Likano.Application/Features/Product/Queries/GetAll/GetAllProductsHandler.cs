@@ -5,7 +5,7 @@ namespace Likano.Application.Features.Product.Queries.GetAll
 {
     public class GetAllProductsHandler : IRequestHandler<GetAllProductsQuery, GetAllProductsResponse>
     {
-        private readonly IProductRepository _repository;
+        readonly IProductRepository _repository;
 
         public GetAllProductsHandler(IProductRepository repository)
         {

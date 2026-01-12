@@ -6,7 +6,7 @@ namespace Likano.Application.Features.Manage.File.Commands.DeleteImage
 {
     public class DeleteImageForManageHandler : IRequestHandler<DeleteImageForManageCommand, DeleteImageForManageResponse>
     {
-        private readonly IManageRepository _manageRepository;
+        readonly IManageRepository _manageRepository;
 
         public DeleteImageForManageHandler(IManageRepository manageRepository)
         {

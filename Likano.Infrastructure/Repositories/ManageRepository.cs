@@ -251,5 +251,16 @@ namespace Likano.Infrastructure.Repositories
             await _db.SaveChangesAsync();
             return true;
         }
+
+        public async Task<bool> EditBrandAsync(int brandId, string name, string? description)
+        {
+            var brand = await _db.Brands.FirstOrDefaultAsync(b => b.Id == brandId);
+            if (brand is null) return false;
+
+            brand.Name = name;
+            brand.Description = description;
+            await _db.SaveChangesAsync();
+            return true;
+        }
     }
 }
