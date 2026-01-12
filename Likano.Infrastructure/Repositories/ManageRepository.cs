@@ -17,9 +17,9 @@ namespace Likano.Infrastructure.Repositories
         }
 
         public async Task<Product?> GetProduct(int id) => await _db.Products.Include(x => x.Category).Include(x => x.Brand).FirstOrDefaultAsync(x => x.Id == id);
-
         public async Task<List<Product>?> GetAllProducts() => await _db.Products.ToListAsync();
         public async Task<List<Category>?> GetAllCategories() => await _db.Categories.ToListAsync();
+
         //Product Status Change:
         public async Task<bool> ChangeStatus(int id, ProductStatus status)
         {
@@ -162,6 +162,7 @@ namespace Likano.Infrastructure.Repositories
             file.DeleteDate = DateTime.UtcNow.AddHours(4);
 
             _db.Files.Update(file);
+            await _db.SaveChangesAsync();
             return true;
         }
 
@@ -172,7 +173,7 @@ namespace Likano.Infrastructure.Repositories
             await _db.SaveChangesAsync();
         }
 
-        public async Task<List<Likano.Domain.Entities.File>?> GetAll()
+        public async Task<List<Likano.Domain.Entities.File>?> GetAllFiles()
         {
             return await _db.Files
                 .Where(x => !x.IsDeleted)
@@ -191,6 +192,46 @@ namespace Likano.Infrastructure.Repositories
             var cat = await _db.Categories.FirstOrDefaultAsync(c => c.Id == categoryId);
             if (cat == null) return false;
             cat.Logo = logoUrl;
+            await _db.SaveChangesAsync();
+            return true;
+        }
+
+        public async Task<bool> EditCategoryAsync(int categoryId, string name, string? description)
+        {
+            var cat = await _db.Categories.FirstOrDefaultAsync(c => c.Id == categoryId);
+            if (cat is null) return false;
+
+            cat.Name = name;
+            cat.Description = description;
+            await _db.SaveChangesAsync();
+            return true;
+        }
+
+        public async Task<bool> DeleteImage(int? categoryId, int? brandId, int? productId)
+        {
+            if (categoryId.HasValue)
+            {
+                var category = await _db.Categories.FindAsync(categoryId.Value);
+                if (category == null) return false;
+                category.Logo = null;
+            }
+            else if (brandId.HasValue)
+            {
+                var brand = await _db.Brands.FindAsync(brandId.Value);
+                if (brand == null) return false;
+                brand.Logo = null;
+            }
+            else if (productId.HasValue)
+            {
+                var product = await _db.Products.FindAsync(productId.Value);
+                if (product == null) return false;
+                product.ImageUrl = null;
+            }
+            else
+            {
+                return false;
+            }
+
             await _db.SaveChangesAsync();
             return true;
         }

@@ -4,6 +4,7 @@ using Likano.Application.Features.Manage.Brand.Queries.Get;
 using Likano.Application.Features.Manage.Brand.Queries.GetAll;
 using Likano.Application.Features.Manage.Category.Commands.ChangeStatus;
 using Likano.Application.Features.Manage.Category.Commands.Create;
+using Likano.Application.Features.Manage.Category.Commands.Edit;
 using Likano.Application.Features.Manage.Category.Queries.Get;
 using Likano.Application.Features.Manage.Category.Queries.GetAll;
 using Likano.Application.Features.Manage.Product.Commands.ChangeCategory;
@@ -75,5 +76,9 @@ namespace Likano.Controllers
         [HttpPost("create/category")]
         public async Task<CreateCategoryForManageResponse> CreateCategory([FromBody] CreateCategoryForManageCommand request)
             => await _mediator.Send(request);
+
+        [HttpPost("edit/category")]
+        public async Task<EditCategoryForManageResponse> EditCategory([FromBody] EditCategoryForManageCommand request)
+        => await _mediator.Send(request);
     }
 }

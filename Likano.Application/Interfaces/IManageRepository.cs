@@ -21,11 +21,13 @@ namespace Likano.Application.Interfaces
         Task<bool> ChangeActiveStatusBrand(int id);
         Task<int> AddCategoryAsync(Category category);
         Task<bool> UpdateCategoryLogoAsync(int categoryId, string? logoUrl);
+        Task<bool> EditCategoryAsync(int categoryId, string name, string? description);
         //ფაილებისთვის - ფოტოებისთვის:
         Task<FileDto> UploadFileAsync(string? fileName, string? fileUrl, FileType? fileType, int? brandId, int? categoryId, int? productId, int? userId);
         Task<Likano.Domain.Entities.File?> GetFileAsync(int id);
         Task<bool> DeleteFileAsync(int fileId);
         Task EditFile(Likano.Domain.Entities.File? file);
-        Task<List<Likano.Domain.Entities.File>?> GetAll();
+        Task<List<Likano.Domain.Entities.File>?> GetAllFiles();
+        Task<bool> DeleteImage(int? categoryId, int? brandId, int? productId);
     }
 }

@@ -132,7 +132,14 @@
                                             @(c.IsActive == true ? "აქტიური" : "არაქტიური")
                                         </span>
                                     </td>
-                                    <td class="text-end pe-4">
+                                    <td class="text-end">
+
+                                        <a asp-controller="Manage"
+                                           asp-action="EditCategory"
+                                           asp-route-id="@c.Id"
+                                           class="btn btn-sm btn-primary me-2">
+                                            <i class="fas fa-edit me-1"></i> რედაქტირება
+                                        </a>
 
                                         <form asp-action="ChangeCategoryStatus" asp-controller="Manage" method="post" class="d-inline">
                                             <input type="hidden" name="categoryId" value="@c.Id" />

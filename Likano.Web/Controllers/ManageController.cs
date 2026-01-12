@@ -7,6 +7,7 @@ using Likano.Application.Features.Manage.Brand.Queries.Get;
 using Likano.Application.Features.Manage.Brand.Queries.GetAll;
 using Likano.Application.Features.Manage.Category.Commands.ChangeStatus;
 using Likano.Application.Features.Manage.Category.Commands.Create;
+using Likano.Application.Features.Manage.Category.Commands.Edit;
 using Likano.Application.Features.Manage.Category.Queries.Get;
 using Likano.Application.Features.Manage.Category.Queries.GetAll;
 using Likano.Application.Features.Manage.Product.Commands.ChangeCategory;
@@ -496,6 +497,94 @@ namespace Likano.Web.Controllers
 
             TempData["SuccessMessage"] = resp.Message ?? "Category created.";
             return RedirectToAction(nameof(Categories));
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> EditCategory(int id)
+        {
+            if (id <= 0) return NotFound();
+
+            var apiUrl = $"{_baseUrl}/manage/category/{id}";
+            var apiResponse = await _httpClient.GetAsync(apiUrl);
+            if (!apiResponse.IsSuccessStatusCode)
+                return View("NotFoundCategory");
+
+            var category = await apiResponse.Content.ReadFromJsonAsync<GetCategoryForManageResponse>();
+            if (category is null || category.Success == false)
+                return View("NotFoundCategory", category);
+
+            return View("EditCategory", category);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditCategory(int id, string name, string? description, IFormFile? logo, bool? removeLogo, CancellationToken ct)
+        {
+            if (id <= 0)
+            {
+                ModelState.AddModelError(string.Empty, "Invalid category id.");
+                return RedirectToAction(nameof(Categories));
+            }
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                ModelState.AddModelError(nameof(name), "Name is required.");
+                return await EditCategory(id);
+            }
+
+            string? logoFileName = null;
+            string? logoDataUrl = null;
+
+            if (logo is not null && logo.Length > 0)
+            {
+                logoFileName = logo.FileName;
+                using var ms = new MemoryStream();
+                await logo.CopyToAsync(ms, ct);
+                var base64 = Convert.ToBase64String(ms.ToArray());
+                var mime = logo.ContentType;
+                logoDataUrl = $"data:{mime};base64,{base64}";
+            }
+
+            var payload = new EditCategoryForManageCommand
+            {
+                Id = id,
+                Name = name,
+                Description = description,
+                LogoFileName = logoFileName,
+                LogoFileContent = logoDataUrl,
+                RemoveLogo = removeLogo ?? false
+            };
+
+            var apiUrl = $"{_baseUrl}/manage/edit/category";
+            var apiResponse = await _httpClient.PostAsJsonAsync(apiUrl, payload, ct);
+
+            if (!apiResponse.IsSuccessStatusCode)
+            {
+                ModelState.AddModelError(string.Empty, $"API error: {(int)apiResponse.StatusCode}");
+                return await EditCategory(id);
+            }
+
+            var resp = await apiResponse.Content.ReadFromJsonAsync<EditCategoryForManageResponse>();
+            if (resp is null || resp.Success == false)
+            {
+                ModelState.AddModelError(string.Empty, resp?.Message ?? "Failed to edit category.");
+                return await EditCategory(id);
+            }
+
+            TempData["SuccessMessage"] = resp.Message ?? "Category updated.";
+            return RedirectToAction(nameof(CategoryDetails), new { id });
+        }
+
+        [HttpDelete]
+        public async Task<IActionResult> DeleteCategoryLogo(int id, CancellationToken ct)
+        {
+            var apiUrl = $"{_baseUrl}/files/image?categoryId={id}";
+            var apiResponse = await _httpClient.DeleteAsync(apiUrl, ct);
+
+            if (apiResponse.StatusCode == System.Net.HttpStatusCode.NoContent)
+                return NoContent();
+
+            var body = await apiResponse.Content.ReadAsStringAsync(ct);
+            return StatusCode((int)apiResponse.StatusCode, string.IsNullOrWhiteSpace(body) ? null : body);
         }
 
         [HttpGet]
