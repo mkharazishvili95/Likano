@@ -9,6 +9,11 @@ using Likano.Application.Features.Manage.Category.Commands.Create;
 using Likano.Application.Features.Manage.Category.Commands.Edit;
 using Likano.Application.Features.Manage.Category.Queries.Get;
 using Likano.Application.Features.Manage.Category.Queries.GetAll;
+using Likano.Application.Features.Manage.ProducerCountry.Commands.Create;
+using Likano.Application.Features.Manage.ProducerCountry.Commands.Delete;
+using Likano.Application.Features.Manage.ProducerCountry.Commands.Edit;
+using Likano.Application.Features.Manage.ProducerCountry.Queries.Get;
+using Likano.Application.Features.Manage.ProducerCountry.Queries.GetAll;
 using Likano.Application.Features.Manage.Product.Commands.ChangeCategory;
 using Likano.Application.Features.Manage.Product.Commands.ChangeStatus;
 using Likano.Application.Features.Manage.Product.Queries.Get;
@@ -90,5 +95,25 @@ namespace Likano.Controllers
         [HttpPost("edit/brand")]
         public async Task<EditBrandForManageResponse> EditBrand([FromBody] EditBrandForManageCommand request)
             => await _mediator.Send(request);
+
+        [HttpGet("producer-country/{id}")]
+        public async Task<GetProducerCountryForManageResponse> GetProducerCountry(int id)
+            => await _mediator.Send(new GetProducerCountryForManageQuery { Id = id });
+
+        [HttpPost("producer-countries")]
+        public async Task<GetAllProducerCountriesForManageResponse> GetAllProducerCountries([FromBody] GetAllProducerCountriesForManageQuery query)
+            => await _mediator.Send(query);
+
+        [HttpPost("create/producer-country")]
+        public async Task<CreateProducerCountryForManageResponse> CreateProducerCountry([FromBody] CreateProducerCountryForManageCommand command)
+            => await _mediator.Send(command);
+
+        [HttpPost("edit/producer-country")]
+        public async Task<EditProducerCountryForManageResponse> EditProducerCountry([FromBody] EditProducerCountryForManageCommand command)
+            => await _mediator.Send(command);
+
+        [HttpDelete("delete/producer-country/{id}")]
+        public async Task<DeleteProducerCountryForManageResponse> DeleteProducerCountry(int id)
+            => await _mediator.Send(new DeleteProducerCountryForManageCommand { Id = id });
     }
 }

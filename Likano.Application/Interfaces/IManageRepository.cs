@@ -23,6 +23,11 @@ namespace Likano.Application.Interfaces
         Task<bool> EditCategoryAsync(int categoryId, string name, string? description);
         Task<int> AddBrandAsync(Brand brand);
         Task<bool> EditBrandAsync(int brandId, string name, string? description);
+        Task<bool> AddProducerCountry(ProducerCountry country);
+        Task<bool> EditProducerCountry(int countryId, string name);
+        Task<ProducerCountry?> GetProducerCountry(int id);
+        Task<List<ProducerCountry>?> GetAllProducerCountries();
+        Task<bool> DeleteProducerCountry(int countryId);
         //ფაილებისთვის - ფოტოებისთვის:
         Task<FileDto> UploadFileAsync(string? fileName, string? fileUrl, FileType? fileType, int? brandId, int? categoryId, int? productId, int? userId);
         Task<Likano.Domain.Entities.File?> GetFileAsync(int id);

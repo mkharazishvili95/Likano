@@ -262,5 +262,39 @@ namespace Likano.Infrastructure.Repositories
             await _db.SaveChangesAsync();
             return true;
         }
+
+        public async Task<ProducerCountry?> GetProducerCountry(int id) => await _db.ProducerCountries.FirstOrDefaultAsync(c => c.Id == id);
+        public async Task<List<ProducerCountry>?> GetAllProducerCountries() => await _db.ProducerCountries.ToListAsync();
+        public async Task<bool> AddProducerCountry(ProducerCountry country)
+        {
+            if(country == null)
+                return false;
+
+            await _db.ProducerCountries.AddAsync(country);
+            await _db.SaveChangesAsync();
+            return true;
+        }
+
+        public async Task<bool> EditProducerCountry(int countryId, string name)
+        {
+           var country = await _db.ProducerCountries.FirstOrDefaultAsync(c => c.Id == countryId);
+              if (country == null)
+                 return false;
+    
+                country.Name = name;
+                await _db.SaveChangesAsync();
+                return true;
+        }
+
+        public async Task<bool> DeleteProducerCountry(int countryId)
+        {
+            var country = await _db.ProducerCountries.FirstOrDefaultAsync(c => c.Id == countryId);
+            if (country == null)
+                return false;
+
+            _db.ProducerCountries.Remove(country);
+            await _db.SaveChangesAsync();
+            return true;
+        }
     }
 }
