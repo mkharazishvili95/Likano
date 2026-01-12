@@ -24,8 +24,8 @@ namespace Likano.Application.Features.Manage.ProducerCountry.Commands.Create
             }
 
             var country = new Likano.Domain.Entities.ProducerCountry { Name = request.Name.Trim() };
-            var ok = await _repository.AddProducerCountry(country);
-            if (!ok)
+            var result = await _repository.AddProducerCountry(country);
+            if (!result)
             {
                 return new CreateProducerCountryForManageResponse
                 {

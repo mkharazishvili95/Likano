@@ -23,12 +23,12 @@ namespace Likano.Application.Features.Manage.ProducerCountry.Commands.Edit
                 };
             }
 
-            var ok = await _repository.EditProducerCountry(request.Id, request.Name.Trim());
+            var result = await _repository.EditProducerCountry(request.Id, request.Name.Trim());
             return new EditProducerCountryForManageResponse
             {
-                Success = ok,
-                StatusCode = ok ? 200 : 404,
-                Message = ok ? "მწარმოებელი ქვეყანა წარმატებით დარედაქტირდა" : "მონაცემები ვერ მოიძებნა"
+                Success = result,
+                StatusCode = result ? 200 : 404,
+                Message = result ? "მწარმოებელი ქვეყანა წარმატებით დარედაქტირდა" : "მონაცემები ვერ მოიძებნა"
             };
         }
     }

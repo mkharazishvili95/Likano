@@ -23,12 +23,19 @@ namespace Likano.Application.Features.Manage.ProducerCountry.Commands.Delete
                 };
             }
 
-            var ok = await _repository.DeleteProducerCountry(request.Id);
-            return new DeleteProducerCountryForManageResponse
-            {
-                Success = ok,
-                StatusCode = ok ? 200 : 404,
-                Message = ok ? "მწარმოებელი ქვეყანა წარმატებით წაიშალა" : "მოხდა შეცდომა"
+            var producerCountry = await _repository.GetProducerCountry(request.Id);
+
+            if(producerCountry == null)
+                return new DeleteProducerCountryForManageResponse { Message = "მწარმოებელი ქვეყანა არ მოიძებნა", Success = false, StatusCode = 404 };
+
+            var deleted = await _repository.DeleteProducerCountry(request.Id);
+
+            
+            return new DeleteProducerCountryForManageResponse 
+            { 
+                Success = deleted, 
+                StatusCode = deleted ? 200 : 500, 
+                Message = deleted ? "მწარმოებელი ქვეყანა წარმატებით წაიშალა" : "მოხდა შეცდომა" 
             };
         }
     }

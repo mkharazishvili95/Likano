@@ -288,13 +288,37 @@ namespace Likano.Infrastructure.Repositories
 
         public async Task<bool> DeleteProducerCountry(int countryId)
         {
-            var country = await _db.ProducerCountries.FirstOrDefaultAsync(c => c.Id == countryId);
+            var country = await _db.ProducerCountries
+                .FirstOrDefaultAsync(c => c.Id == countryId);
+
             if (country == null)
                 return false;
 
-            _db.ProducerCountries.Remove(country);
-            await _db.SaveChangesAsync();
-            return true;
+            await using var transaction = await _db.Database.BeginTransactionAsync();
+
+            try
+            {
+                var products = await _db.Products
+                    .Where(p => p.ProducerCountryId == countryId)
+                    .ToListAsync();
+
+                foreach (var product in products)
+                {
+                    product.ProducerCountryId = null;
+                }
+
+                _db.ProducerCountries.Remove(country);
+
+                await _db.SaveChangesAsync();
+                await transaction.CommitAsync();
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                await transaction.RollbackAsync();
+                return false;
+            }
         }
     }
 }
