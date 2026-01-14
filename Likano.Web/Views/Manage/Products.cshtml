@@ -17,6 +17,17 @@
         PriceFrom = Model.Filter.PriceFrom,
         PriceTo = Model.Filter.PriceTo,
         CategoryId = Model.Filter.CategoryId,
+        ImageUrl = Model.Filter.ImageUrl,
+        Material = Model.Filter.Material,
+        LengthFrom = Model.Filter.LengthFrom,
+        LengthTo = Model.Filter.LengthTo,
+        WidthFrom = Model.Filter.WidthFrom,
+        WidthTo = Model.Filter.WidthTo,
+        HeightFrom = Model.Filter.HeightFrom,
+        HeightTo = Model.Filter.HeightTo,
+        Color = Model.Filter.Color,
+        ProducerCountryId = Model.Filter.ProducerCountryId,
+        BrandId = Model.Filter.BrandId,
         CreateDateFrom = Model.Filter.CreateDateFrom?.ToString("yyyy-MM-dd"),
         CreateDateTo = Model.Filter.CreateDateTo?.ToString("yyyy-MM-dd"),
         UpdateDateFrom = Model.Filter.UpdateDateFrom?.ToString("yyyy-MM-dd"),
@@ -116,6 +127,14 @@
                         new { @class = "form-select form-select-sm" })
                 </div>
 
+                <div class="col-12 col-md-2">
+                    <label class="form-label small fw-medium">ბრენდი</label>
+                    @Html.DropDownList("BrandId",
+                        new SelectList(Model.Brands, "Id", "Name", Model.Filter.BrandId),
+                        "ყველა ბრენდი",
+                        new { @class = "form-select form-select-sm" })
+                </div>
+
                 <div class="col-12 mt-2"></div>
 
                 <div class="col-6 col-md-2">
@@ -137,6 +156,65 @@
                     <label class="form-label small fw-medium">განახლება (მდე)</label>
                     <input type="date" name="UpdateDateTo" value="@Model.Filter.UpdateDateTo?.ToString("yyyy-MM-dd")" 
                            class="form-control form-control-sm" />
+                </div>
+
+                <div class="col-12"></div>
+
+                <div class="col-6 col-md-2">
+                    <label class="form-label small fw-medium">მასალა</label>
+                    <input type="text" name="Material" value="@Model.Filter.Material"
+                           class="form-control form-control-sm" placeholder="მასალა" />
+                </div>
+
+                <div class="col-6 col-md-2">
+                    <label class="form-label small fw-medium">სიგრძე (დან)</label>
+                    <input type="number" step="0.01" name="LengthFrom"
+                           value="@(Model.Filter.LengthFrom?.ToString(System.Globalization.CultureInfo.InvariantCulture))"
+                           class="form-control form-control-sm no-spinner" />
+                </div>
+                <div class="col-6 col-md-2">
+                    <label class="form-label small fw-medium">სიგრძე (მდე)</label>
+                    <input type="number" step="0.01" name="LengthTo"
+                           value="@(Model.Filter.LengthTo?.ToString(System.Globalization.CultureInfo.InvariantCulture))"
+                           class="form-control form-control-sm no-spinner" />
+                </div>
+
+                <div class="col-6 col-md-2">
+                    <label class="form-label small fw-medium">სიგანე (დან)</label>
+                    <input type="number" step="0.01" name="WidthFrom"
+                           value="@(Model.Filter.WidthFrom?.ToString(System.Globalization.CultureInfo.InvariantCulture))"
+                           class="form-control form-control-sm no-spinner" />
+                </div>
+                <div class="col-6 col-md-2">
+                    <label class="form-label small fw-medium">სიგანე (მდე)</label>
+                    <input type="number" step="0.01" name="WidthTo"
+                           value="@(Model.Filter.WidthTo?.ToString(System.Globalization.CultureInfo.InvariantCulture))"
+                           class="form-control form-control-sm no-spinner" />
+                </div>
+
+                <div class="col-6 col-md-2">
+                    <label class="form-label small fw-medium">სიმაღლე (დან)</label>
+                    <input type="number" step="0.01" name="HeightFrom"
+                           value="@(Model.Filter.HeightFrom?.ToString(System.Globalization.CultureInfo.InvariantCulture))"
+                           class="form-control form-control-sm no-spinner" />
+                </div>
+                <div class="col-6 col-md-2">
+                    <label class="form-label small fw-medium">სიმაღლე (მდე)</label>
+                    <input type="number" step="0.01" name="HeightTo"
+                           value="@(Model.Filter.HeightTo?.ToString(System.Globalization.CultureInfo.InvariantCulture))"
+                           class="form-control form-control-sm no-spinner" />
+                </div>
+
+                <div class="col-6 col-md-2">
+                    <label class="form-label small fw-medium">ფერი</label>
+                    <input type="text" name="Color" value="@Model.Filter.Color"
+                           class="form-control form-control-sm" placeholder="ფერი" />
+                </div>
+
+                <div class="col-6 col-md-2">
+                    <label class="form-label small fw-medium">მწარმოებელი ქვეყანა (ID)</label>
+                    <input type="number" name="ProducerCountryId" value="@Model.Filter.ProducerCountryId"
+                           class="form-control form-control-sm no-spinner" placeholder="ID" />
                 </div>
 
                 <div class="col-12 col-md-2 d-flex align-items-end">
@@ -165,6 +243,13 @@
                             <th>აღწერა</th>
                             <th>ფასი</th>
                             <th>კატეგორია</th>
+                            <th>ბრენდი</th>
+                            <th>მასალა</th>
+                            <th>სიგრძე</th>
+                            <th>სიგანე</th>
+                            <th>სიმაღლე</th>
+                            <th>ფერი</th>
+                            <th>ქვეყანა(ID)</th>
                             <th>სტატუსი</th>
                             <th>ხელმისაწვდომია</th>
                             <th>შექმნა</th>
@@ -178,6 +263,7 @@
                             foreach (var p in Model.Response.Items)
                             {
                                 var categoryName = Model.Categories.FirstOrDefault(c => c.Id == p.CategoryId)?.Name ?? "-";
+                                var brandName = Model.Brands.FirstOrDefault(b => b.Id == p.BrandId)?.Name ?? "-";
                                 <tr class="align-middle">
                                     <td class="ps-4 fw-medium">@p.Id</td>
                                     <td>
@@ -206,6 +292,13 @@
                                     <td class="text-muted small" style="max-width:200px;">@p.Description</td>
                                     <td class="fw-bold text-primary">@p.Price?.ToString("0.## ₾")</td>
                                     <td>@categoryName</td>
+                                    <td>@brandName</td>
+                                    <td>@p.Material</td>
+                                    <td>@p.Length</td>
+                                    <td>@p.Width</td>
+                                    <td>@p.Height</td>
+                                    <td>@p.Color</td>
+                                    <td>@p.ProducerCountryId</td>
                                     <td>
                                         <span class="badge rounded-pill @(p.Status == ProductStatus.Active ? "bg-success" : p.Status == ProductStatus.Hiden ? "bg-warning" : "bg-danger")">
                                             @(p.Status switch
@@ -303,7 +396,7 @@
                         else
                         {
                             <tr>
-                                <td colspan="11" class="text-center py-5 text-muted">
+                                <td colspan="18" class="text-center py-5 text-muted">
                                     <i class="fas fa-inbox fa-3x mb-3 opacity-50"></i>
                                     <p class="mb-0">პროდუქტები არ მოიძებნა</p>
                                 </td>

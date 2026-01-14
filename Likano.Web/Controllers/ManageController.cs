@@ -69,7 +69,17 @@ namespace Likano.Web.Controllers
                 CreateDateFrom = filter.CreateDateFrom,
                 CreateDateTo = filter.CreateDateTo,
                 UpdateDateFrom = filter.UpdateDateFrom,
-                UpdateDateTo = filter.UpdateDateTo
+                UpdateDateTo = filter.UpdateDateTo,
+                BrandId = filter.BrandId,
+                Material = string.IsNullOrWhiteSpace(filter.Material) ? null : filter.Material.Trim(),
+                LengthFrom = filter.LengthFrom,
+                LengthTo = filter.LengthTo,
+                WidthFrom = filter.WidthFrom,
+                WidthTo = filter.WidthTo,
+                HeightFrom = filter.HeightFrom,
+                HeightTo = filter.HeightTo,
+                Color = string.IsNullOrWhiteSpace(filter.Color) ? null : filter.Color.Trim(),
+                ProducerCountryId = filter.ProducerCountryId
             };
 
             var apiUrl = $"{_baseUrl}/manage/products";
@@ -119,6 +129,26 @@ namespace Likano.Web.Controllers
                 }
             }
 
+            var brandsUrl = $"{_baseUrl}/manage/brands";
+            var brandsRequest = new GetAllBrandsForManageQuery
+            {
+                Pagination = new Pagination { PageNumber = 1, PageSize = 1000 },
+                Name = null
+            };
+            var brandsResponse = await _httpClient.PostAsJsonAsync(brandsUrl, brandsRequest);
+
+            var brands = new List<BrandDtoForManage>();
+            if (brandsResponse.IsSuccessStatusCode)
+            {
+                var brandsData = await brandsResponse.Content.ReadFromJsonAsync<GetAllBrandsForManageResponse>();
+                if (brandsData?.Items != null)
+                {
+                    brands = brandsData.Items
+                        .Select(b => new BrandDtoForManage { Id = (int)b.Id, Name = b.Name })
+                        .ToList();
+                }
+            }
+
             filter.PageNumber = pageNumber;
             filter.PageSize = pageSize;
 
@@ -126,12 +156,13 @@ namespace Likano.Web.Controllers
             {
                 Filter = filter,
                 Response = data,
-                Categories = categories
+                Categories = categories,
+                Brands = brands
             };
 
             return View("Products", vm);
         }
-        //Products:
+        //for Product:
         [HttpGet]
         public async Task<IActionResult> Details(int id)
         {
