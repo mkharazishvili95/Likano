@@ -39,27 +39,21 @@ namespace Likano.Application.Features.Manage.Product.Commands.Create
             var productId = await _repository.AddProductAsync(product);
 
             string? mainImageUrl = null;
-            //TODO: დასადებაგებელია:
             if (request.Images != null && request.Images.Count > 0)
             {
                 for (int i = 0; i < request.Images.Count; i++)
                 {
                     var photo = request.Images[i];
-                    using var ms = new MemoryStream();
-                    await photo.CopyToAsync(ms, cancellationToken);
-                    var fileBytes = ms.ToArray();
-                    var base64 = Convert.ToBase64String(fileBytes);
-                    var mimeType = photo.ContentType;
-                    var fileContent = $"data:{mimeType};base64,{base64}";
+                    string? fileUrl = null;
 
                     var fileDto = await _repository.UploadFileAsync(
                         photo.FileName,
-                        null,
+                        photo.FileContent,
                         Domain.Enums.File.FileType.Image,
                         request.BrandId,
                         request.CategoryId,
                         productId,
-                        null 
+                        null
                     );
 
                     if (i == 0)
@@ -78,7 +72,6 @@ namespace Likano.Application.Features.Manage.Product.Commands.Create
             if (!string.IsNullOrEmpty(mainImageUrl))
             {
                 product.ImageUrl = mainImageUrl;
-                await _repository.EditFile(new Likano.Domain.Entities.File { ProductId = productId, FileUrl = mainImageUrl, MainImage = true });
             }
 
             return new CreateProductForManageResponse

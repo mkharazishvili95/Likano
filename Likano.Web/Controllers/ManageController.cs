@@ -1076,6 +1076,12 @@ namespace Likano.Web.Controllers
                 await PopulateProductDropdowns();
                 return View("CreateProduct");
             }
+            if (photos != null && photos.Count > 10)
+            {
+                ModelState.AddModelError("photos", "მაქსიმუმ 10 ფოტო შეგიძლიათ ატვირთოთ.");
+                await PopulateProductDropdowns();
+                return View("CreateProduct");
+            }
 
             var photoPayloads = new List<object>();
             if (photos != null && photos.Count > 0)
