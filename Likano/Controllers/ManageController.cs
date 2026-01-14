@@ -17,6 +17,7 @@ using Likano.Application.Features.Manage.ProducerCountry.Queries.Get;
 using Likano.Application.Features.Manage.ProducerCountry.Queries.GetAll;
 using Likano.Application.Features.Manage.Product.Commands.ChangeCategory;
 using Likano.Application.Features.Manage.Product.Commands.ChangeStatus;
+using Likano.Application.Features.Manage.Product.Commands.Create;
 using Likano.Application.Features.Manage.Product.Queries.Get;
 using Likano.Application.Features.Manage.Product.Queries.GetAll;
 using Likano.Domain.Entities;
@@ -37,6 +38,10 @@ namespace Likano.Controllers
         {
             _mediator = mediator;
         }
+
+        [HttpPost("product/create")]
+        public async Task<CreateProductForManageResponse> CreateProduct([FromBody] CreateProductForManageCommand request)
+            => await _mediator.Send(request);
 
         [HttpGet("product/{id}")]
         public async Task<GetProductForManageResponse> GetProduct(int id)

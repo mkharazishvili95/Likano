@@ -29,6 +29,7 @@ namespace Likano.Application.Interfaces
         Task<ProducerCountry?> GetProducerCountry(int id);
         Task<List<ProducerCountry>?> GetAllProducerCountries();
         Task<bool> DeleteProducerCountry(int countryId);
+        Task<int> AddProductAsync(Product product);
         //ფაილებისთვის - ფოტოებისთვის:
         Task<FileDto> UploadFileAsync(string? fileName, string? fileUrl, FileType? fileType, int? brandId, int? categoryId, int? productId, int? userId);
         Task<Likano.Domain.Entities.File?> GetFileAsync(int id);

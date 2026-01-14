@@ -20,6 +20,7 @@ using Likano.Application.Features.Manage.ProducerCountry.Queries.Get;
 using Likano.Application.Features.Manage.ProducerCountry.Queries.GetAll;
 using Likano.Application.Features.Manage.Product.Commands.ChangeCategory;
 using Likano.Application.Features.Manage.Product.Commands.ChangeStatus;
+using Likano.Application.Features.Manage.Product.Commands.Create;
 using Likano.Application.Features.Manage.Product.Queries.Get;
 using Likano.Application.Features.Manage.Product.Queries.GetAll;
 using Likano.Domain.Entities;
@@ -1047,6 +1048,99 @@ namespace Likano.Web.Controllers
                 = resp?.Message ?? "ქვეყნის წაშლა ვერ მოხერხდა.";
 
             return RedirectToAction(nameof(ProducerCountries));
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> CreateProduct()
+        {
+            var categories = await LoadCategories();
+            var brands = await LoadBrands();
+            var countries = await LoadCountries();
+
+            ViewBag.Categories = categories;
+            ViewBag.Brands = brands;
+            ViewBag.Countries = countries;
+
+            return View("CreateProduct");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CreateProduct(string title, string? description, decimal? price, int categoryId,
+            int? brandId, int? producerCountryId, string? material, decimal? length , decimal? width,
+            decimal? height, string? color, List<IFormFile>? photos, CancellationToken ct)
+        {
+            if (string.IsNullOrWhiteSpace(title))
+            {
+                ModelState.AddModelError(nameof(title), "სათაური სავალდებულოა.");
+                await PopulateProductDropdowns();
+                return View("CreateProduct");
+            }
+
+            var photoPayloads = new List<object>();
+            if (photos != null && photos.Count > 0)
+            {
+                foreach (var photo in photos)
+                {
+                    if (photo.Length > 0)
+                    {
+                        using var ms = new MemoryStream();
+                        await photo.CopyToAsync(ms, ct);
+                        var base64 = Convert.ToBase64String(ms.ToArray());
+                        var mime = photo.ContentType;
+                        photoPayloads.Add(new
+                        {
+                            FileName = photo.FileName,
+                            FileContent = $"data:{mime};base64,{base64}"
+                        });
+                    }
+                }
+            }
+
+            var payload = new
+            {
+                Title = title,
+                Description = description,
+                Price = price,
+                CategoryId = categoryId,
+                BrandId = brandId,
+                ProducerCountryId = producerCountryId,
+                Material = material,
+                Length = length,
+                Width = width,
+                Height = height,
+                Color = color,
+                Photos = photoPayloads
+            };
+
+            var apiUrl = $"{_baseUrl}/manage/product/create";
+            var apiResponse = await _httpClient.PostAsJsonAsync(apiUrl, payload, ct);
+
+            if (!apiResponse.IsSuccessStatusCode)
+            {
+                var msg = $"API error: {(int)apiResponse.StatusCode}";
+                ModelState.AddModelError(string.Empty, msg);
+                await PopulateProductDropdowns();
+                return View("CreateProduct");
+            }
+
+            var resp = await apiResponse.Content.ReadFromJsonAsync<CreateProductForManageResponse>();
+            if (resp is null || resp.Success == false)
+            {
+                ModelState.AddModelError(string.Empty, resp?.Message ?? "მოხდა შეცდომა");
+                await PopulateProductDropdowns();
+                return View("CreateProduct");
+            }
+
+            TempData["SuccessMessage"] = resp.Message ?? "პროდუქტი წარმატებით შეიქმნა";
+            return RedirectToAction(nameof(Products));
+        }
+
+        private async Task PopulateProductDropdowns()
+        {
+            ViewBag.Categories = await LoadCategories();
+            ViewBag.Brands = await LoadBrands();
+            ViewBag.Countries = await LoadCountries();
         }
 
         [HttpGet]

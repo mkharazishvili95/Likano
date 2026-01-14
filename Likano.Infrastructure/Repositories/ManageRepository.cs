@@ -340,5 +340,12 @@ namespace Likano.Infrastructure.Repositories
             await _db.SaveChangesAsync();
             return true;
         }
+
+        public async Task<int> AddProductAsync(Product product)
+        {
+            _db.Products.Add(product);
+            await _db.SaveChangesAsync();
+            return product.Id;
+        }
     }
 }
