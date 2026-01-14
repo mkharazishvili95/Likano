@@ -135,6 +135,14 @@
                         new { @class = "form-select form-select-sm" })
                 </div>
 
+                <div class="col-12 col-md-2">
+                    <label class="form-label small fw-medium">ქვეყანა</label>
+                    @Html.DropDownList("ProducerCountryId",
+                        new SelectList(Model.ProducerCountries, "Id", "Name", Model.Filter.ProducerCountryId),
+                        "ყველა ქვეყანა",
+                        new { @class = "form-select form-select-sm" })
+                </div>
+
                 <div class="col-12 mt-2"></div>
 
                 <div class="col-6 col-md-2">
@@ -211,12 +219,6 @@
                            class="form-control form-control-sm" placeholder="ფერი" />
                 </div>
 
-                <div class="col-6 col-md-2">
-                    <label class="form-label small fw-medium">მწარმოებელი ქვეყანა (ID)</label>
-                    <input type="number" name="ProducerCountryId" value="@Model.Filter.ProducerCountryId"
-                           class="form-control form-control-sm no-spinner" placeholder="ID" />
-                </div>
-
                 <div class="col-12 col-md-2 d-flex align-items-end">
                     <button type="submit" class="btn btn-primary shadow-sm w-100">
                         <i class="fas fa-search me-2"></i>ძიება
@@ -249,7 +251,7 @@
                             <th>სიგანე</th>
                             <th>სიმაღლე</th>
                             <th>ფერი</th>
-                            <th>ქვეყანა(ID)</th>
+                            <th>ქვეყანა</th>
                             <th>სტატუსი</th>
                             <th>ხელმისაწვდომია</th>
                             <th>შექმნა</th>
@@ -264,6 +266,7 @@
                             {
                                 var categoryName = Model.Categories.FirstOrDefault(c => c.Id == p.CategoryId)?.Name ?? "-";
                                 var brandName = Model.Brands.FirstOrDefault(b => b.Id == p.BrandId)?.Name ?? "-";
+                                var countryName = Model.ProducerCountries.FirstOrDefault(pc => pc.Id == p.ProducerCountryId)?.Name ?? "-";
                                 <tr class="align-middle">
                                     <td class="ps-4 fw-medium">@p.Id</td>
                                     <td>
@@ -298,7 +301,7 @@
                                     <td>@p.Width</td>
                                     <td>@p.Height</td>
                                     <td>@p.Color</td>
-                                    <td>@p.ProducerCountryId</td>
+                                    <td>@countryName</td>
                                     <td>
                                         <span class="badge rounded-pill @(p.Status == ProductStatus.Active ? "bg-success" : p.Status == ProductStatus.Hiden ? "bg-warning" : "bg-danger")">
                                             @(p.Status switch

@@ -18,6 +18,7 @@ using Likano.Application.Features.Manage.Product.Commands.ChangeCategory;
 using Likano.Application.Features.Manage.Product.Commands.ChangeStatus;
 using Likano.Application.Features.Manage.Product.Queries.Get;
 using Likano.Application.Features.Manage.Product.Queries.GetAll;
+using Likano.Domain.Entities;
 using Likano.Domain.Enums.User;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;

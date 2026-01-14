@@ -149,6 +149,26 @@ namespace Likano.Web.Controllers
                 }
             }
 
+            var countriesUrl = $"{_baseUrl}/manage/producer-countries";
+            var countriesRequest = new GetAllProducerCountriesForManageQuery
+            {
+                Pagination = new Pagination { PageNumber = 1, PageSize = 1000 },
+                Name = null
+            };
+            var countriesResponse = await _httpClient.PostAsJsonAsync(countriesUrl, countriesRequest);
+
+            var countries = new List<ProducerCountryDtoForManage>();
+            if (countriesResponse.IsSuccessStatusCode)
+            {
+                var countryData = await countriesResponse.Content.ReadFromJsonAsync<GetAllProducerCountriesForManageResponse>();
+                if (countryData?.Items != null)
+                {
+                    countries = countryData.Items
+                        .Select(b => new ProducerCountryDtoForManage { Id = (int)b.Id, Name = b.Name })
+                        .ToList();
+                }
+            }
+
             filter.PageNumber = pageNumber;
             filter.PageSize = pageSize;
 
@@ -157,7 +177,8 @@ namespace Likano.Web.Controllers
                 Filter = filter,
                 Response = data,
                 Categories = categories,
-                Brands = brands
+                Brands = brands,
+                ProducerCountries = countries
             };
 
             return View("Products", vm);

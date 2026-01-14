@@ -9,6 +9,7 @@ namespace Likano.Web.Models.Manage
         public GetAllProductsForManageResponse? Response { get; set; }
         public List<CategoryDtoForManage> Categories { get; set; } = new();
         public List<BrandDtoForManage> Brands { get; set; } = new();
+        public List<ProducerCountryDtoForManage> ProducerCountries { get; set; } = new();
         bool? IntoGrid { get; set; } = true;
     }
 }
