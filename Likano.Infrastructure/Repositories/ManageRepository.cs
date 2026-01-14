@@ -325,5 +325,20 @@ namespace Likano.Infrastructure.Repositories
                 return false;
             }
         }
+
+        public async Task<bool> ChangeCountry(int productId, int newCountryId)
+        {
+            var product = await _db.Products.FindAsync(productId);
+            if (product == null)
+                return false;
+
+            var newCountry = await _db.ProducerCountries.FindAsync(newCountryId);
+            if (newCountry == null)
+                return false;
+
+            product.ProducerCountryId = newCountryId;
+            await _db.SaveChangesAsync();
+            return true;
+        }
     }
 }

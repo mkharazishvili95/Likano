@@ -16,6 +16,7 @@ namespace Likano.Application.Interfaces
         Task<bool> ChangeActiveStatusCategory(int id);
         Task<bool> ChangeCategory(int productId, int newCategoryId);
         Task<bool> ChangeBrand(int productId, int newBrandId);
+        Task<bool> ChangeCountry(int productId, int newCountryId);
         Task<Brand?> GetBrand(int id);
         Task<List<Brand>?> GetAllBrands();
         Task<bool> ChangeActiveStatusBrand(int id);

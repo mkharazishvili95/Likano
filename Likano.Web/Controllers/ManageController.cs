@@ -12,6 +12,7 @@ using Likano.Application.Features.Manage.Category.Commands.Create;
 using Likano.Application.Features.Manage.Category.Commands.Edit;
 using Likano.Application.Features.Manage.Category.Queries.Get;
 using Likano.Application.Features.Manage.Category.Queries.GetAll;
+using Likano.Application.Features.Manage.ProducerCountry.Commands.Change;
 using Likano.Application.Features.Manage.ProducerCountry.Commands.Create;
 using Likano.Application.Features.Manage.ProducerCountry.Commands.Delete;
 using Likano.Application.Features.Manage.ProducerCountry.Commands.Edit;
@@ -183,6 +184,7 @@ namespace Likano.Web.Controllers
 
             return View("Products", vm);
         }
+
         //for Product:
         [HttpGet]
         public async Task<IActionResult> Details(int id)
@@ -192,26 +194,103 @@ namespace Likano.Web.Controllers
 
             var apiUrl = $"{_baseUrl}/manage/product/{id}";
             var apiResponse = await _httpClient.GetAsync(apiUrl);
-
             if (!apiResponse.IsSuccessStatusCode)
-            {
-                return View("NotFound", new GetProductForManageResponse
-                {
-                    Success = false,
-                    Message = $"API error: {(int)apiResponse.StatusCode}"
-                });
-            }
+                return View("NotFound");
+
             var product = await apiResponse.Content.ReadFromJsonAsync<GetProductForManageResponse>();
             if (product == null || product.Success == false)
+                return View("NotFound");
+
+            var categories = await LoadCategories();
+            var brands = await LoadBrands();
+            var countries = await LoadCountries();
+
+            var vm = new ProductDetailsViewModel
             {
-                return View("NotFound", product ?? new GetProductForManageResponse
-                {
-                    Success = false,
-                    Message = "Product not found"
-                });
+                Product = product,
+                Categories = categories,
+                Brands = brands,
+                Countries = countries
+            };
+
+            return View("Details", vm);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ChangeProductCountry(int productId, int newCountryId)
+        {
+            var apiUrl = $"{_baseUrl}/manage/product/change-country";
+            var command = new ChangeCountryCommand
+            {
+                ProductId = productId,
+                NewCountryId = newCountryId
+            };
+
+            var response = await _httpClient.PostAsJsonAsync(apiUrl, command);
+
+            if (!response.IsSuccessStatusCode)
+            {
+                TempData["ErrorMessage"] = "ქვეყნის ცვლილება ვერ მოხერხდა";
+                return RedirectToAction("Details", new { id = productId });
             }
 
-            return View("Details", product);
+            var result = await response.Content.ReadFromJsonAsync<ChangeCountryResponse>();
+            TempData[(bool)result!.Success ? "SuccessMessage" : "ErrorMessage"] = result.Message;
+
+            return RedirectToAction("Details", new { id = productId });
+        }
+
+        private async Task<List<CategoryDtoForManage>> LoadCategories()
+        {
+            var categoriesUrl = $"{_baseUrl}/manage/categories";
+            var categoriesRequest = new GetAllCategoriesForManageQuery
+            {
+                Pagination = new Pagination { PageNumber = 1, PageSize = 1000 },
+                IsActive = true
+            };
+            var response = await _httpClient.PostAsJsonAsync(categoriesUrl, categoriesRequest);
+            if (response.IsSuccessStatusCode)
+            {
+                var data = await response.Content.ReadFromJsonAsync<GetAllCategoriesForManageResponse>();
+                if (data?.Items != null)
+                    return data.Items.Select(c => new CategoryDtoForManage { Id = (int)c.Id, Name = c.Name }).ToList();
+            }
+            return new();
+        }
+
+        private async Task<List<BrandDtoForManage>> LoadBrands()
+        {
+            var brandsUrl = $"{_baseUrl}/manage/brands";
+            var brandsRequest = new GetAllBrandsForManageQuery
+            {
+                Pagination = new Pagination { PageNumber = 1, PageSize = 1000 },
+                IsActive = true
+            };
+            var response = await _httpClient.PostAsJsonAsync(brandsUrl, brandsRequest);
+            if (response.IsSuccessStatusCode)
+            {
+                var data = await response.Content.ReadFromJsonAsync<GetAllBrandsForManageResponse>();
+                if (data?.Items != null)
+                    return data.Items.Select(b => new BrandDtoForManage { Id = (int)b.Id, Name = b.Name }).ToList();
+            }
+            return new();
+        }
+
+        private async Task<List<ProducerCountryDtoForManage>> LoadCountries()
+        {
+            var countriesUrl = $"{_baseUrl}/manage/producer-countries";
+            var countriesRequest = new GetAllProducerCountriesForManageQuery
+            {
+                Pagination = new Pagination { PageNumber = 1, PageSize = 1000 }
+            };
+            var response = await _httpClient.PostAsJsonAsync(countriesUrl, countriesRequest);
+            if (response.IsSuccessStatusCode)
+            {
+                var data = await response.Content.ReadFromJsonAsync<GetAllProducerCountriesForManageResponse>();
+                if (data?.Items != null)
+                    return data.Items.Select(c => new ProducerCountryDtoForManage { Id = (int)c.Id, Name = c.Name }).ToList();
+            }
+            return new();
         }
 
         public async Task<IActionResult> ChangeProductStatus(int productId, ProductStatus status, bool? intoGrid)

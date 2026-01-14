@@ -1,10 +1,15 @@
-﻿@model Likano.Application.Features.Manage.Product.Queries.Get.GetProductForManageResponse
+﻿@model Likano.Web.Models.Manage.ProductDetailsViewModel
 @using Likano.Domain.Enums
 
 @{
     ViewData["Title"] = "პროდუქტის დეტალები";
 
-    var statusText = Model?.Status switch
+    var product = Model.Product;
+    var categories = Model.Categories;
+    var brands = Model.Brands;
+    var countries = Model.Countries;
+
+    var statusText = product?.Status switch
     {
         ProductStatus.Active => "აქტიური",
         ProductStatus.Hiden => "დამალული",
@@ -12,81 +17,13 @@
         _ => "—"
     };
 
-    var statusClass = Model?.Status switch
+    var statusClass = product?.Status switch
     {
         ProductStatus.Active => "bg-success",
         ProductStatus.Hiden => "bg-warning",
         ProductStatus.Deleted => "bg-danger",
         _ => "bg-secondary"
     };
-
-    var productId = Model.Id;
-    var currentCategoryId = Model.CategoryId;
-    var currenctBrandId = Model.BrandId;
-    List<Likano.Application.DTOs.CategoryDtoForManage> categories = new();
-    List<Likano.Application.DTOs.BrandDtoForManage> brands = new();
-
-    try
-    {
-        var baseUrl = Context.RequestServices.GetService<IConfiguration>()?["ApiSettings:BaseUrl"];
-        if (!string.IsNullOrWhiteSpace(baseUrl))
-        {
-            var httpClientFactory = Context.RequestServices.GetService<IHttpClientFactory>();
-            var client = httpClientFactory?.CreateClient();
-            if (client is not null)
-            {
-                var categoriesUrl = $"{baseUrl}/manage/categories";
-                var categoriesRequest = new Likano.Application.Features.Manage.Category.Queries.GetAll.GetAllCategoriesForManageQuery
-                {
-                    Pagination = new Likano.Application.Common.Models.Pagination { PageNumber = 1, PageSize = 1000 },
-                    IsActive = true
-                };
-                var apiResponse = await client.PostAsJsonAsync(categoriesUrl, categoriesRequest);
-                if (apiResponse.IsSuccessStatusCode)
-                {
-                    var data = await apiResponse.Content.ReadFromJsonAsync<Likano.Application.Features.Category.Queries.GetAll.GetAllCategoriesResponse>();
-                    if (data?.Items != null)
-                    {
-                        categories = data.Items.Select(c => new Likano.Application.DTOs.CategoryDtoForManage { Id = c.Id, Name = c.Name }).ToList();
-                    }
-                }
-            }
-        }
-    }
-    catch
-    {
-    }
-
-    try
-    {
-        var baseUrl = Context.RequestServices.GetService<IConfiguration>()?["ApiSettings:BaseUrl"];
-        if (!string.IsNullOrWhiteSpace(baseUrl))
-        {
-            var httpClientFactory = Context.RequestServices.GetService<IHttpClientFactory>();
-            var client = httpClientFactory?.CreateClient();
-            if (client is not null)
-            {
-                var brandsUrl = $"{baseUrl}/manage/brands";
-                var brandsRequest = new Likano.Application.Features.Manage.Brand.Queries.GetAll.GetAllBrandsForManageQuery
-                {
-                    Pagination = new Likano.Application.Common.Models.Pagination { PageNumber = 1, PageSize = 1000 },
-                    IsActive = true
-                };
-                var apiResponse = await client.PostAsJsonAsync(brandsUrl, brandsRequest);
-                if (apiResponse.IsSuccessStatusCode)
-                {
-                    var data = await apiResponse.Content.ReadFromJsonAsync<Likano.Application.Features.Manage.Brand.Queries.GetAll.GetAllBrandsForManageResponse>();
-                    if (data?.Items != null)
-                    {
-                        brands = data.Items.Select(b => new Likano.Application.DTOs.BrandDtoForManage { Id = (int)b.Id, Name = b.Name }).ToList();
-                    }
-                }
-            }
-        }
-    }
-    catch
-    {
-    }
 }
 
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
@@ -112,11 +49,11 @@
         </div>
     }
 
-    @if (Model == null || Model.Success == false)
+    @if (product == null || product.Success == false)
     {
         <div class="alert alert-danger shadow-sm rounded-4">
             <i class="fas fa-exclamation-triangle me-2"></i>
-            @Model?.Message ?? "პროდუქტის დეტალების ჩატვირთვა ვერ მოხერხდა."
+            @product?.Message ?? "პროდუქტის დეტალების ჩატვირთვა ვერ მოხერხდა."
         </div>
         return;
     }
@@ -124,7 +61,7 @@
     <div class="card shadow border-0 rounded-4 overflow-hidden">
         <div class="card-header bg-gradient-primary text-white py-3">
             <h5 class="mb-0">
-                <i class="fas fa-box-open me-2"></i>ID: @Model.Id – @Model.Title
+                <i class="fas fa-box-open me-2"></i>ID: @product.Id – @product.Title
             </h5>
         </div>
 
@@ -132,9 +69,9 @@
             <div class="row g-4">
                 <div class="col-lg-4">
                     <div class="text-center">
-                        @if (!string.IsNullOrWhiteSpace(Model.ImageUrl))
+                        @if (!string.IsNullOrWhiteSpace(product.ImageUrl))
                         {
-                            <img src="@Model.ImageUrl" alt="@Model.Title"
+                            <img src="@product.ImageUrl" alt="@product.Title"
                                  class="img-fluid rounded shadow-sm"
                                  style="max-height: 400px; width: 100%; object-fit: cover;" />
                         }
@@ -149,13 +86,13 @@
                 </div>
 
                 <div class="col-lg-8">
-                    <h4 class="fw-bold text-dark mb-3">@Model.Title</h4>
+                    <h4 class="fw-bold text-dark mb-3">@product.Title</h4>
 
                     <div class="mb-4">
                         <p class="text-muted">
-                            @if (!string.IsNullOrWhiteSpace(Model.Description))
+                            @if (!string.IsNullOrWhiteSpace(product.Description))
                             {
-                                @Model.Description
+                                @product.Description
                             }
                             else
                             {
@@ -169,7 +106,7 @@
                             <div class="d-flex">
                                 <strong class="text-muted me-3" style="min-width: 120px;">ფასი:</strong>
                                 <span class="fw-bold text-primary h5 mb-0">
-                                    @(Model.Price.HasValue ? $"{Model.Price:0.##} ₾" : "—")
+                                    @(product.Price.HasValue ? $"{product.Price:0.##} ₾" : "—")
                                 </span>
                             </div>
                         </div>
@@ -178,7 +115,7 @@
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="d-flex align-items-center">
                                     <strong class="text-muted me-3" style="min-width: 120px;">ბრენდი:</strong>
-                                    <span>@(string.IsNullOrWhiteSpace(Model.BrandTitle) ? "—" : Model.BrandTitle)</span>
+                                    <span>@(string.IsNullOrWhiteSpace(product.BrandTitle) ? "—" : product.BrandTitle)</span>
                                 </div>
                                 <button type="button"
                                         class="btn btn-outline-primary btn-sm"
@@ -194,14 +131,15 @@
                                 <div class="card border-0 shadow-sm">
                                     <div class="card-body py-3">
                                         <form asp-controller="Manage" asp-action="ChangeProductBrand" method="post" class="row g-3">
-                                            <input type="hidden" name="productId" value="@Model.Id" />
+                                            <input type="hidden" name="productId" value="@product.Id" />
                                             <div class="col-12 col-md-8">
                                                 <label for="newBrandId" class="form-label fw-medium mb-1">ახალი ბრენდი</label>
                                                 <select id="newBrandId" name="newBrandId" class="form-select form-select-sm" required style="min-height: 32px;">
                                                     <option value="">-- აირჩიეთ ბრენდი --</option>
-                                                    @Html.Raw(string.Join("\n",
-                                                    brands.Select(c => $"<option value='{c.Id}' {(c.Id == currenctBrandId ? "selected" : "")}>{c.Name}</option>")
-                                                                                                        ))
+                                                    @foreach (var b in brands)
+                                                    {
+                                                        <option value="@b.Id" @@(b.Id == product.BrandId ? "selected" : "")>@b.Name</option>
+                                                    }
                                                 </select>
                                             </div>
                                             <div class="col-12 col-md-4">
@@ -227,7 +165,7 @@
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="d-flex align-items-center">
                                     <strong class="text-muted me-3" style="min-width: 120px;">კატეგორია:</strong>
-                                    <span>@(string.IsNullOrWhiteSpace(Model.CategoryTitle) ? "—" : Model.CategoryTitle)</span>
+                                    <span>@(string.IsNullOrWhiteSpace(product.CategoryTitle) ? "—" : product.CategoryTitle)</span>
                                 </div>
                                 <button type="button"
                                         class="btn btn-outline-primary btn-sm"
@@ -243,14 +181,15 @@
                                 <div class="card border-0 shadow-sm">
                                     <div class="card-body py-3">
                                         <form asp-controller="Manage" asp-action="ChangeProductCategory" method="post" class="row g-3">
-                                            <input type="hidden" name="productId" value="@Model.Id" />
+                                            <input type="hidden" name="productId" value="@product.Id" />
                                             <div class="col-12 col-md-8">
                                                 <label for="newCategoryId" class="form-label fw-medium mb-1">ახალი კატეგორია</label>
                                                 <select id="newCategoryId" name="newCategoryId" class="form-select form-select-sm" required style="min-height: 32px;">
                                                     <option value="">-- აირჩიეთ კატეგორია --</option>
-                                                    @Html.Raw(string.Join("\n",
-                                                        categories.Select(c => $"<option value='{c.Id}' {(c.Id == currentCategoryId ? "selected" : "")}>{c.Name}</option>")
-                                                    ))
+                                                    @foreach (var c in categories)
+                                                    {
+                                                        <option value="@c.Id" @@(c.Id == product.CategoryId ? "selected" : "")>@c.Name</option>
+                                                    }
                                                 </select>
                                             </div>
                                             <div class="col-12 col-md-4">
@@ -275,8 +214,8 @@
                         <div class="col-md-6">
                             <div class="d-flex">
                                 <strong class="text-muted me-3" style="min-width: 120px;">ხელმისაწვდომია:</strong>
-                                <span class="badge @(Model.IsAvailable == true ? "bg-success" : "bg-secondary") px-3 py-2">
-                                    @(Model.IsAvailable == true ? "კი" : "არა")
+                                <span class="badge @(product.IsAvailable == true ? "bg-success" : "bg-secondary") px-3 py-2">
+                                    @(product.IsAvailable == true ? "კი" : "არა")
                                 </span>
                             </div>
                         </div>
@@ -293,56 +232,99 @@
                         <div class="col-md-6">
                             <div class="d-flex">
                                 <strong class="text-muted me-3" style="min-width: 120px;">შექმნის თარიღი:</strong>
-                                <span>@(Model.CreateDate?.ToString("dd.MM.yyyy HH:mm") ?? "—")</span>
+                                <span>@(product.CreateDate?.ToString("dd.MM.yyyy HH:mm") ?? "—")</span>
                             </div>
                         </div>
 
                         <div class="col-md-6">
                             <div class="d-flex">
                                 <strong class="text-muted me-3" style="min-width: 120px;">განახლების თარიღი:</strong>
-                                <span>@(Model.UpdateDate?.ToString("dd.MM.yyyy HH:mm") ?? "—")</span>
+                                <span>@(product.UpdateDate?.ToString("dd.MM.yyyy HH:mm") ?? "—")</span>
                             </div>
                         </div>
 
                         <div class="col-md-6">
                             <div class="d-flex">
                                 <strong class="text-muted me-3" style="min-width: 120px;">მასალა:</strong>
-                                <span>@(string.IsNullOrWhiteSpace(Model.Material) ? "—" : Model.Material)</span>
+                                <span>@(string.IsNullOrWhiteSpace(product.Material) ? "—" : product.Material)</span>
                             </div>
                         </div>
 
                         <div class="col-md-6">
                             <div class="d-flex">
                                 <strong class="text-muted me-3" style="min-width: 120px;">ფერი:</strong>
-                                <span>@(string.IsNullOrWhiteSpace(Model.Color) ? "—" : Model.Color)</span>
+                                <span>@(string.IsNullOrWhiteSpace(product.Color) ? "—" : product.Color)</span>
                             </div>
                         </div>
 
                         <div class="col-md-6">
                             <div class="d-flex">
                                 <strong class="text-muted me-3" style="min-width: 120px;">სიგრძე:</strong>
-                                <span>@(Model.Length.HasValue ? $"{Model.Length:0.##} სმ" : "—")</span>
+                                <span>@(product.Length.HasValue ? $"{product.Length:0.##} სმ" : "—")</span>
                             </div>
                         </div>
 
                         <div class="col-md-6">
                             <div class="d-flex">
                                 <strong class="text-muted me-3" style="min-width: 120px;">სიგანე:</strong>
-                                <span>@(Model.Width.HasValue ? $"{Model.Width:0.##} სმ" : "—")</span>
+                                <span>@(product.Width.HasValue ? $"{product.Width:0.##} სმ" : "—")</span>
                             </div>
                         </div>
 
                         <div class="col-md-6">
                             <div class="d-flex">
                                 <strong class="text-muted me-3" style="min-width: 120px;">სიმაღლე:</strong>
-                                <span>@(Model.Height.HasValue ? $"{Model.Height:0.##} სმ" : "—")</span>
+                                <span>@(product.Height.HasValue ? $"{product.Height:0.##} სმ" : "—")</span>
                             </div>
                         </div>
 
                         <div class="col-md-6">
-                            <div class="d-flex">
-                                <strong class="text-muted me-3" style="min-width: 120px;">მწარმოებელი ქვეყანა:</strong>
-                                <span>@(string.IsNullOrWhiteSpace(Model.ProducerCountryName) ? "—" : Model.ProducerCountryName)</span>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="d-flex align-items-center">
+                                    <strong class="text-muted me-3" style="min-width: 120px;">მწარმოებელი ქვეყანა:</strong>
+                                    <span>@(string.IsNullOrWhiteSpace(product.ProducerCountryName) ? "—" : product.ProducerCountryName)</span>
+                                </div>
+                                <button type="button"
+                                        class="btn btn-outline-primary btn-sm"
+                                        data-bs-toggle="collapse"
+                                        data-bs-target="#changeCountryPanel"
+                                        aria-expanded="false"
+                                        aria-controls="changeCountryPanel">
+                                    <i class="fas fa-exchange-alt me-1"></i>ქვეყნის შეცვლა
+                                </button>
+                            </div>
+
+                            <div id="changeCountryPanel" class="collapse mt-2">
+                                <div class="card border-0 shadow-sm">
+                                    <div class="card-body py-3">
+                                        <form asp-controller="Manage" asp-action="ChangeProductCountry" method="post" class="row g-3">
+                                            <input type="hidden" name="productId" value="@product.Id" />
+                                            <div class="col-12 col-md-8">
+                                                <label for="newCountryId" class="form-label fw-medium mb-1">ახალი ქვეყანა</label>
+                                                <select id="newCountryId" name="newCountryId" class="form-select form-select-sm" required style="min-height: 32px;">
+                                                    <option value="">-- აირჩიეთ ქვეყანა --</option>
+                                                    @foreach (var country in countries)
+                                                    {
+                                                        <option value="@country.Id" @@(country.Id == product.ProducerCountryId ? "selected" : "")>@country.Name</option>
+                                                    }
+                                                </select>
+                                            </div>
+                                            <div class="col-12 col-md-4">
+                                                <div class="d-flex flex-wrap gap-2">
+                                                    <button type="submit" class="btn btn-success btn-sm flex-grow-1">
+                                                        <i class="fas fa-check me-1"></i>დადასტურება
+                                                    </button>
+                                                    <button type="button"
+                                                            class="btn btn-secondary btn-sm flex-grow-1"
+                                                            data-bs-toggle="collapse"
+                                                            data-bs-target="#changeCountryPanel">
+                                                        <i class="fas fa-times me-1"></i>გაუქმება
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -352,21 +334,19 @@
                     <div class="mb-4">
                         <h5 class="fw-bold text-dark mb-3">სტატუსის მართვა</h5>
                         <div class="d-flex flex-wrap gap-2">
-
-                            @switch (Model.Status)
+                            @switch (product.Status)
                             {
                                 case ProductStatus.Active:
                                     <form asp-action="ChangeProductStatus" method="post" class="d-inline">
-                                        <input type="hidden" name="productId" value="@Model.Id" />
+                                        <input type="hidden" name="productId" value="@product.Id" />
                                         <input type="hidden" name="status" value="@ProductStatus.Hiden" />
                                         <button type="submit" class="btn btn-warning shadow-sm"
                                                 onclick="return confirm('ნამდვილად გინდათ პროდუქტის დამალვა?')">
                                             <i class="fas fa-eye-slash me-2"></i>დამალვა
                                         </button>
                                     </form>
-
                                     <form asp-action="ChangeProductStatus" method="post" class="d-inline">
-                                        <input type="hidden" name="productId" value="@Model.Id" />
+                                        <input type="hidden" name="productId" value="@product.Id" />
                                         <input type="hidden" name="status" value="@ProductStatus.Deleted" />
                                         <button type="submit" class="btn btn-danger shadow-sm"
                                                 onclick="return confirm('ნამდვილად გინდათ პროდუქტის წაშლა? ეს ქმედება შეუქცევადია!')">
@@ -374,19 +354,17 @@
                                         </button>
                                     </form>
                                     break;
-
                                 case ProductStatus.Hiden:
                                     <form asp-action="ChangeProductStatus" method="post" class="d-inline">
-                                        <input type="hidden" name="productId" value="@Model.Id" />
+                                        <input type="hidden" name="productId" value="@product.Id" />
                                         <input type="hidden" name="status" value="@ProductStatus.Active" />
                                         <button type="submit" class="btn btn-success shadow-sm"
                                                 onclick="return confirm('ნამდვილად გინდათ პროდუქტის გამოჩენა?')">
                                             <i class="fas fa-eye me-2"></i>გამოჩენა
                                         </button>
                                     </form>
-
                                     <form asp-action="ChangeProductStatus" method="post" class="d-inline">
-                                        <input type="hidden" name="productId" value="@Model.Id" />
+                                        <input type="hidden" name="productId" value="@product.Id" />
                                         <input type="hidden" name="status" value="@ProductStatus.Deleted" />
                                         <button type="submit" class="btn btn-danger shadow-sm"
                                                 onclick="return confirm('ნამდვილად გსურთ პროდუქტის წაშლა?')">
@@ -394,10 +372,9 @@
                                         </button>
                                     </form>
                                     break;
-
                                 case ProductStatus.Deleted:
                                     <form asp-action="ChangeProductStatus" method="post" class="d-inline">
-                                        <input type="hidden" name="productId" value="@Model.Id" />
+                                        <input type="hidden" name="productId" value="@product.Id" />
                                         <input type="hidden" name="status" value="@ProductStatus.Active" />
                                         <button type="submit" class="btn btn-success shadow-sm"
                                                 onclick="return confirm('ნამდვილად გსურთ პროდუქტის აღდგენა?')">
@@ -412,9 +389,9 @@
                     <hr class="my-4">
 
                     <div class="text-end">
-                        @if (Model.Status != ProductStatus.Deleted)
+                        @if (product.Status != ProductStatus.Deleted)
                         {
-                            <a asp-controller="Manage" asp-action="Edit" asp-route-id="@Model.Id"
+                            <a asp-controller="Manage" asp-action="Edit" asp-route-id="@product.Id"
                                class="btn btn-outline-primary shadow-sm me-2">
                                 <i class="fas fa-edit me-2"></i>რედაქტირება
                             </a>
@@ -443,9 +420,9 @@
             transition: transform 0.2s ease;
         }
 
-            .card:hover {
-                transform: translateY(-2px);
-            }
+        .card:hover {
+            transform: translateY(-2px);
+        }
 
         .badge {
             font-size: 0.9rem;

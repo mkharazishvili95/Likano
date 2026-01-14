@@ -9,6 +9,7 @@ using Likano.Application.Features.Manage.Category.Commands.Create;
 using Likano.Application.Features.Manage.Category.Commands.Edit;
 using Likano.Application.Features.Manage.Category.Queries.Get;
 using Likano.Application.Features.Manage.Category.Queries.GetAll;
+using Likano.Application.Features.Manage.ProducerCountry.Commands.Change;
 using Likano.Application.Features.Manage.ProducerCountry.Commands.Create;
 using Likano.Application.Features.Manage.ProducerCountry.Commands.Delete;
 using Likano.Application.Features.Manage.ProducerCountry.Commands.Edit;
@@ -47,6 +48,10 @@ namespace Likano.Controllers
 
         [HttpPost("product/status")]
         public async Task<ChangeProductStatusResponse> ChangeProductStatus([FromBody] ChangeProductStatusCommand command)
+            => await _mediator.Send(command);
+
+        [HttpPost("product/change-country")]
+        public async Task<ChangeCountryResponse> ChangeProducerCountry([FromBody] ChangeCountryCommand command)
             => await _mediator.Send(command);
 
         [HttpPost("categories")]
