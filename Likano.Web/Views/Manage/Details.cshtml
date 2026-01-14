@@ -178,7 +178,7 @@
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="d-flex align-items-center">
                                     <strong class="text-muted me-3" style="min-width: 120px;">ბრენდი:</strong>
-                                    <span>@Model.BrandTitle</span>
+                                    <span>@(string.IsNullOrWhiteSpace(Model.BrandTitle) ? "—" : Model.BrandTitle)</span>
                                 </div>
                                 <button type="button"
                                         class="btn btn-outline-primary btn-sm"
@@ -227,7 +227,7 @@
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="d-flex align-items-center">
                                     <strong class="text-muted me-3" style="min-width: 120px;">კატეგორია:</strong>
-                                    <span>@Model.CategoryTitle</span>
+                                    <span>@(string.IsNullOrWhiteSpace(Model.CategoryTitle) ? "—" : Model.CategoryTitle)</span>
                                 </div>
                                 <button type="button"
                                         class="btn btn-outline-primary btn-sm"
@@ -301,6 +301,48 @@
                             <div class="d-flex">
                                 <strong class="text-muted me-3" style="min-width: 120px;">განახლების თარიღი:</strong>
                                 <span>@(Model.UpdateDate?.ToString("dd.MM.yyyy HH:mm") ?? "—")</span>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="d-flex">
+                                <strong class="text-muted me-3" style="min-width: 120px;">მასალა:</strong>
+                                <span>@(string.IsNullOrWhiteSpace(Model.Material) ? "—" : Model.Material)</span>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="d-flex">
+                                <strong class="text-muted me-3" style="min-width: 120px;">ფერი:</strong>
+                                <span>@(string.IsNullOrWhiteSpace(Model.Color) ? "—" : Model.Color)</span>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="d-flex">
+                                <strong class="text-muted me-3" style="min-width: 120px;">სიგრძე:</strong>
+                                <span>@(Model.Length.HasValue ? $"{Model.Length:0.##} სმ" : "—")</span>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="d-flex">
+                                <strong class="text-muted me-3" style="min-width: 120px;">სიგანე:</strong>
+                                <span>@(Model.Width.HasValue ? $"{Model.Width:0.##} სმ" : "—")</span>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="d-flex">
+                                <strong class="text-muted me-3" style="min-width: 120px;">სიმაღლე:</strong>
+                                <span>@(Model.Height.HasValue ? $"{Model.Height:0.##} სმ" : "—")</span>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="d-flex">
+                                <strong class="text-muted me-3" style="min-width: 120px;">მწარმოებელი ქვეყანა:</strong>
+                                <span>@(string.IsNullOrWhiteSpace(Model.ProducerCountryName) ? "—" : Model.ProducerCountryName)</span>
                             </div>
                         </div>
                     </div>

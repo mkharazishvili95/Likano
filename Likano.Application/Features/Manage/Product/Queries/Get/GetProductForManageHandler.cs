@@ -36,6 +36,13 @@ namespace Likano.Application.Features.Manage.Product.Queries.Get
                 Status = product.Status,
                 BrandId = product.BrandId,
                 BrandTitle = product.Brand?.Name,
+                Material = product.Material,
+                Length = product.Length,
+                Width = product.Width,
+                Height = product.Height,
+                Color = product.Color,
+                ProducerCountryId = product.ProducerCountryId,
+                ProducerCountryName = product.ProducerCountry?.Name,
                 Success = true,
                 StatusCode = 200
             };

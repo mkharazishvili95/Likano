@@ -18,5 +18,12 @@ namespace Likano.Application.Features.Manage.Product.Queries.Get
         public ProductStatus? Status { get; set; }
         public DateTime? CreateDate { get; set; }
         public DateTime? UpdateDate { get; set; }
+        public string? Material { get; set; }
+        public decimal? Length { get; set; } //სიგრძე
+        public decimal? Width { get; set; } // სიგანე
+        public decimal? Height { get; set; } // სიმაღლე
+        public string? Color { get; set; }
+        public int? ProducerCountryId { get; set; }
+        public string? ProducerCountryName { get; set; }
     }
 }
