@@ -20,5 +20,15 @@ namespace Likano.Application.Features.Manage.Product.Queries.GetAll
         public DateTime? CreateDateTo { get; set; }
         public DateTime? UpdateDateFrom { get; set; }
         public DateTime? UpdateDateTo { get; set; }
+        public string? Material { get; set; }
+        public decimal? LengthFrom { get; set; } //სიგრძე დან
+        public decimal? LengthTo { get; set; } //სიგრძე მდე
+        public decimal? WidthFrom { get; set; } // სიგანე დან
+        public decimal? WidthTo { get; set; } // სიგანე მდე  
+        public decimal? HeightFrom { get; set; } // სიმაღლე დან
+        public decimal? HeightTo { get; set; } // სიმაღლე მდე
+        public string? Color { get; set; }
+        public int? ProducerCountryId { get; set; }
+        public int? BrandId { get; set; }
     }
 }

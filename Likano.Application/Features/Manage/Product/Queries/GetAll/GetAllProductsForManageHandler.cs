@@ -48,7 +48,14 @@ namespace Likano.Application.Features.Manage.Product.Queries.GetAll
                     CategoryId = p.CategoryId,
                     Status = p.Status,
                     CreateDate = p.CreateDate,
-                    UpdateDate = p.UpdateDate
+                    UpdateDate = p.UpdateDate,
+                    Material = p.Material,
+                    Length = p.Length,
+                    Width = p.Width,
+                    Height = p.Height,
+                    Color = p.Color,
+                    ProducerCountryId = p.ProducerCountryId,
+                    BrandId = p.BrandId
                 }).ToList()
             };
         }
