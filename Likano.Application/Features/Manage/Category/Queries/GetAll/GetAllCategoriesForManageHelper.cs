@@ -11,6 +11,8 @@ namespace Likano.Application.Features.Manage.Category.Queries.GetAll
                 (!request.Id.HasValue || p.Id == request.Id.Value) &&
                 (string.IsNullOrWhiteSpace(request.Name) || (!string.IsNullOrEmpty(p.Name) && p.Name.Contains(request.Name, StringComparison.OrdinalIgnoreCase))) &&
                 (string.IsNullOrWhiteSpace(request.Description) || (!string.IsNullOrEmpty(p.Description) && p.Description.Contains(request.Description, StringComparison.OrdinalIgnoreCase))) &&
+                (string.IsNullOrWhiteSpace(request.SearchString) || (!string.IsNullOrEmpty(p.Name) && p.Name.Contains(request.SearchString, StringComparison.OrdinalIgnoreCase))) &&
+                (string.IsNullOrWhiteSpace(request.SearchString) || (!string.IsNullOrEmpty(p.Description) && p.Description.Contains(request.SearchString, StringComparison.OrdinalIgnoreCase))) &&
                 (!request.IsActive.HasValue || p.IsActive == request.IsActive.Value);
 
             return whereClause;

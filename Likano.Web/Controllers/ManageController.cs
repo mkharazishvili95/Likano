@@ -99,8 +99,8 @@ namespace Likano.Web.Controllers
                        };
             }
 
-            var categoriesUrl = $"{_baseUrl}/category/all";
-            var categoriesRequest = new GetAllCategoriesQuery
+            var categoriesUrl = $"{_baseUrl}/manage/categories";
+            var categoriesRequest = new GetAllCategoriesForManageQuery
             {
                 Pagination = new Pagination { PageNumber = 1, PageSize = 1000 },
                 SearchString = null
@@ -110,11 +110,11 @@ namespace Likano.Web.Controllers
             var categories = new List<CategoryDtoForManage>();
             if (categoriesResponse.IsSuccessStatusCode)
             {
-                var categoriesData = await categoriesResponse.Content.ReadFromJsonAsync<GetAllCategoriesResponse>();
+                var categoriesData = await categoriesResponse.Content.ReadFromJsonAsync<GetAllCategoriesForManageResponse>();
                 if (categoriesData?.Items != null)
                 {
                     categories = categoriesData.Items
-                        .Select(c => new CategoryDtoForManage { Id = c.Id, Name = c.Name })
+                        .Select(c => new CategoryDtoForManage { Id = (int)c.Id, Name = c.Name })
                         .ToList();
                 }
             }
