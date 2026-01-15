@@ -1,4 +1,7 @@
-﻿using Likano.Application.DTOs;
+﻿using Imagekit.Sdk;
+using Likano.Application.Configuration;
+using Microsoft.Extensions.Options;
+using Likano.Application.DTOs;
 using Likano.Application.Interfaces;
 using Likano.Domain.Entities;
 using Likano.Domain.Enums;
@@ -11,9 +14,12 @@ namespace Likano.Infrastructure.Repositories
     public class ManageRepository : IManageRepository
     {
         readonly ApplicationDbContext _db;
-        public ManageRepository(ApplicationDbContext db)
+        readonly ImageKitSettings _imageKitSettings;
+
+        public ManageRepository(ApplicationDbContext db, IOptions<ImageKitSettings> imageKitSettings)
         {
             _db = db;
+            _imageKitSettings = imageKitSettings.Value;
         }
 
         public async Task<Product?> GetProduct(int id) => await _db.Products
@@ -112,14 +118,40 @@ namespace Likano.Infrastructure.Repositories
             return true;
         }
 
-        public async Task<FileDto> UploadFileAsync(string? fileName, string? fileUrl, FileType? fileType, int? brandId, int? categoryId, int? productId, int? userId)
+        public async Task<FileDto> UploadFileAsync(string? fileName, string? fileContent, FileType? fileType, int? brandId, int? categoryId, int? productId, int? userId, bool? isMain)
         {
-            if (string.IsNullOrWhiteSpace(fileName) || string.IsNullOrWhiteSpace(fileUrl) || fileType == null)
+            if (string.IsNullOrWhiteSpace(fileName) || string.IsNullOrWhiteSpace(fileContent) || fileType == null)
                 throw new ArgumentException("Invalid file data");
+
+            var imageKit = new ImagekitClient(
+                _imageKitSettings.PublicKey,
+                _imageKitSettings.PrivateKey,
+                _imageKitSettings.UrlEndpoint
+            );
+
+            var base64Data = fileContent;
+            if (fileContent.Contains(","))
+            {
+                base64Data = fileContent.Substring(fileContent.IndexOf(",") + 1);
+            }
+
+            var uniqueFileName = $"{Guid.NewGuid()}_{fileName}";
+
+            var uploadResponse = await imageKit.UploadAsync(new FileCreateRequest
+            {
+                file = base64Data,
+                fileName = uniqueFileName,
+                folder = "products"
+            });
+
+            if (uploadResponse == null || string.IsNullOrEmpty(uploadResponse.url))
+                throw new Exception("ImageKit upload failed");
+
+            var fileUrl = uploadResponse.url;
 
             var fileEntity = new Likano.Domain.Entities.File
             {
-                FileName = fileName,  
+                FileName = uniqueFileName,
                 FileUrl = fileUrl,
                 FileType = fileType.Value,
                 UploadDate = DateTime.UtcNow.AddHours(4),
@@ -128,7 +160,8 @@ namespace Likano.Infrastructure.Repositories
                 BrandId = brandId,
                 CategoryId = categoryId,
                 ProductId = productId,
-                UserId = userId
+                UserId = userId,
+                MainImage = isMain
             };
 
             _db.Files.Add(fileEntity);
@@ -346,6 +379,17 @@ namespace Likano.Infrastructure.Repositories
             _db.Products.Add(product);
             await _db.SaveChangesAsync();
             return product.Id;
+        }
+
+        public async Task<bool> UpdateProductImageUrlAsync(int productId, string? imageUrl)
+        {
+            var product = await _db.Products.FindAsync(productId);
+            if (product == null)
+                return false;
+
+            product.ImageUrl = imageUrl;
+            await _db.SaveChangesAsync();
+            return true;
         }
     }
 }

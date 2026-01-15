@@ -41,30 +41,27 @@ namespace Likano.Application.Features.Manage.Product.Commands.Create
             string? mainImageUrl = null;
             if (request.Images != null && request.Images.Count > 0)
             {
+                bool hasMainSelected = request.Images.Any(x => x.IsMain);
+
                 for (int i = 0; i < request.Images.Count; i++)
                 {
                     var photo = request.Images[i];
-                    string? fileUrl = null;
+                    bool isMain = photo.IsMain || (!hasMainSelected && i == 0);
 
                     var fileDto = await _repository.UploadFileAsync(
                         photo.FileName,
                         photo.FileContent,
                         Domain.Enums.File.FileType.Image,
-                        request.BrandId,
-                        request.CategoryId,
+                        null,
+                        null,
                         productId,
-                        null
+                        null,
+                        isMain
                     );
 
-                    if (i == 0)
+                    if (isMain)
                     {
                         mainImageUrl = fileDto.FileUrl;
-                        var fileEntity = await _repository.GetFileAsync(fileDto.Id);
-                        if (fileEntity != null)
-                        {
-                            fileEntity.MainImage = true;
-                            await _repository.EditFile(fileEntity);
-                        }
                     }
                 }
             }
@@ -72,6 +69,7 @@ namespace Likano.Application.Features.Manage.Product.Commands.Create
             if (!string.IsNullOrEmpty(mainImageUrl))
             {
                 product.ImageUrl = mainImageUrl;
+                await _repository.UpdateProductImageUrlAsync(productId, mainImageUrl);
             }
 
             return new CreateProductForManageResponse

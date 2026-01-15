@@ -12,5 +12,6 @@ namespace Likano.Application.Features.Manage.File.Commands.Upload
         public int? BrandId { get; set; }
         public int? ProductId { get; set; }
         public int? UserId { get; set; }
+        public bool? IsMain { get; set; }
     }
 }

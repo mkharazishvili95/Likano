@@ -25,6 +25,7 @@
 
             <form asp-action="CreateProduct" asp-controller="Manage" method="post" enctype="multipart/form-data">
                 @Html.AntiForgeryToken()
+                <input type="hidden" name="mainPhotoIndex" id="mainPhotoIndex" value="0" />
                 <div class="row g-4">
                     <div class="col-12 col-lg-8">
                         <div class="mb-3">
@@ -101,7 +102,8 @@
                         </div>
                         <input id="photosInput" name="photos" type="file" class="form-control" accept="image/*" multiple />
                         <div class="form-text text-muted mt-2 small">
-                            PNG / JPG / WEBP • შეგიძლიათ ატვირთოთ მაქსიმუმ 10 ფოტო
+                            PNG / JPG / WEBP • შეგიძლიათ ატვირთოთ მაქსიმუმ 10 ფოტო<br />
+                            <strong>დააჭირეთ ფოტოს მთავარი სურათის ასარჩევად</strong>
                         </div>
                         <div id="photosLimitMsg" class="text-danger small mt-2" style="display:none;">
                             მაქსიმუმ 10 ფოტო შეგიძლიათ აირჩიოთ!
@@ -146,10 +148,16 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: box-shadow 0.2s;
+            transition: box-shadow 0.2s, border 0.2s;
+            cursor: pointer;
+            border: 3px solid transparent;
         }
         .photo-preview-item:hover {
             box-shadow: 0 4px 16px rgba(0,0,0,0.13);
+        }
+        .photo-preview-item.main-photo {
+            border: 3px solid #28a745;
+            box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.25);
         }
         .photo-preview-img {
             max-width: 100%;
@@ -182,22 +190,38 @@
             color: #fff;
             opacity: 1;
         }
+        .main-badge {
+            position: absolute;
+            bottom: 8px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #28a745;
+            color: #fff;
+            font-size: 10px;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-weight: 600;
+            z-index: 2;
+        }
     </style>
     <script>
         const photosInput = document.getElementById('photosInput');
         const photosPreviewWrapper = document.getElementById('photosPreviewWrapper');
         const clearPhotosBtn = document.getElementById('clearPhotosBtn');
         const photosLimitMsg = document.getElementById('photosLimitMsg');
+        const mainPhotoIndexInput = document.getElementById('mainPhotoIndex');
         const MAX_PHOTOS = 10;
 
         let selectedFiles = [];
+        let mainIndex = 0;
 
         function updatePreview() {
             photosPreviewWrapper.innerHTML = '';
             photosPreviewWrapper.className = 'photo-preview-grid';
             selectedFiles.forEach((file, idx) => {
                 const wrapper = document.createElement('div');
-                wrapper.className = 'photo-preview-item';
+                wrapper.className = 'photo-preview-item' + (idx === mainIndex ? ' main-photo' : '');
+                wrapper.title = 'დააჭირეთ მთავარი ფოტოს ასარჩევად';
 
                 const img = document.createElement('img');
                 img.src = URL.createObjectURL(file);
@@ -209,13 +233,31 @@
                 removeBtn.className = 'photo-remove-btn';
                 removeBtn.innerHTML = '<svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 16 16"><line x1="4" y1="4" x2="12" y2="12"/><line x1="12" y1="4" x2="4" y2="12"/></svg>';
                 removeBtn.title = "ფოტოს წაშლა";
-                removeBtn.onclick = function () {
+                removeBtn.onclick = function (e) {
+                    e.stopPropagation();
                     selectedFiles.splice(idx, 1);
+                    if (mainIndex >= selectedFiles.length) mainIndex = Math.max(0, selectedFiles.length - 1);
+                    if (mainIndex === idx && selectedFiles.length > 0) mainIndex = 0;
+                    mainPhotoIndexInput.value = mainIndex;
                     updatePreview();
                 };
 
                 wrapper.appendChild(img);
                 wrapper.appendChild(removeBtn);
+
+                if (idx === mainIndex) {
+                    const badge = document.createElement('span');
+                    badge.className = 'main-badge';
+                    badge.textContent = 'მთავარი';
+                    wrapper.appendChild(badge);
+                }
+
+                wrapper.onclick = function () {
+                    mainIndex = idx;
+                    mainPhotoIndexInput.value = mainIndex;
+                    updatePreview();
+                };
+
                 photosPreviewWrapper.appendChild(wrapper);
             });
         }
@@ -239,6 +281,8 @@
 
         clearPhotosBtn?.addEventListener('click', function () {
             selectedFiles = [];
+            mainIndex = 0;
+            mainPhotoIndexInput.value = 0;
             updatePreview();
             photosLimitMsg.style.display = 'none';
         });

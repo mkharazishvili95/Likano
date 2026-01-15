@@ -1,6 +1,5 @@
 using Likano.Application.DTOs;
 using MediatR;
-using Microsoft.AspNetCore.Http;
 
 namespace Likano.Application.Features.Manage.Product.Commands.Create
 {

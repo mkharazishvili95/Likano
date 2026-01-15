@@ -89,7 +89,7 @@ namespace Likano.Application.Features.Manage.File.Commands.Upload
 
             string fileUrl = uploadResult.url;
 
-            var fileDto = await _manageRepository.UploadFileAsync(request.FileName, fileUrl, request.FileType, request.BrandId, request.CategoryId, request.ProductId, request.UserId);
+            var fileDto = await _manageRepository.UploadFileAsync(request.FileName, fileUrl, request.FileType, request.BrandId, request.CategoryId, request.ProductId, request.UserId, request.IsMain);
 
             return new UploadFileForManageResponse
             {

@@ -1067,8 +1067,8 @@ namespace Likano.Web.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> CreateProduct(string title, string? description, decimal? price, int categoryId,
-            int? brandId, int? producerCountryId, string? material, decimal? length , decimal? width,
-            decimal? height, string? color, List<IFormFile>? photos, CancellationToken ct)
+        int? brandId, int? producerCountryId, string? material, decimal? length, decimal? width,
+        decimal? height, string? color, List<IFormFile>? photos, int? mainPhotoIndex, CancellationToken ct)
         {
             if (string.IsNullOrWhiteSpace(title))
             {
@@ -1086,8 +1086,9 @@ namespace Likano.Web.Controllers
             var photoPayloads = new List<object>();
             if (photos != null && photos.Count > 0)
             {
-                foreach (var photo in photos)
+                for (int i = 0; i < photos.Count; i++)
                 {
+                    var photo = photos[i];
                     if (photo.Length > 0)
                     {
                         using var ms = new MemoryStream();
@@ -1097,7 +1098,8 @@ namespace Likano.Web.Controllers
                         photoPayloads.Add(new
                         {
                             FileName = photo.FileName,
-                            FileContent = $"data:{mime};base64,{base64}"
+                            FileContent = $"data:{mime};base64,{base64}",
+                            IsMain = (mainPhotoIndex.HasValue && mainPhotoIndex.Value == i) || (!mainPhotoIndex.HasValue && i == 0)
                         });
                     }
                 }
@@ -1116,7 +1118,7 @@ namespace Likano.Web.Controllers
                 Width = width,
                 Height = height,
                 Color = color,
-                Photos = photoPayloads
+                Images = photoPayloads
             };
 
             var apiUrl = $"{_baseUrl}/manage/product/create";

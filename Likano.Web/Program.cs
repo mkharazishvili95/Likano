@@ -4,6 +4,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Globalization;
 using System.Text;
 using Likano.Web.Infrastructure;
+using Likano.Application.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -69,6 +70,8 @@ builder.Services
             }
         };
     });
+
+builder.Services.Configure<ImageKitSettings>(builder.Configuration.GetSection("ImageKit"));
 
 var app = builder.Build();
 
