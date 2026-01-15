@@ -18,8 +18,10 @@ using Likano.Application.Features.Manage.ProducerCountry.Queries.GetAll;
 using Likano.Application.Features.Manage.Product.Commands.ChangeCategory;
 using Likano.Application.Features.Manage.Product.Commands.ChangeStatus;
 using Likano.Application.Features.Manage.Product.Commands.Create;
+using Likano.Application.Features.Manage.Product.Commands.Edit;
 using Likano.Application.Features.Manage.Product.Queries.Get;
 using Likano.Application.Features.Manage.Product.Queries.GetAll;
+using Likano.Application.Interfaces;
 using Likano.Domain.Entities;
 using Likano.Domain.Enums.User;
 using MediatR;
@@ -34,14 +36,20 @@ namespace Likano.Controllers
     public class ManageController : ControllerBase
     {
         readonly IMediator _mediator;
-        public ManageController(IMediator mediator)
+        readonly IManageRepository _manageRepository;
+        public ManageController(IMediator mediator, IManageRepository manageRepository)
         {
             _mediator = mediator;
+            _manageRepository = manageRepository;
         }
 
         [HttpPost("product/create")]
         public async Task<CreateProductForManageResponse> CreateProduct([FromBody] CreateProductForManageCommand request)
             => await _mediator.Send(request);
+
+        [HttpPost("edit/product")]
+        public async Task<EditProductForManageResponse> EditProduct([FromBody] EditProductForManageCommand command)
+            => await _mediator.Send(command);
 
         [HttpGet("product/{id}")]
         public async Task<GetProductForManageResponse> GetProduct(int id)
@@ -126,5 +134,18 @@ namespace Likano.Controllers
         [HttpDelete("delete/producer-country/{id}")]
         public async Task<DeleteProducerCountryForManageResponse> DeleteProducerCountry(int id)
             => await _mediator.Send(new DeleteProducerCountryForManageCommand { Id = id });
+
+        [HttpGet("product/{id}/images")]
+        public async Task<IActionResult> GetProductImages(int id)
+        {
+            var images = await _manageRepository.GetProductImagesAsync(id);
+            var result = images.Select(i => new
+            {
+                Id = i.Id,
+                FileUrl = i.FileUrl,
+                IsMain = i.MainImage ?? false
+            }).ToList();
+            return Ok(result);
+        }
     }
 }

@@ -138,7 +138,14 @@
                                                     <option value="">-- აირჩიეთ ბრენდი --</option>
                                                     @foreach (var b in brands)
                                                     {
-                                                        <option value="@b.Id" @@(b.Id == product.BrandId ? "selected" : "")>@b.Name</option>
+                                                        if (b.Id == product.BrandId)
+                                                        {
+                                                            <option value="@b.Id" selected>@b.Name</option>
+                                                        }
+                                                        else
+                                                        {
+                                                            <option value="@b.Id">@b.Name</option>
+                                                        }
                                                     }
                                                 </select>
                                             </div>
@@ -188,7 +195,14 @@
                                                     <option value="">-- აირჩიეთ კატეგორია --</option>
                                                     @foreach (var c in categories)
                                                     {
-                                                        <option value="@c.Id" @@(c.Id == product.CategoryId ? "selected" : "")>@c.Name</option>
+                                                        if (c.Id == product.CategoryId)
+                                                        {
+                                                            <option value="@c.Id" selected>@c.Name</option>
+                                                        }
+                                                        else
+                                                        {
+                                                            <option value="@c.Id">@c.Name</option>
+                                                        }
                                                     }
                                                 </select>
                                             </div>
@@ -305,7 +319,14 @@
                                                     <option value="">-- აირჩიეთ ქვეყანა --</option>
                                                     @foreach (var country in countries)
                                                     {
-                                                        <option value="@country.Id" @@(country.Id == product.ProducerCountryId ? "selected" : "")>@country.Name</option>
+                                                        if (country.Id == product.ProducerCountryId)
+                                                        {
+                                                            <option value="@country.Id" selected>@country.Name</option>
+                                                        }
+                                                        else
+                                                        {
+                                                            <option value="@country.Id">@country.Name</option>
+                                                        }
                                                     }
                                                 </select>
                                             </div>
@@ -391,7 +412,7 @@
                     <div class="text-end">
                         @if (product.Status != ProductStatus.Deleted)
                         {
-                            <a asp-controller="Manage" asp-action="Edit" asp-route-id="@product.Id"
+                            <a asp-controller="Manage" asp-action="EditProduct" asp-route-id="@product.Id"
                                class="btn btn-outline-primary shadow-sm me-2">
                                 <i class="fas fa-edit me-2"></i>რედაქტირება
                             </a>

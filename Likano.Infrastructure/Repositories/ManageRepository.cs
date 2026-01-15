@@ -391,5 +391,43 @@ namespace Likano.Infrastructure.Repositories
             await _db.SaveChangesAsync();
             return true;
         }
+
+        public async Task<bool> UpdateProductAsync(Product product)
+        {
+            _db.Products.Update(product);
+            await _db.SaveChangesAsync();
+            return true;
+        }
+
+        public async Task<bool> SetMainImageAsync(int productId, int fileId)
+        {
+            var allImages = await _db.Files
+                .Where(f => f.ProductId == productId && !f.IsDeleted)
+                .ToListAsync();
+
+            foreach (var img in allImages)
+            {
+                img.MainImage = img.Id == fileId;
+            }
+
+            await _db.SaveChangesAsync();
+            return true;
+        }
+
+        public async Task<Domain.Entities.File?> GetMainImageForProductAsync(int productId)
+        {
+            return await _db.Files
+                .Where(f => f.ProductId == productId && !f.IsDeleted && f.MainImage == true)
+                .FirstOrDefaultAsync();
+        }
+
+        public async Task<List<Domain.Entities.File>> GetProductImagesAsync(int productId)
+        {
+            return await _db.Files
+                .Where(f => f.ProductId == productId && !f.IsDeleted)
+                .OrderByDescending(f => f.MainImage)
+                .ThenBy(f => f.Id)
+                .ToListAsync();
+        }
     }
 }

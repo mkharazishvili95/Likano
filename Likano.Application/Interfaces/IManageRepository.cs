@@ -30,6 +30,7 @@ namespace Likano.Application.Interfaces
         Task<List<ProducerCountry>?> GetAllProducerCountries();
         Task<bool> DeleteProducerCountry(int countryId);
         Task<int> AddProductAsync(Product product);
+        Task<bool> UpdateProductAsync(Product product);
         //ფაილებისთვის - ფოტოებისთვის:
         Task<FileDto> UploadFileAsync(string? fileName, string? fileUrl, FileType? fileType, int? brandId, int? categoryId, int? productId, int? userId, bool? isMain);
         Task<Likano.Domain.Entities.File?> GetFileAsync(int id);
@@ -40,5 +41,8 @@ namespace Likano.Application.Interfaces
         Task<bool> UpdateBrandLogoAsync(int brandId, string? logoUrl);
         Task<bool> UpdateCategoryLogoAsync(int categoryId, string? logoUrl);
         Task<bool> UpdateProductImageUrlAsync(int productId, string? imageUrl);
+        Task<bool> SetMainImageAsync(int productId, int fileId);
+        Task<Domain.Entities.File?> GetMainImageForProductAsync(int productId);
+        Task<List<Domain.Entities.File>> GetProductImagesAsync(int productId);
     }
 }

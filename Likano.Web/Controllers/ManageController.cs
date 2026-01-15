@@ -21,6 +21,7 @@ using Likano.Application.Features.Manage.ProducerCountry.Queries.GetAll;
 using Likano.Application.Features.Manage.Product.Commands.ChangeCategory;
 using Likano.Application.Features.Manage.Product.Commands.ChangeStatus;
 using Likano.Application.Features.Manage.Product.Commands.Create;
+using Likano.Application.Features.Manage.Product.Commands.Edit;
 using Likano.Application.Features.Manage.Product.Queries.Get;
 using Likano.Application.Features.Manage.Product.Queries.GetAll;
 using Likano.Domain.Entities;
@@ -1142,6 +1143,129 @@ namespace Likano.Web.Controllers
 
             TempData["SuccessMessage"] = resp.Message ?? "პროდუქტი წარმატებით შეიქმნა";
             return RedirectToAction(nameof(Products));
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> EditProduct(int id)
+        {
+            if (id <= 0)
+                return NotFound();
+
+            var apiUrl = $"{_baseUrl}/manage/product/{id}";
+            var apiResponse = await _httpClient.GetAsync(apiUrl);
+            if (!apiResponse.IsSuccessStatusCode)
+                return View("NotFound");
+
+            var product = await apiResponse.Content.ReadFromJsonAsync<GetProductForManageResponse>();
+            if (product == null || product.Success == false)
+                return View("NotFound");
+
+            var imagesUrl = $"{_baseUrl}/manage/product/{id}/images";
+            var imagesResponse = await _httpClient.GetAsync(imagesUrl);
+            var existingImages = new List<ProductImageDto>();
+            if (imagesResponse.IsSuccessStatusCode)
+            {
+                existingImages = await imagesResponse.Content.ReadFromJsonAsync<List<ProductImageDto>>() ?? new();
+            }
+
+            var categories = await LoadCategories();
+            var brands = await LoadBrands();
+            var countries = await LoadCountries();
+
+            var vm = new EditProductViewModel
+            {
+                Product = product,
+                Categories = categories,
+                Brands = brands,
+                Countries = countries,
+                ExistingImages = existingImages
+            };
+
+            return View("EditProduct", vm);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditProduct(int id, string title,  string? description, decimal? price, int categoryId, int? brandId, int? producerCountryId, 
+            string? material, decimal? length, decimal? width, decimal? height, string? color, List<IFormFile>? photos, int mainPhotoIndex, int? existingMainImageId, string? deletedImageIds, CancellationToken ct)
+        {
+            if (id <= 0)
+            {
+                TempData["ErrorMessage"] = "არასწორი პროდუქტის ID.";
+                return RedirectToAction(nameof(Products));
+            }
+
+            if (string.IsNullOrWhiteSpace(title))
+            {
+                ModelState.AddModelError(nameof(title), "სათაური აუცილებელია.");
+                return await EditProduct(id);
+            }
+
+            var newImages = new List<PhotoUploadDto>();
+            if (photos != null && photos.Count > 0)
+            {
+                for (int i = 0; i < photos.Count; i++)
+                {
+                    var photo = photos[i];
+                    if (photo.Length > 0)
+                    {
+                        using var ms = new MemoryStream();
+                        await photo.CopyToAsync(ms, ct);
+                        var base64 = Convert.ToBase64String(ms.ToArray());
+                        var mime = photo.ContentType;
+                        var dataUrl = $"data:{mime};base64,{base64}";
+
+                        newImages.Add(new PhotoUploadDto
+                        {
+                            FileName = photo.FileName,
+                            FileContent = dataUrl,
+                            IsMain = i == mainPhotoIndex && !existingMainImageId.HasValue
+                        });
+                    }
+                }
+            }
+
+            var deletedIds = new List<int>();
+            if (!string.IsNullOrWhiteSpace(deletedImageIds))
+            {
+                deletedIds = deletedImageIds.Split(',', StringSplitOptions.RemoveEmptyEntries)
+                    .Select(x => int.TryParse(x, out var val) ? val : 0)
+                    .Where(x => x > 0)
+                    .ToList();
+            }
+
+            var payload = new
+            {
+                Id = id,
+                Title = title,
+                Description = description,
+                Price = price,
+                CategoryId = categoryId,
+                BrandId = brandId,
+                ProducerCountryId = producerCountryId,
+                Material = material,
+                Length = length,
+                Width = width,
+                Height = height,
+                Color = color,
+                NewImages = newImages,
+                MainImageId = existingMainImageId,
+                DeletedImageIds = deletedIds
+            };
+
+            var apiUrl = $"{_baseUrl}/manage/edit/product";
+            var apiResponse = await _httpClient.PostAsJsonAsync(apiUrl, payload, ct);
+
+            if (!apiResponse.IsSuccessStatusCode)
+            {
+                TempData["ErrorMessage"] = "პროდუქტის რედაქტირება ვერ მოხერხდა.";
+                return await EditProduct(id);
+            }
+
+            var resp = await apiResponse.Content.ReadFromJsonAsync<EditProductForManageResponse>();
+            TempData[(resp?.Success ?? false) ? "SuccessMessage" : "ErrorMessage"] = resp?.Message ?? "შეცდომა.";
+
+            return RedirectToAction(nameof(Details), new { id });
         }
 
         private async Task PopulateProductDropdowns()
