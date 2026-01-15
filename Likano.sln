@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Likano.Application", "Likan
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Likano.Web", "Likano.Web\Likano.Web.csproj", "{B96AC6A6-8EF9-4133-B31B-8702866D90DA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Likano.Tests", "Likano.Tests\Likano.Tests.csproj", "{678413A3-A89A-466A-B40F-0A4556B2A9CD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{B96AC6A6-8EF9-4133-B31B-8702866D90DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B96AC6A6-8EF9-4133-B31B-8702866D90DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B96AC6A6-8EF9-4133-B31B-8702866D90DA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{678413A3-A89A-466A-B40F-0A4556B2A9CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{678413A3-A89A-466A-B40F-0A4556B2A9CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{678413A3-A89A-466A-B40F-0A4556B2A9CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{678413A3-A89A-466A-B40F-0A4556B2A9CD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
