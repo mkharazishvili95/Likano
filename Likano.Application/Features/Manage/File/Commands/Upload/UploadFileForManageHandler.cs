@@ -72,7 +72,7 @@ namespace Likano.Application.Features.Manage.File.Commands.Upload
             var uploadRequest = new FileCreateRequest
             {
                 fileName = uniqueFileName,
-                folder = "/gifts",
+                folder = "/likano",
                 useUniqueFileName = true,
                 file = base64Data
             };
