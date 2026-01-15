@@ -55,17 +55,15 @@
                             <label for="categoryId" class="form-label small fw-medium">კატეგორია <span class="text-danger">*</span></label>
                             <select name="categoryId" id="categoryId" class="form-control" required>
                                 <option value="">აირჩიეთ</option>
-                                @{
-                                    foreach (var c in categories)
+                                @foreach (var c in categories)
+                                {
+                                    if (c.Id == product.CategoryId)
                                     {
-                                        if (c.Id == product.CategoryId)
-                                        {
-                                            <option value="@c.Id" selected>@c.Name</option>
-                                        }
-                                        else
-                                        {
-                                            <option value="@c.Id">@c.Name</option>
-                                        }
+                                        <option value="@c.Id" selected>@c.Name</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@c.Id">@c.Name</option>
                                     }
                                 }
                             </select>
@@ -74,17 +72,15 @@
                             <label for="brandId" class="form-label small fw-medium">ბრენდი</label>
                             <select name="brandId" id="brandId" class="form-control">
                                 <option value="">აირჩიეთ</option>
-                                @{
-                                    foreach (var b in brands)
+                                @foreach (var b in brands)
+                                {
+                                    if (b.Id == product.BrandId)
                                     {
-                                        if (b.Id == product.BrandId)
-                                        {
-                                            <option value="@b.Id" selected>@b.Name</option>
-                                        }
-                                        else
-                                        {
-                                            <option value="@b.Id">@b.Name</option>
-                                        }
+                                        <option value="@b.Id" selected>@b.Name</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@b.Id">@b.Name</option>
                                     }
                                 }
                             </select>
@@ -93,17 +89,15 @@
                             <label for="producerCountryId" class="form-label small fw-medium">მწარმოებელი ქვეყანა</label>
                             <select name="producerCountryId" id="producerCountryId" class="form-control">
                                 <option value="">აირჩიეთ</option>
-                                @{
-                                    foreach (var c in countries)
+                                @foreach (var c in countries)
+                                {
+                                    if (c.Id == product.ProducerCountryId)
                                     {
-                                        if (c.Id == product.ProducerCountryId)
-                                        {
-                                            <option value="@c.Id" selected>@c.Name</option>
-                                        }
-                                        else
-                                        {
-                                            <option value="@c.Id">@c.Name</option>
-                                        }
+                                        <option value="@c.Id" selected>@c.Name</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@c.Id">@c.Name</option>
                                     }
                                 }
                             </select>
@@ -189,25 +183,6 @@
     </div>
 </div>
 
-<!-- Delete Confirmation Modal -->
-<div class="modal fade" id="deletePhotoModal" tabindex="-1" aria-labelledby="deletePhotoModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="deletePhotoModalLabel">ფოტოს წაშლა</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <p>ნამდვილად გსურთ ფოტოს წაშლა?</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" id="cancelDeletePhoto">არა</button>
-                <button type="button" class="btn btn-danger" id="confirmDeletePhoto">კი, წაშლა</button>
-            </div>
-        </div>
-    </div>
-</div>
-
 @section Scripts {
     <style>
         .photo-preview-grid {
@@ -216,6 +191,7 @@
             gap: 12px;
             justify-content: flex-start;
         }
+
         .photo-preview-item {
             position: relative;
             width: 100px;
@@ -231,23 +207,28 @@
             border: 3px solid transparent;
             transition: all 0.2s;
         }
-        .photo-preview-item:hover {
-            box-shadow: 0 4px 16px rgba(0,0,0,0.13);
-        }
-        .photo-preview-item.main-photo {
-            border: 3px solid #28a745;
-            box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.25);
-        }
-        .photo-preview-item.deleted {
-            opacity: 0.3;
-            pointer-events: none;
-        }
+
+            .photo-preview-item:hover {
+                box-shadow: 0 4px 16px rgba(0,0,0,0.13);
+            }
+
+            .photo-preview-item.main-photo {
+                border: 3px solid #28a745;
+                box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.25);
+            }
+
+            .photo-preview-item.deleted {
+                opacity: 0.3;
+                pointer-events: none;
+            }
+
         .photo-preview-img {
             max-width: 100%;
             max-height: 100%;
             object-fit: cover;
             border-radius: 10px;
         }
+
         .photo-remove-btn {
             position: absolute;
             top: 4px;
@@ -264,10 +245,12 @@
             cursor: pointer;
             z-index: 2;
         }
-        .photo-remove-btn:hover {
-            background: #dc3545;
-            color: #fff;
-        }
+
+            .photo-remove-btn:hover {
+                background: #dc3545;
+                color: #fff;
+            }
+
         .main-badge {
             position: absolute;
             bottom: 4px;
@@ -292,18 +275,11 @@
             const mainPhotoIndexInput = document.getElementById('mainPhotoIndex');
             const existingMainImageIdInput = document.getElementById('existingMainImageId');
             const deletedImageIdsInput = document.getElementById('deletedImageIds');
-            const deleteModalEl = document.getElementById('deletePhotoModal');
             const MAX_PHOTOS = 10;
 
             let selectedFiles = [];
             let mainIndex = -1;
             let deletedIds = [];
-            let photoToDelete = null;
-            let deleteModal = null;
-
-            if (deleteModalEl) {
-                deleteModal = new bootstrap.Modal(deleteModalEl);
-            }
 
             document.querySelectorAll('#existingPhotosWrapper .photo-preview-item').forEach(item => {
                 item.addEventListener('click', function (e) {
@@ -336,35 +312,19 @@
                 btn.addEventListener('click', function (e) {
                     e.stopPropagation();
                     e.preventDefault();
-                    photoToDelete = this.dataset.id;
-                    if (deleteModal) {
-                        deleteModal.show();
+
+                    if (confirm('ნამდვილად გსურთ ფოტოს წაშლა?')) {
+                        const id = this.dataset.id;
+                        deletedIds.push(parseInt(id));
+                        deletedImageIdsInput.value = deletedIds.join(',');
+
+                        const item = document.querySelector('#existingPhotosWrapper .photo-preview-item[data-id="' + id + '"]');
+                        if (item) {
+                            item.classList.add('deleted');
+                            item.style.display = 'none';
+                        }
                     }
                 });
-            });
-
-            document.getElementById('confirmDeletePhoto').addEventListener('click', function () {
-                if (photoToDelete) {
-                    deletedIds.push(parseInt(photoToDelete));
-                    deletedImageIdsInput.value = deletedIds.join(',');
-
-                    const item = document.querySelector('#existingPhotosWrapper .photo-preview-item[data-id="' + photoToDelete + '"]');
-                    if (item) {
-                        item.classList.add('deleted');
-                        item.style.display = 'none';
-                    }
-                    photoToDelete = null;
-                }
-                if (deleteModal) {
-                    deleteModal.hide();
-                }
-            });
-
-            document.getElementById('cancelDeletePhoto').addEventListener('click', function () {
-                photoToDelete = null;
-                if (deleteModal) {
-                    deleteModal.hide();
-                }
             });
 
             function updatePreview() {
