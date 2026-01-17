@@ -37,6 +37,7 @@ builder.Services.AddScoped<IManageRepository, ManageRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IProductQueries, ProductQueries>();
 builder.Services.AddScoped<IBrandRepository, BrandRepository>();
+builder.Services.AddScoped<IProducerCountryRepository, ProducerCountryRepository>();
 
 builder.Services.AddScoped<RegisterUserValidator>();
 
