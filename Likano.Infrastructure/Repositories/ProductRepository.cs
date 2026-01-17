@@ -20,5 +20,21 @@ namespace Likano.Infrastructure.Repositories
             .Where(x => x.Status == Domain.Enums.ProductStatus.Active)
             .AsNoTracking()
             .ToListAsync();
+
+        public async Task<List<Product>?> GetAllForSearch()
+        {
+            return await _db.Products
+                .Include(x => x.Category)
+                .Include(x => x.Brand)
+                .Include(x => x.ProducerCountry)
+                .Include(x => x.Images.Where(img => !img.IsDeleted))
+                .Where(x =>
+                    x.Status == Domain.Enums.ProductStatus.Active &&
+                    x.Category != null && x.Category.IsActive == true &&
+                    x.Brand != null && x.Brand.IsActive == true
+                )
+                .AsNoTracking()
+                .ToListAsync();
+        }
     }
 }

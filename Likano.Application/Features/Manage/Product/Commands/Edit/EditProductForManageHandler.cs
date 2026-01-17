@@ -32,6 +32,7 @@ namespace Likano.Application.Features.Manage.Product.Commands.Edit
             product.Height = request.Height;
             product.Color = request.Color;
             product.UpdateDate = DateTime.UtcNow.AddHours(4);
+            product.Code = request.Code;
 
             await _repository.UpdateProductAsync(product);
 

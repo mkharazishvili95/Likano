@@ -54,6 +54,7 @@ namespace Likano.Application.Features.Manage.Product.Queries.GetAll
                     Width = p.Width,
                     Height = p.Height,
                     Color = p.Color,
+                    Code = p.Code,
                     ProducerCountryId = p.ProducerCountryId,
                     BrandId = p.BrandId
                 }).ToList()

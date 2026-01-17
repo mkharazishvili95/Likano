@@ -6,5 +6,6 @@ namespace Likano.Application.Interfaces
     {
         Task<Product?> Get(int id);
         Task<List<Product>?> GetAll();
+        Task<List<Product>?> GetAllForSearch();
     }
 }

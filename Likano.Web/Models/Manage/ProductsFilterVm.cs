@@ -29,5 +29,6 @@ namespace Likano.Web.Models.Manage
         public string? Color { get; set; }
         public int? ProducerCountryId { get; set; }
         public int? BrandId { get; set; }
+        public string? Code { get; set; }
     }
 }

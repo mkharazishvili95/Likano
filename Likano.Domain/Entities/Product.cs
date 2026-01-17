@@ -24,5 +24,7 @@ namespace Likano.Domain.Entities
         public string? Color { get; set; }
         public ProducerCountry? ProducerCountry { get; set; } // მწარმოებელი ქვეყანა
         public int? ProducerCountryId { get; set; }
+        public ICollection<Likano.Domain.Entities.File>? Images { get; set; }
+        public string? Code { get; set; }
     }
 }

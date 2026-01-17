@@ -19,6 +19,7 @@
         CategoryId = Model.Filter.CategoryId,
         ImageUrl = Model.Filter.ImageUrl,
         Material = Model.Filter.Material,
+        Code = Model.Filter.Code,
         LengthFrom = Model.Filter.LengthFrom,
         LengthTo = Model.Filter.LengthTo,
         WidthFrom = Model.Filter.WidthFrom,
@@ -175,6 +176,12 @@
                 </div>
 
                 <div class="col-6 col-md-2">
+                    <label class="form-label small fw-medium">კოდი</label>
+                    <input type="text" name="Code" value="@Model.Filter.Code"
+                           class="form-control form-control-sm" placeholder="კოდი" />
+                </div>
+
+                <div class="col-6 col-md-2">
                     <label class="form-label small fw-medium">სიგრძე (დან)</label>
                     <input type="number" step="0.01" name="LengthFrom"
                            value="@(Model.Filter.LengthFrom?.ToString(System.Globalization.CultureInfo.InvariantCulture))"
@@ -247,6 +254,7 @@
                             <th>კატეგორია</th>
                             <th>ბრენდი</th>
                             <th>მასალა</th>
+                            <td>კოდი</td>
                             <th>სიგრძე</th>
                             <th>სიგანე</th>
                             <th>სიმაღლე</th>
@@ -297,6 +305,7 @@
                                     <td>@categoryName</td>
                                     <td>@brandName</td>
                                     <td>@p.Material</td>
+                                    <td>@p.Code</td>
                                     <td>@p.Length</td>
                                     <td>@p.Width</td>
                                     <td>@p.Height</td>

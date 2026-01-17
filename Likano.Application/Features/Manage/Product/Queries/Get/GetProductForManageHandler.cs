@@ -41,6 +41,7 @@ namespace Likano.Application.Features.Manage.Product.Queries.Get
                 Width = product.Width,
                 Height = product.Height,
                 Color = product.Color,
+                Code = product.Code,
                 ProducerCountryId = product.ProducerCountryId,
                 ProducerCountryName = product.ProducerCountry?.Name,
                 Success = true,

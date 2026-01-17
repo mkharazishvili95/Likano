@@ -82,7 +82,8 @@ namespace Likano.Web.Controllers
                 HeightFrom = filter.HeightFrom,
                 HeightTo = filter.HeightTo,
                 Color = string.IsNullOrWhiteSpace(filter.Color) ? null : filter.Color.Trim(),
-                ProducerCountryId = filter.ProducerCountryId
+                ProducerCountryId = filter.ProducerCountryId,
+                Code = string.IsNullOrWhiteSpace(filter.Code) ? null : filter.Code.Trim()
             };
 
             var apiUrl = $"{_baseUrl}/manage/products";
@@ -1069,7 +1070,7 @@ namespace Likano.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> CreateProduct(string title, string? description, decimal? price, int categoryId,
         int? brandId, int? producerCountryId, string? material, decimal? length, decimal? width,
-        decimal? height, string? color, List<IFormFile>? photos, int? mainPhotoIndex, CancellationToken ct)
+        decimal? height, string? color, List<IFormFile>? photos, int? mainPhotoIndex, string? code, CancellationToken ct)
         {
             if (string.IsNullOrWhiteSpace(title))
             {
@@ -1119,7 +1120,8 @@ namespace Likano.Web.Controllers
                 Width = width,
                 Height = height,
                 Color = color,
-                Images = photoPayloads
+                Images = photoPayloads,
+                Code = code
             };
 
             var apiUrl = $"{_baseUrl}/manage/product/create";
@@ -1187,7 +1189,7 @@ namespace Likano.Web.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> EditProduct(int id, string title,  string? description, decimal? price, int categoryId, int? brandId, int? producerCountryId, 
-            string? material, decimal? length, decimal? width, decimal? height, string? color, List<IFormFile>? photos, int mainPhotoIndex, int? existingMainImageId, string? deletedImageIds, CancellationToken ct)
+            string? material, decimal? length, decimal? width, decimal? height, string? color, List<IFormFile>? photos, int mainPhotoIndex, int? existingMainImageId, string? deletedImageIds, string? code, CancellationToken ct)
         {
             if (id <= 0)
             {
@@ -1250,7 +1252,8 @@ namespace Likano.Web.Controllers
                 Color = color,
                 NewImages = newImages,
                 MainImageId = existingMainImageId,
-                DeletedImageIds = deletedIds
+                DeletedImageIds = deletedIds,
+                Code = code
             };
 
             var apiUrl = $"{_baseUrl}/manage/edit/product";

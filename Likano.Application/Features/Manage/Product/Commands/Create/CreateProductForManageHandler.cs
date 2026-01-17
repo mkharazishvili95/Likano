@@ -14,7 +14,7 @@ namespace Likano.Application.Features.Manage.Product.Commands.Create
         public async Task<CreateProductForManageResponse> Handle(CreateProductForManageCommand request, CancellationToken cancellationToken)
         {
             if (string.IsNullOrEmpty(request.Title))
-                return new CreateProductForManageResponse { Message = "სათაური აუცილებელია.", Success = false, StatusCode = 400 };
+                return new CreateProductForManageResponse { Message = "სათაური სავალდებულოა.", Success = false, StatusCode = 400 };
 
             var product = new Likano.Domain.Entities.Product
             {
@@ -33,7 +33,8 @@ namespace Likano.Application.Features.Manage.Product.Commands.Create
                 UpdateDate = DateTime.UtcNow.AddHours(4),
                 CategoryId = request.CategoryId,
                 BrandId = request.BrandId,
-                ProducerCountryId = request.ProducerCountryId
+                ProducerCountryId = request.ProducerCountryId,
+                Code = request.Code
             };
 
             var productId = await _repository.AddProductAsync(product);

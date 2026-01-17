@@ -27,5 +27,6 @@ namespace Likano.Application.Features.Manage.Product.Queries.GetAll
         public string? Color { get; set; }
         public int? ProducerCountryId { get; set; }
         public int? BrandId { get; set; }
+        public string? Code { get; set; }
     }
 }

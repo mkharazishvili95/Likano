@@ -19,5 +19,6 @@ namespace Likano.Application.Features.Manage.Product.Commands.Create
         public decimal? Height { get; set; }
         public string? Color { get; set; }
         public List<PhotoUploadDto>? Images { get; set; }
+        public string? Code { get; set; }
     }
 }
