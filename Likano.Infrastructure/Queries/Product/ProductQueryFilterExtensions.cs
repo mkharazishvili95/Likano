@@ -1,0 +1,32 @@
+using Likano.Infrastructure.Queries.Product.Models;
+
+namespace Likano.Infrastructure.Queries.Product
+{
+    public static class ProductQueryFilterExtensions
+    {
+        public static string ToWhereClause(this GetAllProductsForSearchQuery request)
+        {
+            var whereConditions = new List<string> { "1=1" };
+
+            void Add(string? condition, bool add) { if (add) whereConditions.Add(condition!); }
+
+            Add($"(p.Title LIKE '%{request.SearchString}%' OR p.Description LIKE '%{request.SearchString}%')", !string.IsNullOrEmpty(request.SearchString));
+            Add($"p.Title LIKE '%{request.Title}%'", !string.IsNullOrEmpty(request.Title));
+            Add($"p.Price >= {request.PriceFrom}", request.PriceFrom.HasValue);
+            Add($"p.Price <= {request.PriceTo}", request.PriceTo.HasValue);
+            Add($"p.IsAvailable = {(request.IsAvailable == true ? 1 : 0)}", request.IsAvailable.HasValue);
+            Add($"p.CategoryId = {request.CategoryId}", request.CategoryId.HasValue);
+            Add($"p.BrandId = {request.BrandId}", request.BrandId.HasValue);
+            Add($"p.ProducerCountryId = {request.ProducerCountryId}", request.ProducerCountryId.HasValue);
+            Add($"p.Length >= {request.LengthFrom}", request.LengthFrom.HasValue);
+            Add($"p.Length <= {request.LengthTo}", request.LengthTo.HasValue);
+            Add($"p.Width >= {request.WidthFrom}", request.WidthFrom.HasValue);
+            Add($"p.Width <= {request.WidthTo}", request.WidthTo.HasValue);
+            Add($"p.Height >= {request.HeightFrom}", request.HeightFrom.HasValue);
+            Add($"p.Height <= {request.HeightTo}", request.HeightTo.HasValue);
+            Add($"p.Color LIKE '%{request.Color}%'", !string.IsNullOrEmpty(request.Color));
+
+            return string.Join(" AND ", whereConditions);
+        }
+    }
+}

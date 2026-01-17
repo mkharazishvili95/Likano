@@ -4,6 +4,8 @@ using Likano.Application.Features.Category.Queries.Get;
 using Likano.Application.Features.Manage.Product.Commands.ChangeStatus;
 using Likano.Application.Interfaces;
 using Likano.Infrastructure.Data;
+using Likano.Infrastructure.Queries.Product;
+using Likano.Infrastructure.Queries.Product.Models;
 using Likano.Infrastructure.Repositories;
 using Likano.Middleware;
 using MediatR;
@@ -26,12 +28,14 @@ builder.Services.AddDbContext<ApplicationDbContext>
 
 builder.Services.AddMediatR(x => x.RegisterServicesFromAssemblyContaining<GetCategoryHandler>());
 builder.Services.AddMediatR(x => x.RegisterServicesFromAssemblyContaining<ChangeProductStatusHandler>());
+builder.Services.AddMediatR(x => x.RegisterServicesFromAssemblyContaining<GetAllProductsForSearchHandler>());
 
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped<IManageRepository, ManageRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IProductQueries, ProductQueries>();
 
 builder.Services.AddScoped<RegisterUserValidator>();
 
