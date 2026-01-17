@@ -15,8 +15,6 @@ namespace Likano.Infrastructure.Queries.Product
             {
                 SortBy.PriceAsc => "p.Price ASC",
                 SortBy.PriceDesc => "p.Price DESC",
-                SortBy.Newest => "p.CreateDate DESC",
-                SortBy.Oldest => "p.CreateDate ASC",
                 _ => "p.CreateDate DESC"
             };
 
@@ -25,6 +23,9 @@ namespace Likano.Infrastructure.Queries.Product
             var countQuery = $@"
                 SELECT COUNT(*) AS TotalCount
                 FROM Products p
+                LEFT JOIN Categories c ON c.Id = p.CategoryId
+                LEFT JOIN Brands b ON b.Id = p.BrandId
+                LEFT JOIN ProducerCountries pc ON pc.Id = p.ProducerCountryId
                 WHERE {whereClause}";
 
             var totalCount = await Get(countQuery, reader => reader.GetInt32(reader.GetOrdinal("TotalCount")));

@@ -10,7 +10,13 @@ namespace Likano.Infrastructure.Queries.Product
 
             void Add(string? condition, bool add) { if (add) whereConditions.Add(condition!); }
 
-            Add($"(p.Title LIKE '%{request.SearchString}%' OR p.Description LIKE '%{request.SearchString}%')", !string.IsNullOrEmpty(request.SearchString));
+            Add(
+                $"(p.Title LIKE N'%{request.SearchString}%' OR " +
+                $"p.Description LIKE N'%{request.SearchString}%' OR " +
+                $"c.Name LIKE N'%{request.SearchString}%' OR " +
+                $"b.Name LIKE N'%{request.SearchString}%')",
+                !string.IsNullOrEmpty(request.SearchString)
+            );
             Add($"p.Title LIKE '%{request.Title}%'", !string.IsNullOrEmpty(request.Title));
             Add($"p.Price >= {request.PriceFrom}", request.PriceFrom.HasValue);
             Add($"p.Price <= {request.PriceTo}", request.PriceTo.HasValue);
