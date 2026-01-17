@@ -1,3 +1,4 @@
+using Likano.Infrastructure.Queries.Product.Models;
 using Likano.Web.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
@@ -6,16 +7,27 @@ namespace Likano.Web.Controllers
 {
     public class HomeController : Controller
     {
-        readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        readonly HttpClient _httpClient;
+        readonly string _baseUrl;
+        public HomeController(IHttpClientFactory httpClientFactory, IConfiguration configuration)
         {
-            _logger = logger;
+            _httpClient = httpClientFactory.CreateClient("API");
+            _baseUrl = configuration["ApiSettings:BaseUrl"]!;
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> SearchProducts([FromBody] GetAllProductsForSearchQuery query)
+        {
+            var response = await _httpClient.PostAsJsonAsync($"{_baseUrl}/Product/search", query);
+            if (!response.IsSuccessStatusCode)
+                return StatusCode((int)response.StatusCode);
+
+            var result = await response.Content.ReadFromJsonAsync<GetAllProductsForSearchResponse>();
+            return Json(result);
         }
 
         public IActionResult Index()
         {
-            //return RedirectToAction("Main", "Manage");
             return View();
         }
 
