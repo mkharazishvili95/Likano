@@ -1,4 +1,5 @@
 using Likano.Application.Interfaces;
+using Likano.Domain.Entities;
 using MediatR;
 
 namespace Likano.Application.Features.Category.Queries.GetAll
@@ -26,6 +27,13 @@ namespace Likano.Application.Features.Category.Queries.GetAll
                     .Where(c =>
                         (!string.IsNullOrEmpty(c.Name) && c.Name.Contains(search, StringComparison.OrdinalIgnoreCase)) ||
                         (!string.IsNullOrEmpty(c.Description) && c.Description.Contains(search, StringComparison.OrdinalIgnoreCase)))
+                    .ToList();
+            }
+
+            if (request.Id != null)
+            {
+                categories = categories
+                    .Where(c => c.Id == request.Id)
                     .ToList();
             }
 

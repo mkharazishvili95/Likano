@@ -28,6 +28,12 @@ namespace Likano.Application.Features.Brand.Queries.GetAll
                         (!string.IsNullOrEmpty(c.Description) && c.Description.Contains(search, StringComparison.OrdinalIgnoreCase)))
                     .ToList();
             }
+            if(request.Id != null)
+            {
+                brands = brands
+                    .Where(c => c.Id == request.Id)
+                    .ToList();
+            }
 
             var totalCount = brands.Count;
 

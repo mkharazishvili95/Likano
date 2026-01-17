@@ -7,5 +7,6 @@ namespace Likano.Application.Features.Category.Queries.GetAll
     {
         public Pagination Pagination { get; set; } = new Pagination();
         public string? SearchString { get; set; }
+        public int? Id { get; set; }
     }
 }
