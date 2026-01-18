@@ -18,6 +18,7 @@ using Likano.Application.Features.Manage.ProducerCountry.Commands.Delete;
 using Likano.Application.Features.Manage.ProducerCountry.Commands.Edit;
 using Likano.Application.Features.Manage.ProducerCountry.Queries.Get;
 using Likano.Application.Features.Manage.ProducerCountry.Queries.GetAll;
+using Likano.Application.Features.Manage.Product.Commands.ChangeAvailableStatus;
 using Likano.Application.Features.Manage.Product.Commands.ChangeCategory;
 using Likano.Application.Features.Manage.Product.Commands.ChangeStatus;
 using Likano.Application.Features.Manage.Product.Commands.Create;
@@ -1271,6 +1272,26 @@ namespace Likano.Web.Controllers
             TempData[(resp?.Success ?? false) ? "SuccessMessage" : "ErrorMessage"] = resp?.Message ?? "შეცდომა.";
 
             return RedirectToAction(nameof(Details), new { id });
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ChangeProductAvailableStatus(int productId, bool isAvailable, bool? intoGrid)
+        {
+            var command = new ChangeAvailableStatusCommand
+            {
+                ProductId = productId,
+                IsAvailable = isAvailable
+            };
+
+            var apiUrl = $"{_baseUrl}/manage/product/available-status";
+            var apiResponse = await _httpClient.PostAsJsonAsync(apiUrl, command);
+
+            if (apiResponse.IsSuccessStatusCode)
+            {
+                return intoGrid == true ? RedirectToAction("Products") : RedirectToAction("Details", new { id = productId });
+            }
+
+            return RedirectToAction("Products");
         }
 
         private async Task PopulateProductDropdowns()

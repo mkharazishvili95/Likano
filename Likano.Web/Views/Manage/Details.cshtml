@@ -420,6 +420,14 @@
                             }
                         </div>
                     </div>
+                    <form asp-controller="Manage" asp-action="ChangeProductAvailableStatus" method="post">
+                        <input type="hidden" name="productId" value="@Model.Product.Id" />
+                        <input type="hidden" name="intoGrid" value="false" />
+                        <input type="hidden" name="isAvailable" value="@(Model.Product.IsAvailable == true ? "false" : "true")" />
+                        <button type="submit" class="btn btn-warning">
+                            @(Model.Product.IsAvailable == true ? "ხელმიუწვდომელი" : "ხელმისაწვდომი")
+                        </button>
+                    </form>
 
                     <hr class="my-4">
 

@@ -64,7 +64,7 @@ namespace Likano.Controllers
         public async Task<ChangeProductStatusResponse> ChangeProductStatus([FromBody] ChangeProductStatusCommand command)
             => await _mediator.Send(command);
 
-        [HttpPatch("product/available-status")]
+        [HttpPost("product/available-status")]
         public async Task<ChangeAvailableStatusResponse> ChangeProductAvailableStatus([FromBody] ChangeAvailableStatusCommand command)
             => await _mediator.Send(command);
 

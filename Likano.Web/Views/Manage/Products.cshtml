@@ -412,6 +412,17 @@
                                                 </form>
                                                 break;
                                         }
+
+                                        <form asp-controller="Manage" asp-action="ChangeProductAvailableStatus" method="post" class="d-inline">
+                                            <input type="hidden" name="productId" value="@p.Id" />
+                                            <input type="hidden" name="intoGrid" value="true" />
+                                            <input type="hidden" name="isAvailable" value="@(p.IsAvailable == true ? "false" : "true")" />
+                                            <button type="submit" class="btn btn-warning shadow-sm status-icon-btn"
+                                                    title="ხელმისაწვდომობის შეცვლა"
+                                                    onclick="return confirm('ნამდვილად გსურთ პროდუქტის ხელმისაწვდომობის შეცვლა?')">
+                                                <i class="fas @(p.IsAvailable == true ? "fa-lock" : "fa-unlock")"></i>
+                                            </button>
+                                        </form>
                                     </td>
                                 </tr>
                             }
