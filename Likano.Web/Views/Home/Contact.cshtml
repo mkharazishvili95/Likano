@@ -1,0 +1,209 @@
+﻿@{
+    Layout = "_Layout";
+    ViewData["Title"] = "კონტაქტი";
+}
+
+<section class="contact-section" style="max-width:980px;margin:48px auto 0;">
+    <div class="row g-4 align-items-stretch">
+
+        <!-- საკონტაქტო ინფორმაცია -->
+        <div class="col-md-6">
+            <div class="contact-card" style="background:#fff;border-radius:20px;box-shadow:var(--card-shadow);padding:36px 28px;height:100%;display:flex;flex-direction:column;justify-content:center;">
+                <h2 class="fw-bold mb-4" style="font-size:1.6rem;color:var(--primary);letter-spacing:-1px;">საკონტაქტო ინფორმაცია</h2>
+
+                <div class="mb-4">
+                    <div class="d-flex align-items-center mb-2">
+                        <i class="fas fa-map-marker-alt me-2" style="color:var(--primary);font-size:1.2rem;"></i>
+                        <span class="fw-semibold" style="color:var(--dark);font-size:1.05rem;">მისამართი</span>
+                    </div>
+                    <div style="color:var(--slate);font-size:1rem;line-height:1.7;">
+                        თბილისი, აგლაძის ქ.15,<br>
+                        სავაჭრო ცენტრი მეგალაინი, მაღაზია #1
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    <a href="https://www.google.com/maps/place/Megaline/@@41.7299765,44.7807375,17z/data=!3m1!4b1!4m6!3m5!1s0x404472c46bfb9fb9:0xb7f22c7cb9a1ecb8!8m2!3d41.7299725!4d44.7833124!16s%2Fg%2F11c54n9pf7?entry=ttu&g_ep=EgoyMDI2MDExMy4wIKXMDSoASAFQAw%3D%3D"
+                       target="_blank" rel="noopener"
+                       class="d-inline-flex align-items-center gap-2"
+                       style="color:var(--primary);font-weight:600;text-decoration:underline;">
+                        <i class="fas fa-map"></i> რუკაზე ნახვა
+                    </a>
+                </div>
+
+                <div>
+                    <div class="d-flex align-items-center mb-2">
+                        <i class="fas fa-phone-alt me-2" style="color:var(--primary);font-size:1.2rem;"></i>
+                        <span class="fw-semibold" style="color:var(--dark);font-size:1.05rem;">კონტაქტი</span>
+                    </div>
+                    <div style="font-size:1.08rem;">
+                        <a href="tel:599457950" style="color:var(--primary);text-decoration:none;font-weight:600;">599-45-79-50</a><br>
+                        <a href="tel:598336060" style="color:var(--primary);text-decoration:none;font-weight:600;">598-33-60-60</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Google Maps iframe -->
+        <div class="col-md-6">
+            <div style="border-radius:20px;overflow:hidden;box-shadow:var(--card-shadow);height:100%;">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2992.073964857624!2d44.7807375!3d@@41.7299765!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x404472c46bfb9fb9%3A0xb7f22c7cb9a1ecb8!2sMegaline!5e0!3m2!1ska!2sge!4v1700000000000!5m2!1ska!2sge"
+                        width="100%" height="340" style="border:0;min-height:280px;" allowfullscreen="" loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<style>
+    .contact-section {
+        max-width: 1100px;
+        margin: 48px auto 0;
+        padding: 0 24px;
+    }
+
+    .contact-container {
+        display: flex;
+        gap: 40px;
+        background: #fff;
+        border-radius: 24px;
+        box-shadow: 0 8px 32px rgba(37,99,235,0.08), 0 1.5px 6px rgba(15,23,42,0.04);
+        overflow: hidden;
+        flex-wrap: wrap;
+    }
+
+    .contact-info {
+        flex: 1 1 340px;
+        padding: 40px 36px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        background: linear-gradient(120deg, #eff6ff 0%, #fff 100%);
+    }
+
+        .contact-info h2 {
+            color: #2563eb;
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 32px;
+            letter-spacing: -1px;
+        }
+
+    .info-block {
+        display: flex;
+        align-items: flex-start;
+        gap: 18px;
+        margin-bottom: 24px;
+    }
+
+    .info-icon {
+        background: #2563eb;
+        color: #fff;
+        border-radius: 50%;
+        width: 44px;
+        height: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        box-shadow: 0 2px 8px rgba(37,99,235,0.10);
+        flex-shrink: 0;
+    }
+
+    .info-title {
+        font-weight: 700;
+        color: #0f172a;
+        font-size: 1.08rem;
+        margin-bottom: 2px;
+    }
+
+    .info-text {
+        color: #64748b;
+        font-size: 1.05rem;
+        line-height: 1.7;
+    }
+
+        .info-text a {
+            color: #2563eb;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.2s;
+        }
+
+            .info-text a:hover {
+                color: #1d4ed8;
+                text-decoration: underline;
+            }
+
+    .map-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        margin-top: 18px;
+        color: #2563eb;
+        font-weight: 700;
+        text-decoration: underline;
+        font-size: 1.08rem;
+        transition: color 0.2s;
+    }
+
+        .map-link i {
+            font-size: 1.2rem;
+        }
+
+        .map-link:hover {
+            color: #1d4ed8;
+        }
+
+    .contact-map {
+        flex: 1 1 380px;
+        min-width: 320px;
+        min-height: 340px;
+        height: 420px;
+        background: #e0e7ef;
+        display: flex;
+        align-items: stretch;
+        justify-content: stretch;
+    }
+
+        .contact-map iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+            border-radius: 0 0 24px 0;
+        }
+
+    @@media (max-width: 991px) {
+        .contact-container {
+            flex-direction: column;
+            gap: 0;
+        }
+
+        .contact-info, .contact-map {
+            border-radius: 0;
+            padding: 28px 16px;
+            min-width: 0;
+            height: auto;
+        }
+
+        .contact-section {
+            padding: 0 8px;
+        }
+    }
+
+    @@media (max-width: 576px) {
+        .contact-info {
+            padding: 18px 8px;
+        }
+
+        .contact-map {
+            min-height: 220px;
+            height: 220px;
+        }
+
+        .contact-section {
+            margin-top: 18px;
+        }
+    }
+    </style>
