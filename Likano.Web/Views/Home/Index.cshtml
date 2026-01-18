@@ -260,7 +260,7 @@
 
                     <div class="form-check form-switch pt-2">
                         <input class="form-check-input" type="checkbox" name="IsAvailable" id="stCheck">
-                        <label class="form-check-label fw-600 ms-2" for="stCheck">მხოლოდ მარაგშია</label>
+                        <label class="form-check-label fw-600 ms-2" for="stCheck">მარაგშია</label>
                     </div>
                 </form>
             </div>
@@ -307,7 +307,7 @@
             <div class="product-card">
                 <div class="img-container">
                     <span class="status-badge ${p.isAvailable ? 'bg-success-subtle text-success' : 'bg-secondary-subtle text-secondary'}">
-                        ${p.isAvailable ? '● მარაგშია' : '○ შეკვეთით'}
+                        ${p.isAvailable ? '● მარაგშია' : '○ არაა მარაგში'}
                     </span>
                     <img src="${p.images?.[0]?.fileUrl || 'https://ik.imagekit.io/rqxdk712q/products/733b35b7-b949-4a3c-9e64-1de44004c88e_NoImageLogo'}"
                          class="product-img" alt="${p.title}">
