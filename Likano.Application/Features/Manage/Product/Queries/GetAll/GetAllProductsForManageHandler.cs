@@ -56,7 +56,8 @@ namespace Likano.Application.Features.Manage.Product.Queries.GetAll
                     Color = p.Color,
                     Code = p.Code,
                     ProducerCountryId = p.ProducerCountryId,
-                    BrandId = p.BrandId
+                    BrandId = p.BrandId,
+                    SeoTitle = p.SeoTitle
                 }).ToList()
             };
         }

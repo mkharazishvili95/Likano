@@ -13,6 +13,7 @@ namespace Likano.Application.Features.Manage.Product.Queries.GetAll
                 (string.IsNullOrWhiteSpace(request.Color) || (!string.IsNullOrEmpty(p.Color) && p.Color.Contains(request.Color, StringComparison.OrdinalIgnoreCase))) &&
                 (string.IsNullOrWhiteSpace(request.Description) || (!string.IsNullOrEmpty(p.Description) && p.Description.Contains(request.Description, StringComparison.OrdinalIgnoreCase))) &&
                 (string.IsNullOrWhiteSpace(request.Code) || (!string.IsNullOrEmpty(p.Code) && p.Code.Contains(request.Code, StringComparison.OrdinalIgnoreCase))) &&
+                (string.IsNullOrWhiteSpace(request.SeoTitle) || (!string.IsNullOrEmpty(p.SeoTitle) && p.SeoTitle.Contains(request.SeoTitle, StringComparison.OrdinalIgnoreCase))) &&
                 (!request.PriceFrom.HasValue || (p.Price.HasValue && p.Price.Value >= request.PriceFrom.Value)) &&
                 (!request.PriceTo.HasValue || (p.Price.HasValue && p.Price.Value <= request.PriceTo.Value)) &&
                 (!request.WidthFrom.HasValue || (p.Width.HasValue && p.Width.Value >= request.WidthFrom.Value)) &&
