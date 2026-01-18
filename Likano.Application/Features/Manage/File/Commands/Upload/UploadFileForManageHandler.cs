@@ -33,7 +33,6 @@ namespace Likano.Application.Features.Manage.File.Commands.Upload
 
         public async Task<UploadFileForManageResponse> Handle(UploadFileForManageCommand request, CancellationToken cancellationToken)
         {
-            //TODO: Likano Logo: https://ik.imagekit.io/rqxdk712q/products/3a3061eb-bbf4-4ca7-87dc-cf2cbe379e00_likanoLogo
             var userIdClaim = _httpContextAccessor.HttpContext?.User?.FindFirst(ClaimTypes.NameIdentifier)?.Value;
 
             if (string.IsNullOrWhiteSpace(userIdClaim))

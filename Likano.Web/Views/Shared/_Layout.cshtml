@@ -3,47 +3,143 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Likano.Web</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/Likano.Web.styles.css" asp-append-version="true" />
+    <title>@ViewData["Title"] - Likano</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+    <style>
+        body {
+            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f8fafc;
+            margin: 0;
+        }
+
+        header {
+            background: #fff;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            padding: 16px 0;
+        }
+
+        .container-header {
+            width: 100%;
+            max-width: 1380px;
+            margin: 0 auto;
+            padding: 0 32px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: relative;
+        }
+
+        .logo {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            text-decoration: none;
+        }
+
+            .logo img {
+                height: 92px; /* გაზრდილი ზომა — შეგიძლია 84-100px შუალედში აიღო */
+                width: auto;
+                transition: transform .28s ease;
+            }
+
+            .logo:hover img {
+                transform: scale(1.05) rotate(-2deg);
+            }
+
+        .contact {
+            display: flex;
+            align-items: center;
+            font-size: 1.18rem;
+            font-weight: 500;
+            color: #1f2937;
+            background: #f1f5f9;
+            border-radius: 12px;
+            padding: 12px 20px;
+            white-space: nowrap;
+            z-index: 10;
+            margin-left: auto; /* 👈 ეს არის მთავარი */
+        }
+
+            .contact i {
+                color: #2563eb;
+                margin-right: 12px;
+                font-size: 1.45rem;
+            }
+
+        /* მობილური და ტაბლეტი */
+        @@media (max-width: 991px) {
+            .container-header
+
+        {
+            padding: 0 20px;
+            flex-direction: column;
+            gap: 16px;
+            position: relative;
+        }
+
+        .logo {
+            position: static;
+            transform: none;
+            margin: 10px 0 8px;
+        }
+
+            .logo img {
+                height: 78px; /* მობილურზე ოდნავ პატარა, მაგრამ მაინც თამამი */
+            }
+
+        .contact {
+            font-size: 1.05rem;
+            padding: 10px 18px;
+        }
+
+        }
+
+        @@media (max-width: 576px) {
+            .logo img
+
+        {
+            height: 68px;
+        }
+
+        .contact {
+            font-size: 1rem;
+            padding: 9px 16px;
+        }
+
+        }
+    </style>
+
+    @RenderSection("Styles", required: false)
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Likano.Web</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2026 - Likano.Web - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+    <header>
+        <div class="container-header">
+
+            <!-- ცენტრში ლოგო -->
+            <a class="logo" href="@Url.Page("/Index")">
+                <img src="https://ik.imagekit.io/rqxdk712q/products/3a3061eb-bbf4-4ca7-87dc-cf2cbe379e00_likanoLogo"
+                     alt="Likano Logo" />
+            </a>
+
+            <!-- მარჯვნივ კონტაქტი -->
+            <div class="contact">
+                <i class="fas fa-phone-alt"></i>
+                599-45-79-50
+            </div>
+
         </div>
+    </header>
+
+    <main role="main" style="max-width:1380px; margin:32px auto 48px; padding:0 24px;">
+        @RenderBody()
+    </main>
+
+    <footer style="text-align:center; color:#777; padding:40px 0 20px; font-size:0.97rem; border-top:1px solid #e5e7eb;">
+        © @DateTime.Now.Year Likano.Ge — ყველა უფლება დაცულია.
     </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    @await RenderSectionAsync("Scripts", required: false)
+
+    @RenderSection("Scripts", required: false)
 </body>
 </html>
