@@ -429,5 +429,15 @@ namespace Likano.Infrastructure.Repositories
                 .ThenBy(f => f.Id)
                 .ToListAsync();
         }
+
+        public async Task<bool> ChangeProductAvailableStatus(int productId, bool isAvailable)
+        {
+            var product = await _db.Products.FindAsync(productId);
+            if (product == null)
+                return false;
+            product.IsAvailable = isAvailable;
+            await _db.SaveChangesAsync();
+            return true;
+        }
     }
 }

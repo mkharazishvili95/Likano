@@ -15,6 +15,7 @@ using Likano.Application.Features.Manage.ProducerCountry.Commands.Delete;
 using Likano.Application.Features.Manage.ProducerCountry.Commands.Edit;
 using Likano.Application.Features.Manage.ProducerCountry.Queries.Get;
 using Likano.Application.Features.Manage.ProducerCountry.Queries.GetAll;
+using Likano.Application.Features.Manage.Product.Commands.ChangeAvailableStatus;
 using Likano.Application.Features.Manage.Product.Commands.ChangeCategory;
 using Likano.Application.Features.Manage.Product.Commands.ChangeStatus;
 using Likano.Application.Features.Manage.Product.Commands.Create;
@@ -61,6 +62,10 @@ namespace Likano.Controllers
 
         [HttpPost("product/status")]
         public async Task<ChangeProductStatusResponse> ChangeProductStatus([FromBody] ChangeProductStatusCommand command)
+            => await _mediator.Send(command);
+
+        [HttpPatch("product/available-status")]
+        public async Task<ChangeAvailableStatusResponse> ChangeProductAvailableStatus([FromBody] ChangeAvailableStatusCommand command)
             => await _mediator.Send(command);
 
         [HttpPost("product/change-country")]
