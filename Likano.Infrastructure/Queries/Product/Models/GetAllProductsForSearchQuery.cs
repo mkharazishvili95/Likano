@@ -26,6 +26,7 @@ namespace Likano.Infrastructure.Queries.Product.Models
     public enum SortBy
     {
         PriceAsc,
-        PriceDesc
+        PriceDesc,
+        CreateDateDesc
     }
 }

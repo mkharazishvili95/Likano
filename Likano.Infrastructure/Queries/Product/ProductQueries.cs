@@ -15,6 +15,7 @@ namespace Likano.Infrastructure.Queries.Product
             {
                 SortBy.PriceAsc => "p.Price ASC",
                 SortBy.PriceDesc => "p.Price DESC",
+                SortBy.CreateDateDesc => "p.CreateDate DESC",
                 _ => "p.CreateDate DESC"
             };
 

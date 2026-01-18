@@ -336,10 +336,22 @@
         const filters = {
             pagination: { pageNumber: page, pageSize }
         };
-        // აგროვებს ყველა მონაცემს ფორმიდან + სორტირებას
+
+        // Collect all form data
         $('#searchForm').serializeArray().forEach(item => {
             if (item.value) filters[item.name] = item.value;
         });
+
+        // SortBy: Only add if not empty
+        const sortByValue = $('select[name="SortBy"]').val();
+        if (sortByValue) {
+            filters.SortBy = sortByValue;
+        }
+
+        // IsAvailable: Only add if checked, else set null
+        const isAvailableChecked = $('#searchForm input[name="IsAvailable"]').prop('checked');
+        filters.IsAvailable = isAvailableChecked ? true : null;
+
         $.ajax({
             url: '/Home/SearchProducts',
             type: 'POST',
@@ -375,7 +387,6 @@
     $(function () {
         loadProducts();
         let debounce;
-        // ფორმის და სორტირების ცვლილება
         $('#searchForm input, #searchForm select, select[name="SortBy"]').on('input change', function () {
             clearTimeout(debounce);
             debounce = setTimeout(() => {
@@ -384,7 +395,6 @@
                 loadProducts();
             }, 500);
         });
-        // გასუფთავების ღილაკი
         $('#resetFilters').on('click', function () {
             $('#searchForm')[0].reset();
             $('select[name="SortBy"]').val('');
@@ -392,7 +402,6 @@
             hasMore = true;
             loadProducts();
         });
-        // Infinite Scroll
         $(window).on('scroll', function () {
             if ($(window).scrollTop() + $(window).height() > $(document).height() - 800) {
                 loadProducts(true);

@@ -20,7 +20,7 @@ namespace Likano.Infrastructure.Queries.Product
             Add($"p.Title LIKE '%{request.Title}%'", !string.IsNullOrEmpty(request.Title));
             Add($"p.Price >= {request.PriceFrom}", request.PriceFrom.HasValue);
             Add($"p.Price <= {request.PriceTo}", request.PriceTo.HasValue);
-            Add($"p.IsAvailable = {(request.IsAvailable == true ? 1 : 0)}", request.IsAvailable.HasValue);
+            Add("p.IsAvailable = 1", request.IsAvailable == true);
             Add($"p.CategoryId = {request.CategoryId}", request.CategoryId.HasValue);
             Add($"p.BrandId = {request.BrandId}", request.BrandId.HasValue);
             Add($"p.ProducerCountryId = {request.ProducerCountryId}", request.ProducerCountryId.HasValue);
