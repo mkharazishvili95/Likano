@@ -31,16 +31,16 @@
         }
 
         .logo {
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
             text-decoration: none;
+            display: flex;
+            align-items: center;
         }
 
             .logo img {
-                height: 120px; /* გაზრდილი ზომა — შეგიძლია 84-100px შუალედში აიღო */
+                height: 120px;
                 width: auto;
                 transition: transform .28s ease;
+                margin-right: 12px;
             }
 
             .logo:hover img {
@@ -58,7 +58,7 @@
             padding: 12px 20px;
             white-space: nowrap;
             z-index: 10;
-            margin-left: auto; /* 👈 ეს არის მთავარი */
+            margin-left: auto;
         }
 
             .contact i {
@@ -67,7 +67,6 @@
                 font-size: 1.45rem;
             }
 
-        /* მობილური და ტაბლეტი */
         @@media (max-width: 991px) {
             .container-header
 
@@ -85,7 +84,7 @@
         }
 
             .logo img {
-                height: 78px; /* მობილურზე ოდნავ პატარა, მაგრამ მაინც თამამი */
+                height: 78px;
             }
 
         .contact {
@@ -117,13 +116,11 @@
     <header>
         <div class="container-header">
 
-            <!-- ცენტრში ლოგო -->
             <a class="logo" href="@Url.Page("/Index")">
                 <img src="https://ik.imagekit.io/rqxdk712q/products/3a3061eb-bbf4-4ca7-87dc-cf2cbe379e00_likanoLogo"
                      alt="Likano Logo" />
             </a>
 
-            <!-- მარჯვნივ კონტაქტი -->
             <div class="contact">
                 <i class="fas fa-phone-alt"></i>
                 599-45-79-50
