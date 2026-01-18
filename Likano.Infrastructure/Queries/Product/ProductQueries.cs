@@ -13,8 +13,9 @@ namespace Likano.Infrastructure.Queries.Product
 
             var orderBy = request.SortBy switch
             {
-                SortBy.PriceAsc => "p.Price ASC",
-                SortBy.PriceDesc => "p.Price DESC",
+                "PriceAsc" => "p.Price ASC",
+                "PriceDesc" => "p.Price DESC",
+                "CreateDateDesc" => "p.CreateDate DESC",
                 _ => "p.CreateDate DESC"
             };
 

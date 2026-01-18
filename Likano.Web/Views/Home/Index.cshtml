@@ -1,375 +1,272 @@
 ﻿@{
-    ViewData["Title"] = "პროდუქტების ძიება";
+    ViewData["Title"] = "Likano.Ge - სამზარეულოს ტექნიკა";
 }
 
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
 <style>
     :root {
-        --main: #0ea5e9;
-        --main-dark: #0369a1;
-        --main-light: #38bdf8;
-        --accent: #22d3ee;
+        --primary: #2563eb;
+        --primary-hover: #1d4ed8;
+        --primary-soft: #eff6ff;
+        --dark: #0f172a;
+        --slate: #64748b;
         --bg: #f8fafc;
-        --card-bg: #fff;
-        --radius: 1.5rem;
-        --shadow: 0 8px 32px rgba(14,165,233,0.10);
-        --shadow-hover: 0 16px 48px rgba(14,165,233,0.18);
+        --border-color: #e2e8f0;
+        --card-shadow: 0 4px 20px -2px rgba(15,23,42,.05);
+        --card-shadow-hover: 0 20px 25px -5px rgba(15,23,42,.1);
     }
 
     body {
         background: var(--bg);
-        font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+        font-family: 'Inter', sans-serif;
+        color: var(--dark);
     }
 
-    .sticky-filter-bar {
+    .filter-sidebar {
+        background: #fff;
+        border: 1px solid var(--border-color);
+        border-radius: 24px;
+        padding: 2.2rem;
         position: sticky;
-        top: 0;
-        z-index: 100;
-        background: linear-gradient(90deg, #f8fafc 60%, #e0e7ef 100%);
-        box-shadow: 0 2px 16px rgba(14,165,233,0.07);
-        border-radius: var(--radius);
-        padding: 1.2rem 2rem;
-        margin-bottom: 2.5rem;
+        top: 1.5rem;
+        box-shadow: var(--card-shadow);
+    }
+
+    .filter-section-title {
+        font-size: .75rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: .08em;
+        color: var(--slate);
+        margin-bottom: .75rem;
         display: flex;
-        flex-wrap: wrap;
-        gap: 1.2rem;
+        gap: .4rem;
         align-items: center;
     }
 
-    .sticky-filter-bar .form-control,
-    .sticky-filter-bar .form-select {
-        border-radius: 2rem;
-        border: 1.5px solid #cbd5e1;
-        font-size: 1.08rem;
-        background: #fff;
-        transition: border-color 0.2s, box-shadow 0.2s;
-        max-width: 180px;
-        min-width: 0;
-        flex: 1 1 0;
-    }
-
-    .sticky-filter-bar .form-control:focus,
-    .sticky-filter-bar .form-select:focus {
-        border-color: var(--main);
-        box-shadow: 0 0 0 4px rgba(14,165,233,0.10);
-    }
-
-    .sticky-filter-bar .search-input {
-        max-width: 220px;
-        min-width: 120px;
-        flex: 2 1 0;
-    }
-
-    .sticky-filter-bar .btn-search {
-        background: linear-gradient(90deg, var(--main), var(--main-light));
-        color: #fff;
-        font-weight: 700;
-        border: none;
-        border-radius: 2rem;
-        padding: 0.7rem 2.2rem;
-        box-shadow: 0 4px 18px rgba(14,165,233,0.18);
-        transition: all 0.3s cubic-bezier(.4,2,.6,1);
-        min-width: 110px;
-    }
-
-    .sticky-filter-bar .btn-search:hover {
-        background: linear-gradient(90deg, var(--main-light), var(--main));
-        transform: translateY(-2px) scale(1.03);
-        box-shadow: 0 10px 32px rgba(14,165,233,0.22);
-    }
-
-    @@media (max-width: 991.98px) {
-        .sticky-filter-bar {
-            flex-direction: column;
-            gap: 0.7rem;
-            padding: 1.1rem 1rem;
-        }
-        .sticky-filter-bar .form-control,
-        .sticky-filter-bar .form-select,
-        .sticky-filter-bar .search-input {
-            max-width: 100%;
-            width: 100%;
-        }
-    }
-
-    .filter-title {
-        font-weight: 900;
-        color: var(--main-dark);
-        font-size: 2.2rem;
-        letter-spacing: -0.03em;
-        margin-bottom: 2.2rem;
-        text-align: center;
-        text-shadow: 0 2px 12px rgba(14,165,233,0.10);
+    .form-control,
+    .form-select {
+        border-radius: 14px;
+        padding: .7rem .9rem;
+        font-size: .95rem;
+        background: #f9fbff;
     }
 
     .product-card {
-        background: var(--card-bg);
-        border-radius: var(--radius);
-        box-shadow: var(--shadow);
-        transition: box-shadow 0.3s, transform 0.3s;
-        overflow: hidden;
+        background: #fff;
+        border-radius: 20px;
+        border: 1px solid var(--border-color);
+        height: 370px;
         display: flex;
         flex-direction: column;
-        height: 100%;
-        border: none;
-        position: relative;
-        animation: fadeInUp 0.7s cubic-bezier(.4,2,.6,1);
+        transition: .35s;
+        box-shadow: var(--card-shadow);
+        overflow: hidden;
+        justify-content: space-between;
     }
 
         .product-card:hover {
-            box-shadow: var(--shadow-hover);
-            transform: translateY(-8px) scale(1.025);
+            transform: translateY(-6px);
+            border-color: var(--primary);
+            box-shadow: var(--card-shadow-hover);
         }
 
-    .product-img-container {
-        background: #f1f5f9;
+    .img-container {
+        height: 140px;
+        padding: 0.7rem;
         display: flex;
         align-items: center;
         justify-content: center;
-        height: 220px;
         position: relative;
-        border-bottom: 1px solid #e5e7eb;
     }
 
     .product-img {
-        max-width: 180px;
-        max-height: 180px;
+        max-height: 100%;
+        max-width: 100%;
         object-fit: contain;
-        border-radius: 1rem;
-        background: #fff;
-        box-shadow: 0 2px 16px rgba(0,0,0,0.07);
-        transition: transform 0.4s, box-shadow 0.3s;
+        transition: .4s;
+        z-index: 1;
     }
 
     .product-card:hover .product-img {
-        transform: scale(1.07) rotate(-1deg);
-        box-shadow: 0 8px 32px rgba(14,165,233,0.13);
+        transform: scale(1.08);
     }
 
-    .badge-new {
+    .status-badge {
         position: absolute;
-        top: 1.2rem;
-        left: 1.2rem;
-        background: linear-gradient(90deg, #ef4444, #f87171);
-        color: #fff;
+        top: .8rem;
+        left: .8rem;
+        font-size: .7rem;
         font-weight: 700;
-        font-size: 1rem;
-        border-radius: 1.2rem;
-        padding: 0.5em 1.2em;
-        box-shadow: 0 2px 8px rgba(220,38,38,0.10);
+        padding: .3rem .6rem;
+        border-radius: 8px;
         z-index: 2;
+        opacity: 1;
+        transition: none;
+        pointer-events: none;
+        background-clip: padding-box;
     }
 
     .card-body {
-        flex: 1 1 auto;
+        padding: 1rem 1.2rem 1rem 1.2rem;
         display: flex;
         flex-direction: column;
-        padding: 1.5rem 1.2rem 1.2rem 1.2rem;
-        background: transparent;
+        flex: 1;
+        justify-content: space-between;
     }
 
-    .card-title {
-        font-size: 1.22rem;
+    .category-label {
+        font-size: .7rem;
+        font-weight: 800;
+        color: var(--primary);
+        text-transform: uppercase;
+    }
+
+    .product-title {
+        font-size: 1.05rem;
         font-weight: 700;
-        margin-bottom: 0.7rem;
-        color: var(--main-dark);
-        letter-spacing: -0.01em;
-        text-overflow: ellipsis;
-        white-space: nowrap;
+        line-height: 1.3;
+        margin: .4rem 0 .6rem;
+        min-height: 2.6rem;
         overflow: hidden;
-    }
-
-    .badge.bg-light {
-        background: #e0e7ef;
-        color: #0369a1;
-        font-size: 0.95rem;
-        font-weight: 500;
-        border-radius: 1.1rem;
-        margin-right: 0.2rem;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
     }
 
     .price-tag {
-        font-size: 1.45rem;
-        font-weight: 900;
-        color: var(--main-dark);
-        letter-spacing: -0.01em;
+        font-size: 1.15rem;
+        font-weight: 800;
     }
 
-    .availability-badge {
-        font-size: 0.95rem;
-        padding: 0.45em 1.1em;
-        border-radius: 2rem;
-        font-weight: 700;
-        box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+    .btn-action {
+        width: 40px;
+        height: 40px;
+        background: var(--primary-soft);
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--primary);
+        transition: .3s;
     }
 
-    .btn-details {
-        border-radius: 1.2rem;
-        font-weight: 700;
-        font-size: 1.08rem;
-        padding: 0.7rem 0;
-        border-width: 2px;
-        margin-top: 0.7rem;
-        transition: background 0.2s, color 0.2s, border-color 0.2s;
+    .product-card:hover .btn-action {
+        background: var(--primary);
+        color: #fff;
     }
 
-        .btn-details:hover, .btn-details:focus {
-            background: var(--main-light);
-            color: #fff;
-            border-color: var(--main-light);
+    @@media (max-width: 991px) {
+        .filter-sidebar {
+            position: static;
         }
-
-    @@media (max-width: 991.98px) {
-        .sticky-filter-bar
-
-    {
-        flex-direction: column;
-        gap: 0.7rem;
-        padding: 1.1rem 1rem;
-    }
-
-    .product-img-container {
-        height: 120px;
-    }
-
-    .product-img {
-        max-width: 120px;
-        max-height: 100px;
-    }
-
-    }
-    @@media (max-width: 575.98px) {
-        .sticky-filter-bar
-
-    {
-        border-radius: 1rem;
-        padding: 0.7rem 0.5rem;
-    }
-
-    .product-card {
-        border-radius: 0.8rem;
-    }
-
-    .product-img-container {
-        height: 80px;
-    }
-
-    .product-img {
-        max-width: 80px;
-        max-height: 70px;
-    }
-
-    .card-body {
-        padding: 1rem 0.7rem 0.9rem 0.7rem;
-    }
-
-    }
-
-    @@keyframes fadeInUp {
-        from
-
-    {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-
     }
 </style>
 
-<div class="container py-5">
-    <h2 class="filter-title">იპოვე სასურველი პროდუქტი</h2>
-    <form id="searchForm" autocomplete="off">
-        <div class="sticky-filter-bar shadow-sm">
-            <span class="d-flex align-items-center gap-2">
-                <i class="bi bi-search fs-4 text-info"></i>
-                <input type="text" class="form-control search-input" name="SearchString" placeholder="პროდუქტის დასახელება ან კოდი">
-            </span>
-            <select class="form-select" name="CategoryId" asp-items="ViewBag.Categories">
-                <option value="">კატეგორია</option>
-            </select>
-            <select class="form-select" name="BrandId" asp-items="ViewBag.Brands">
-                <option value="">ბრენდი</option>
-            </select>
-            <select class="form-select" name="ProducerCountryId" asp-items="ViewBag.ProducerCountries">
-                <option value="">მწარმოებელი</option>
-            </select>
-            <span class="d-flex align-items-center gap-1">
-                <input type="number" class="form-control" name="PriceFrom" min="0" placeholder="ფასი დან" style="max-width:90px;">
-                <span class="text-secondary">-</span>
-                <input type="number" class="form-control" name="PriceTo" min="0" placeholder="მდე" style="max-width:90px;">
-            </span>
-            <select class="form-select" name="IsAvailable" style="min-width:110px;">
-                <option value="">მარაგი</option>
-                <option value="true">✓ კი</option>
-                <option value="false">✗ არა</option>
-            </select>
-            <select class="form-select" name="SortBy" style="min-width:140px;">
-                <option value="">ახალი დამატებული</option>
-                <option value="PriceAsc">ფასი ↑</option>
-                <option value="PriceDesc">ფასი ↓</option>
-            </select>
-            <button type="submit" class="btn btn-search ms-2">
-                ძებნა
-            </button>
-        </div>
-    </form>
-    <div id="productsGrid" class="row g-4 mt-2"></div>
-    <div id="loadingMore" class="loading-more d-none">
-        <div class="spinner-border text-info me-2" role="status" style="width:1.4rem;height:1.4rem">
-            <span class="visually-hidden">იტვირთება...</span>
-        </div>
-        იტვირთება მეტი პროდუქტი...
+<div class="container-fluid px-lg-5 py-5">
+    <div class="row g-4">
+
+        <aside class="col-xl-3 col-lg-4">
+            <div class="filter-sidebar">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h5 class="fw-bold m-0">ფილტრები</h5>
+                    <button id="resetFilters" class="btn btn-link p-0 small text-primary">
+                        <i class="bi bi-arrow-counterclockwise"></i>
+                    </button>
+                </div>
+
+                <form id="searchForm">
+                    <div class="mb-3 position-relative">
+                        <i class="bi bi-search position-absolute top-50 start-0 translate-middle-y ms-3 text-muted"></i>
+                        <input name="SearchString" class="form-control ps-5" placeholder="ძებნა...">
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="filter-section-title">კატეგორია</label>
+                        <select name="CategoryId" class="form-select">
+                            <option value="">ყველა</option>
+                            @foreach (var c in (SelectList)ViewBag.Categories)
+                            {
+                                <option value="@c.Value">@c.Text</option>
+                            }
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="filter-section-title">ბრენდი</label>
+                        <select name="BrandId" class="form-select">
+                            <option value="">ყველა</option>
+                            @foreach (var b in (SelectList)ViewBag.Brands)
+                            {
+                                <option value="@b.Value">@b.Text</option>
+                            }
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="filter-section-title">ფასი</label>
+                        <div class="d-flex gap-2">
+                            <input name="PriceFrom" class="form-control" placeholder="დან">
+                            <input name="PriceTo" class="form-control" placeholder="მდე">
+                        </div>
+                    </div>
+
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" id="stCheck" type="checkbox">
+                        <label class="form-check-label">მარაგშია</label>
+                    </div>
+                </form>
+            </div>
+        </aside>
+
+        <main class="col-xl-9 col-lg-8">
+            <div class="d-flex justify-content-between align-items-end mb-4 flex-wrap gap-3">
+                <h2 class="fw-bold m-0">პროდუქცია</h2>
+                <div class="d-flex gap-3 align-items-center">
+                    <span id="resultsCount" class="badge bg-dark">0 პროდუქტი</span>
+                    <select id="sortSelector" class="form-select form-select-sm">
+                        <option value="CreateDateDesc">ახალი</option>
+                        <option value="PriceAsc">ფასი ↑</option>
+                        <option value="PriceDesc">ფასი ↓</option>
+                    </select>
+                </div>
+            </div>
+
+            <div id="productsGrid" class="row g-4"></div>
+            <div id="loadingMore" class="text-center py-4 d-none">
+                <div class="spinner-border text-primary"></div>
+            </div>
+        </main>
     </div>
 </div>
 
-<script src="https://code.jquery.com/jquery-3.7.1.min.js" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script>
-    function loadSelect(url, $select, textField = "name", valueField = "id") {
-        $.get(url, function (data) {
-            $select.empty().append(`<option value="">ყველა</option>`);
-            data.forEach(x => $select.append(`<option value="${x[valueField]}">${x[textField]}</option>`));
-        });
-    }
-    $(function () {
-        loadSelect('/Category/GetAll', $('#categorySelect'));
-        loadSelect('/Brand/GetAll', $('#brandSelect'));
-    });
-
-    const renderProduct = product => `
-        <div class="col-xl-3 col-lg-4 col-md-6">
-            <div class="product-card h-100">
-                <div class="product-img-container">
-                    <img src="${product.images?.[0]?.fileUrl || '/images/placeholder.jpg'}"
-                         class="product-img"
-                         alt="${product.title}"
-                         loading="lazy">
-                    ${product.isNew ? '<span class="badge-new">ახალი</span>' : ''}
+    const renderProduct = p => `
+        <div class="col-12 col-sm-6 col-xl-4">
+            <div class="product-card">
+                <div class="img-container">
+                    <span class="status-badge ${p.isAvailable ? 'bg-success-subtle text-success' : 'bg-secondary-subtle text-secondary'}">
+                        ${p.isAvailable ? '● მარაგშია' : '○ არაა მარაგში'}
+                    </span>
+                    <img src="${p.images?.[0]?.fileUrl || 'https://ik.imagekit.io/rqxdk712q/products/733b35b7-b949-4a3c-9e64-1de44004c88e_NoImageLogo'}"
+                         class="product-img" alt="${p.title}">
                 </div>
-                <div class="card-body d-flex flex-column">
-                    <h5 class="card-title">${product.title || 'უსახელო'}</h5>
-                    <div class="d-flex flex-wrap gap-2 mb-2">
-                        ${product.category?.name ? `<span class="badge bg-light">${product.category.name}</span>` : ''}
-                        ${product.brand?.name ? `<span class="badge bg-light">${product.brand.name}</span>` : ''}
-                    </div>
-                    <div class="mb-2">
-                        ${product.code ? `<div class="text-secondary small"><i class="bi bi-upc-scan"></i> <b>${product.code}</b></div>` : ''}
-                    </div>
-                    <div class="mt-auto">
-                        <div class="d-flex align-items-center justify-content-between mb-2">
-                            <span class="price-tag">${product.price ? product.price.toLocaleString('ka-GE') + ' ₾' : '—'}</span>
-                            <span class="availability-badge ${product.isAvailable ? 'bg-success' : 'bg-secondary'} text-white">
-                                ${product.isAvailable ? 'მარაგშია' : 'არ არის მარაგში'}
-                            </span>
+                <div class="card-body">
+                    <span class="category-label">${p.category?.name || 'Likano'}</span>
+                    <h3 class="product-title">${p.title}</h3>
+                    <p class="text-muted small mb-4">
+                        <i class="bi bi-award me-1"></i> ${p.brand?.name || 'ბრენდი'}
+                    </p>
+                    <div class="mt-auto d-flex justify-content-between align-items-center">
+                        <div class="price-tag">
+                            ${(p.price || 0).toLocaleString('ka-GE')} <span style="font-size: 1rem;">₾</span>
                         </div>
-                        <a href="/Product/Details/${product.id}" class="btn btn-outline-primary btn-details w-100">
-                            დეტალურად <i class="bi bi-arrow-right ms-2"></i>
+                        <a href="/Product/Details/${p.id}" class="btn-action">
+                            <i class="bi bi-chevron-right fs-5"></i>
                         </a>
                     </div>
                 </div>
@@ -378,40 +275,56 @@
     `;
 
     let page = 1;
-    const pageSize = 12;
+    const pageSize = 9;
     let isLoading = false;
     let hasMore = true;
 
     function loadProducts(append = false) {
-        if (isLoading || !hasMore) return;
+        if (isLoading || (!hasMore && append)) return;
         isLoading = true;
         $('#loadingMore').removeClass('d-none');
 
-        const formData = $('#searchForm').serializeArray();
-        const filters = { pagination: { pageNumber: page, pageSize } };
-        formData.forEach(item => {
-            if (item.value) filters[item.name] = item.value;
+        const filters = {
+            pagination: { pageNumber: page, pageSize: pageSize },
+            SortBy: $('#sortSelector').val() 
+        };
+
+        $('#searchForm').serializeArray().forEach(item => {
+            if (item.value && item.name !== "IsAvailable") {
+                filters[item.name] = item.value;
+            }
         });
+
+        filters.IsAvailable = $('#stCheck').is(':checked') ? true : null;
 
         $.ajax({
             url: '/Home/SearchProducts',
             type: 'POST',
             contentType: 'application/json',
             data: JSON.stringify(filters),
-            success: function (response) {
+            success: response => {
                 const $grid = $('#productsGrid');
                 if (!append) $grid.empty();
-                if (response.items?.length) {
+
+                if (response?.items?.length > 0) {
                     response.items.forEach(p => $grid.append(renderProduct(p)));
+                    $('#resultsCount').text(`${response.totalCount} პროდუქტი`);
                 } else if (!append) {
-                    $grid.html(`<div class="col-12 no-results text-center py-5 fs-4 text-secondary">ვერ მოიძებნა პროდუქტი :(</div>`);
+                    $grid.html(`
+                        <div class="col-12 text-center py-5">
+                            <i class="bi bi-search fs-1 text-muted"></i>
+                            <p class="mt-3 text-muted">პროდუქტები ვერ მოიძებნა</p>
+                        </div>
+                    `);
+                    $('#resultsCount').text('0 პროდუქტი');
                 }
-                hasMore = response.items?.length === pageSize;
-                page++;
+
+                hasMore = (response.items?.length === pageSize);
+                if (hasMore) page++;
                 isLoading = false;
                 $('#loadingMore').addClass('d-none');
             },
-            error: function () {
+            error: () => {
                 isLoading = false;
                 $('#loadingMore').addClass('d-none');
             }
@@ -421,28 +334,27 @@
     $(function () {
         loadProducts();
 
-        $('#searchForm').on('submit', function (e) {
-            e.preventDefault();
-            page = 1;
-            hasMore = true;
-            loadProducts();
-        });
-
-        let debounceTimer;
-        $('#searchForm input, #searchForm select').on('input change', function () {
-            clearTimeout(debounceTimer);
-            debounceTimer = setTimeout(function () {
+        let debounce;
+        $('#searchForm input, #searchForm select, #sortSelector').on('input change', function () {
+            clearTimeout(debounce);
+            debounce = setTimeout(() => {
                 page = 1;
                 hasMore = true;
                 loadProducts();
             }, 500);
         });
 
+        $('#resetFilters').on('click', function () {
+            $('#searchForm')[0].reset();
+            $('#sortSelector').val('CreateDateDesc');
+            page = 1;
+            hasMore = true;
+            loadProducts();
+        });
+
         $(window).on('scroll', function () {
-            if ($(window).scrollTop() + $(window).height() >= $(document).height() - 400) {
-                if (!isLoading && hasMore) {
-                    loadProducts(true);
-                }
+            if ($(window).scrollTop() + $(window).height() > $(document).height() - 800) {
+                loadProducts(true);
             }
         });
     });
