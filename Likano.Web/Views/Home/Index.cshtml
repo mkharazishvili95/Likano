@@ -191,12 +191,12 @@
     <div class="row g-4">
         <aside class="col-lg-4 col-xl-3">
             <div class="filter-sidebar">
-                <h3 class="fw-800 mb-4 h5">ფილტრები</h3>
+                <h3 class="fw-800 mb-4 h5">ფილტრი</h3>
                 <form id="searchForm">
                     <div class="mb-4">
                         <div class="position-relative">
                             <i class="bi bi-search position-absolute top-50 start-0 translate-middle-y ms-3 text-muted"></i>
-                            <input type="text" class="form-control ps-5" name="SearchString" placeholder="მოძებნე მოდელი...">
+                            <input type="text" class="form-control ps-5" name="SearchString" placeholder="ნიჟარა, ონკანი...">
                         </div>
                     </div>
 
@@ -229,19 +229,19 @@
                     </div>
 
                     <div class="filter-group mb-4">
-                        <label class="filter-section-title"><i class="bi bi-currency-dollar"></i> ბიუჯეტი</label>
+                        <label class="filter-section-title"><i class="bi bi-currency-dollar"></i> ფასი</label>
                         <div class="d-flex gap-2">
-                            <input type="number" class="form-control" name="PriceFrom" placeholder="მინ">
-                            <input type="number" class="form-control" name="PriceTo" placeholder="მაქს">
+                            <input type="number" class="form-control" name="PriceFrom" placeholder="დან">
+                            <input type="number" class="form-control" name="PriceTo" placeholder="მდე">
                         </div>
                     </div>
 
                     <div class="filter-group mb-4">
                         <label class="filter-section-title"><i class="bi bi-sort-down"></i> დალაგება</label>
                         <select class="form-select" name="SortBy">
-                            <option value="">უახლესი</option>
-                            <option value="PriceAsc">ფასი: დაბლიდან</option>
-                            <option value="PriceDesc">ფასი: მაღლიდან</option>
+                            <option value="">ახალი</option>
+                            <option value="PriceAsc">ფასი: ქვემოდან</option>
+                            <option value="PriceDesc">ფასი: ზემოდან</option>
                         </select>
                     </div>
 
@@ -262,7 +262,7 @@
                             <li class="breadcrumb-item small active">კატალოგი</li>
                         </ol>
                     </nav>
-                    <h1 class="fw-800 m-0 h2">ჩვენი პროდუქცია</h1>
+                    <h1 class="fw-800 m-0 h2">პროდუქცია</h1>
                 </div>
                 <div class="text-end">
                     <span class="badge bg-dark rounded-pill px-3 py-2" id="resultsCount">0 პროდუქტი</span>
@@ -289,9 +289,9 @@
             <div class="product-card">
                 <div class="img-container">
                     <span class="status-badge ${p.isAvailable ? 'bg-success-subtle text-success' : 'bg-secondary-subtle text-secondary'}">
-                        ${p.isAvailable ? '● მარაგშია' : '○ შეკვეთით'}
+                        ${p.isAvailable ? '● მარაგშია' : '○ არაა მარაგში'}
                     </span>
-                    <img src="${p.images?.[0]?.fileUrl || '/images/no-image.png'}"
+                    <img src="${p.images?.[0]?.fileUrl || 'https://ik.imagekit.io/rqxdk712q/products/733b35b7-b949-4a3c-9e64-1de44004c88e_NoImageLogo'}"
                          class="product-img"
                          alt="${p.title}"
                          loading="lazy">
@@ -299,7 +299,7 @@
                 <div class="card-body">
                     <span class="category-label">${p.category?.name || 'სანტექნიკა'}</span>
                     <h3 class="product-title">${p.title || 'პროდუქტის დასახელება'}</h3>
-                    <p class="text-muted small mb-4"><i class="bi bi-qr-code-scan me-2"></i>არტიკული: ${p.code || 'N/A'}</p>
+                    <p class="text-muted small mb-4"><i class="bi bi-award me-2"></i>ბრენდი: ${p.brand?.name || '—'}</p>
 
                     <div class="mt-auto d-flex justify-content-between align-items-center">
                         <div class="price-tag">
