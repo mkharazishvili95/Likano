@@ -1070,7 +1070,7 @@ namespace Likano.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> CreateProduct(string title, string? description, decimal? price, int categoryId,
         int? brandId, int? producerCountryId, string? material, decimal? length, decimal? width,
-        decimal? height, string? color, List<IFormFile>? photos, int? mainPhotoIndex, string? code, CancellationToken ct)
+        decimal? height, string? color, List<IFormFile>? photos, int? mainPhotoIndex, string? code, string? seoTitle, CancellationToken ct)
         {
             if (string.IsNullOrWhiteSpace(title))
             {
@@ -1121,7 +1121,8 @@ namespace Likano.Web.Controllers
                 Height = height,
                 Color = color,
                 Images = photoPayloads,
-                Code = code
+                Code = code,
+                SeoTitle = seoTitle
             };
 
             var apiUrl = $"{_baseUrl}/manage/product/create";
@@ -1189,7 +1190,7 @@ namespace Likano.Web.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> EditProduct(int id, string title,  string? description, decimal? price, int categoryId, int? brandId, int? producerCountryId, 
-            string? material, decimal? length, decimal? width, decimal? height, string? color, List<IFormFile>? photos, int mainPhotoIndex, int? existingMainImageId, string? deletedImageIds, string? code, CancellationToken ct)
+            string? material, decimal? length, decimal? width, decimal? height, string? color, List<IFormFile>? photos, int mainPhotoIndex, int? existingMainImageId, string? deletedImageIds, string? code, string? seoTitle, CancellationToken ct)
         {
             if (id <= 0)
             {
@@ -1253,7 +1254,8 @@ namespace Likano.Web.Controllers
                 NewImages = newImages,
                 MainImageId = existingMainImageId,
                 DeletedImageIds = deletedIds,
-                Code = code
+                Code = code,
+                SeoTitle = seoTitle
             };
 
             var apiUrl = $"{_baseUrl}/manage/edit/product";

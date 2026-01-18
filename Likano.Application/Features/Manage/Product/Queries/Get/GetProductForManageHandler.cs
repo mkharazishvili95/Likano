@@ -42,6 +42,7 @@ namespace Likano.Application.Features.Manage.Product.Queries.Get
                 Height = product.Height,
                 Color = product.Color,
                 Code = product.Code,
+                SeoTitle = product.SeoTitle,
                 ProducerCountryId = product.ProducerCountryId,
                 ProducerCountryName = product.ProducerCountry?.Name,
                 Success = true,

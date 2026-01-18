@@ -33,6 +33,7 @@ namespace Likano.Application.Features.Manage.Product.Commands.Edit
             product.Color = request.Color;
             product.UpdateDate = DateTime.UtcNow.AddHours(4);
             product.Code = request.Code;
+            product.SeoTitle = request.SeoTitle;
 
             await _repository.UpdateProductAsync(product);
 

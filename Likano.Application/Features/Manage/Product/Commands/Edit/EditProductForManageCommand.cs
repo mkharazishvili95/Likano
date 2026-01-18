@@ -21,5 +21,6 @@ namespace Likano.Application.Features.Manage.Product.Commands.Edit
         public int? MainImageId { get; set; }
         public List<int>? DeletedImageIds { get; set; }
         public string? Code { get; set; }
+        public string? SeoTitle { get; set; }
     }
 }
