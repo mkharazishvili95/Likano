@@ -4,10 +4,8 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Likano</title>
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-
     <style>
         :root {
             --primary: #2563eb;
@@ -31,8 +29,6 @@
             color: var(--dark);
         }
 
-        /* ================= HEADER ================= */
-
         header {
             background: var(--bg);
             border-bottom: 1px solid var(--border-color);
@@ -54,7 +50,7 @@
         }
 
             .logo img {
-                height: 96px; /* ⬅ ოდნავ შემცირებული */
+                height: 96px;
                 max-height: 96px;
                 width: auto;
                 transition: transform .25s ease;
@@ -64,35 +60,53 @@
                 transform: scale(1.05) rotate(-2deg);
             }
 
-        .contact {
+        .contact-group {
             display: flex;
             align-items: center;
             gap: 12px;
-            font-size: 1.15rem;
-            font-weight: 500;
+        }
+
+        .contact-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 16px;
             background: #fff;
             border: 1px solid var(--border-color);
-            border-radius: 14px;
-            padding: 12px 20px;
-            box-shadow: var(--card-shadow);
+            border-radius: 10px;
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.05rem;
+            transition: all 0.25s ease;
             white-space: nowrap;
         }
 
-            .contact i {
+            .contact-btn:hover {
+                background: var(--primary-soft);
                 color: var(--primary);
-                font-size: 1.4rem;
+                border-color: var(--primary);
+                transform: translateY(-2px);
+                box-shadow: 0 6px 16px rgba(37,99,235,0.12);
             }
 
-        /* ================= MAIN ================= */
+            .contact-btn i {
+                font-size: 1.3rem;
+            }
+
+            .contact-btn.phone i {
+                color: #10b981;
+            }
+
+            .contact-btn.map i {
+                color: #ef4444;
+            }
 
         main {
             max-width: 1380px;
             margin: 32px auto 48px;
             padding: 0 24px;
-            border: none;
         }
-
-        /* ================= FOOTER ================= */
 
         footer {
             text-align: center;
@@ -100,62 +114,68 @@
             font-size: 0.97rem;
             color: var(--slate);
             background: var(--bg);
-            border: none;
         }
-
-        /* ❌ სრულად ვშლით არასასურველ ხაზებს */
-        .container-fluid {
-            border: none !important;
-        }
-
-        /* ================= RESPONSIVE ================= */
 
         @@media (max-width: 991px) {
-            .container-header {
-                flex-direction: column;
-                gap: 16px;
-                padding: 16px 20px;
-            }
+            .container-header
 
-            .logo img {
-                height: 80px;
-            }
+        {
+            flex-direction: column;
+            gap: 20px;
+            padding: 16px 20px;
+        }
 
-            .contact {
-                font-size: 1.05rem;
-                padding: 10px 18px;
-            }
+        .logo img {
+            height: 80px;
+        }
+
+        .contact-group {
+            flex-direction: column;
+            width: 100%;
+        }
+
+        .contact-btn {
+            justify-content: center;
+            width: 100%;
+        }
+
         }
 
         @@media (max-width: 576px) {
-            .logo img {
-                height: 68px;
-            }
+            .logo img
 
-            .contact {
-                font-size: 1rem;
-                padding: 9px 16px;
-            }
+        {
+            height: 68px;
+        }
+
+        .contact-btn {
+            font-size: 0.98rem;
+            padding: 9px 14px;
+        }
+
         }
     </style>
-
     @RenderSection("Styles", required: false)
 </head>
 <body>
-
     <header>
         <div class="container-header">
-
             <a class="logo" href="@Url.Page("/Index")">
                 <img src="https://ik.imagekit.io/rqxdk712q/products/17827bc1-7332-4122-b0aa-7e5adc3e229e_likanologo"
                      alt="Likano Logo" />
             </a>
 
-            <div class="contact">
-                <i class="fas fa-phone-alt"></i>
-                599-45-79-50
-            </div>
+            <div class="contact-group">
+                <a href="tel:+995599457950" class="contact-btn phone">
+                    <i class="fas fa-phone-alt"></i>
+                    599 45 79 50
+                </a>
 
+                <a href="/contact" class="contact-btn map" title="სრული მისამართი და რუკა">
+                    <i class="fas fa-map-marker-alt"></i>
+                    თბილისი, აგლაძის #15
+                </a>
+            </div>
         </div>
     </header>
 
