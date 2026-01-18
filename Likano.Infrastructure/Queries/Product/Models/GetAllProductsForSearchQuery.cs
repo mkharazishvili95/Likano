@@ -21,12 +21,6 @@ namespace Likano.Infrastructure.Queries.Product.Models
         public decimal? HeightFrom { get; set; } // სიმაღლე(დან)
         public decimal? HeightTo { get; set; } // სიმაღლე(მდე)
         public string? Color { get; set; }
-        public SortBy? SortBy { get; set; }
-    }
-    public enum SortBy
-    {
-        PriceAsc,
-        PriceDesc,
-        CreateDateDesc
+        public string? SortBy { get; set; }
     }
 }
