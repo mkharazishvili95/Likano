@@ -490,6 +490,7 @@
         box-shadow: var(--shadow-md);
         align-items: center;
         letter-spacing: 0.02em;
+        justify-content: flex-end;
     }
     .product-meta-bar span {
         display: flex;
@@ -507,13 +508,12 @@
         height: 18px;
         display: inline-block;
         vertical-align: middle;
-        fill: #6b7280; /* Tailwind's gray-500 */
+        fill: #6b7280; 
     }
 </style>
 
 <div class="product-page-wrapper">
     <div class="product-details-container">
-        <!-- Meta bar between header and card -->
         <div class="product-meta-bar">
             @if (Model.ViewCount.HasValue)
             {
