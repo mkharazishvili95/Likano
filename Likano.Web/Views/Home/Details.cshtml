@@ -475,6 +475,42 @@
             align-items: flex-start;
         }
     }
+
+    .product-meta-bar {
+        position: absolute;
+        top: 24px;
+        right: 24px;
+        z-index: 2;
+        display: flex;
+        gap: 18px;
+        background: #f3f4f6; /* Light gray, matches Tailwind's gray-100 */
+        color: #374151; /* Tailwind's gray-700 */
+        border-radius: 18px;
+        padding: 10px 22px;
+        font-size: 1rem;
+        font-weight: 600;
+        box-shadow: var(--shadow-md);
+        align-items: center;
+        letter-spacing: 0.02em;
+    }
+    .product-meta-bar span {
+        display: flex;
+        align-items: center;
+        white-space: nowrap;
+        gap: 6px;
+    }
+    .product-meta-bar .meta-sep {
+        margin: 0 8px;
+        color: #9ca3af;
+        font-weight: 400;
+    }
+    .product-meta-bar svg {
+        width: 18px;
+        height: 18px;
+        display: inline-block;
+        vertical-align: middle;
+        fill: #6b7280; /* Tailwind's gray-500 */
+    }
 </style>
 
 <div class="product-page-wrapper">
@@ -483,27 +519,30 @@
             <div class="row g-0">
                 <div class="col-lg-6">
                     <div class="product-gallery-section">
-                        <div class="product-meta-info">
-                            @if (Model.CreateDate.HasValue)
-                            {
-                                <div class="spec-item">
-                                    <div class="spec-label">განთავსების თარიღი</div>
-                                    <div class="spec-value">@Model.CreateDate.Value.ToString("dd.MM.yyyy")</div>
-                                </div>
-                            }
+                        <!-- Meta bar in top-right -->
+                        <div class="product-meta-bar">
                             @if (Model.ViewCount.HasValue)
                             {
-                                <div class="spec-item">
-                                    <div class="spec-label">ნახვების რაოდენობა</div>
-                                    <div class="spec-value">@Model.ViewCount.Value.ToString("N0")</div>
-                                </div>
+                                <span>
+                                    <svg viewBox="0 0 20 20"><path d="M10 3c-5 0-9 5.25-9 7s4 7 9 7 9-5.25 9-7-4-7-9-7zm0 12c-3.87 0-7-3.13-7-5s3.13-5 7-5 7 3.13 7 5-3.13 5-7 5zm0-8a3 3 0 100 6 3 3 0 000-6zm0 4.5A1.5 1.5 0 1110 7a1.5 1.5 0 010 3z"/></svg>
+                                    @Model.ViewCount.Value.ToString("N0")
+                                </span>
+                                <span class="meta-sep">|</span>
+                            }
+                            @if (Model.CreateDate.HasValue)
+                            {
+                                <span>
+                                    <svg viewBox="0 0 20 20"><path d="M6 2a1 1 0 012 0v1h4V2a1 1 0 112 0v1a3 3 0 013 3v10a3 3 0 01-3 3H6a3 3 0 01-3-3V6a3 3 0 013-3V2zm8 4H6a1 1 0 00-1 1v10a1 1 0 001 1h8a1 1 0 001-1V7a1 1 0 00-1-1zm-4 2a1 1 0 110 2 1 1 0 010-2z"/></svg>
+                                    @Model.CreateDate.Value.ToString("dd MMM yy, HH:mm", new System.Globalization.CultureInfo("ka-GE"))
+                                </span>
+                                <span class="meta-sep">|</span>
                             }
                             @if (Model.Id.HasValue)
                             {
-                                <div class="spec-item">
-                                    <div class="spec-label">ID</div>
-                                    <div class="spec-value">@Model.Id.Value.ToString("N0")</div>
-                                </div>
+                                <span>
+                                    <svg viewBox="0 0 20 20"><path d="M2 10a2 2 0 012-2h2V6a2 2 0 012-2h4a2 2 0 012 2v2h2a2 2 0 012 2v4a2 2 0 01-2 2h-2v2a2 2 0 01-2 2h-4a2 2 0 01-2-2v-2H4a2 2 0 01-2-2v-4zm4-4v2h8V6a1 1 0 00-1-1h-6a1 1 0 00-1 1zm10 4h-2v4h2v-4zm-4 6v-2H8v2h4zm-6-6H4v4h2v-4z"/></svg>
+                                    ID - @Model.Id.Value.ToString("N0")
+                                </span>
                             }
                         </div>
 
