@@ -89,7 +89,7 @@ namespace Likano.Web.Controllers
             return View();
         }
 
-        [HttpGet("product/details/{id}")]
+        [HttpGet("details/{id}")]
         public async Task<IActionResult> ProductDetails(int id)
         {
             var response = await _httpClient.GetAsync($"{_baseUrl}/Product/details/{id}");
