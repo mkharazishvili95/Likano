@@ -75,6 +75,7 @@
 
     .main-image-container {
         width: 100%;
+        max-width: 450px;
         aspect-ratio: 1;
         border-radius: 20px;
         overflow: hidden;
@@ -82,6 +83,7 @@
         position: relative;
         background: white;
         border: 1px solid var(--border-color);
+        margin: 0 auto;
     }
 
     .product-main-image {
@@ -328,11 +330,12 @@
     }
 
     .modal-img-main {
-        max-width: 80vw;
-        max-height: 70vh;
+        width: 600px;
+        height: 600px;
         object-fit: contain;
         border-radius: 16px;
         margin-bottom: 1.5rem;
+        background: #f9fafb;
     }
 
     .modal-img-close {
@@ -438,8 +441,19 @@
         padding: 1.5rem;
     }
 
+    .main-image-container {
+        max-width: 100%;
+    }
+
     .spec-grid {
         grid-template-columns: 1fr;
+    }
+
+    .modal-img-main {
+        width: 90vw;
+        height: 90vw;
+        max-width: 500px;
+        max-height: 500px;
     }
 
     .modal-img-arrow.left {
@@ -464,7 +478,14 @@
             <div class="row g-0">
                 <div class="col-lg-6">
                     <div class="product-gallery-section">
-                        <h1 class="product-title-top">@Model.Title</h1>
+                        @if (Model.CreateDate.HasValue)
+                        {
+                            <div class="spec-item">
+                                <div class="spec-label">განთავსების თარიღი</div>
+                                <div class="spec-value">@Model.CreateDate.Value.ToString("dd.MM.yyyy")</div>
+                            </div>
+                        }
+                        <h2 class="product-title-top">@Model.Title</h2>
 
                         <div class="code-wrapper">
                             <span class="product-code-top">კოდი: @Model.Code</span>
@@ -513,7 +534,10 @@
                 <div class="col-lg-6">
                     <div class="product-info-section">
                         <div class="price-availability-header">
-                            <div class="product-price">@Model.Price?.ToString("N2") ₾</div>
+                            @if (Model.Price.HasValue && Model.Price > 0)
+                            {
+                                <div class="product-price">@Model.Price.Value.ToString("N2") ₾</div>
+                            }
                             @if (Model.IsAvailable == true)
                             {
                                 <span class="availability-badge in-stock">მარაგშია</span>
@@ -549,7 +573,7 @@
                                 @if (Model.ProducerCountry != null)
                                 {
                                     <div class="spec-item">
-                                        <div class="spec-label">მწარმოებელი ქვეყანა</div>
+                                        <div class="spec-label">წარმოების ქვეყანა</div>
                                         <div class="spec-value">@Model.ProducerCountry.Name</div>
                                     </div>
                                 }
@@ -579,13 +603,6 @@
                                     <div class="spec-item">
                                         <div class="spec-label">სიმაღლე</div>
                                         <div class="spec-value">@Model.Height მ</div>
-                                    </div>
-                                }
-                                @if (Model.CreateDate.HasValue)
-                                {
-                                    <div class="spec-item">
-                                        <div class="spec-label">დამატების თარიღი</div>
-                                        <div class="spec-value">@Model.CreateDate.Value.ToString("dd.MM.yyyy")</div>
                                     </div>
                                 }
                             </div>
