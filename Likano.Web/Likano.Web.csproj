@@ -13,5 +13,9 @@
 	<ItemGroup>
 		<ProjectReference Include="..\Likano\Likano.csproj" />
 	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Views\Product\" />
+	</ItemGroup>
 	
 </Project>
