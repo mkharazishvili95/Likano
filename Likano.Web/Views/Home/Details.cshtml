@@ -56,12 +56,17 @@
     }
 
     .product-title-top {
-        font-size: 2rem;
-        font-weight: 700;
-        color: #1a1a1a;
+        font-size: 2.4rem;
+        font-weight: 800;
+        background: var(--primary-gradient);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
         margin-bottom: 0.75rem;
         line-height: 1.3;
         text-align: center;
+        text-shadow: 0 2px 8px rgba(102,126,234,0.08);
+        letter-spacing: 0.5px;
     }
 
     .product-code-top {
@@ -515,6 +520,14 @@
 <div class="product-page-wrapper">
     <div class="product-details-container">
         <div class="product-meta-bar">
+            @if (Model.Id.HasValue)
+            {
+                <span>
+                    <svg viewBox="0 0 20 20"><path d="M2 10a2 2 0 012-2h2V6a2 2 0 012-2h4a2 2 0 012 2v2h2a2 2 0 012 2v4a2 2 0 01-2 2h-2v2a2 2 0 01-2 2h-4a2 2 0 01-2-2v-2H4a2 2 0 01-2-2v-4zm4-4v2h8V6a1 1 0 00-1-1h-6a1 1 0 00-1 1zm10 4h-2v4h2v-4zm-4 6v-2H8v2h4zm-6-6H4v4h2v-4z"/></svg>
+                    ID - @Model.Id.Value.ToString("N0")
+                </span>
+                <span class="meta-sep">|</span>
+            }
             @if (Model.ViewCount.HasValue)
             {
                 <span>
@@ -528,14 +541,6 @@
                 <span>
                     <svg viewBox="0 0 20 20"><path d="M6 2a1 1 0 012 0v1h4V2a1 1 0 112 0v1a3 3 0 013 3v10a3 3 0 01-3 3H6a3 3 0 01-3-3V6a3 3 0 013-3V2zm8 4H6a1 1 0 00-1 1v10a1 1 0 001 1h8a1 1 0 001-1V7a1 1 0 00-1-1zm-4 2a1 1 0 110 2 1 1 0 010-2z"/></svg>
                     @Model.CreateDate.Value.ToString("dd MMM yy, HH:mm", new System.Globalization.CultureInfo("ka-GE"))
-                </span>
-                <span class="meta-sep">|</span>
-            }
-            @if (Model.Id.HasValue)
-            {
-                <span>
-                    <svg viewBox="0 0 20 20"><path d="M2 10a2 2 0 012-2h2V6a2 2 0 012-2h4a2 2 0 012 2v2h2a2 2 0 012 2v4a2 2 0 01-2 2h-2v2a2 2 0 01-2 2h-4a2 2 0 01-2-2v-2H4a2 2 0 01-2-2v-4zm4-4v2h8V6a1 1 0 00-1-1h-6a1 1 0 00-1 1zm10 4h-2v4h2v-4zm-4 6v-2H8v2h4zm-6-6H4v4h2v-4z"/></svg>
-                    ID - @Model.Id.Value.ToString("N0")
                 </span>
             }
         </div>
@@ -592,10 +597,6 @@
                 <div class="col-lg-6">
                     <div class="product-info-section">
                         <div class="price-availability-header">
-                            @if (Model.Price.HasValue && Model.Price > 0)
-                            {
-                                <div class="product-price">@Model.Price.Value.ToString("N2") ₾</div>
-                            }
                             @if (Model.IsAvailable == true)
                             {
                                 <span class="availability-badge in-stock">მარაგშია</span>
@@ -604,12 +605,11 @@
                             {
                                 <span class="availability-badge out-of-stock">არ არის მარაგში</span>
                             }
+                            @if (Model.Price.HasValue && Model.Price > 0)
+                            {
+                                <div class="product-price">@Model.Price.Value.ToString("N2") ₾</div>
+                            }
                         </div>
-
-                        @if (!string.IsNullOrWhiteSpace(Model.Description))
-                        {
-                            <p class="product-description">@Model.Description</p>
-                        }
 
                         <div class="product-specs">
                             <h3 class="specs-title">ტექნიკური მახასიათებლები</h3>
@@ -626,13 +626,6 @@
                                     <div class="spec-item">
                                         <div class="spec-label">ბრენდი</div>
                                         <div class="spec-value">@Model.Brand.Name</div>
-                                    </div>
-                                }
-                                @if (Model.ProducerCountry != null)
-                                {
-                                    <div class="spec-item">
-                                        <div class="spec-label">წარმოების ქვეყანა</div>
-                                        <div class="spec-value">@Model.ProducerCountry.Name</div>
                                     </div>
                                 }
                                 @if (!string.IsNullOrWhiteSpace(Model.Color))
@@ -661,6 +654,13 @@
                                     <div class="spec-item">
                                         <div class="spec-label">სიმაღლე</div>
                                         <div class="spec-value">@Model.Height მ</div>
+                                    </div>
+                                }
+                                @if (Model.ProducerCountry != null)
+                                {
+                                    <div class="spec-item">
+                                        <div class="spec-label">წარმოების ქვეყანა</div>
+                                        <div class="spec-value">@Model.ProducerCountry.Name</div>
                                     </div>
                                 }
                             </div>
