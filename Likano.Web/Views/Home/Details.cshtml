@@ -7,35 +7,6 @@
 }
 
 <style>
-    .product-details-card {
-        background: #fff;
-        border-radius: 12px;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.07);
-        padding: 32px 24px;
-        margin-bottom: 32px;
-    }
-
-    .product-details-title {
-        font-size: 2rem;
-        font-weight: 600;
-        margin-bottom: 12px;
-    }
-
-    .product-details-price {
-        font-size: 1.5rem;
-        color: #0d6efd;
-        font-weight: 500;
-        margin-bottom: 16px;
-    }
-
-    .product-details-list .list-group-item {
-        border: none;
-        padding-left: 0;
-        padding-right: 0;
-        background: transparent;
-        font-size: 1rem;
-    }
-
     .product-details-image,
     .product-details-carousel img {
         width: @imageSize;
@@ -44,17 +15,107 @@
         border-radius: 8px;
         background: #f8f9fa;
         box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+        cursor: pointer;
+        transition: transform 0.15s;
     }
-
-    .carousel-control-prev-icon,
-    .carousel-control-next-icon {
-        background-color: #0d6efd;
+    .product-details-image:hover {
+        transform: scale(1.04);
+        box-shadow: 0 4px 16px rgba(0,0,0,0.10);
+    }
+    .product-details-gallery {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 1rem;
+    }
+    .modal-img-backdrop {
+        display: none;
+        position: fixed;
+        z-index: 1050;
+        left: 0; top: 0; width: 100vw; height: 100vh;
+        background: rgba(0,0,0,0.7);
+        justify-content: center;
+        align-items: center;
+    }
+    .modal-img-backdrop.active {
+        display: flex;
+    }
+    .modal-img-content {
+        position: relative;
+        background: #fff;
+        border-radius: 10px;
+        padding: 24px 24px 16px 24px;
+        max-width: 90vw;
+        max-height: 90vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .modal-img-main {
+        max-width: 60vw;
+        max-height: 60vh;
+        object-fit: contain;
+        border-radius: 8px;
+        margin-bottom: 16px;
+        box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+    }
+    .modal-img-thumbs {
+        display: flex;
+        gap: 8px;
+        margin-bottom: 8px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .modal-img-thumb {
+        width: 60px;
+        height: 60px;
+        object-fit: cover;
+        border-radius: 5px;
+        border: 2px solid transparent;
+        cursor: pointer;
+        transition: border 0.2s;
+    }
+    .modal-img-thumb.selected {
+        border: 2px solid #0d6efd;
+    }
+    .modal-img-close {
+        position: absolute;
+        top: 8px;
+        right: 12px;
+        font-size: 2rem;
+        color: #333;
+        background: none;
+        border: none;
+        cursor: pointer;
+        z-index: 2;
+        opacity: 0.8;
+        transition: opacity 0.2s;
+    }
+    .modal-img-close:hover {
+        opacity: 1;
+        color: #dc3545;
+    }
+    .modal-img-arrow {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background: rgba(0,0,0,0.2);
+        border: none;
+        color: #fff;
+        font-size: 2rem;
+        width: 40px;
+        height: 40px;
         border-radius: 50%;
+        cursor: pointer;
+        z-index: 2;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
-
-    .product-details-back {
-        margin-top: 24px;
-    }
+    .modal-img-arrow.left { left: 0; }
+    .modal-img-arrow.right { right: 0; }
 </style>
 
 <div class="container mt-4">
@@ -65,24 +126,15 @@
                     <div class="col-md-5 d-flex flex-column align-items-center">
                         @if (Model.Images != null && Model.Images.Any())
                         {
-                            <div id="productImagesCarousel" class="carousel slide product-details-carousel mb-3" data-bs-ride="carousel" style="width:@imageSize;">
-                                <div class="carousel-inner">
-                                    @for (int i = 0; i < Model.Images.Count; i++)
-                                    {
-                                        var img = Model.Images[i];
-                                        <div class="carousel-item @(i == 0 ? "active" : "")">
-                                            <img src="@img.FileUrl" alt="@img.FileName" />
-                                        </div>
-                                    }
-                                </div>
-                                @if (Model.Images.Count > 1)
+                            <div class="product-details-gallery">
+                                @for (int i = 0; i < Model.Images.Count; i++)
                                 {
-                                    <button class="carousel-control-prev" type="button" data-bs-target="#productImagesCarousel" data-bs-slide="prev">
-                                        <span class="carousel-control-prev-icon"></span>
-                                    </button>
-                                    <button class="carousel-control-next" type="button" data-bs-target="#productImagesCarousel" data-bs-slide="next">
-                                        <span class="carousel-control-next-icon"></span>
-                                    </button>
+                                    var img = Model.Images[i];
+                                    <img src="@img.FileUrl"
+                                         class="product-details-image"
+                                         alt="@img.FileName"
+                                         data-img-index="@i"
+                                         onclick="openImgModal(@i)" />
                                 }
                             </div>
                         }
@@ -123,8 +175,6 @@
                             <li class="list-group-item"><strong>სიმაღლე:</strong> @Model.Height</li>
                             <li class="list-group-item"><strong>დამატების თარიღი:</strong> @Model.CreateDate?.ToString("yyyy-MM-dd")</li>
                         </ul>
-                        <div class="mb-2">
-                        </div>
                         <div class="product-details-back">
                             <a href="@Url.Action("Index", "Home")" class="btn btn-outline-secondary">უკან დაბრუნება</a>
                         </div>
@@ -134,3 +184,77 @@
         </div>
     </div>
 </div>
+
+@if (Model.Images != null && Model.Images.Any())
+{
+    <div id="imgModalBackdrop" class="modal-img-backdrop" tabindex="-1" onclick="closeImgModal(event)">
+        <div class="modal-img-content" onclick="event.stopPropagation()">
+            <button class="modal-img-close" onclick="closeImgModal(event)" title="დახურვა">&times;</button>
+            <button class="modal-img-arrow left" onclick="imgModalPrev(event)" title="წინა">&#8592;</button>
+            <img id="imgModalMain" class="modal-img-main" src="" alt="Product image" />
+            <button class="modal-img-arrow right" onclick="imgModalNext(event)" title="შემდეგი">&#8594;</button>
+            <div class="modal-img-thumbs" id="imgModalThumbs"></div>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    <script>
+        var imgModalImages = [
+            @foreach (var img in Model.Images)
+            {
+                @: { url: '@img.FileUrl', alt: '@img.FileName' },
+            }
+        ];
+        var imgModalIndex = 0;
+
+        function openImgModal(idx) {
+            imgModalIndex = idx;
+            showImgModal();
+            document.getElementById('imgModalBackdrop').classList.add('active');
+        }
+
+        function closeImgModal(e) {
+            if (e) e.preventDefault();
+            document.getElementById('imgModalBackdrop').classList.remove('active');
+        }
+
+        function showImgModal() {
+            var mainImg = document.getElementById('imgModalMain');
+            var thumbs = document.getElementById('imgModalThumbs');
+            if (!mainImg || !thumbs) return;
+            mainImg.src = imgModalImages[imgModalIndex].url;
+            mainImg.alt = imgModalImages[imgModalIndex].alt;
+
+            thumbs.innerHTML = '';
+            imgModalImages.forEach(function(img, i) {
+                var thumb = document.createElement('img');
+                thumb.src = img.url;
+                thumb.alt = img.alt;
+                thumb.className = 'modal-img-thumb' + (i === imgModalIndex ? ' selected' : '');
+                thumb.onclick = function() { imgModalIndex = i; showImgModal(); };
+                thumbs.appendChild(thumb);
+            });
+        }
+
+        function imgModalPrev(e) {
+            if (e) e.stopPropagation();
+            imgModalIndex = (imgModalIndex - 1 + imgModalImages.length) % imgModalImages.length;
+            showImgModal();
+        }
+
+        function imgModalNext(e) {
+            if (e) e.stopPropagation();
+            imgModalIndex = (imgModalIndex + 1) % imgModalImages.length;
+            showImgModal();
+        }
+
+        document.addEventListener('keydown', function(e) {
+            var modal = document.getElementById('imgModalBackdrop');
+            if (!modal || !modal.classList.contains('active')) return;
+            if (e.key === 'Escape') closeImgModal(e);
+            if (e.key === 'ArrowLeft') imgModalPrev(e);
+            if (e.key === 'ArrowRight') imgModalNext(e);
+        });
+    </script>
+}
