@@ -7,98 +7,129 @@
 
 <style>
     :root {
-        --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        --primary: #6366f1;
+        --primary-dark: #4f46e5;
+        --primary-light: #818cf8;
+        --secondary: #ec4899;
+        --success: #10b981;
+        --danger: #ef4444;
         --surface: #ffffff;
-        --surface-hover: #f8f9fa;
-        --border-color: rgba(0,0,0,0.08);
-        --shadow-sm: 0 2px 8px rgba(0,0,0,0.04);
-        --shadow-md: 0 4px 16px rgba(0,0,0,0.08);
-        --shadow-lg: 0 12px 48px rgba(0,0,0,0.12);
+        --surface-alt: #f8fafc;
+        --border: #e2e8f0;
+        --text-primary: #0f172a;
+        --text-secondary: #64748b;
+        --shadow-sm: 0 1px 3px rgba(0,0,0,0.05);
+        --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
+        --shadow-lg: 0 20px 40px rgba(0,0,0,0.12);
         --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     .product-page-wrapper {
         min-height: 100vh;
-        background: linear-gradient(180deg, #f8f9fa 0%, #ffffff 100%);
-        padding: 2rem 0 4rem 0;
+        background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+        padding: 2.5rem 0 4rem 0;
     }
 
-    .product-details-container {
+    .product-container {
         max-width: 1400px;
         margin: 0 auto;
-        padding: 0 1rem;
+        padding: 0 1.5rem;
     }
 
-    .product-details-card {
+    /* Meta Bar */
+    .product-meta-bar {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        border-radius: 16px;
+        padding: 1rem 1.5rem;
+        margin-bottom: 2rem;
+        box-shadow: var(--shadow-sm);
+        border: 1px solid var(--border);
+        display: flex;
+        gap: 2rem;
+        align-items: center;
+        justify-content: flex-end;
+        flex-wrap: wrap;
+    }
+
+    .meta-item {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        color: var(--text-secondary);
+        font-size: 0.95rem;
+        font-weight: 500;
+    }
+
+        .meta-item svg {
+            width: 18px;
+            height: 18px;
+            fill: var(--primary);
+            opacity: 0.8;
+        }
+
+    .meta-sep {
+        color: var(--border);
+        font-weight: 300;
+    }
+
+    /* Main Grid Layout */
+    .product-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+        align-items: start;
+    }
+
+    /* Gallery Card */
+    .gallery-card {
         background: var(--surface);
         border-radius: 24px;
-        overflow: hidden;
+        padding: 2.5rem;
         box-shadow: var(--shadow-lg);
-        border: 1px solid var(--border-color);
-    }
-
-    .product-gallery-section {
-        padding: 3rem;
-        background: linear-gradient(135deg, #fafafa 0%, #f5f5f5 100%);
-        display: flex;
-        flex-direction: column;
-        gap: 1.5rem;
+        border: 1px solid var(--border);
         position: sticky;
         top: 20px;
     }
 
-    .product-meta-info {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 1rem;
-        margin-bottom: 1.5rem;
-    }
-
-    .product-title-top {
-        font-size: 2.4rem;
+    .product-title {
+        font-size: 2rem;
         font-weight: 800;
-        background: var(--primary-gradient);
+        color: var(--text-primary);
+        margin-bottom: 1rem;
+        line-height: 1.3;
+        background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         background-clip: text;
-        margin-bottom: 0.75rem;
-        line-height: 1.3;
-        text-align: center;
-        text-shadow: 0 2px 8px rgba(102,126,234,0.08);
-        letter-spacing: 0.5px;
     }
 
-    .product-code-top {
-        display: inline-block;
-        background: linear-gradient(135deg, #e0e7ff 0%, #f3e8ff 100%);
-        color: #5b21b6;
-        padding: 6px 16px;
-        border-radius: 20px;
-        font-size: 0.85rem;
+    .product-code {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        background: linear-gradient(135deg, #ede9fe 0%, #fce7f3 100%);
+        color: var(--primary-dark);
+        padding: 0.5rem 1.25rem;
+        border-radius: 50px;
+        font-size: 0.9rem;
         font-weight: 600;
-        margin-bottom: 1.5rem;
+        margin-bottom: 2rem;
     }
 
-    .code-wrapper {
-        text-align: center;
-        margin-bottom: 1.5rem;
-    }
-
-    .main-image-container {
+    .main-image-wrapper {
         width: 100%;
-        max-width: 450px;
         aspect-ratio: 1;
         border-radius: 20px;
         overflow: hidden;
-        box-shadow: var(--shadow-lg);
+        background: var(--surface-alt);
         position: relative;
-        background: white;
-        border: 1px solid var(--border-color);
-        margin: 0 auto;
+        margin-bottom: 1.5rem;
+        box-shadow: var(--shadow-md);
+        border: 1px solid var(--border);
     }
 
-    .product-main-image {
+    .main-image {
         width: 100%;
         height: 100%;
         object-fit: cover;
@@ -106,77 +137,85 @@
         transition: var(--transition);
     }
 
-        .product-main-image:hover {
+        .main-image:hover {
             transform: scale(1.05);
         }
 
-    .thumbnail-gallery {
-        display: flex;
-        gap: 12px;
-        flex-wrap: wrap;
-        justify-content: center;
+    .thumbnail-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+        gap: 0.75rem;
     }
 
-    .thumbnail-item {
-        width: 80px;
-        height: 80px;
+    .thumbnail {
+        aspect-ratio: 1;
         border-radius: 12px;
         overflow: hidden;
         cursor: pointer;
         border: 3px solid transparent;
         transition: var(--transition);
         box-shadow: var(--shadow-sm);
+        background: var(--surface-alt);
     }
 
-        .thumbnail-item:hover {
-            transform: translateY(-4px);
+        .thumbnail:hover {
+            transform: translateY(-2px);
             box-shadow: var(--shadow-md);
-            border-color: #667eea;
+            border-color: var(--primary-light);
         }
 
-        .thumbnail-item.active {
-            border-color: #667eea;
-            box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.2);
+        .thumbnail.active {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.15);
         }
 
-        .thumbnail-item img {
+        .thumbnail img {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
 
-    .product-info-section {
-        padding: 3rem;
+    /* Info Card */
+    .info-card {
+        background: var(--surface);
+        border-radius: 24px;
+        padding: 2.5rem;
+        box-shadow: var(--shadow-lg);
+        border: 1px solid var(--border);
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
     }
 
-    .price-availability-header {
+    .price-availability {
         display: flex;
         align-items: center;
         justify-content: space-between;
         gap: 1.5rem;
-        margin-bottom: 2rem;
-        flex-wrap: wrap;
         padding-bottom: 2rem;
-        border-bottom: 2px solid var(--border-color);
+        border-bottom: 2px solid var(--border);
+        flex-wrap: wrap;
     }
 
     .product-price {
-        font-size: 2rem;
-        font-weight: 800;
-        background: var(--primary-gradient);
+        font-size: 2.5rem;
+        font-weight: 900;
+        background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         background-clip: text;
+        letter-spacing: -0.02em;
     }
 
     .availability-badge {
-        padding: 12px 24px;
-        border-radius: 30px;
+        padding: 0.75rem 1.5rem;
+        border-radius: 50px;
         font-weight: 600;
-        font-size: 1rem;
+        font-size: 0.95rem;
         display: inline-flex;
         align-items: center;
-        gap: 8px;
+        gap: 0.5rem;
+        box-shadow: var(--shadow-sm);
     }
 
         .availability-badge.in-stock {
@@ -195,166 +234,172 @@
             height: 8px;
             border-radius: 50%;
             background: currentColor;
+            animation: pulse 2s ease-in-out infinite;
         }
 
-    .product-description {
-        font-size: 1.05rem;
-        color: #4b5563;
-        line-height: 1.8;
-        margin-bottom: 2.5rem;
-        padding: 1.5rem;
-        background: linear-gradient(135deg, #f9fafb 0%, #f3f4f6 100%);
-        border-radius: 16px;
-        border-left: 4px solid #667eea;
+    @@keyframes pulse {
+        0%, 100%
+
+    {
+        opacity: 1;
     }
 
-    .product-specs {
-        margin-bottom: 2rem;
+    50% {
+        opacity: 0.5;
     }
 
-    .specs-title {
-        font-size: 1.4rem;
+    }
+
+    /* Specs Section */
+    .specs-section {
+        display: flex;
+        flex-direction: column;
+        gap: 1.25rem;
+    }
+
+    .section-title {
+        font-size: 1.25rem;
         font-weight: 700;
-        color: #1a1a1a;
-        margin-bottom: 1.5rem;
+        color: var(--text-primary);
         display: flex;
         align-items: center;
-        gap: 10px;
+        gap: 0.75rem;
+        margin-bottom: 0.5rem;
     }
 
-        .specs-title::before {
-            content: '●';
-            color: #667eea;
-            font-size: 1.2rem;
+        .section-title::before {
+            content: '';
+            width: 4px;
+            height: 24px;
+            background: linear-gradient(180deg, var(--primary) 0%, var(--secondary) 100%);
+            border-radius: 4px;
         }
 
-    .spec-grid {
+    .specs-grid {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
         gap: 1rem;
     }
 
     .spec-item {
-        background: white;
+        background: var(--surface-alt);
         padding: 1.25rem;
         border-radius: 12px;
-        border: 1px solid var(--border-color);
+        border: 1px solid var(--border);
         transition: var(--transition);
-        display: flex;
-        flex-direction: column;
-        gap: 0.5rem;
     }
 
         .spec-item:hover {
             transform: translateY(-2px);
             box-shadow: var(--shadow-md);
-            border-color: #667eea;
+            border-color: var(--primary-light);
+            background: var(--surface);
         }
 
     .spec-label {
-        font-size: 0.8rem;
-        color: #9ca3af;
+        font-size: 0.75rem;
+        color: var(--text-secondary);
         font-weight: 600;
         text-transform: uppercase;
         letter-spacing: 0.5px;
+        margin-bottom: 0.5rem;
     }
 
     .spec-value {
         font-size: 1.05rem;
-        color: #1f2937;
+        color: var(--text-primary);
         font-weight: 600;
     }
 
-    .action-buttons {
-        display: flex;
-        gap: 1rem;
-        flex-wrap: wrap;
-        margin-top: 2rem;
+    /* Actions */
+    .actions-section {
         padding-top: 2rem;
-        border-top: 2px solid var(--border-color);
+        border-top: 2px solid var(--border);
     }
 
     .btn-back {
-        padding: 14px 32px;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.75rem;
+        padding: 1rem 2rem;
         border-radius: 12px;
         font-weight: 600;
         font-size: 1rem;
-        border: 2px solid #667eea;
-        background: white;
-        color: #667eea;
+        border: 2px solid var(--primary);
+        background: var(--surface);
+        color: var(--primary);
         text-decoration: none;
         transition: var(--transition);
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
+        box-shadow: var(--shadow-sm);
     }
 
         .btn-back:hover {
-            background: #667eea;
+            background: var(--primary);
             color: white;
             transform: translateY(-2px);
             box-shadow: var(--shadow-md);
         }
 
-    .modal-img-backdrop {
+    /* Modal */
+    .modal-backdrop {
         display: none;
         position: fixed;
         z-index: 9999;
-        left: 0;
-        top: 0;
-        width: 100vw;
-        height: 100vh;
-        background: rgba(0, 0, 0, 0.92);
-        backdrop-filter: blur(4px);
+        inset: 0;
+        background: rgba(15, 23, 42, 0.95);
+        backdrop-filter: blur(8px);
         justify-content: center;
         align-items: center;
         animation: fadeIn 0.3s ease;
     }
 
-        .modal-img-backdrop.active {
+        .modal-backdrop.active {
             display: flex;
         }
 
     @@keyframes fadeIn {
-        from {
-            opacity: 0;
-        }
+        from
 
-        to {
-            opacity: 1;
-        }
+    {
+        opacity: 0;
     }
 
-    .modal-img-content {
+    to {
+        opacity: 1;
+    }
+
+    }
+
+    .modal-content {
         position: relative;
-        background: white;
+        background: var(--surface);
         border-radius: 24px;
         padding: 2rem;
-        max-width: 95vw;
-        max-height: 95vh;
+        max-width: 90vw;
+        max-height: 90vh;
         display: flex;
         flex-direction: column;
         align-items: center;
         box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
     }
 
-    .modal-img-main {
+    .modal-main-image {
         width: 600px;
         height: 600px;
         object-fit: contain;
         border-radius: 16px;
         margin-bottom: 1.5rem;
-        background: #f9fafb;
+        background: var(--surface-alt);
     }
 
-    .modal-img-close {
+    .modal-close {
         position: absolute;
         top: 1rem;
         right: 1rem;
         width: 44px;
         height: 44px;
         border-radius: 50%;
-        background: rgba(0, 0, 0, 0.7);
+        background: rgba(15, 23, 42, 0.8);
         color: white;
         border: none;
         font-size: 1.5rem;
@@ -366,19 +411,19 @@
         justify-content: center;
     }
 
-        .modal-img-close:hover {
-            background: #dc3545;
+        .modal-close:hover {
+            background: var(--danger);
             transform: rotate(90deg);
         }
 
-    .modal-img-arrow {
+    .modal-arrow {
         position: absolute;
         top: 50%;
         transform: translateY(-50%);
         width: 50px;
         height: 50px;
         border-radius: 50%;
-        background: rgba(0, 0, 0, 0.7);
+        background: rgba(15, 23, 42, 0.8);
         color: white;
         border: none;
         font-size: 1.5rem;
@@ -390,20 +435,20 @@
         justify-content: center;
     }
 
-        .modal-img-arrow:hover {
-            background: #667eea;
+        .modal-arrow:hover {
+            background: var(--primary);
             transform: translateY(-50%) scale(1.1);
         }
 
-        .modal-img-arrow.left {
+        .modal-arrow.left {
             left: 2rem;
         }
 
-        .modal-img-arrow.right {
+        .modal-arrow.right {
             right: 2rem;
         }
 
-    .modal-img-thumbs {
+    .modal-thumbnails {
         display: flex;
         gap: 10px;
         flex-wrap: wrap;
@@ -413,7 +458,7 @@
         padding: 10px;
     }
 
-    .modal-img-thumb {
+    .modal-thumbnail {
         width: 70px;
         height: 70px;
         object-fit: cover;
@@ -424,275 +469,262 @@
         flex-shrink: 0;
     }
 
-        .modal-img-thumb:hover {
-            border-color: #667eea;
+        .modal-thumbnail:hover {
+            border-color: var(--primary);
             transform: scale(1.1);
         }
 
-        .modal-img-thumb.selected {
-            border-color: #667eea;
-            box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.3);
+        .modal-thumbnail.selected {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.3);
         }
+
+    /* Responsive */
+    @@media (max-width: 992px) {
+        .product-grid
+
+    {
+        grid-template-columns: 1fr;
+    }
+
+    .gallery-card {
+        position: static;
+    }
+
+    .specs-grid {
+        grid-template-columns: 1fr;
+    }
+
+    }
 
     @@media (max-width: 768px) {
-        .product-title-top {
-            font-size: 1.5rem;
-        }
+        .product-page-wrapper
 
-        .product-price {
-            font-size: 1.3rem;
-        }
+    {
+        padding: 1.5rem 0 3rem 0;
+    }
 
-        .product-gallery-section,
-        .product-info-section {
-            padding: 1.5rem;
-        }
-
-        .main-image-container {
-            max-width: 100%;
-        }
-
-        .spec-grid {
-            grid-template-columns: 1fr;
-        }
-
-        .product-meta-info {
-            grid-template-columns: 1fr;
-        }
-
-        .modal-img-main {
-            width: 90vw;
-            height: 90vw;
-            max-width: 500px;
-            max-height: 500px;
-        }
-
-        .modal-img-arrow.left {
-            left: 0.5rem;
-        }
-
-        .modal-img-arrow.right {
-            right: 0.5rem;
-        }
-
-        .price-availability-header {
-            flex-direction: column;
-            align-items: flex-start;
-        }
+    .product-container {
+        padding: 0 1rem;
     }
 
     .product-meta-bar {
-        position: static;
-        margin-bottom: 1.5rem;
-        display: flex;
-        gap: 18px;
-        background: #f3f4f6;
-        color: #374151;
-        border-radius: 18px;
-        padding: 10px 22px;
-        font-size: 1rem;
-        font-weight: 600;
-        box-shadow: var(--shadow-md);
-        align-items: center;
-        letter-spacing: 0.02em;
-        justify-content: flex-end;
+        justify-content: center;
+        gap: 1rem;
     }
-    .product-meta-bar span {
-        display: flex;
-        align-items: center;
-        white-space: nowrap;
-        gap: 6px;
+
+    .gallery-card,
+    .info-card {
+        padding: 1.5rem;
     }
-    .product-meta-bar .meta-sep {
-        margin: 0 8px;
-        color: #9ca3af;
-        font-weight: 400;
+
+    .product-title {
+        font-size: 1.5rem;
     }
-    .product-meta-bar svg {
-        width: 18px;
-        height: 18px;
-        display: inline-block;
-        vertical-align: middle;
-        fill: #6b7280; 
+
+    .product-price {
+        font-size: 1.75rem;
+    }
+
+    .price-availability {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .modal-main-image {
+        width: 90vw;
+        height: 90vw;
+        max-width: 500px;
+        max-height: 500px;
+    }
+
+    .modal-arrow.left {
+        left: 0.5rem;
+    }
+
+    .modal-arrow.right {
+        right: 0.5rem;
+    }
+
     }
 </style>
 
 <div class="product-page-wrapper">
-    <div class="product-details-container">
+    <div class="product-container">
+        <!-- Meta Bar -->
         <div class="product-meta-bar">
             @if (Model.Id.HasValue)
             {
-                <span>
-                    <svg viewBox="0 0 20 20"><path d="M2 10a2 2 0 012-2h2V6a2 2 0 012-2h4a2 2 0 012 2v2h2a2 2 0 012 2v4a2 2 0 01-2 2h-2v2a2 2 0 01-2 2h-4a2 2 0 01-2-2v-2H4a2 2 0 01-2-2v-4zm4-4v2h8V6a1 1 0 00-1-1h-6a1 1 0 00-1 1zm10 4h-2v4h2v-4zm-4 6v-2H8v2h4zm-6-6H4v4h2v-4z"/></svg>
+                <div class="meta-item">
+                    <svg viewBox="0 0 20 20"><path d="M2 10a2 2 0 012-2h2V6a2 2 0 012-2h4a2 2 0 012 2v2h2a2 2 0 012 2v4a2 2 0 01-2 2h-2v2a2 2 0 01-2 2h-4a2 2 0 01-2-2v-2H4a2 2 0 01-2-2v-4zm4-4v2h8V6a1 1 0 00-1-1h-6a1 1 0 00-1 1zm10 4h-2v4h2v-4zm-4 6v-2H8v2h4zm-6-6H4v4h2v-4z" /></svg>
                     ID - @Model.Id.Value.ToString("N0")
-                </span>
+                </div>
                 <span class="meta-sep">|</span>
             }
             @if (Model.ViewCount.HasValue)
             {
-                <span>
-                    <svg viewBox="0 0 20 20"><path d="M10 3c-5 0-9 5.25-9 7s4 7 9 7 9-5.25 9-7-4-7-9-7zm0 12c-3.87 0-7-3.13-7-5s3.13-5 7-5 7 3.13 7 5-3.13 5-7 5zm0-8a3 3 0 100 6 3 3 0 000-6zm0 4.5A1.5 1.5 0 1110 7a1.5 1.5 0 010 3z"/></svg>
+                <div class="meta-item">
+                    <svg viewBox="0 0 20 20"><path d="M10 3c-5 0-9 5.25-9 7s4 7 9 7 9-5.25 9-7-4-7-9-7zm0 12c-3.87 0-7-3.13-7-5s3.13-5 7-5 7 3.13 7 5-3.13 5-7 5zm0-8a3 3 0 100 6 3 3 0 000-6zm0 4.5A1.5 1.5 0 1110 7a1.5 1.5 0 010 3z" /></svg>
                     @Model.ViewCount.Value.ToString("N0")
-                </span>
+                </div>
                 <span class="meta-sep">|</span>
             }
             @if (Model.CreateDate.HasValue)
             {
-                <span>
-                    <svg viewBox="0 0 20 20"><path d="M6 2a1 1 0 012 0v1h4V2a1 1 0 112 0v1a3 3 0 013 3v10a3 3 0 01-3 3H6a3 3 0 01-3-3V6a3 3 0 013-3V2zm8 4H6a1 1 0 00-1 1v10a1 1 0 001 1h8a1 1 0 001-1V7a1 1 0 00-1-1zm-4 2a1 1 0 110 2 1 1 0 010-2z"/></svg>
+                <div class="meta-item">
+                    <svg viewBox="0 0 20 20"><path d="M6 2a1 1 0 012 0v1h4V2a1 1 0 112 0v1a3 3 0 013 3v10a3 3 0 01-3 3H6a3 3 0 01-3-3V6a3 3 0 013-3V2zm8 4H6a1 1 0 00-1 1v10a1 1 0 001 1h8a1 1 0 001-1V7a1 1 0 00-1-1zm-4 2a1 1 0 110 2 1 1 0 010-2z" /></svg>
                     @Model.CreateDate.Value.ToString("dd MMM yy, HH:mm", new System.Globalization.CultureInfo("ka-GE"))
-                </span>
+                </div>
             }
         </div>
-        <div class="product-details-card">
-            <div class="row g-0">
-                <div class="col-lg-6">
-                    <div class="product-gallery-section">
-                        <h2 class="product-title-top">@Model.Title</h2>
 
-                        <div class="code-wrapper">
-                            <span class="product-code-top">კოდი: @Model.Code</span>
-                        </div>
+        <!-- Main Grid -->
+        <div class="product-grid">
+            <!-- Gallery Card -->
+            <div class="gallery-card">
+                <h1 class="product-title">@Model.Title</h1>
+                <span class="product-code">📦 კოდი: @Model.Code</span>
 
-                        @if (Model.Images != null && Model.Images.Any())
-                        {
-                            <div class="main-image-container">
-                                <img id="mainImage"
-                                     src="@Model.Images.First().FileUrl"
-                                     class="product-main-image"
-                                     alt="@Model.Title"
-                                     onclick="openImgModal(0)" />
-                            </div>
+                @if (Model.Images != null && Model.Images.Any())
+                {
+                    <div class="main-image-wrapper">
+                        <img id="mainImage"
+                             src="@Model.Images.First().FileUrl"
+                             class="main-image"
+                             alt="@Model.Title"
+                             onclick="openModal(0)" />
+                    </div>
 
-                            @if (Model.Images.Count > 1)
+                    @if (Model.Images.Count > 1)
+                    {
+                        <div class="thumbnail-grid">
+                            @for (int i = 0; i < Model.Images.Count; i++)
                             {
-                                <div class="thumbnail-gallery">
-                                    @for (int i = 0; i < Model.Images.Count; i++)
-                                    {
-                                        var img = Model.Images[i];
-                                        <div class="thumbnail-item @(i == 0 ? "active" : "")"
-                                             data-index="@i"
-                                             onclick="changeMainImage(@i)">
-                                            <img src="@img.FileUrl" alt="@img.FileName" />
-                                        </div>
-                                    }
+                                var img = Model.Images[i];
+                                <div class="thumbnail @(i == 0 ? "active" : "")"
+                                     data-index="@i"
+                                     onclick="changeImage(@i)">
+                                    <img src="@img.FileUrl" alt="@img.FileName" />
                                 </div>
                             }
-                        }
-                        else if (!string.IsNullOrEmpty(Model.ProductImageUrl))
+                        </div>
+                    }
+                }
+                else if (!string.IsNullOrEmpty(Model.ProductImageUrl))
+                {
+                    <div class="main-image-wrapper">
+                        <img src="@Model.ProductImageUrl" class="main-image" alt="@Model.Title" />
+                    </div>
+                }
+                else
+                {
+                    <div class="main-image-wrapper">
+                        <img src="https://ik.imagekit.io/rqxdk712q/products/733b35b7-b949-4a3c-9e64-1de44004c88e_NoImageLogo" class="main-image" alt="No image" />
+                    </div>
+                }
+            </div>
+
+            <!-- Info Card -->
+            <div class="info-card">
+                <!-- Price & Availability -->
+                <div class="price-availability">
+                    @if (Model.Price.HasValue && Model.Price > 0)
+                    {
+                        <div class="product-price">@Model.Price.Value.ToString("N2") ₾</div>
+                    }
+                    @if (Model.IsAvailable == true)
+                    {
+                        <span class="availability-badge in-stock">მარაგშია</span>
+                    }
+                    else
+                    {
+                        <span class="availability-badge out-of-stock">არ არის მარაგში</span>
+                    }
+                </div>
+
+                <!-- Specifications -->
+                <div class="specs-section">
+                    <h3 class="section-title">ტექნიკური მახასიათებლები</h3>
+                    <div class="specs-grid">
+                        @if (Model.Category != null)
                         {
-                            <div class="main-image-container">
-                                <img src="@Model.ProductImageUrl" class="product-main-image" alt="@Model.Title" />
+                            <div class="spec-item">
+                                <div class="spec-label">კატეგორია</div>
+                                <div class="spec-value">@Model.Category.Name</div>
                             </div>
                         }
-                        else
+                        @if (Model.Brand != null)
                         {
-                            <div class="main-image-container">
-                                <img src="https://ik.imagekit.io/rqxdk712q/products/733b35b7-b949-4a3c-9e64-1de44004c88e_NoImageLogo" class="product-main-image" alt="No image" />
+                            <div class="spec-item">
+                                <div class="spec-label">ბრენდი</div>
+                                <div class="spec-value">@Model.Brand.Name</div>
+                            </div>
+                        }
+                        @if (!string.IsNullOrWhiteSpace(Model.Color))
+                        {
+                            <div class="spec-item">
+                                <div class="spec-label">ფერი</div>
+                                <div class="spec-value">@Model.Color</div>
+                            </div>
+                        }
+                        @if (Model.Length.HasValue)
+                        {
+                            <div class="spec-item">
+                                <div class="spec-label">სიგრძე</div>
+                                <div class="spec-value">@Model.Length მ</div>
+                            </div>
+                        }
+                        @if (Model.Width.HasValue)
+                        {
+                            <div class="spec-item">
+                                <div class="spec-label">სიგანე</div>
+                                <div class="spec-value">@Model.Width მ</div>
+                            </div>
+                        }
+                        @if (Model.Height.HasValue)
+                        {
+                            <div class="spec-item">
+                                <div class="spec-label">სიმაღლე</div>
+                                <div class="spec-value">@Model.Height მ</div>
+                            </div>
+                        }
+                        @if (Model.ProducerCountry != null)
+                        {
+                            <div class="spec-item">
+                                <div class="spec-label">წარმოების ქვეყანა</div>
+                                <div class="spec-value">@Model.ProducerCountry.Name</div>
                             </div>
                         }
                     </div>
                 </div>
 
-                <div class="col-lg-6">
-                    <div class="product-info-section">
-                        <div class="price-availability-header">
-                            @if (Model.IsAvailable == true)
-                            {
-                                <span class="availability-badge in-stock">მარაგშია</span>
-                            }
-                            else
-                            {
-                                <span class="availability-badge out-of-stock">არ არის მარაგში</span>
-                            }
-                            @if (Model.Price.HasValue && Model.Price > 0)
-                            {
-                                <div class="product-price">@Model.Price.Value.ToString("N2") ₾</div>
-                            }
-                        </div>
-
-                        <div class="product-specs">
-                            <h3 class="specs-title">ტექნიკური მახასიათებლები</h3>
-                            <div class="spec-grid">
-                                @if (Model.Category != null)
-                                {
-                                    <div class="spec-item">
-                                        <div class="spec-label">კატეგორია</div>
-                                        <div class="spec-value">@Model.Category.Name</div>
-                                    </div>
-                                }
-                                @if (Model.Brand != null)
-                                {
-                                    <div class="spec-item">
-                                        <div class="spec-label">ბრენდი</div>
-                                        <div class="spec-value">@Model.Brand.Name</div>
-                                    </div>
-                                }
-                                @if (!string.IsNullOrWhiteSpace(Model.Color))
-                                {
-                                    <div class="spec-item">
-                                        <div class="spec-label">ფერი</div>
-                                        <div class="spec-value">@Model.Color</div>
-                                    </div>
-                                }
-                                @if (Model.Length.HasValue)
-                                {
-                                    <div class="spec-item">
-                                        <div class="spec-label">სიგრძე</div>
-                                        <div class="spec-value">@Model.Length მ</div>
-                                    </div>
-                                }
-                                @if (Model.Width.HasValue)
-                                {
-                                    <div class="spec-item">
-                                        <div class="spec-label">სიგანე</div>
-                                        <div class="spec-value">@Model.Width მ</div>
-                                    </div>
-                                }
-                                @if (Model.Height.HasValue)
-                                {
-                                    <div class="spec-item">
-                                        <div class="spec-label">სიმაღლე</div>
-                                        <div class="spec-value">@Model.Height მ</div>
-                                    </div>
-                                }
-                                @if (Model.ProducerCountry != null)
-                                {
-                                    <div class="spec-item">
-                                        <div class="spec-label">წარმოების ქვეყანა</div>
-                                        <div class="spec-value">@Model.ProducerCountry.Name</div>
-                                    </div>
-                                }
-                            </div>
-                        </div>
-
-                        <div class="action-buttons">
-                            <a href="@Url.Action("Index", "Home")" class="btn-back">
-                                <span>←</span> უკან დაბრუნება
-                            </a>
-                        </div>
-                    </div>
+                <!-- Actions -->
+                <div class="actions-section">
+                    <a href="@Url.Action("Index", "Home")" class="btn-back">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                            <path d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" />
+                        </svg>
+                        უკან დაბრუნება
+                    </a>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
+<!-- Modal -->
 @if (Model.Images != null && Model.Images.Any())
 {
-    <div id="imgModalBackdrop" class="modal-img-backdrop" onclick="closeImgModal(event)">
-        <div class="modal-img-content" onclick="event.stopPropagation()">
-            <button class="modal-img-close" onclick="closeImgModal(event)">&times;</button>
-            @if (Model.Images != null && Model.Images.Count > 1)
+    <div id="modalBackdrop" class="modal-backdrop" onclick="closeModal(event)">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <button class="modal-close" onclick="closeModal(event)">&times;</button>
+            @if (Model.Images.Count > 1)
             {
-                <button class="modal-img-arrow left" onclick="imgModalPrev(event)">‹</button>
+                <button class="modal-arrow left" onclick="prevImage(event)">‹</button>
+                <button class="modal-arrow right" onclick="nextImage(event)">›</button>
             }
-            <img id="imgModalMain" class="modal-img-main" src="" alt="Product image" />
-            @if (Model.Images != null && Model.Images.Count > 1)
-            {
-                <button class="modal-img-arrow right" onclick="imgModalNext(event)">›</button>
-            }
-            <div class="modal-img-thumbs" id="imgModalThumbs"></div>
+            <img id="modalMainImage" class="modal-main-image" src="" alt="Product image" />
+            <div class="modal-thumbnails" id="modalThumbnails"></div>
         </div>
     </div>
 }
@@ -701,82 +733,81 @@
     <script>
         @if (Model.Images != null && Model.Images.Any())
         {
-                @:var imgModalImages = [
+                @:var images = [
                 foreach (var img in Model.Images)
                 {
                         @:{ url: '@img.FileUrl', alt: '@img.FileName' },
                 }
                     @:];
-                @:var imgModalIndex = 0;
+                @:var currentIndex = 0;
         }
 
-        function changeMainImage(index) {
+        function changeImage(index) {
             const mainImg = document.getElementById('mainImage');
-            const thumbnails = document.querySelectorAll('.thumbnail-item');
+            const thumbnails = document.querySelectorAll('.thumbnail');
 
-            if (mainImg && imgModalImages && imgModalImages[index]) {
-                mainImg.src = imgModalImages[index].url;
-
+            if (mainImg && images && images[index]) {
+                mainImg.src = images[index].url;
                 thumbnails.forEach((thumb, i) => {
                     thumb.classList.toggle('active', i === index);
                 });
             }
         }
 
-        function openImgModal(idx) {
-            imgModalIndex = idx;
-            showImgModal();
-            document.getElementById('imgModalBackdrop').classList.add('active');
+        function openModal(idx) {
+            currentIndex = idx;
+            updateModal();
+            document.getElementById('modalBackdrop').classList.add('active');
             document.body.style.overflow = 'hidden';
         }
 
-        function closeImgModal(e) {
+        function closeModal(e) {
             if (e) e.preventDefault();
-            document.getElementById('imgModalBackdrop').classList.remove('active');
+            document.getElementById('modalBackdrop').classList.remove('active');
             document.body.style.overflow = '';
         }
 
-        function showImgModal() {
-            const mainImg = document.getElementById('imgModalMain');
-            const thumbs = document.getElementById('imgModalThumbs');
+        function updateModal() {
+            const mainImg = document.getElementById('modalMainImage');
+            const thumbs = document.getElementById('modalThumbnails');
 
-            if (!mainImg || !thumbs || !imgModalImages) return;
+            if (!mainImg || !thumbs || !images) return;
 
-            mainImg.src = imgModalImages[imgModalIndex].url;
-            mainImg.alt = imgModalImages[imgModalIndex].alt;
+            mainImg.src = images[currentIndex].url;
+            mainImg.alt = images[currentIndex].alt;
 
             thumbs.innerHTML = '';
-            imgModalImages.forEach((img, i) => {
+            images.forEach((img, i) => {
                 const thumb = document.createElement('img');
                 thumb.src = img.url;
                 thumb.alt = img.alt;
-                thumb.className = 'modal-img-thumb' + (i === imgModalIndex ? ' selected' : '');
-                thumb.onclick = () => { imgModalIndex = i; showImgModal(); };
+                thumb.className = 'modal-thumbnail' + (i === currentIndex ? ' selected' : '');
+                thumb.onclick = () => { currentIndex = i; updateModal(); };
                 thumbs.appendChild(thumb);
             });
         }
 
-        function imgModalPrev(e) {
+        function prevImage(e) {
             if (e) e.stopPropagation();
-            if (!imgModalImages) return;
-            imgModalIndex = (imgModalIndex - 1 + imgModalImages.length) % imgModalImages.length;
-            showImgModal();
+            if (!images) return;
+            currentIndex = (currentIndex - 1 + images.length) % images.length;
+            updateModal();
         }
 
-        function imgModalNext(e) {
+        function nextImage(e) {
             if (e) e.stopPropagation();
-            if (!imgModalImages) return;
-            imgModalIndex = (imgModalIndex + 1) % imgModalImages.length;
-            showImgModal();
+            if (!images) return;
+            currentIndex = (currentIndex + 1) % images.length;
+            updateModal();
         }
 
         document.addEventListener('keydown', (e) => {
-            const modal = document.getElementById('imgModalBackdrop');
+            const modal = document.getElementById('modalBackdrop');
             if (!modal || !modal.classList.contains('active')) return;
 
-            if (e.key === 'Escape') closeImgModal(e);
-            if (e.key === 'ArrowLeft') imgModalPrev(e);
-            if (e.key === 'ArrowRight') imgModalNext(e);
+            if (e.key === 'Escape') closeModal(e);
+            if (e.key === 'ArrowLeft') prevImage(e);
+            if (e.key === 'ArrowRight') nextImage(e);
         });
     </script>
 }
