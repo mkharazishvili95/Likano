@@ -683,9 +683,15 @@
     <div id="imgModalBackdrop" class="modal-img-backdrop" onclick="closeImgModal(event)">
         <div class="modal-img-content" onclick="event.stopPropagation()">
             <button class="modal-img-close" onclick="closeImgModal(event)">&times;</button>
-            <button class="modal-img-arrow left" onclick="imgModalPrev(event)">‹</button>
+            @if (Model.Images != null && Model.Images.Count > 1)
+            {
+                <button class="modal-img-arrow left" onclick="imgModalPrev(event)">‹</button>
+            }
             <img id="imgModalMain" class="modal-img-main" src="" alt="Product image" />
-            <button class="modal-img-arrow right" onclick="imgModalNext(event)">›</button>
+            @if (Model.Images != null && Model.Images.Count > 1)
+            {
+                <button class="modal-img-arrow right" onclick="imgModalNext(event)">›</button>
+            }
             <div class="modal-img-thumbs" id="imgModalThumbs"></div>
         </div>
     </div>
