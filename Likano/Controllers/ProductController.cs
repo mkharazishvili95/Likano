@@ -1,6 +1,7 @@
 ﻿using Likano.Application.Features.Product.Queries.Get;
 using Likano.Application.Features.Product.Queries.GetAll;
 using Likano.Infrastructure.Queries.Product.Models;
+using Likano.Infrastructure.Queries.Product.Models.Details;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -24,5 +25,8 @@ namespace Likano.Controllers
 
         [HttpPost("search")]
         public async Task<GetAllProductsForSearchResponse> Search(GetAllProductsForSearchQuery request) => await _mediator.Send(request);
+
+        [HttpGet("details")]
+        public async Task<GetProductDetailsResponse> Details(int id) => await _mediator.Send(new GetProductDetailsQuery { ProductId = id });
     }
 }
