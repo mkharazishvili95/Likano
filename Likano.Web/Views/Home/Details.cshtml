@@ -36,7 +36,6 @@
         padding: 0 1.5rem;
     }
 
-    /* Meta Bar */
     .product-meta-bar {
         background: rgba(255, 255, 255, 0.95);
         backdrop-filter: blur(10px);
@@ -73,7 +72,6 @@
         font-weight: 300;
     }
 
-    /* Main Grid Layout */
     .product-grid {
         display: grid;
         grid-template-columns: 1fr 1fr;
@@ -81,7 +79,6 @@
         align-items: start;
     }
 
-    /* Gallery Card */
     .gallery-card {
         background: var(--surface);
         border-radius: 24px;
@@ -175,7 +172,6 @@
             object-fit: cover;
         }
 
-    /* Info Card */
     .info-card {
         background: var(--surface);
         border-radius: 24px;
@@ -250,7 +246,6 @@
 
     }
 
-    /* Specs Section */
     .specs-section {
         display: flex;
         flex-direction: column;
@@ -267,7 +262,6 @@
         margin-bottom: 0.5rem;
     }
 
-    /* Remove old ::before icon and add new SVG icon */
     .section-title::before {
         content: '';
         display: none;
@@ -322,7 +316,6 @@
         font-weight: 600;
     }
 
-    /* Actions */
     .actions-section {
         padding-top: 2rem;
         border-top: 2px solid var(--border);
@@ -351,7 +344,6 @@
             box-shadow: var(--shadow-md);
         }
 
-    /* Modal */
     .modal-backdrop {
         display: none;
         position: fixed;
@@ -487,7 +479,6 @@
             box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.3);
         }
 
-    /* Responsive */
     @@media (max-width: 992px) {
         .product-grid {
             grid-template-columns: 1fr;
@@ -580,7 +571,7 @@
 
 <div class="product-page-wrapper">
     <div class="product-container">
-        <!-- Meta Bar -->
+
         <div class="product-meta-bar">
             @if (Model.Id.HasValue)
             {
@@ -607,9 +598,8 @@
             }
         </div>
 
-        <!-- Main Grid -->
         <div class="product-grid">
-            <!-- Gallery Card -->
+
             <div class="gallery-card">
                 <h1 class="product-title">@Model.Title</h1>
                 <span class="product-code">📦 კოდი: @Model.Code</span>
@@ -657,9 +647,8 @@
                 }
             </div>
 
-            <!-- Info Card -->
             <div class="info-card">
-                <!-- Price & Availability -->
+
                 <div class="price-availability">
                     @if (Model.Price.HasValue && Model.Price > 0)
                     {
@@ -675,11 +664,10 @@
                     }
                 </div>
 
-                <!-- Specifications -->
                 <div class="specs-section">
                     <h3 class="section-title">
                         <span class="icon">
-                            <!-- Professional SVG icon: Material Design "Tune" -->
+
                             <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
                                 <path d="M7 20v-9M7 9V4M7 9h10M17 9v11M17 9V4M17 9H7" stroke="#6366f1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
@@ -739,7 +727,6 @@
                     </div>
                 </div>
 
-                <!-- Actions -->
                 <div class="actions-section">
                     <a href="@Url.Action("Index", "Home")" class="btn-back">
                         <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
@@ -753,7 +740,6 @@
     </div>
 </div>
 
-<!-- Modal -->
 @if (Model.Images != null && Model.Images.Any())
 {
     <div id="modalBackdrop" class="modal-backdrop" onclick="closeModal(event)">
@@ -784,7 +770,6 @@
             @:var selectedIndex = 0;
         }
 
-        // Tooltip logic
         function showTooltip() {
             var tooltip = document.getElementById('mainImageTooltip');
             if (tooltip) tooltip.style.opacity = '1';
@@ -803,7 +788,7 @@
                 thumbnails.forEach((thumb, i) => {
                     thumb.classList.toggle('active', i === index);
                 });
-                selectedIndex = index; // Track selected image index
+                selectedIndex = index; 
             }
         }
 
@@ -863,7 +848,6 @@
             if (e.key === 'ArrowRight') nextImage(e);
         });
 
-        // Initialize main image and selectedIndex
         document.addEventListener('DOMContentLoaded', function () {
             if (images && images.length > 0) {
                 document.getElementById('mainImage').src = images[0].url;
