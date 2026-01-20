@@ -154,6 +154,7 @@ namespace Likano.Infrastructure.Queries.Product
             p.IsAvailable,
             p.ImageUrl,
             p.CreateDate,
+            p.Code,
             p.Length,
             p.Width,
             p.Height,
@@ -185,6 +186,7 @@ namespace Likano.Infrastructure.Queries.Product
                 Width = reader.IsDBNull(reader.GetOrdinal("Width")) ? null : reader.GetDecimal(reader.GetOrdinal("Width")),
                 Height = reader.IsDBNull(reader.GetOrdinal("Height")) ? null : reader.GetDecimal(reader.GetOrdinal("Height")),
                 Color = reader.IsDBNull(reader.GetOrdinal("Color")) ? null : reader.GetString(reader.GetOrdinal("Color")),
+                Code = reader.IsDBNull(reader.GetOrdinal("Code")) ? null : reader.GetString(reader.GetOrdinal("Code")),
                 CategoryId = reader.IsDBNull(reader.GetOrdinal("CategoryId")) ? null : reader.GetInt32(reader.GetOrdinal("CategoryId")),
                 Category = reader.IsDBNull(reader.GetOrdinal("CategoryId")) ? null : new CategoryDtoForSearch
                 {

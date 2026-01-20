@@ -26,7 +26,7 @@ namespace Likano.Controllers
         [HttpPost("search")]
         public async Task<GetAllProductsForSearchResponse> Search(GetAllProductsForSearchQuery request) => await _mediator.Send(request);
 
-        [HttpGet("details")]
+        [HttpGet("details/{id}")]
         public async Task<GetProductDetailsResponse> Details(int id) => await _mediator.Send(new GetProductDetailsQuery { ProductId = id });
     }
 }

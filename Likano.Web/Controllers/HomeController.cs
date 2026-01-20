@@ -2,6 +2,7 @@
 using Likano.Application.Features.Category.Queries.GetAll;
 using Likano.Application.Features.ProducerCountry.Queries.GetAll;
 using Likano.Infrastructure.Queries.Product.Models;
+using Likano.Infrastructure.Queries.Product.Models.Details;
 using Likano.Web.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -86,6 +87,20 @@ namespace Likano.Web.Controllers
             ViewBag.ProducerCountries = new SelectList(countries, "ProducerCountryId", "Name");
 
             return View();
+        }
+
+        [HttpGet("product/details/{id}")]
+        public async Task<IActionResult> ProductDetails(int id)
+        {
+            var response = await _httpClient.GetAsync($"{_baseUrl}/Product/details/{id}");
+            if (!response.IsSuccessStatusCode)
+                return StatusCode((int)response.StatusCode);
+
+            var result = await response.Content.ReadFromJsonAsync<GetProductDetailsResponse>();
+            if (result == null || result.Id == null)
+                return View("NotFound");
+
+            return View("Details", result);
         }
 
         public IActionResult Privacy()
