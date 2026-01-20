@@ -267,6 +267,17 @@
         margin-bottom: 0.5rem;
     }
 
+    /* Remove old ::before icon and add new SVG icon */
+    .section-title::before {
+        content: '';
+        display: none;
+    }
+    .section-title .icon {
+        display: inline-flex;
+        align-items: center;
+        margin-right: 0.5rem;
+    }
+
         .section-title::before {
             content: '';
             width: 4px;
@@ -358,16 +369,13 @@
         }
 
     @@keyframes fadeIn {
-        from
+        from {
+            opacity: 0;
+        }
 
-    {
-        opacity: 0;
-    }
-
-    to {
-        opacity: 1;
-    }
-
+        to {
+            opacity: 1;
+        }
     }
 
     .modal-content {
@@ -481,71 +489,92 @@
 
     /* Responsive */
     @@media (max-width: 992px) {
-        .product-grid
+        .product-grid {
+            grid-template-columns: 1fr;
+        }
 
-    {
-        grid-template-columns: 1fr;
-    }
+        .gallery-card {
+            position: static;
+        }
 
-    .gallery-card {
-        position: static;
-    }
-
-    .specs-grid {
-        grid-template-columns: 1fr;
-    }
-
+        .specs-grid {
+            grid-template-columns: 1fr;
+        }
     }
 
     @@media (max-width: 768px) {
-        .product-page-wrapper
+        .product-page-wrapper {
+            padding: 1.5rem 0 3rem 0;
+        }
 
-    {
-        padding: 1.5rem 0 3rem 0;
+        .product-container {
+            padding: 0 1rem;
+        }
+
+        .product-meta-bar {
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .gallery-card,
+        .info-card {
+            padding: 1.5rem;
+        }
+
+        .product-title {
+            font-size: 1.5rem;
+        }
+
+        .product-price {
+            font-size: 1.75rem;
+        }
+
+        .price-availability {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .modal-main-image {
+            width: 90vw;
+            height: 90vw;
+            max-width: 500px;
+            max-height: 500px;
+        }
+
+        .modal-arrow.left {
+            left: 0.5rem;
+        }
+
+        .modal-arrow.right {
+            right: 0.5rem;
+        }
     }
-
-    .product-container {
-        padding: 0 1rem;
+    .main-image-wrapper {
+        position: relative;
     }
-
-    .product-meta-bar {
-        justify-content: center;
-        gap: 1rem;
+    .main-image-tooltip {
+        display: none;
+        position: absolute;
+        left: 50%;
+        bottom: 12px;
+        transform: translateX(-50%);
+        background: rgba(99,102,241,0.95);
+        color: #fff;
+        padding: 6px 16px;
+        border-radius: 8px;
+        font-size: 0.95rem;
+        font-weight: 500;
+        white-space: nowrap;
+        box-shadow: var(--shadow-md);
+        pointer-events: none;
+        z-index: 10;
+        transition: opacity 0.2s;
+        opacity: 0;
     }
-
-    .gallery-card,
-    .info-card {
-        padding: 1.5rem;
-    }
-
-    .product-title {
-        font-size: 1.5rem;
-    }
-
-    .product-price {
-        font-size: 1.75rem;
-    }
-
-    .price-availability {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    .modal-main-image {
-        width: 90vw;
-        height: 90vw;
-        max-width: 500px;
-        max-height: 500px;
-    }
-
-    .modal-arrow.left {
-        left: 0.5rem;
-    }
-
-    .modal-arrow.right {
-        right: 0.5rem;
-    }
-
+    .main-image-wrapper:hover .main-image-tooltip,
+    .main-image:focus + .main-image-tooltip {
+        display: block;
+        opacity: 1;
     }
 </style>
 
@@ -592,7 +621,11 @@
                              src="@Model.Images.First().FileUrl"
                              class="main-image"
                              alt="@Model.Title"
-                             onclick="openModal(0)" />
+                             tabindex="0"
+                             onclick="openModal(selectedIndex)"
+                             onmouseover="showTooltip()"
+                             onmouseout="hideTooltip()" />
+                        <div class="main-image-tooltip" id="mainImageTooltip">დააკლიკეთ ფოტოს გახსნისთვის</div>
                     </div>
 
                     @if (Model.Images.Count > 1)
@@ -644,7 +677,15 @@
 
                 <!-- Specifications -->
                 <div class="specs-section">
-                    <h3 class="section-title">ტექნიკური მახასიათებლები</h3>
+                    <h3 class="section-title">
+                        <span class="icon">
+                            <!-- Professional SVG icon: Material Design "Tune" -->
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                                <path d="M7 20v-9M7 9V4M7 9h10M17 9v11M17 9V4M17 9H7" stroke="#6366f1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </span>
+                        ტექნიკური მახასიათებლები
+                    </h3>
                     <div class="specs-grid">
                         @if (Model.Category != null)
                         {
@@ -733,13 +774,24 @@
     <script>
         @if (Model.Images != null && Model.Images.Any())
         {
-                @:var images = [
-                foreach (var img in Model.Images)
-                {
-                        @:{ url: '@img.FileUrl', alt: '@img.FileName' },
-                }
-                    @:];
-                @:var currentIndex = 0;
+            @:var images = [
+            foreach (var img in Model.Images)
+            {
+                @:{ url: '@img.FileUrl', alt: '@img.FileName' },
+            }
+            @:];
+            @:var currentIndex = 0;
+            @:var selectedIndex = 0;
+        }
+
+        // Tooltip logic
+        function showTooltip() {
+            var tooltip = document.getElementById('mainImageTooltip');
+            if (tooltip) tooltip.style.opacity = '1';
+        }
+        function hideTooltip() {
+            var tooltip = document.getElementById('mainImageTooltip');
+            if (tooltip) tooltip.style.opacity = '0';
         }
 
         function changeImage(index) {
@@ -751,6 +803,7 @@
                 thumbnails.forEach((thumb, i) => {
                     thumb.classList.toggle('active', i === index);
                 });
+                selectedIndex = index; // Track selected image index
             }
         }
 
@@ -808,6 +861,14 @@
             if (e.key === 'Escape') closeModal(e);
             if (e.key === 'ArrowLeft') prevImage(e);
             if (e.key === 'ArrowRight') nextImage(e);
+        });
+
+        // Initialize main image and selectedIndex
+        document.addEventListener('DOMContentLoaded', function () {
+            if (images && images.length > 0) {
+                document.getElementById('mainImage').src = images[0].url;
+                selectedIndex = 0;
+            }
         });
     </script>
 }
