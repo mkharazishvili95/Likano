@@ -48,6 +48,13 @@
         top: 20px;
     }
 
+    .product-meta-info {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1rem;
+        margin-bottom: 1.5rem;
+    }
+
     .product-title-top {
         font-size: 2rem;
         font-weight: 700;
@@ -304,16 +311,13 @@
         }
 
     @@keyframes fadeIn {
-        from
+        from {
+            opacity: 0;
+        }
 
-    {
-        opacity: 0;
-    }
-
-    to {
-        opacity: 1;
-    }
-
+        to {
+            opacity: 1;
+        }
     }
 
     .modal-img-content {
@@ -426,49 +430,50 @@
         }
 
     @@media (max-width: 768px) {
-        .product-title-top
+        .product-title-top {
+            font-size: 1.5rem;
+        }
 
-    {
-        font-size: 1.5rem;
-    }
+        .product-price {
+            font-size: 2.2rem;
+        }
 
-    .product-price {
-        font-size: 2.2rem;
-    }
+        .product-gallery-section,
+        .product-info-section {
+            padding: 1.5rem;
+        }
 
-    .product-gallery-section,
-    .product-info-section {
-        padding: 1.5rem;
-    }
+        .main-image-container {
+            max-width: 100%;
+        }
 
-    .main-image-container {
-        max-width: 100%;
-    }
+        .spec-grid {
+            grid-template-columns: 1fr;
+        }
 
-    .spec-grid {
-        grid-template-columns: 1fr;
-    }
+        .product-meta-info {
+            grid-template-columns: 1fr;
+        }
 
-    .modal-img-main {
-        width: 90vw;
-        height: 90vw;
-        max-width: 500px;
-        max-height: 500px;
-    }
+        .modal-img-main {
+            width: 90vw;
+            height: 90vw;
+            max-width: 500px;
+            max-height: 500px;
+        }
 
-    .modal-img-arrow.left {
-        left: 0.5rem;
-    }
+        .modal-img-arrow.left {
+            left: 0.5rem;
+        }
 
-    .modal-img-arrow.right {
-        right: 0.5rem;
-    }
+        .modal-img-arrow.right {
+            right: 0.5rem;
+        }
 
-    .price-availability-header {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
+        .price-availability-header {
+            flex-direction: column;
+            align-items: flex-start;
+        }
     }
 </style>
 
@@ -478,13 +483,30 @@
             <div class="row g-0">
                 <div class="col-lg-6">
                     <div class="product-gallery-section">
-                        @if (Model.CreateDate.HasValue)
-                        {
-                            <div class="spec-item">
-                                <div class="spec-label">განთავსების თარიღი</div>
-                                <div class="spec-value">@Model.CreateDate.Value.ToString("dd.MM.yyyy")</div>
-                            </div>
-                        }
+                        <div class="product-meta-info">
+                            @if (Model.CreateDate.HasValue)
+                            {
+                                <div class="spec-item">
+                                    <div class="spec-label">განთავსების თარიღი</div>
+                                    <div class="spec-value">@Model.CreateDate.Value.ToString("dd.MM.yyyy")</div>
+                                </div>
+                            }
+                            @if (Model.ViewCount.HasValue)
+                            {
+                                <div class="spec-item">
+                                    <div class="spec-label">ნახვების რაოდენობა</div>
+                                    <div class="spec-value">@Model.ViewCount.Value.ToString("N0")</div>
+                                </div>
+                            }
+                            @if (Model.Id.HasValue)
+                            {
+                                <div class="spec-item">
+                                    <div class="spec-label">ID</div>
+                                    <div class="spec-value">@Model.Id.Value.ToString("N0")</div>
+                                </div>
+                            }
+                        </div>
+
                         <h2 class="product-title-top">@Model.Title</h2>
 
                         <div class="code-wrapper">
@@ -637,13 +659,13 @@
     <script>
         @if (Model.Images != null && Model.Images.Any())
         {
-                    @:var imgModalImages = [
-                    foreach (var img in Model.Images)
-                    {
-                                @:{ url: '@img.FileUrl', alt: '@img.FileName' },
-                    }
-                                    @:];
-                    @:var imgModalIndex = 0;
+                @:var imgModalImages = [
+                foreach (var img in Model.Images)
+                {
+                        @:{ url: '@img.FileUrl', alt: '@img.FileName' },
+                }
+                    @:];
+                @:var imgModalIndex = 0;
         }
 
         function changeMainImage(index) {
