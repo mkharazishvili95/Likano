@@ -206,7 +206,8 @@ namespace Likano.Infrastructure.Queries.Product
                     BrandId = reader.GetInt32(reader.GetOrdinal("BrandId")),
                     Name = reader.IsDBNull(reader.GetOrdinal("BrandTitle")) ? null : reader.GetString(reader.GetOrdinal("BrandTitle")),
                     Logo = reader.IsDBNull(reader.GetOrdinal("BrandLogo")) ? null : reader.GetString(reader.GetOrdinal("BrandLogo"))
-                }
+                },
+                ViewCount = 123 /*TODO: დასამატებელია entity მოდელში და მერე აქ */
             });
 
             var product = items.FirstOrDefault();

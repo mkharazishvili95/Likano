@@ -3,130 +3,673 @@
 @{
     Layout = "_Layout";
     ViewData["Title"] = Model.Title ?? "პროდუქტის დეტალები";
-    var imageSize = "300px";
 }
 
 <style>
+    :root {
+        --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        --surface: #ffffff;
+        --surface-hover: #f8f9fa;
+        --border-color: rgba(0,0,0,0.08);
+        --shadow-sm: 0 2px 8px rgba(0,0,0,0.04);
+        --shadow-md: 0 4px 16px rgba(0,0,0,0.08);
+        --shadow-lg: 0 12px 48px rgba(0,0,0,0.12);
+        --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .product-page-wrapper {
+        min-height: 100vh;
+        background: linear-gradient(180deg, #f8f9fa 0%, #ffffff 100%);
+        padding: 2rem 0 4rem 0;
+    }
+
+    .product-details-container {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 0 1rem;
+    }
+
     .product-details-card {
-        background: #fff;
-        border-radius: 12px;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.07);
-        padding: 32px 24px;
-        margin-bottom: 32px;
+        background: var(--surface);
+        border-radius: 24px;
+        overflow: hidden;
+        box-shadow: var(--shadow-lg);
+        border: 1px solid var(--border-color);
     }
 
-    .product-details-title {
+    .product-gallery-section {
+        padding: 3rem;
+        background: linear-gradient(135deg, #fafafa 0%, #f5f5f5 100%);
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+        position: sticky;
+        top: 20px;
+    }
+
+    .product-meta-info {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .product-title-top {
         font-size: 2rem;
+        font-weight: 700;
+        color: #1a1a1a;
+        margin-bottom: 0.75rem;
+        line-height: 1.3;
+        text-align: center;
+    }
+
+    .product-code-top {
+        display: inline-block;
+        background: linear-gradient(135deg, #e0e7ff 0%, #f3e8ff 100%);
+        color: #5b21b6;
+        padding: 6px 16px;
+        border-radius: 20px;
+        font-size: 0.85rem;
         font-weight: 600;
-        margin-bottom: 12px;
+        margin-bottom: 1.5rem;
     }
 
-    .product-details-price {
-        font-size: 1.5rem;
-        color: #0d6efd;
-        font-weight: 500;
-        margin-bottom: 16px;
+    .code-wrapper {
+        text-align: center;
+        margin-bottom: 1.5rem;
     }
 
-    .product-details-list .list-group-item {
-        border: none;
-        padding-left: 0;
-        padding-right: 0;
-        background: transparent;
-        font-size: 1rem;
+    .main-image-container {
+        width: 100%;
+        max-width: 450px;
+        aspect-ratio: 1;
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: var(--shadow-lg);
+        position: relative;
+        background: white;
+        border: 1px solid var(--border-color);
+        margin: 0 auto;
     }
 
-    .product-details-image,
-    .product-details-carousel img {
-        width: @imageSize;
-        height: @imageSize;
+    .product-main-image {
+        width: 100%;
+        height: 100%;
         object-fit: cover;
-        border-radius: 8px;
-        background: #f8f9fa;
-        box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+        cursor: zoom-in;
+        transition: var(--transition);
     }
 
-    .carousel-control-prev-icon,
-    .carousel-control-next-icon {
-        background-color: #0d6efd;
+        .product-main-image:hover {
+            transform: scale(1.05);
+        }
+
+    .thumbnail-gallery {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .thumbnail-item {
+        width: 80px;
+        height: 80px;
+        border-radius: 12px;
+        overflow: hidden;
+        cursor: pointer;
+        border: 3px solid transparent;
+        transition: var(--transition);
+        box-shadow: var(--shadow-sm);
+    }
+
+        .thumbnail-item:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+            border-color: #667eea;
+        }
+
+        .thumbnail-item.active {
+            border-color: #667eea;
+            box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.2);
+        }
+
+        .thumbnail-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+    .product-info-section {
+        padding: 3rem;
+    }
+
+    .price-availability-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1.5rem;
+        margin-bottom: 2rem;
+        flex-wrap: wrap;
+        padding-bottom: 2rem;
+        border-bottom: 2px solid var(--border-color);
+    }
+
+    .product-price {
+        font-size: 3rem;
+        font-weight: 800;
+        background: var(--primary-gradient);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+
+    .availability-badge {
+        padding: 12px 24px;
+        border-radius: 30px;
+        font-weight: 600;
+        font-size: 1rem;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+        .availability-badge.in-stock {
+            background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+            color: #065f46;
+        }
+
+        .availability-badge.out-of-stock {
+            background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
+            color: #991b1b;
+        }
+
+        .availability-badge::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: currentColor;
+        }
+
+    .product-description {
+        font-size: 1.05rem;
+        color: #4b5563;
+        line-height: 1.8;
+        margin-bottom: 2.5rem;
+        padding: 1.5rem;
+        background: linear-gradient(135deg, #f9fafb 0%, #f3f4f6 100%);
+        border-radius: 16px;
+        border-left: 4px solid #667eea;
+    }
+
+    .product-specs {
+        margin-bottom: 2rem;
+    }
+
+    .specs-title {
+        font-size: 1.4rem;
+        font-weight: 700;
+        color: #1a1a1a;
+        margin-bottom: 1.5rem;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+        .specs-title::before {
+            content: '●';
+            color: #667eea;
+            font-size: 1.2rem;
+        }
+
+    .spec-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
+
+    .spec-item {
+        background: white;
+        padding: 1.25rem;
+        border-radius: 12px;
+        border: 1px solid var(--border-color);
+        transition: var(--transition);
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+        .spec-item:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+            border-color: #667eea;
+        }
+
+    .spec-label {
+        font-size: 0.8rem;
+        color: #9ca3af;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .spec-value {
+        font-size: 1.05rem;
+        color: #1f2937;
+        font-weight: 600;
+    }
+
+    .action-buttons {
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+        margin-top: 2rem;
+        padding-top: 2rem;
+        border-top: 2px solid var(--border-color);
+    }
+
+    .btn-back {
+        padding: 14px 32px;
+        border-radius: 12px;
+        font-weight: 600;
+        font-size: 1rem;
+        border: 2px solid #667eea;
+        background: white;
+        color: #667eea;
+        text-decoration: none;
+        transition: var(--transition);
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+        .btn-back:hover {
+            background: #667eea;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+    .modal-img-backdrop {
+        display: none;
+        position: fixed;
+        z-index: 9999;
+        left: 0;
+        top: 0;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(0, 0, 0, 0.92);
+        backdrop-filter: blur(4px);
+        justify-content: center;
+        align-items: center;
+        animation: fadeIn 0.3s ease;
+    }
+
+        .modal-img-backdrop.active {
+            display: flex;
+        }
+
+    @@keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+
+        to {
+            opacity: 1;
+        }
+    }
+
+    .modal-img-content {
+        position: relative;
+        background: white;
+        border-radius: 24px;
+        padding: 2rem;
+        max-width: 95vw;
+        max-height: 95vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    }
+
+    .modal-img-main {
+        width: 600px;
+        height: 600px;
+        object-fit: contain;
+        border-radius: 16px;
+        margin-bottom: 1.5rem;
+        background: #f9fafb;
+    }
+
+    .modal-img-close {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        width: 44px;
+        height: 44px;
         border-radius: 50%;
+        background: rgba(0, 0, 0, 0.7);
+        color: white;
+        border: none;
+        font-size: 1.5rem;
+        cursor: pointer;
+        transition: var(--transition);
+        z-index: 10;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
-    .product-details-back {
-        margin-top: 24px;
+        .modal-img-close:hover {
+            background: #dc3545;
+            transform: rotate(90deg);
+        }
+
+    .modal-img-arrow {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background: rgba(0, 0, 0, 0.7);
+        color: white;
+        border: none;
+        font-size: 1.5rem;
+        cursor: pointer;
+        transition: var(--transition);
+        z-index: 10;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+        .modal-img-arrow:hover {
+            background: #667eea;
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .modal-img-arrow.left {
+            left: 2rem;
+        }
+
+        .modal-img-arrow.right {
+            right: 2rem;
+        }
+
+    .modal-img-thumbs {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        justify-content: center;
+        max-width: 80vw;
+        overflow-x: auto;
+        padding: 10px;
+    }
+
+    .modal-img-thumb {
+        width: 70px;
+        height: 70px;
+        object-fit: cover;
+        border-radius: 10px;
+        border: 3px solid transparent;
+        cursor: pointer;
+        transition: var(--transition);
+        flex-shrink: 0;
+    }
+
+        .modal-img-thumb:hover {
+            border-color: #667eea;
+            transform: scale(1.1);
+        }
+
+        .modal-img-thumb.selected {
+            border-color: #667eea;
+            box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.3);
+        }
+
+    @@media (max-width: 768px) {
+        .product-title-top {
+            font-size: 1.5rem;
+        }
+
+        .product-price {
+            font-size: 2.2rem;
+        }
+
+        .product-gallery-section,
+        .product-info-section {
+            padding: 1.5rem;
+        }
+
+        .main-image-container {
+            max-width: 100%;
+        }
+
+        .spec-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .product-meta-info {
+            grid-template-columns: 1fr;
+        }
+
+        .modal-img-main {
+            width: 90vw;
+            height: 90vw;
+            max-width: 500px;
+            max-height: 500px;
+        }
+
+        .modal-img-arrow.left {
+            left: 0.5rem;
+        }
+
+        .modal-img-arrow.right {
+            right: 0.5rem;
+        }
+
+        .price-availability-header {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+    }
+
+    .product-meta-bar {
+        position: static;
+        margin-bottom: 1.5rem;
+        display: flex;
+        gap: 18px;
+        background: #f3f4f6;
+        color: #374151;
+        border-radius: 18px;
+        padding: 10px 22px;
+        font-size: 1rem;
+        font-weight: 600;
+        box-shadow: var(--shadow-md);
+        align-items: center;
+        letter-spacing: 0.02em;
+        justify-content: flex-end;
+    }
+    .product-meta-bar span {
+        display: flex;
+        align-items: center;
+        white-space: nowrap;
+        gap: 6px;
+    }
+    .product-meta-bar .meta-sep {
+        margin: 0 8px;
+        color: #9ca3af;
+        font-weight: 400;
+    }
+    .product-meta-bar svg {
+        width: 18px;
+        height: 18px;
+        display: inline-block;
+        vertical-align: middle;
+        fill: #6b7280; 
     }
 </style>
 
-<div class="container mt-4">
-    <div class="row justify-content-center">
-        <div class="col-lg-10">
-            <div class="product-details-card">
-                <div class="row">
-                    <div class="col-md-5 d-flex flex-column align-items-center">
+<div class="product-page-wrapper">
+    <div class="product-details-container">
+        <div class="product-meta-bar">
+            @if (Model.ViewCount.HasValue)
+            {
+                <span>
+                    <svg viewBox="0 0 20 20"><path d="M10 3c-5 0-9 5.25-9 7s4 7 9 7 9-5.25 9-7-4-7-9-7zm0 12c-3.87 0-7-3.13-7-5s3.13-5 7-5 7 3.13 7 5-3.13 5-7 5zm0-8a3 3 0 100 6 3 3 0 000-6zm0 4.5A1.5 1.5 0 1110 7a1.5 1.5 0 010 3z"/></svg>
+                    @Model.ViewCount.Value.ToString("N0")
+                </span>
+                <span class="meta-sep">|</span>
+            }
+            @if (Model.CreateDate.HasValue)
+            {
+                <span>
+                    <svg viewBox="0 0 20 20"><path d="M6 2a1 1 0 012 0v1h4V2a1 1 0 112 0v1a3 3 0 013 3v10a3 3 0 01-3 3H6a3 3 0 01-3-3V6a3 3 0 013-3V2zm8 4H6a1 1 0 00-1 1v10a1 1 0 001 1h8a1 1 0 001-1V7a1 1 0 00-1-1zm-4 2a1 1 0 110 2 1 1 0 010-2z"/></svg>
+                    @Model.CreateDate.Value.ToString("dd MMM yy, HH:mm", new System.Globalization.CultureInfo("ka-GE"))
+                </span>
+                <span class="meta-sep">|</span>
+            }
+            @if (Model.Id.HasValue)
+            {
+                <span>
+                    <svg viewBox="0 0 20 20"><path d="M2 10a2 2 0 012-2h2V6a2 2 0 012-2h4a2 2 0 012 2v2h2a2 2 0 012 2v4a2 2 0 01-2 2h-2v2a2 2 0 01-2 2h-4a2 2 0 01-2-2v-2H4a2 2 0 01-2-2v-4zm4-4v2h8V6a1 1 0 00-1-1h-6a1 1 0 00-1 1zm10 4h-2v4h2v-4zm-4 6v-2H8v2h4zm-6-6H4v4h2v-4z"/></svg>
+                    ID - @Model.Id.Value.ToString("N0")
+                </span>
+            }
+        </div>
+        <div class="product-details-card">
+            <div class="row g-0">
+                <div class="col-lg-6">
+                    <div class="product-gallery-section">
+                        <h2 class="product-title-top">@Model.Title</h2>
+
+                        <div class="code-wrapper">
+                            <span class="product-code-top">კოდი: @Model.Code</span>
+                        </div>
+
                         @if (Model.Images != null && Model.Images.Any())
                         {
-                            <div id="productImagesCarousel" class="carousel slide product-details-carousel mb-3" data-bs-ride="carousel" style="width:@imageSize;">
-                                <div class="carousel-inner">
+                            <div class="main-image-container">
+                                <img id="mainImage"
+                                     src="@Model.Images.First().FileUrl"
+                                     class="product-main-image"
+                                     alt="@Model.Title"
+                                     onclick="openImgModal(0)" />
+                            </div>
+
+                            @if (Model.Images.Count > 1)
+                            {
+                                <div class="thumbnail-gallery">
                                     @for (int i = 0; i < Model.Images.Count; i++)
                                     {
                                         var img = Model.Images[i];
-                                        <div class="carousel-item @(i == 0 ? "active" : "")">
+                                        <div class="thumbnail-item @(i == 0 ? "active" : "")"
+                                             data-index="@i"
+                                             onclick="changeMainImage(@i)">
                                             <img src="@img.FileUrl" alt="@img.FileName" />
                                         </div>
                                     }
                                 </div>
-                                @if (Model.Images.Count > 1)
-                                {
-                                    <button class="carousel-control-prev" type="button" data-bs-target="#productImagesCarousel" data-bs-slide="prev">
-                                        <span class="carousel-control-prev-icon"></span>
-                                    </button>
-                                    <button class="carousel-control-next" type="button" data-bs-target="#productImagesCarousel" data-bs-slide="next">
-                                        <span class="carousel-control-next-icon"></span>
-                                    </button>
-                                }
-                            </div>
+                            }
                         }
                         else if (!string.IsNullOrEmpty(Model.ProductImageUrl))
                         {
-                            <img src="@Model.ProductImageUrl" class="product-details-image mb-3" alt="@Model.Title" />
+                            <div class="main-image-container">
+                                <img src="@Model.ProductImageUrl" class="product-main-image" alt="@Model.Title" />
+                            </div>
                         }
                         else
                         {
-                            <img src="~/images/no-image.png" class="product-details-image mb-3" alt="No image" />
+                            <div class="main-image-container">
+                                <img src="https://ik.imagekit.io/rqxdk712q/products/733b35b7-b949-4a3c-9e64-1de44004c88e_NoImageLogo" class="product-main-image" alt="No image" />
+                            </div>
                         }
                     </div>
-                    <div class="col-md-7">
-                        <div class="product-details-title">@Model.Title</div>
-                        <p class="text-muted">@Model.Description</p>
-                        <div class="product-details-price">@Model.Price?.ToString("N2") ₾</div>
-                        <p>
-                            <strong>კოდი:</strong> @Model.Code
-                        </p>
-                        <p>
-                            <strong>მდგომარეობა:</strong>
+                </div>
+
+                <div class="col-lg-6">
+                    <div class="product-info-section">
+                        <div class="price-availability-header">
+                            @if (Model.Price.HasValue && Model.Price > 0)
+                            {
+                                <div class="product-price">@Model.Price.Value.ToString("N2") ₾</div>
+                            }
                             @if (Model.IsAvailable == true)
                             {
-                                <span class="badge bg-success">მარაგშია</span>
+                                <span class="availability-badge in-stock">მარაგშია</span>
                             }
                             else
                             {
-                                <span class="badge bg-danger">არ არის მარაგში</span>
+                                <span class="availability-badge out-of-stock">არ არის მარაგში</span>
                             }
-                        </p>
-                        <ul class="list-group list-group-flush product-details-list mb-3">
-                            <li class="list-group-item"><strong>კატეგორია:</strong> @Model.Category?.Name</li>
-                            <li class="list-group-item"><strong>ბრენდი:</strong> @Model.Brand?.Name</li>
-                            <li class="list-group-item"><strong>წარმოების ქვეყანა:</strong> @Model.ProducerCountry?.Name</li>
-                            <li class="list-group-item"><strong>ფერი:</strong> @Model.Color</li>
-                            <li class="list-group-item"><strong>სიგრძე:</strong> @Model.Length</li>
-                            <li class="list-group-item"><strong>სიგანე:</strong> @Model.Width</li>
-                            <li class="list-group-item"><strong>სიმაღლე:</strong> @Model.Height</li>
-                            <li class="list-group-item"><strong>დამატების თარიღი:</strong> @Model.CreateDate?.ToString("yyyy-MM-dd")</li>
-                        </ul>
-                        <div class="mb-2">
                         </div>
-                        <div class="product-details-back">
-                            <a href="@Url.Action("Index", "Home")" class="btn btn-outline-secondary">უკან დაბრუნება</a>
+
+                        @if (!string.IsNullOrWhiteSpace(Model.Description))
+                        {
+                            <p class="product-description">@Model.Description</p>
+                        }
+
+                        <div class="product-specs">
+                            <h3 class="specs-title">ტექნიკური მახასიათებლები</h3>
+                            <div class="spec-grid">
+                                @if (Model.Category != null)
+                                {
+                                    <div class="spec-item">
+                                        <div class="spec-label">კატეგორია</div>
+                                        <div class="spec-value">@Model.Category.Name</div>
+                                    </div>
+                                }
+                                @if (Model.Brand != null)
+                                {
+                                    <div class="spec-item">
+                                        <div class="spec-label">ბრენდი</div>
+                                        <div class="spec-value">@Model.Brand.Name</div>
+                                    </div>
+                                }
+                                @if (Model.ProducerCountry != null)
+                                {
+                                    <div class="spec-item">
+                                        <div class="spec-label">წარმოების ქვეყანა</div>
+                                        <div class="spec-value">@Model.ProducerCountry.Name</div>
+                                    </div>
+                                }
+                                @if (!string.IsNullOrWhiteSpace(Model.Color))
+                                {
+                                    <div class="spec-item">
+                                        <div class="spec-label">ფერი</div>
+                                        <div class="spec-value">@Model.Color</div>
+                                    </div>
+                                }
+                                @if (Model.Length.HasValue)
+                                {
+                                    <div class="spec-item">
+                                        <div class="spec-label">სიგრძე</div>
+                                        <div class="spec-value">@Model.Length მ</div>
+                                    </div>
+                                }
+                                @if (Model.Width.HasValue)
+                                {
+                                    <div class="spec-item">
+                                        <div class="spec-label">სიგანე</div>
+                                        <div class="spec-value">@Model.Width მ</div>
+                                    </div>
+                                }
+                                @if (Model.Height.HasValue)
+                                {
+                                    <div class="spec-item">
+                                        <div class="spec-label">სიმაღლე</div>
+                                        <div class="spec-value">@Model.Height მ</div>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+
+                        <div class="action-buttons">
+                            <a href="@Url.Action("Index", "Home")" class="btn-back">
+                                <span>←</span> უკან დაბრუნება
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -134,3 +677,100 @@
         </div>
     </div>
 </div>
+
+@if (Model.Images != null && Model.Images.Any())
+{
+    <div id="imgModalBackdrop" class="modal-img-backdrop" onclick="closeImgModal(event)">
+        <div class="modal-img-content" onclick="event.stopPropagation()">
+            <button class="modal-img-close" onclick="closeImgModal(event)">&times;</button>
+            <button class="modal-img-arrow left" onclick="imgModalPrev(event)">‹</button>
+            <img id="imgModalMain" class="modal-img-main" src="" alt="Product image" />
+            <button class="modal-img-arrow right" onclick="imgModalNext(event)">›</button>
+            <div class="modal-img-thumbs" id="imgModalThumbs"></div>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    <script>
+        @if (Model.Images != null && Model.Images.Any())
+        {
+                @:var imgModalImages = [
+                foreach (var img in Model.Images)
+                {
+                        @:{ url: '@img.FileUrl', alt: '@img.FileName' },
+                }
+                    @:];
+                @:var imgModalIndex = 0;
+        }
+
+        function changeMainImage(index) {
+            const mainImg = document.getElementById('mainImage');
+            const thumbnails = document.querySelectorAll('.thumbnail-item');
+
+            if (mainImg && imgModalImages && imgModalImages[index]) {
+                mainImg.src = imgModalImages[index].url;
+
+                thumbnails.forEach((thumb, i) => {
+                    thumb.classList.toggle('active', i === index);
+                });
+            }
+        }
+
+        function openImgModal(idx) {
+            imgModalIndex = idx;
+            showImgModal();
+            document.getElementById('imgModalBackdrop').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeImgModal(e) {
+            if (e) e.preventDefault();
+            document.getElementById('imgModalBackdrop').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        function showImgModal() {
+            const mainImg = document.getElementById('imgModalMain');
+            const thumbs = document.getElementById('imgModalThumbs');
+
+            if (!mainImg || !thumbs || !imgModalImages) return;
+
+            mainImg.src = imgModalImages[imgModalIndex].url;
+            mainImg.alt = imgModalImages[imgModalIndex].alt;
+
+            thumbs.innerHTML = '';
+            imgModalImages.forEach((img, i) => {
+                const thumb = document.createElement('img');
+                thumb.src = img.url;
+                thumb.alt = img.alt;
+                thumb.className = 'modal-img-thumb' + (i === imgModalIndex ? ' selected' : '');
+                thumb.onclick = () => { imgModalIndex = i; showImgModal(); };
+                thumbs.appendChild(thumb);
+            });
+        }
+
+        function imgModalPrev(e) {
+            if (e) e.stopPropagation();
+            if (!imgModalImages) return;
+            imgModalIndex = (imgModalIndex - 1 + imgModalImages.length) % imgModalImages.length;
+            showImgModal();
+        }
+
+        function imgModalNext(e) {
+            if (e) e.stopPropagation();
+            if (!imgModalImages) return;
+            imgModalIndex = (imgModalIndex + 1) % imgModalImages.length;
+            showImgModal();
+        }
+
+        document.addEventListener('keydown', (e) => {
+            const modal = document.getElementById('imgModalBackdrop');
+            if (!modal || !modal.classList.contains('active')) return;
+
+            if (e.key === 'Escape') closeImgModal(e);
+            if (e.key === 'ArrowLeft') imgModalPrev(e);
+            if (e.key === 'ArrowRight') imgModalNext(e);
+        });
+    </script>
+}
