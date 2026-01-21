@@ -596,16 +596,18 @@
         -webkit-text-fill-color: transparent;
     }
 
+    .similar-products-carousel {
+        display: flex;
+        flex-direction: row;
+        gap: 2rem;
+        padding: 1rem 0;
+        transition: transform 0.6s ease;
+        will-change: transform;
+    }
+
     .similar-products-carousel-outer {
         overflow: hidden;
         padding: 0 1rem;
-    }
-
-    .similar-products-carousel {
-        display: flex;
-        transition: transform 0.6s ease;
-        gap: 2rem;
-        padding: 1rem 0;
     }
 
     .similar-product-card {
@@ -673,6 +675,13 @@
         0% { transform: translateY(0); }
         50% { transform: translateY(-10px); }
         100% { transform: translateY(0); }
+    }
+
+    .similar-products-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 2rem;
+        padding: 1rem 0;
     }
 </style>
 
@@ -869,13 +878,12 @@
             const carousel = document.getElementById('similarProductsCarouselFlex');
             if (!carousel) return;
             const cards = carousel.querySelectorAll('.similar-product-card');
-            const visibleCount = Math.min(4, cards.length);
             let currentIndex = 0;
 
             function scrollCarousel() {
-                if (cards.length <= visibleCount) return;
-                currentIndex = (currentIndex + 1) % (cards.length - visibleCount + 1);
-                const cardWidth = cards[0].offsetWidth + 32; 
+                if (cards.length <= 1) return;
+                currentIndex = (currentIndex + 1) % cards.length;
+                const cardWidth = cards[0].offsetWidth + 32;
                 carousel.style.transform = `translateX(-${currentIndex * cardWidth}px)`;
             }
 
