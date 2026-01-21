@@ -1,4 +1,5 @@
-﻿@model Likano.Infrastructure.Queries.Product.Models.Details.GetProductDetailsResponse
+﻿@using Likano.Infrastructure.Queries.Product.Models.Similar
+@model Likano.Infrastructure.Queries.Product.Models.Details.GetProductDetailsResponse
 
 @{
     Layout = "_Layout";
@@ -163,7 +164,7 @@
 
         .thumbnail.active {
             border-color: var(--primary);
-            box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.15);
+            box-shadow: 0 0 0 4px rgba(99, 102,241, 0.15);
         }
 
         .thumbnail img {
@@ -476,7 +477,7 @@
 
         .modal-thumbnail.selected {
             border-color: var(--primary);
-            box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.3);
+            box-shadow: 0 0 0 4px rgba(99, 102,241, 0.3);
         }
 
     @@media (max-width: 992px) {
@@ -566,6 +567,49 @@
     .main-image:focus + .main-image-tooltip {
         display: block;
         opacity: 1;
+    }
+
+    #similarProductsCarousel .carousel-item {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 2rem 0;
+    }
+
+    .similar-product-card {
+        width: 260px;
+        max-width: 90vw;
+        background: #fff;
+        border-radius: 16px;
+        box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+        border: 1px solid #e2e8f0;
+        overflow: hidden;
+        margin: 0 auto;
+        text-align: center;
+        padding: 1rem 1rem 1.5rem 1rem;
+        transition: box-shadow 0.2s;
+    }
+    .similar-product-card img {
+        width: 100%;
+        height: 160px;
+        object-fit: cover;
+        border-radius: 12px;
+        margin-bottom: 0.75rem;
+    }
+    .similar-product-card h5 {
+        font-size: 1.1rem;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+        color: #6366f1;
+    }
+    .similar-product-card p {
+        font-size: 1rem;
+        color: #0f172a;
+        margin-bottom: 0.5rem;
+    }
+    .similar-product-card .btn {
+        font-size: 0.95rem;
+        padding: 0.5rem 1.2rem;
     }
 </style>
 
@@ -758,6 +802,18 @@
 
 @section Scripts {
     <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var carouselEl = document.getElementById('similarProductsCarousel');
+            if (carouselEl) {
+                var carousel = bootstrap.Carousel.getOrCreateInstance(carouselEl, {
+                    interval: 2000,
+                    ride: 'carousel',
+                    pause: false,
+                    wrap: true
+                });
+            }
+        });
+
         @if (Model.Images != null && Model.Images.Any())
         {
             @:var images = [
@@ -856,3 +912,52 @@
         });
     </script>
 }
+
+@{
+    var similarProducts = (ViewBag.SimilarProducts as List<SimilarProductDto>)?.Where(x => x.Id != Model.Id).ToList();
+}
+<div class="similar-products-section" style="margin-top:3rem;">
+    <div style="display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem;">
+        <svg width="28" height="28" fill="none" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="10" fill="#6366f1" fill-opacity="0.12"/>
+            <path d="M8 12h8M12 8v8" stroke="#6366f1" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        <h2 style="margin:0;font-size:1.5rem;font-weight:800;color:#6366f1;letter-spacing:-0.5px;">
+            მსგავსი პროდუქტები
+        </h2>
+        <div style="flex:1;height:2px;background:linear-gradient(90deg,#6366f1 0%,#ec4899 100%);border-radius:2px;"></div>
+    </div>
+    @if (similarProducts != null && similarProducts.Any())
+    {
+        <div id="similarProductsCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="2000" style="background:linear-gradient(135deg,#f8fafc 0%,#ede9fe 100%);border-radius:20px;padding:2rem 0;box-shadow:0 4px 24px rgba(99,102,241,0.07);">
+            <div class="carousel-inner">
+                @for (int i = 0; i < similarProducts.Count; i++)
+                {
+                    var product = similarProducts[i];
+                    <div class="carousel-item @(i == 0 ? "active" : "")">
+                        <div class="similar-product-card" style="margin:0 auto;">
+                            <img src="@product.ImageUrl" alt="@product.Title" />
+                            <h5>@product.Title</h5>
+                            <p style="color:#6366f1;font-weight:700;">@product.Price ₾</p>
+                            <a href="@Url.Action("ProductDetails", "Home", new { id = product.Id })" class="btn btn-primary" style="background:linear-gradient(90deg,#6366f1 0%,#ec4899 100%);border:none;">
+                                ნახვა
+                            </a>
+                        </div>
+                    </div>
+                }
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#similarProductsCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">წინა</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#similarProductsCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">შემდეგი</span>
+            </button>
+        </div>
+    }
+    else
+    {
+        <div style="color:#64748b;font-size:1.1rem;">მსგავსი პროდუქტები ვერ მოიძებნა.</div>
+    }
+</div>
