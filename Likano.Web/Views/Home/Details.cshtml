@@ -618,9 +618,11 @@
         border: 1px solid var(--border);
         text-align: center;
         padding: 1.25rem 1rem;
+        animation: floatCard 3s ease-in-out infinite;
     }
 
         .similar-product-card:hover {
+            animation: none;
             transform: translateY(-12px);
             box-shadow: var(--shadow-lg);
             border-color: var(--primary-light);
@@ -666,6 +668,12 @@
                 transform: scale(1.04);
                 box-shadow: 0 8px 24px rgba(99, 102, 241, 0.25);
             }
+
+    @@keyframes floatCard {
+        0% { transform: translateY(0); }
+        50% { transform: translateY(-10px); }
+        100% { transform: translateY(0); }
+    }
 </style>
 
 <div class="product-page-wrapper">
