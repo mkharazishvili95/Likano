@@ -1,4 +1,5 @@
-﻿@model Likano.Infrastructure.Queries.Product.Models.Details.GetProductDetailsResponse
+﻿@using Likano.Infrastructure.Queries.Product.Models.Similar
+@model Likano.Infrastructure.Queries.Product.Models.Details.GetProductDetailsResponse
 
 @{
     Layout = "_Layout";
@@ -163,7 +164,7 @@
 
         .thumbnail.active {
             border-color: var(--primary);
-            box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.15);
+            box-shadow: 0 0 0 4px rgba(99, 102,241, 0.15);
         }
 
         .thumbnail img {
@@ -374,13 +375,14 @@
         position: relative;
         background: var(--surface);
         border-radius: 24px;
-        padding: 2rem;
-        max-width: 90vw;
-        max-height: 90vh;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
+        padding: 0.5rem;
+        max-width: 100vw;
+        max-height: 100vh;
+        width: auto;
+        height: auto;
+        display: inline-block;
         box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        box-sizing: content-box;
     }
 
     .modal-main-image {
@@ -476,7 +478,7 @@
 
         .modal-thumbnail.selected {
             border-color: var(--primary);
-            box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.3);
+            box-shadow: 0 0 0 4px rgba(99, 102,241, 0.3);
         }
 
     @@media (max-width: 992px) {
@@ -566,6 +568,121 @@
     .main-image:focus + .main-image-tooltip {
         display: block;
         opacity: 1;
+    }
+
+    #similarProductsCarousel .carousel-item {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 2rem 0;
+    }
+
+    similar-products-section {
+        margin: 4rem 0 2rem;
+        padding: 2.5rem 0;
+        background: var(--surface);
+        border-radius: 24px;
+        box-shadow: var(--shadow-lg);
+        border: 1px solid var(--border);
+    }
+
+    .similar-products-title {
+        font-size: 1.75rem;
+        font-weight: 800;
+        color: var(--text-primary);
+        margin-bottom: 2rem;
+        text-align: center;
+        background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .similar-products-carousel {
+        display: flex;
+        flex-direction: row;
+        gap: 2rem;
+        padding: 1rem 0;
+        transition: transform 0.6s ease;
+        will-change: transform;
+    }
+
+    .similar-products-carousel-outer {
+        overflow: hidden;
+        padding: 0 1rem;
+    }
+
+    .similar-product-card {
+        flex: 0 0 260px;
+        background: var(--surface-alt);
+        border-radius: 16px;
+        overflow: hidden;
+        box-shadow: var(--shadow-md);
+        transition: var(--transition);
+        border: 1px solid var(--border);
+        text-align: center;
+        padding: 1.25rem 1rem;
+        animation: floatCard 3s ease-in-out infinite;
+    }
+
+        .similar-product-card:hover {
+            animation: none;
+            transform: translateY(-12px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary-light);
+        }
+
+        .similar-product-card img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            border-radius: 12px;
+            margin-bottom: 1rem;
+            background: white;
+        }
+
+        .similar-product-card h5 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin: 0.75rem 0 0.5rem;
+            color: var(--text-primary);
+            line-height: 1.4;
+            min-height: 2.8em;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .similar-product-card p {
+            font-size: 1.25rem;
+            font-weight: 800;
+            margin: 0.5rem 0 1rem;
+        }
+
+        .similar-product-card .btn {
+            width: 100%;
+            padding: 0.75rem;
+            font-weight: 600;
+            border-radius: 12px;
+            transition: var(--transition);
+        }
+
+            .similar-product-card .btn:hover {
+                transform: scale(1.04);
+                box-shadow: 0 8px 24px rgba(99, 102, 241, 0.25);
+            }
+
+    @@keyframes floatCard {
+        0% { transform: translateY(0); }
+        50% { transform: translateY(-10px); }
+        100% { transform: translateY(0); }
+    }
+
+    .similar-products-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 2rem;
+        padding: 1rem 0;
     }
 </style>
 
@@ -758,6 +875,30 @@
 
 @section Scripts {
     <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const carousel = document.getElementById('similarProductsCarouselFlex');
+            if (!carousel) return;
+            const cards = carousel.querySelectorAll('.similar-product-card');
+            if (cards.length <= 1) return;
+
+            const carouselOuter = carousel.parentElement;
+            const cardWidth = cards[0].offsetWidth + 32; 
+            const visibleCount = Math.floor(carouselOuter.offsetWidth / cardWidth);
+
+            let currentIndex = 0;
+
+            function scrollCarousel() {
+                if (currentIndex >= cards.length - visibleCount) {
+                    currentIndex = 0;
+                } else {
+                    currentIndex++;
+                }
+                carousel.style.transform = `translateX(-${currentIndex * cardWidth}px)`;
+            }
+
+            setInterval(scrollCarousel, 3000);
+        });
+
         @if (Model.Images != null && Model.Images.Any())
         {
             @:var images = [
@@ -856,3 +997,43 @@
         });
     </script>
 }
+
+@{
+    var similarProducts = (ViewBag.SimilarProducts as List<SimilarProductDto>)?.Where(x => x.Id != Model.Id).ToList();
+}
+<div class="similar-products-section" style="margin-top:3rem;">
+    <div style="display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem;">
+        <svg width="28" height="28" fill="none" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="10" fill="#6366f1" fill-opacity="0.12" />
+            <path d="M8 12h8M12 8v8" stroke="#6366f1" stroke-width="2" stroke-linecap="round" />
+        </svg>
+        <h2 style="margin:0;font-size:1.5rem;font-weight:800;color:#6366f1;letter-spacing:-0.5px;">
+            მსგავსი პროდუქტები
+        </h2>
+        <div style="flex:1;height:2px;background:linear-gradient(90deg,#6366f1 0%,#ec4899 100%);border-radius:2px;"></div>
+    </div>
+    @if (similarProducts != null && similarProducts.Any())
+    {
+        <div class="similar-products-carousel-outer">
+            <div class="similar-products-carousel" id="similarProductsCarouselFlex">
+                @foreach (var product in similarProducts)
+                {
+                    <div class="similar-product-card">
+                        <img src="@(string.IsNullOrWhiteSpace(product.ImageUrl)
+                                 ? "https://ik.imagekit.io/rqxdk712q/products/733b35b7-b949-4a3c-9e64-1de44004c88e_NoImageLogo"
+                                 : product.ImageUrl)" alt="@product.Title" />
+                        <h5>@product.Title</h5>
+                        <p style="color:#6366f1;font-weight:700;">@product.Price ₾</p>
+                        <a href="@Url.Action("ProductDetails", "Home", new { id = product.Id })" class="btn btn-primary" style="background:linear-gradient(90deg,#6366f1 0%,#ec4899 100%);border:none;">
+                            ნახვა
+                        </a>
+                    </div>
+                }
+            </div>
+        </div>
+    }
+    else
+    {
+        <div style="color:#64748b;font-size:1.1rem;">მსგავსი პროდუქტები ვერ მოიძებნა.</div>
+    }
+</div>

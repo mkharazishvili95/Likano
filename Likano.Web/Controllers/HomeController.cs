@@ -3,6 +3,7 @@ using Likano.Application.Features.Category.Queries.GetAll;
 using Likano.Application.Features.ProducerCountry.Queries.GetAll;
 using Likano.Infrastructure.Queries.Product.Models;
 using Likano.Infrastructure.Queries.Product.Models.Details;
+using Likano.Infrastructure.Queries.Product.Models.Similar;
 using Likano.Web.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -100,7 +101,40 @@ namespace Likano.Web.Controllers
             if (result == null || result.Id == null)
                 return View("NotFound");
 
+            var similarsResponse = await _httpClient.GetAsync($"{_baseUrl}/Product/similars?productId={id}");
+            var similars = new List<SimilarProductDto>();
+            if (similarsResponse.IsSuccessStatusCode)
+            {
+                var similarsResult = await similarsResponse.Content.ReadFromJsonAsync<GetSimilarProductsResponse>();
+                if (similarsResult?.Items != null)
+                    similars = similarsResult.Items
+                        .Select(x => new SimilarProductDto
+                        {
+                            Id = (int)x.Id,
+                            Title = (string?)x.Title,
+                            ImageUrl = (string?)x.MainImage,
+                            Price = (decimal?)x.Price
+                        })
+                        .ToList();
+            }
+
+            ViewBag.SimilarProducts = similars;
+
             return View("Details", result);
+        }
+
+        [HttpGet("similars/{id}")]
+        public async Task<IActionResult> SimilarProducts(int id)
+        {
+            var response = await _httpClient.GetAsync($"{_baseUrl}/Product/similars?productId={id}");
+            if (!response.IsSuccessStatusCode)
+                return StatusCode((int)response.StatusCode);
+
+            var result = await response.Content.ReadFromJsonAsync<GetSimilarProductsResponse>();
+            if (result == null || result.Items == null)
+                return View("NotFound");
+
+            return View("Similars", result.Items);
         }
 
         public IActionResult Privacy()
