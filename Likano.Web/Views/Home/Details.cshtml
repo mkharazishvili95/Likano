@@ -878,16 +878,24 @@
             const carousel = document.getElementById('similarProductsCarouselFlex');
             if (!carousel) return;
             const cards = carousel.querySelectorAll('.similar-product-card');
+            if (cards.length <= 1) return;
+
+            const carouselOuter = carousel.parentElement;
+            const cardWidth = cards[0].offsetWidth + 32; 
+            const visibleCount = Math.floor(carouselOuter.offsetWidth / cardWidth);
+
             let currentIndex = 0;
 
             function scrollCarousel() {
-                if (cards.length <= 1) return;
-                currentIndex = (currentIndex + 1) % cards.length;
-                const cardWidth = cards[0].offsetWidth + 32;
+                if (currentIndex >= cards.length - visibleCount) {
+                    currentIndex = 0;
+                } else {
+                    currentIndex++;
+                }
                 carousel.style.transform = `translateX(-${currentIndex * cardWidth}px)`;
             }
 
-            setInterval(scrollCarousel, 2000);
+            setInterval(scrollCarousel, 3000);
         });
 
         @if (Model.Images != null && Model.Images.Any())
@@ -1010,7 +1018,9 @@
                 @foreach (var product in similarProducts)
                 {
                     <div class="similar-product-card">
-                        <img src="@product.ImageUrl" alt="@product.Title" />
+                        <img src="@(string.IsNullOrWhiteSpace(product.ImageUrl)
+                                 ? "https://ik.imagekit.io/rqxdk712q/products/733b35b7-b949-4a3c-9e64-1de44004c88e_NoImageLogo"
+                                 : product.ImageUrl)" alt="@product.Title" />
                         <h5>@product.Title</h5>
                         <p style="color:#6366f1;font-weight:700;">@product.Price ₾</p>
                         <a href="@Url.Action("ProductDetails", "Home", new { id = product.Id })" class="btn btn-primary" style="background:linear-gradient(90deg,#6366f1 0%,#ec4899 100%);border:none;">
