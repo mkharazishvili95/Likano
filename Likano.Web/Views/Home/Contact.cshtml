@@ -31,10 +31,6 @@
                             <a href="tel:598336060">598 33 60 60</a>
                         </div>
                     </div>
-
-                    @* <a href="https://www.google.com/maps?ll=41.729924,44.783362&z=17&t=m&hl=ka&gl=GE&mapclient=embed&cid=13254705567506754744" target="_blank" rel="noopener" class="map-link mt-3">
-                        <i class="fas fa-map"></i> რუკაზე ნახვა
-                    </a> *@
                 </div>
             </div>
 
@@ -51,21 +47,30 @@
 
 <style>
     :root {
-        --primary: #2563eb;
-        --primary-dark: #1d4ed8;
-        --dark: #0f172a;
-        --slate: #64748b;
-        --card-shadow: 0 8px 32px rgba(37,99,235,0.08), 0 1.5px 6px rgba(15,23,42,0.04);
+        --primary: #6366f1;
+        --primary-dark: #4f46e5;
+        --primary-light: #818cf8;
+        --secondary: #ec4899;
+        --surface: #ffffff;
+        --surface-alt: #f8fafc;
+        --border: #e2e8f0;
+        --text-primary: #0f172a;
+        --text-secondary: #64748b;
+        --shadow-sm: 0 1px 3px rgba(0,0,0,0.05);
+        --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
+        --shadow-lg: 0 20px 40px rgba(0,0,0,0.12);
+        --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     body {
         font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        background: #f8fafc;
+        background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
         margin: 0;
     }
 
     .contact-section {
         padding: 48px 0;
+        min-height: 100vh;
     }
 
     .container {
@@ -97,47 +102,50 @@
     }
 
     .contact-card {
-        background: #fff;
-        border-radius: 20px;
-        box-shadow: var(--card-shadow);
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 24px;
+        box-shadow: var(--shadow-lg);
         padding: 40px 32px;
         height: 500px;
         width: 100%;
         display: flex;
         flex-direction: column;
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        transition: var(--transition);
     }
 
         .contact-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 12px 40px rgba(37,99,235,0.15), 0 2px 10px rgba(15,23,42,0.08);
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.15);
         }
 
         .contact-card h2 {
             font-size: 1.75rem;
-            color: var(--primary);
             font-weight: 800;
             letter-spacing: -0.5px;
             margin-bottom: 2rem;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .contact-card .fw-semibold {
             font-weight: 600;
             font-size: 1.05rem;
-            color: var(--dark);
+            color: var(--text-primary);
         }
 
         .contact-card i {
             color: var(--primary);
             font-size: 1.25rem;
-            margin-right: 8px;
+            margin-right: 12px;
         }
 
         .contact-card a {
             color: var(--primary);
             text-decoration: none;
             font-weight: 600;
-            transition: color 0.2s;
+            transition: var(--transition);
         }
 
             .contact-card a:hover {
@@ -146,7 +154,7 @@
             }
 
     .info-block {
-        margin-bottom: 1.5rem;
+        margin-bottom: 2rem;
     }
 
     .d-flex {
@@ -158,7 +166,7 @@
     }
 
     .mb-2 {
-        margin-bottom: 0.5rem;
+        margin-bottom: 0.75rem;
     }
 
     .mb-4 {
@@ -169,45 +177,37 @@
         margin-bottom: 3rem;
     }
 
-    .mt-3 {
-        margin-top: 1rem;
-    }
-
     .fw-bold {
         font-weight: 700;
     }
 
     .info-text {
-        color: var(--slate);
+        color: var(--text-secondary);
         font-size: 1.05rem;
         line-height: 1.8;
-        padding-left: 32px;
+        padding-left: 36px;
+        font-weight: 500;
     }
 
-    .map-link {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        font-weight: 600;
-        font-size: 1.05rem;
-        text-decoration: underline;
-        color: var(--primary);
-        transition: color 0.2s;
-        padding-left: 32px;
-    }
-
-        .map-link:hover {
-            color: var(--primary-dark);
+        .info-text strong {
+            color: var(--text-primary);
+            font-weight: 700;
         }
 
     .contact-map {
-        border-radius: 20px;
+        border-radius: 24px;
         overflow: hidden;
-        box-shadow: var(--card-shadow);
+        border: 1px solid var(--border);
+        box-shadow: var(--shadow-lg);
         height: 500px;
         width: 100%;
-        background: #e0e7ef;
+        background: var(--surface-alt);
+        transition: var(--transition);
     }
+
+        .contact-map:hover {
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.15);
+        }
 
         .contact-map iframe {
             width: 100%;
@@ -228,7 +228,7 @@
     .contact-card,
     .contact-map {
         height: 400px;
-        border-radius: 16px;
+        border-radius: 20px;
     }
 
     .contact-card {
@@ -257,9 +257,9 @@
             margin-bottom: 1.5rem;
         }
 
-    .info-text,
-    .map-link {
-        padding-left: 28px;
+    .info-text {
+        padding-left: 32px;
+        font-size: 1rem;
     }
 
     }
