@@ -27,6 +27,7 @@ namespace Likano.Infrastructure.Queries.Product
             {
                 "PriceAsc" => "p.Price ASC",
                 "PriceDesc" => "p.Price DESC",
+                "PopularityDesc" => "p.ViewCount DESC",
                 "CreateDateDesc" => "p.CreateDate DESC",
                 _ => "p.CreateDate DESC"
             };
