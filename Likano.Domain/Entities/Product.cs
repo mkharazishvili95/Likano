@@ -27,5 +27,6 @@ namespace Likano.Domain.Entities
         public ICollection<Likano.Domain.Entities.File>? Images { get; set; }
         public string? Code { get; set; }
         public string? SeoTitle { get; set; }
+        public int? ViewCount { get; set; }
     }
 }
