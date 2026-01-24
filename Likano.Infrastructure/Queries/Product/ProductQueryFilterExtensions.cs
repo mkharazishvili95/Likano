@@ -18,6 +18,7 @@ namespace Likano.Infrastructure.Queries.Product
                 !string.IsNullOrEmpty(request.SearchString)
             );
             Add($"p.Title LIKE '%{request.Title}%'", !string.IsNullOrEmpty(request.Title));
+            Add($"p.Code LIKE '%{request.Code}%'", !string.IsNullOrEmpty(request.Code));
             Add($"p.Price >= {request.PriceFrom}", request.PriceFrom.HasValue);
             Add($"p.Price <= {request.PriceTo}", request.PriceTo.HasValue);
             Add("p.IsAvailable = 1", request.IsAvailable == true);
