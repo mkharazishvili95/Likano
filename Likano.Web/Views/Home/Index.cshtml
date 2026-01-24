@@ -423,6 +423,30 @@
     }
 
     }
+    .details-btn {
+        position: relative;
+    }
+    .details-text {
+        display: none;
+        position: absolute;
+        right: 110%;
+        top: 50%;
+        transform: translateY(-50%);
+        white-space: nowrap;
+        background: var(--primary);
+        color: #fff;
+        padding: 0.3rem 1rem;
+        border-radius: 12px;
+        font-size: 0.95rem;
+        font-weight: 600;
+        box-shadow: var(--shadow-md);
+        transition: right 0.2s;
+        z-index: 10;
+    }
+    .details-btn:hover .details-text {
+        display: block;
+        right: 120%;
+    }
 </style>
 
 <div class="page-wrapper">
@@ -535,9 +559,11 @@
                     <div class="product-code" style="font-size:0.85rem;color:var(--text-secondary);font-weight:600;margin-bottom:0.5rem;">
                         კოდი: ${p.code || '-'}
                     </div>
-                    <p class="brand-info">
-                        <i class="bi bi-award"></i> ${p.brand?.name || 'ბრენდი'}
-                    </p>
+                    ${p.brand?.name ? `
+                        <p class="brand-info">
+                            <i class="bi bi-award"></i> ${p.brand.name}
+                        </p>
+                    ` : ''}
                 </div>
                 <div class="mt-auto d-flex align-items-center">
                     ${p.price && p.price > 0 ? `
@@ -545,8 +571,9 @@
                             ${p.price.toLocaleString('ka-GE')} <span style="font-size: 1.1rem;">₾</span>
                         </div>
                     ` : ''}
-                    <a href="/Details/${p.id}" class="btn-action ms-auto">
+                    <a href="/Details/${p.id}" class="btn-action ms-auto details-btn">
                         <i class="bi bi-chevron-right fs-5"></i>
+                        <span class="details-text">სრულად ნახვა</span>
                     </a>
                 </div>
             </div>
