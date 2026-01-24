@@ -35,7 +35,8 @@ namespace Likano.Application.Features.Manage.Product.Commands.Create
                 BrandId = request.BrandId,
                 ProducerCountryId = request.ProducerCountryId,
                 Code = request.Code,
-                SeoTitle = request.SeoTitle
+                SeoTitle = request.SeoTitle,
+                ViewCount = 0
             };
 
             var productId = await _repository.AddProductAsync(product);

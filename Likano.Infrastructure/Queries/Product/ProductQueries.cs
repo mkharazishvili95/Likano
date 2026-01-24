@@ -1,15 +1,23 @@
-﻿using Likano.Domain.Entities;
+﻿using Likano.Application.Interfaces;
+using Likano.Domain.Entities;
 using Likano.Domain.Enums;
 using Likano.Infrastructure.Queries.Product.Models;
 using Likano.Infrastructure.Queries.Product.Models.Details;
 using Likano.Infrastructure.Queries.Product.Models.Similar;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 
 namespace Likano.Infrastructure.Queries.Product
 {
     public class ProductQueries : QueriesBase, IProductQueries
     {
-        public ProductQueries(IConfiguration configuration) : base(configuration) { }
+        readonly IStatisticRepository _statisticRepository;
+        readonly ILogger<ProductQueries> _logger;
+        public ProductQueries(IConfiguration configuration, IStatisticRepository statisticRepository, ILogger<ProductQueries> logger) : base(configuration) 
+        {
+            _statisticRepository = statisticRepository;
+            _logger = logger;
+        }
 
         public async Task<GetAllProductsForSearchResponse> GetAllProductsForSearch(GetAllProductsForSearchQuery request)
         {
@@ -166,6 +174,7 @@ namespace Likano.Infrastructure.Queries.Product
             c.Name AS CategoryTitle,
             c.Logo AS CategoryLogo,
             p.ProducerCountryId,
+            p.ViewCount, 
             pc.Name AS ProducerCountryName,
             p.BrandId,
             b.Name AS BrandTitle,
@@ -210,7 +219,7 @@ namespace Likano.Infrastructure.Queries.Product
                     Name = reader.IsDBNull(reader.GetOrdinal("BrandTitle")) ? null : reader.GetString(reader.GetOrdinal("BrandTitle")),
                     Logo = reader.IsDBNull(reader.GetOrdinal("BrandLogo")) ? null : reader.GetString(reader.GetOrdinal("BrandLogo"))
                 },
-                ViewCount = 123 /*TODO: დასამატებელია entity მოდელში და მერე აქ */
+                ViewCount = reader.IsDBNull(reader.GetOrdinal("ViewCount")) ? null : reader.GetInt32(reader.GetOrdinal("ViewCount")),
             });
 
             var product = items.FirstOrDefault();
@@ -222,6 +231,15 @@ namespace Likano.Infrastructure.Queries.Product
                     StatusCode = 404,
                     Message = "Product not found"
                 };
+            }
+
+            try
+            {
+                await _statisticRepository.AddViewCount(request.ProductId);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, $"Failed to add view count for productId: {request.ProductId}");
             }
 
             if (product.Id.HasValue)
