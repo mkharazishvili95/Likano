@@ -28,6 +28,7 @@ namespace Likano.Infrastructure.Queries.Product.Models
         public int? BrandId { get; set; }
         public BrandDtoForSearch? Brand { get; set; }
         public List<ImageDtoForSearch>? Images { get; set; }
+        public string? Code { get; set; }
     }
 
     public class BrandDtoForSearch

@@ -1,5 +1,6 @@
 ﻿using Likano.Application.Common.Models;
 using MediatR;
+using System.Reflection.Metadata;
 
 namespace Likano.Infrastructure.Queries.Product.Models
 {
@@ -22,5 +23,6 @@ namespace Likano.Infrastructure.Queries.Product.Models
         public decimal? HeightTo { get; set; } // სიმაღლე(მდე)
         public string? Color { get; set; }
         public string? SortBy { get; set; }
+        public string? Code { get; set; }
     }
 }
