@@ -20,6 +20,12 @@ namespace Likano.Web.Controllers
             _httpClient = httpClientFactory.CreateClient("API");
             _baseUrl = configuration["ApiSettings:BaseUrl"]!;
         }
+        //not found default page:
+        [Route("Shared/NotFound")]
+        public IActionResult NotFoundPage()
+        {
+            return View("NotFound");
+        }
 
         [HttpPost]
         public async Task<IActionResult> SearchProducts([FromBody] GetAllProductsForSearchQuery query)
