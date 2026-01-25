@@ -24,5 +24,6 @@ namespace Likano.Infrastructure.Queries.Product.Models
         public string? Color { get; set; }
         public string? SortBy { get; set; }
         public string? Code { get; set; }
+        public bool? HasPrice { get; set; }
     }
 }

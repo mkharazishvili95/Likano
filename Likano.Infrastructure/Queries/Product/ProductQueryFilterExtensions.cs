@@ -27,6 +27,7 @@ namespace Likano.Infrastructure.Queries.Product
             Add($"p.ProducerCountryId = {request.ProducerCountryId}", request.ProducerCountryId.HasValue);
             Add($"p.Length >= {request.LengthFrom}", request.LengthFrom.HasValue);
             Add($"p.Length <= {request.LengthTo}", request.LengthTo.HasValue);
+            Add(request.HasPrice == true ? "p.Price > 0" : "(p.Price IS NULL OR p.Price = 0)", request.HasPrice.HasValue);
             Add($"p.Width >= {request.WidthFrom}", request.WidthFrom.HasValue);
             Add($"p.Width <= {request.WidthTo}", request.WidthTo.HasValue);
             Add($"p.Height >= {request.HeightFrom}", request.HeightFrom.HasValue);

@@ -107,7 +107,8 @@ namespace Likano.Infrastructure.Queries.Product
                     BrandId = reader.GetInt32(reader.GetOrdinal("BrandId")),
                     Name = reader.IsDBNull(reader.GetOrdinal("BrandTitle")) ? null : reader.GetString(reader.GetOrdinal("BrandTitle")),
                     Logo = reader.IsDBNull(reader.GetOrdinal("BrandLogo")) ? null : reader.GetString(reader.GetOrdinal("BrandLogo"))
-                }
+                },
+                HasPrice = !reader.IsDBNull(reader.GetOrdinal("Price")) && reader.GetDecimal(reader.GetOrdinal("Price")) > 0
             });
 
             var productIds = items.Select(x => x.Id).Where(x => x.HasValue).Select(x => x.Value).ToList();
