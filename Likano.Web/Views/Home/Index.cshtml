@@ -383,6 +383,16 @@
         color: var(--primary);
     }
 
+        input[type=number]::-webkit-inner-spin-button,
+        input[type=number]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        input[type=number] {
+            -moz-appearance: textfield;
+        }
+
     @@media (max-width: 991px) {
         .filter-sidebar
 
@@ -531,8 +541,8 @@
                                 ფასი
                             </label>
                             <div class="d-flex gap-2">
-                                <input name="PriceFrom" class="form-control" placeholder="დან" type="number">
-                                <input name="PriceTo" class="form-control" placeholder="მდე" type="number">
+                                <input name="PriceFrom" class="form-control" placeholder="დან" type="number" min="0" step="any">
+                                <input name="PriceTo" class="form-control" placeholder="მდე" type="number" min="0" step="any">
                             </div>
                         </div>
 
@@ -706,6 +716,17 @@
             if ($(window).scrollTop() + $(window).height() > $(document).height() - 800) {
                 loadProducts(true);
             }
+        });
+    });
+
+       document.addEventListener('DOMContentLoaded', function () {
+        const priceInputs = document.querySelectorAll('input[name="PriceFrom"], input[name="PriceTo"]');
+        priceInputs.forEach(input => {
+            input.addEventListener('input', function () {
+                if (this.value && parseFloat(this.value) < 0) {
+                    this.value = '';
+                }
+            });
         });
     });
 </script>
