@@ -45,6 +45,12 @@
             justify-content: space-between;
         }
 
+        .branding-group {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+        }
+
         .logo {
             display: flex;
             align-items: center;
@@ -104,6 +110,21 @@
                 color: #ef4444;
             }
 
+        .slogan {
+            font-size: 1.13rem;
+            font-weight: 500;
+            color: var(--primary);
+            background: var(--primary-soft);
+            border-radius: 8px;
+            padding: 8px 20px;
+            margin: 0 20px;
+            letter-spacing: 0.3px;
+            text-align: center;
+            box-shadow: none;
+            border: none;
+            transition: background 0.2s, color 0.2s;
+        }
+
         main {
             max-width: 1380px;
             margin: 32px auto 48px;
@@ -141,6 +162,25 @@
             width: 100%;
         }
 
+        .slogan {
+            margin: 12px 0 0 0;
+            font-size: 1.04rem;
+            text-align: center;
+            justify-content: center;
+            height: auto;
+            border-left: none;
+            border-top: 3px solid var(--primary);
+            border-radius: 0 0 6px 6px;
+            background: #f3f7fd;
+        }
+
+        .branding-group {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 8px;
+            width: 100%;
+        }
+
         }
 
         @@media (max-width: 576px) {
@@ -162,20 +202,23 @@
 <body>
     <header>
         <div class="container-header">
-            <a class="logo" href="/" title="Likano.Ge - სამზარეულოს ტექნიკა">
-                <img src="https://ik.imagekit.io/rqxdk712q/products/17827bc1-7332-4122-b0aa-7e5adc3e229e_likanologo"
-                     alt="Likano Logo" />
-            </a>
-
+            <div class="branding-group">
+                <a class="logo" href="/" title="Likano.Ge - სამზარეულოს ტექნიკა">
+                    <img src="https://ik.imagekit.io/rqxdk712q/products/17827bc1-7332-4122-b0aa-7e5adc3e229e_likanologo"
+                         alt="Likano Logo" />
+                </a>
+                <div class="slogan">
+                    სამზარეულო იწყება სწორი ტექნიკით
+                </div>
+            </div>
             <div class="contact-group">
                 <a href="tel:+995599457950" class="contact-btn phone" title="დაკავშირება">
                     <i class="fas fa-phone-alt"></i>
                     599 45 79 50
                 </a>
-
                 <a href="/contact" class="contact-btn map" title="სრული მისამართი და რუკა">
                     <i class="fas fa-map-marker-alt"></i>
-                    თბილისი, აგლაძის #15
+                    თბილისი, აგლაძის ქ. №15
                 </a>
             </div>
         </div>
