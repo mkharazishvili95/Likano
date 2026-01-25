@@ -684,6 +684,26 @@
         gap: 2rem;
         padding: 1rem 0;
     }
+
+    .price-missing {
+        font-size: 0.95rem;
+        font-weight: 600;
+        color: #b42318;
+        background: #fef3f2;
+        border: 1px dashed #f5c2c7;
+        border-radius: 12px;
+        padding: 0.75rem 1.25rem;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        letter-spacing: -0.01em;
+        white-space: nowrap;
+    }
+
+        .price-missing i {
+            font-size: 1.1rem;
+            opacity: 0.85;
+        }
 </style>
 
 <div class="product-page-wrapper">
@@ -770,6 +790,12 @@
                     @if (Model.Price.HasValue && Model.Price > 0)
                     {
                         <div class="product-price">@Model.Price.Value.ToString("N2") ₾</div>
+                    }
+                    else
+                    {
+                        <div class="price-missing">
+                            <i class="bi bi-exclamation-triangle"></i> ფასი არაა მითითებული
+                        </div>
                     }
                     @if (Model.IsAvailable == true)
                     {
