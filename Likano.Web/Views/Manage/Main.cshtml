@@ -3,12 +3,15 @@
     Layout = "_AdminLayout";
 }
 
-<div class="d-flex justify-content-end mb-4">
+<div class="d-flex justify-content-end mb-4 gap-2">
+    <a asp-controller="Home" asp-action="Index" class="btn btn-primary">
+        <i class="fas fa-home"></i> მთავარზე გადასვლა
+    </a>    
     <form asp-controller="Auth" asp-action="Logout" method="post" class="d-inline">
         <button type="submit" class="btn btn-danger">
             <i class="fas fa-sign-out-alt"></i> გამოსვლა
         </button>
-    </form>
+    </form> 
 </div>
 
 <div class="text-center mb-5">
