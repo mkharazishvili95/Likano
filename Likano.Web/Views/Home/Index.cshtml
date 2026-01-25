@@ -545,7 +545,11 @@
                                 <input name="PriceTo" class="form-control" placeholder="მდე" type="number" min="0" step="any">
                             </div>
                         </div>
-
+                        <div class="form-check form-switch mt-2">
+                            <input class="form-check-input" id="hasPriceCheck" name="HasPrice" type="checkbox" value="true">
+                            <label class="form-check-label" for="hasPriceCheck">მხოლოდ მითითებული ფასით</label>
+                        </div>
+                        
                         <div class="form-check form-switch">
                             <input class="form-check-input" id="stCheck" type="checkbox">
                             <label class="form-check-label" for="stCheck">მხოლოდ მარაგში არსებული</label>
@@ -647,6 +651,7 @@
         });
 
         filters.IsAvailable = $('#stCheck').is(':checked') ? true : null;
+        filters.HasPrice = $('#hasPriceCheck').is(':checked') ? true : null;
 
         $.ajax({
             url: '/Home/SearchProducts',
@@ -703,10 +708,18 @@
             loadProducts();
         });
 
+
+        $('#hasPriceCheck').on('change', function () {
+            page = 1;
+            hasMore = true;
+            loadProducts();
+        });
+
         $('#resetFilters').on('click', function () {
             $('#searchForm')[0].reset();
             $('#sortSelector').val('CreateDateDesc');
             $('#stCheck').prop('checked', false);
+            $('#hasPriceCheck').prop('checked', false);
             page = 1;
             hasMore = true;
             loadProducts();
