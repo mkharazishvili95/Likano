@@ -457,6 +457,26 @@
         transform: translateY(-50%) translateX(20px);
     }
 
+    .price-missing {
+        font-size: 0.95rem;
+        font-weight: 600;
+        color: #b42318; /* რბილი danger */
+        background: #fef3f2;
+        border: 1px dashed #f5c2c7;
+        border-radius: 10px;
+        padding: 0.35rem 0.75rem;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        letter-spacing: -0.01em;
+        white-space: nowrap;
+    }
+
+        .price-missing i {
+            font-size: 1rem;
+            opacity: 0.85;
+        }
+
 </style>
 
 <div class="page-wrapper">
@@ -576,11 +596,15 @@
                     ` : ''}
                 </div>
                 <div class="mt-auto d-flex align-items-center">
-                    ${p.price && p.price > 0 ? `
-                        <div class="price-tag">
-                            ${p.price.toLocaleString('ka-GE')} <span style="font-size: 1.1rem;">₾</span>
-                        </div>
-                    ` : ''}
+                        ${p.price && p.price > 0 ? `
+                    <div class="price-tag">
+                        ${p.price.toLocaleString('ka-GE')} <span style="font-size: 1.1rem;">₾</span>
+                    </div>
+                ` : `
+                    <div class="price-missing">
+                        <i class="bi bi-exclamation-circle"></i> ფასი არაა მითითებული
+                    </div>
+                `}
                     <a href="/Details/${p.id}" class="btn-action ms-auto details-btn">
                         <i class="bi bi-chevron-right fs-5"></i>
                         <span class="details-text">სრულად ნახვა</span>
