@@ -864,6 +864,7 @@
         gap: 0.5rem;
         letter-spacing: -0.01em;
         white-space: nowrap;
+        margin-bottom: 1rem;
     }
 
         .price-missing i {
@@ -3273,7 +3274,16 @@
                                  ? "https://ik.imagekit.io/rqxdk712q/products/733b35b7-b949-4a3c-9e64-1de44004c88e_NoImageLogo"
                                  : product.ImageUrl)" alt="@product.Title" />
                         <h5>@product.Title</h5>
-                        <p style="color:#6366f1;font-weight:700;">@product.Price ₾</p>
+                        @if (product.Price != null && product.Price > 0)
+                        {
+                            <div class="price-tag" style="color:#6366f1;font-weight:700;font-size:1.05rem;">
+                                @product.Price <span style="font-size:1.1rem;">₾</span>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="price-missing"> <i class="bi bi-exclamation-circle"></i> ფასი არაა მითითებული </div>
+                        }
                         <a href="@Url.Action("ProductDetails", "Home", new { id = product.Id })" class="btn btn-primary" style="background:linear-gradient(90deg,#6366f1 0%,#ec4899 100%);border:none;">
                             ნახვა
                         </a>
