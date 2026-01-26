@@ -334,7 +334,8 @@ namespace Likano.Infrastructure.Queries.Product
             LEFT JOIN ProducerCountries pc ON pc.Id = p.ProducerCountryId
             LEFT JOIN Brands b ON b.Id = p.BrandId
             WHERE p.Id != {request.ProductId} AND p.CategoryId = {product.CategoryId}
-            AND p.Status = {(int)ProductStatus.Active}";
+            AND p.Status = {(int)ProductStatus.Active}
+            ORDER BY NEWID() ";
 
             var items = await GetMany(commandText, reader => new GetSimilarProductsItemsResponse
             {
