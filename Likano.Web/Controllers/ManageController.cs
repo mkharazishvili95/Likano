@@ -84,7 +84,8 @@ namespace Likano.Web.Controllers
                 HeightTo = filter.HeightTo,
                 Color = string.IsNullOrWhiteSpace(filter.Color) ? null : filter.Color.Trim(),
                 ProducerCountryId = filter.ProducerCountryId,
-                Code = string.IsNullOrWhiteSpace(filter.Code) ? null : filter.Code.Trim()
+                Code = string.IsNullOrWhiteSpace(filter.Code) ? null : filter.Code.Trim(),
+                Type = filter.Type
             };
 
             var apiUrl = $"{_baseUrl}/manage/products";
