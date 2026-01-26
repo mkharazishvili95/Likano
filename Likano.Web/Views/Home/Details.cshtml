@@ -1,11 +1,30 @@
-﻿@using Likano.Infrastructure.Queries.Product.Models.Similar
+﻿@using Likano.Domain.Enums
+@using Likano.Infrastructure.Queries.Product.Models.Similar
 @model Likano.Infrastructure.Queries.Product.Models.Details.GetProductDetailsResponse
 
 @{
     Layout = "_Layout";
     ViewData["Title"] = Model.Title ?? "პროდუქტის დეტალები";
 }
+@{
+    Func<ProductType, string> getGeorgianType = type => type switch
+    {
+        ProductType.BuiltIn => "ჩასაშენებელი",
+        ProductType.Freestanding => "დასადგამი",
+        ProductType.WallMounted => "კედელზე დასაკიდი",
+        ProductType.CounterTop => "ზედაპირზე / მაგიდაზე დასადგამი",
+        ProductType.FloorMounted => "იატაკზე დასადგამი",
+        _ => ""
+    };
+}
 
+@if (Model.Type != null)
+{
+    <div class="product-detail-row">
+        <span class="product-detail-label">ტიპი:</span>
+        <span class="product-detail-value">@getGeorgianType(Model.Type.Value)</span>
+    </div>
+}
 <style>
     :root {
         --primary: #6366f1;
@@ -830,6 +849,13 @@
                             <div class="spec-item">
                                 <div class="spec-label">ბრენდი</div>
                                 <div class="spec-value">@Model.Brand.Name</div>
+                            </div>
+                        }
+                        @if (Model.Type != null)
+                        {
+                            <div class="spec-item">
+                                <div class="spec-label">ტიპი</div>
+                                <div class="spec-value">@getGeorgianType(Model.Type.Value)</div>
                             </div>
                         }
                         @if (!string.IsNullOrWhiteSpace(Model.Color))
