@@ -37,6 +37,20 @@
         --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
+    .zoom-lens {
+        position: absolute;
+        border: 2px solid #6366f1;
+        border-radius: 50%;
+        width: 120px;
+        height: 120px;
+        pointer-events: none;
+        opacity: 0.85;
+        background-repeat: no-repeat;
+        background-size: 200% 200%;
+        z-index: 100;
+        display: none;
+    }
+    
     .product-page-wrapper {
         min-height: 80vh;
         background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
@@ -2528,376 +2542,7 @@
             box-shadow: var(--shadow-md);
         }
 
-    .modal-backdrop {
-        display: none;
-        position: fixed;
-        z-index: 9999;
-        inset: 0;
-        background: rgba(15, 23, 42, 0.95);
-        backdrop-filter: blur(8px);
-        justify-content: center;
-        align-items: center;
-        animation: fadeIn 0.3s ease;
-    }
-
-        .modal-backdrop.active {
-            display: flex;
-        }
-
-    @@keyframes fadeIn {
-        from {
-            opacity: 0;
-        }
-
-        to {
-            opacity: 1;
-        }
-    }
-
-    .modal-content {
-        position: relative;
-        background: var(--surface);
-        border-radius: 24px;
-        padding: 0.5rem;
-        max-width: 100vw;
-        max-height: 100vh;
-        width: auto;
-        height: auto;
-        display: inline-block;
-        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-        box-sizing: content-box;
-    }
-
-    .modal-main-image {
-        width: 600px;
-        height: 600px;
-        object-fit: contain;
-        border-radius: 16px;
-        margin-bottom: 1.5rem;
-        background: var(--surface-alt);
-    }
-
-    .modal-close {
-        position: absolute;
-        top: 1rem;
-        right: 1rem;
-        width: 44px;
-        height: 44px;
-        border-radius: 50%;
-        background: rgba(15, 23, 42, 0.8);
-        color: white;
-        border: none;
-        font-size: 1.5rem;
-        cursor: pointer;
-        transition: var(--transition);
-        z-index: 10;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-        .modal-close:hover {
-            background: var(--danger);
-            transform: rotate(90deg);
-        }
-
-    .modal-arrow {
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        width: 50px;
-        height: 50px;
-        border-radius: 50%;
-        background: rgba(15, 23, 42, 0.8);
-        color: white;
-        border: none;
-        font-size: 1.5rem;
-        cursor: pointer;
-        transition: var(--transition);
-        z-index: 10;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-        .modal-arrow:hover {
-            background: var(--primary);
-            transform: translateY(-50%) scale(1.1);
-        }
-
-        .modal-arrow.left {
-            left: 2rem;
-        }
-
-        .modal-arrow.right {
-            right: 2rem;
-        }
-
-    .modal-thumbnails {
-        display: flex;
-        gap: 10px;
-        flex-wrap: wrap;
-        justify-content: center;
-        max-width: 80vw;
-        overflow-x: auto;
-        padding: 10px;
-    }
-
-    .modal-thumbnail {
-        width: 70px;
-        height: 70px;
-        object-fit: cover;
-        border-radius: 10px;
-        border: 3px solid transparent;
-        cursor: pointer;
-        transition: var(--transition);
-        flex-shrink: 0;
-    }
-
-        .modal-thumbnail:hover {
-            border-color: var(--primary);
-            transform: scale(1.1);
-        }
-
-        .modal-thumbnail.selected {
-            border-color: var(--primary);
-            box-shadow: 0 0 0 4px rgba(99, 102,241, 0.3);
-        }
-
-    @@media (max-width: 992px) {
-        .product-grid {
-            grid-template-columns: 1fr;
-        }
-
-        .gallery-card {
-            position: static;
-        }
-
-        .specs-grid {
-            grid-template-columns: 1fr;
-        }
-    }
-
-    @@media (max-width: 768px) {
-        .product-page-wrapper {
-            padding: 1.5rem 0 3rem 0;
-        }
-
-        .product-container {
-            padding: 0 1rem;
-        }
-
-        .product-meta-bar {
-            justify-content: center;
-            gap: 1rem;
-        }
-
-        .gallery-card,
-        .info-card {
-            padding: 1.5rem;
-        }
-
-        .product-title {
-            font-size: 2rem;
-            font-weight: 800;
-            color: var(--text-primary);
-            margin-bottom: 1rem;
-            line-height: 1.2;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            padding-bottom: 0.2em;
-            box-decoration-break: clone;
-            -webkit-box-decoration-break: clone;
-        }
-
-        .product-price {
-            font-size: 1.1rem;
-        }
-
-        .price-availability {
-            flex-direction: column;
-            align-items: flex-start;
-        }
-
-        .modal-main-image {
-            width: 90vw;
-            height: 90vw;
-            max-width: 500px;
-            max-height: 500px;
-        }
-
-        .modal-arrow.left {
-            left: 0.5rem;
-        }
-
-        .modal-arrow.right {
-            right: 0.5rem;
-        }
-    }
-    .main-image-wrapper {
-        position: relative;
-    }
-    .main-image-tooltip {
-        display: none;
-        position: absolute;
-        left: 50%;
-        bottom: 12px;
-        transform: translateX(-50%);
-        background: rgba(99,102,241,0.95);
-        color: #fff;
-        padding: 6px 16px;
-        border-radius: 8px;
-        font-size: 0.95rem;
-        font-weight: 500;
-        white-space: nowrap;
-        box-shadow: var(--shadow-md);
-        pointer-events: none;
-        z-index: 10;
-        transition: opacity 0.2s;
-        opacity: 0;
-    }
-    .main-image-wrapper:hover .main-image-tooltip,
-    .main-image:focus + .main-image-tooltip {
-        display: block;
-        opacity: 1;
-    }
-
-    #similarProductsCarousel .carousel-item {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        padding: 2rem 0;
-    }
-
-    similar-products-section {
-        margin: 4rem 0 2rem;
-        padding: 2.5rem 0;
-        background: var(--surface);
-        border-radius: 24px;
-        box-shadow: var(--shadow-lg);
-        border: 1px solid var(--border);
-    }
-
-    .similar-products-title {
-        font-size: 1.75rem;
-        font-weight: 800;
-        color: var(--text-primary);
-        margin-bottom: 2rem;
-        text-align: center;
-        background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-    }
-
-    .similar-products-carousel {
-        display: flex;
-        flex-direction: row;
-        gap: 2rem;
-        padding: 1rem 0;
-        transition: transform 0.6s ease;
-        will-change: transform;
-    }
-
-    .similar-products-carousel-outer {
-        overflow: hidden;
-        padding: 0 1rem;
-    }
-
-    .similar-product-card {
-        flex: 0 0 260px;
-        background: var(--surface-alt);
-        border-radius: 16px;
-        overflow: hidden;
-        box-shadow: var(--shadow-md);
-        transition: var(--transition);
-        border: 1px solid var(--border);
-        text-align: center;
-        padding: 1.25rem 1rem;
-        animation: floatCard 3s ease-in-out infinite;
-    }
-
-        .similar-product-card:hover {
-            animation: none;
-            transform: translateY(-12px);
-            box-shadow: var(--shadow-lg);
-            border-color: var(--primary-light);
-        }
-
-        .similar-product-card img {
-            width: 100%;
-            height: 220px;
-            object-fit: cover;
-            border-radius: 12px;
-            margin-bottom: 1rem;
-            background: white;
-        }
-
-        .similar-product-card h5 {
-            font-size: 1.1rem;
-            font-weight: 700;
-            margin: 0.75rem 0 0.5rem;
-            color: var(--text-primary);
-            line-height: 1.4;
-            min-height: 2.8em;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-        }
-
-        .similar-product-card p {
-            font-size: 1.25rem;
-            font-weight: 800;
-            margin: 0.5rem 0 1rem;
-        }
-
-        .similar-product-card .btn {
-            width: 100%;
-            padding: 0.75rem;
-            font-weight: 600;
-            border-radius: 12px;
-            transition: var(--transition);
-        }
-
-            .similar-product-card .btn:hover {
-                transform: scale(1.04);
-                box-shadow: 0 8px 24px rgba(99, 102, 241, 0.25);
-            }
-
-    @@keyframes floatCard {
-        0% { transform: translateY(0); }
-        50% { transform: translateY(-10px); }
-        100% { transform: translateY(0); }
-    }
-
-    .similar-products-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-        gap: 2rem;
-        padding: 1rem 0;
-    }
-
-    .price-missing {
-        font-size: 0.95rem;
-        font-weight: 600;
-        color: #b42318;
-        background: #fef3f2;
-        border: 1px dashed #f5c2c7;
-        border-radius: 12px;
-        padding: 0.75rem 1.25rem;
-        display: inline-flex;
-        align-items: center;
-        gap: 0.5rem;
-        letter-spacing: -0.01em;
-        white-space: nowrap;
-    }
-
-        .price-missing i {
-            font-size: 1.1rem;
-            opacity: 0.85;
-        }
+    
 </style>
 
 <div class="product-page-wrapper">
@@ -3119,6 +2764,7 @@
                 <button class="modal-arrow right" onclick="nextImage(event)">›</button>
             }
             <img id="modalMainImage" class="modal-main-image" src="" alt="Product image" />
+            <div id="zoomLens" class="zoom-lens"></div>
             <div class="modal-thumbnails" id="modalThumbnails"></div>
         </div>
     </div>
@@ -3126,6 +2772,45 @@
 
 @section Scripts {
     <script>
+            const modalMainImage = document.getElementById('modalMainImage');
+        const zoomLens = document.getElementById('zoomLens');
+
+        if (modalMainImage && zoomLens) {
+            modalMainImage.addEventListener('mousemove', moveLens);
+            modalMainImage.addEventListener('mouseenter', showLens);
+            modalMainImage.addEventListener('mouseleave', hideLens);
+
+            function showLens(e) {
+                zoomLens.style.display = 'block';
+                zoomLens.style.backgroundImage = `url('${modalMainImage.src}')`;
+            }
+
+            function hideLens(e) {
+                zoomLens.style.display = 'none';
+            }
+
+            function moveLens(e) {
+                const rect = modalMainImage.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+
+                const lensSize = zoomLens.offsetWidth / 2;
+                let lensX = x - lensSize;
+                let lensY = y - lensSize;
+
+                lensX = Math.max(0, Math.min(lensX, rect.width - zoomLens.offsetWidth));
+                lensY = Math.max(0, Math.min(lensY, rect.height - zoomLens.offsetHeight));
+
+                zoomLens.style.left = (modalMainImage.offsetLeft + lensX) + 'px';
+                zoomLens.style.top = (modalMainImage.offsetTop + lensY) + 'px';
+
+                const percentX = x / rect.width * 100;
+                const percentY = y / rect.height * 100;
+                zoomLens.style.backgroundPosition = `${percentX}% ${percentY}%`;
+                zoomLens.style.backgroundSize = `${rect.width * 2}px ${rect.height * 2}px`;
+            }
+        }
+
         document.addEventListener('DOMContentLoaded', function () {
             const carousel = document.getElementById('similarProductsCarouselFlex');
             if (!carousel) return;
@@ -3203,8 +2888,11 @@
 
             if (!mainImg || !thumbs || !images) return;
 
-            mainImg.src = images[currentIndex].url;
-            mainImg.alt = images[currentIndex].alt;
+                mainImg.src = images[currentIndex].url;
+                mainImg.alt = images[currentIndex].alt;
+                if (zoomLens) {
+                    zoomLens.style.backgroundImage = `url('${images[currentIndex].url}')`;
+                }
 
             thumbs.innerHTML = '';
             images.forEach((img, i) => {
