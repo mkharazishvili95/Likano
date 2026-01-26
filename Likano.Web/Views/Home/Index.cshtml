@@ -499,6 +499,25 @@
             opacity: 0.85;
         }
 
+    .img-container.no-image {
+        background: #f3f4f6;
+    }
+
+        .img-container.no-image .product-img {
+            cursor: default !important;
+            opacity: 0.5;
+            filter: grayscale(0.3);
+            pointer-events: none;
+        }
+
+        .img-container.no-image:hover {
+            transform: none !important;
+        }
+
+            .img-container.no-image:hover .product-img {
+                transform: none !important;
+            }
+
 </style>
 
 <div class="page-wrapper">
@@ -599,15 +618,15 @@
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script>
     const renderProduct = p => `
-    <div class="col-12 col-sm-6 col-xl-4">
-        <div class="product-card">
-            <div class="img-container">
-                <span class="status-badge ${p.isAvailable ? 'in-stock' : 'out-of-stock'}">
-                    ${p.isAvailable ? 'მარაგშია' : 'არაა მარაგში'}
-                </span>
-                <img src="${p.images?.[0]?.fileUrl || 'https://ik.imagekit.io/rqxdk712q/products/733b35b7-b949-4a3c-9e64-1de44004c88e_NoImageLogo'}"
-                     class="product-img" alt="${p.title}">
-            </div>
+       <div class="col-12 col-sm-6 col-xl-4">
+         <div class="product-card">
+             <div class="img-container ${!p.images?.[0]?.fileUrl ? 'no-image' : ''}">
+                 <span class="status-badge ${p.isAvailable ? 'in-stock' : 'out-of-stock'}">
+                     ${p.isAvailable ? 'მარაგშია' : 'არაა მარაგში'}
+                 </span>
+                 <img src="${p.images?.[0]?.fileUrl || 'https://ik.imagekit.io/rqxdk712q/products/733b35b7-b949-4a3c-9e64-1de44004c88e_NoImageLogo'}"
+                      class="product-img" alt="${p.title}">
+             </div>
             <div class="card-body">
                 <div>
                     <span class="category-label">${p.category?.name || 'Likano'}</span>
