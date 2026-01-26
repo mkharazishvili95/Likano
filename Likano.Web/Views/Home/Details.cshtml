@@ -587,6 +587,23 @@
             transform: rotate(90deg);
         }
 
+    .no-image {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #f3f4f6;
+    }
+
+        .no-image .main-image {
+            cursor: default !important;
+            opacity: 0.5;
+            filter: grayscale(0.3);
+            pointer-events: none;
+        }
+
     .modal-arrow {
         position: absolute;
         top: 50%;
@@ -2617,7 +2634,7 @@
                 }
                 else
                 {
-                    <div class="main-image-wrapper">
+                    <div class="no-image">
                         <img src="https://ik.imagekit.io/rqxdk712q/products/733b35b7-b949-4a3c-9e64-1de44004c88e_NoImageLogo" class="main-image" alt="No image" />
                     </div>
                 }
@@ -2772,13 +2789,16 @@
 
 @section Scripts {
     <script>
-            const modalMainImage = document.getElementById('modalMainImage');
-        const zoomLens = document.getElementById('zoomLens');
 
-        if (modalMainImage && zoomLens) {
+        const modalMainImage = document.getElementById('modalMainImage');
+        const zoomLens = document.getElementById('zoomLens');
+        const isNoImage = modalMainImage?.closest('.no-image');
+
+        if (modalMainImage && zoomLens && !isNoImage) {
             modalMainImage.addEventListener('mousemove', moveLens);
             modalMainImage.addEventListener('mouseenter', showLens);
             modalMainImage.addEventListener('mouseleave', hideLens);
+
 
             function showLens(e) {
                 zoomLens.style.display = 'block';
