@@ -28,6 +28,7 @@
         HeightFrom = Model.Filter.HeightFrom,
         HeightTo = Model.Filter.HeightTo,
         Color = Model.Filter.Color,
+        Type = Model.Filter.Type,
         ProducerCountryId = Model.Filter.ProducerCountryId,
         BrandId = Model.Filter.BrandId,
         CreateDateFrom = Model.Filter.CreateDateFrom?.ToString("yyyy-MM-dd"),
@@ -89,6 +90,28 @@
                                     }
                                 }),
                             "Id", "Name", Model.Filter.Status),
+                        "ყველა",
+                        new { @class = "form-select form-select-sm" })
+                </div>
+
+                <div class="col-6 col-md-2">
+                    <label class="form-label small fw-medium">ტიპი</label>
+                    @Html.DropDownList("Type",
+                        new SelectList(
+                            Enum.GetValues<ProductType>()
+                                .Select(x => new {
+                                    Id = (int)x,
+                                    Name = x switch
+                                    {
+                                        ProductType.BuiltIn => "ჩასაშენებელი",
+                                        ProductType.Freestanding => "დასადგამი",
+                                        ProductType.WallMounted => "კედელზე დასაკიდი",
+                                        ProductType.CounterTop => "ზედაპირზე / მაგიდაზე დასადგამი",
+                                        ProductType.FloorMounted => "იატაკზე დასადგამი",
+                                        _ => x.ToString()
+                                    }
+                                }),
+                            "Id", "Name", Model.Filter.Type),
                         "ყველა",
                         new { @class = "form-select form-select-sm" })
                 </div>
@@ -269,6 +292,7 @@
                             <th>ფერი</th>
                             <th>ქვეყანა</th>
                             <th>სტატუსი</th>
+                            <td>ტიპი</td>
                             <th>ხელმისაწვდომია</th>
                             <th>შექმნა</th>
                             <th>განახლება</th>
@@ -330,6 +354,17 @@
                                                 _ => p.Status.ToString()
                                             })
                                         </span>
+                                    </td>
+                                    <td>
+                                            @(p.Type switch
+                                            {
+                                                ProductType.BuiltIn => "ჩასაშენებელი",
+                                                ProductType.Freestanding => "დასადგამი",
+                                                ProductType.WallMounted => "კედელზე დასაკიდი",
+                                                ProductType.CounterTop => "ზედაპირზე / მაგიდაზე დასადგამი",
+                                                ProductType.FloorMounted => "იატაკზე დასადგამი",
+                                                _ => p.Status.ToString()
+                                            })
                                     </td>
                                     <td>
                                         <span class="badge @(p.IsAvailable == true ? "bg-success" : "bg-secondary")">

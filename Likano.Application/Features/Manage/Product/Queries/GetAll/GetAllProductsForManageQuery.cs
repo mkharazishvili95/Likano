@@ -32,5 +32,6 @@ namespace Likano.Application.Features.Manage.Product.Queries.GetAll
         public int? BrandId { get; set; }
         public string? Code { get; set; }
         public string? SeoTitle { get; set; }
+        public ProductType? Type { get; set; }
     }
 }
