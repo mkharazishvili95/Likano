@@ -523,6 +523,10 @@
                                 <i class="fas fa-edit me-2"></i>რედაქტირება
                             </a>
                         }
+                        <a asp-controller="Home" asp-action="ProductDetails" asp-route-id="@product.Id"
+                           class="btn btn-outline-success shadow-sm me-2" target="_blank">
+                            <i class="fas fa-external-link-alt me-2"></i> ნახვა ვებ-გვერდზე
+                        </a>
 
                         <a asp-controller="Manage" asp-action="Products"
                            class="btn btn-secondary shadow-sm">
