@@ -439,5 +439,15 @@ namespace Likano.Infrastructure.Repositories
             await _db.SaveChangesAsync();
             return true;
         }
+
+        public async Task<bool> ChangeProductType(int productId, ProductType type)
+        {
+            var product = await _db.Products.FindAsync(productId);
+            if (product == null)
+                return false;
+            product.Type = type;
+            await _db.SaveChangesAsync();
+            return true;
+        }
     }
 }
