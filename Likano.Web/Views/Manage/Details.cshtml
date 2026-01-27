@@ -297,6 +297,15 @@
 
                         <div class="col-md-6">
                             <div class="d-flex">
+                                <strong class="text-muted me-3" style="min-width: 120px;">კომპლექტაცია:</strong>
+                                <span>
+                                    @(string.IsNullOrWhiteSpace(product.IncludedComponents) ? "—" : product.IncludedComponents)
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="d-flex">
                                 <strong class="text-muted me-3" style="min-width: 120px;">სიგრძე:</strong>
                                 <span>@(product.Length.HasValue ? $"{product.Length:0.##} სმ" : "—")</span>
                             </div>
