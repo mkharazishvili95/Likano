@@ -2003,6 +2003,32 @@
             background: rgba(255,255,255,0.95);
         }
 
+    .similar-product-card .no-image {
+        width: 100%;
+        aspect-ratio: 1;
+        border-radius: 12px;
+        overflow: hidden;
+        background: var(--surface-alt);
+        position: relative;
+        margin-bottom: 1rem;
+        min-height: 180px;
+        max-height: 220px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+        .similar-product-card .no-image .main-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            cursor: default !important;
+            opacity: 0.5;
+            filter: grayscale(0.3);
+            pointer-events: none;
+            border-radius: 12px;
+            background: #f3f4f6;
+        }
     .spec-icon {
         font-size: 1.6rem;
         color: #6366f1;
@@ -2978,9 +3004,16 @@
                 @foreach (var product in similarProducts)
                 {
                     <div class="similar-product-card">
-                        <img src="@(string.IsNullOrWhiteSpace(product.ImageUrl)
-                                 ? "https://ik.imagekit.io/rqxdk712q/products/733b35b7-b949-4a3c-9e64-1de44004c88e_NoImageLogo"
-                                 : product.ImageUrl)" alt="@product.Title" />
+                        @if (string.IsNullOrWhiteSpace(product.ImageUrl))
+                        {
+                            <div class="no-image">
+                                <img src="https://ik.imagekit.io/rqxdk712q/products/733b35b7-b949-4a3c-9e64-1de44004c88e_NoImageLogo" class="main-image" alt="No image" />
+                            </div>
+                        }
+                        else
+                        {
+                            <img src="@product.ImageUrl" class="similar-product-image" alt="@product.Title" />
+                        }
                         <h5>@product.Title</h5>
                         @if (product.Price != null && product.Price > 0)
                         {
