@@ -9,6 +9,16 @@
     var brands = Model.Brands;
     var countries = Model.Countries;
 
+ 
+    var typeText = product?.ProductType switch
+    {
+        ProductType.BuiltIn => "ჩასაშენებელი",
+        ProductType.Freestanding => "დასადგამი",
+        ProductType.WallMounted => "კედელზე დასაკიდი",
+        ProductType.CounterTop => "ზედაპირზე / მაგიდაზე დასადგამი",
+        ProductType.FloorMounted => "იატაკზე დასადგამი",
+        _ => "—"
+    };
     var statusText = product?.Status switch
     {
         ProductStatus.Active => "აქტიური",
@@ -303,6 +313,15 @@
                             <div class="d-flex">
                                 <strong class="text-muted me-3" style="min-width: 120px;">სიმაღლე:</strong>
                                 <span>@(product.Height.HasValue ? $"{product.Height:0.##} სმ" : "—")</span>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="d-flex">
+                                <strong class="text-muted me-3" style="min-width: 120px;">ტიპი:</strong>
+                                <span class="badge rounded-pill @statusClass px-3 py-2">
+                                    @typeText
+                                </span>
                             </div>
                         </div>
 
