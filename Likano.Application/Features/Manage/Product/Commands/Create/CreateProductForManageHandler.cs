@@ -36,6 +36,7 @@ namespace Likano.Application.Features.Manage.Product.Commands.Create
                 ProducerCountryId = request.ProducerCountryId,
                 Code = request.Code,
                 SeoTitle = request.SeoTitle,
+                Type = request.Type,
                 ViewCount = 0
             };
 

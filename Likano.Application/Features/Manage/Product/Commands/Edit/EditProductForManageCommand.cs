@@ -1,4 +1,5 @@
 using Likano.Application.DTOs;
+using Likano.Domain.Enums;
 using MediatR;
 
 namespace Likano.Application.Features.Manage.Product.Commands.Edit
@@ -22,5 +23,6 @@ namespace Likano.Application.Features.Manage.Product.Commands.Edit
         public List<int>? DeletedImageIds { get; set; }
         public string? Code { get; set; }
         public string? SeoTitle { get; set; }
+        public ProductType? Type { get; set; }
     }
 }
