@@ -64,17 +64,16 @@
     }
 
     .product-meta-bar {
-        background: rgba(255, 255, 255, 0.95);
-        backdrop-filter: blur(10px);
+        background: rgba(255,255,255,0.95);
         border-radius: 16px;
-        padding: 1rem 1.5rem;
-        margin-bottom: 2rem;
         box-shadow: var(--shadow-sm);
         border: 1px solid var(--border);
+        padding: 0.7rem 1.3rem;
+        margin-bottom: 2rem;
         display: flex;
-        gap: 2rem;
         align-items: center;
-        justify-content: flex-end;
+        justify-content: space-between;
+        gap: 1.5rem;
         flex-wrap: wrap;
     }
 
@@ -2591,6 +2590,19 @@
         user-select: none;
     }
 
+    .meta-breadcrumb,
+    .details-breadcrumb {
+        margin-bottom: 0;
+        padding: 0;
+        background: transparent;
+        font-size: 1.04rem;
+        font-weight: 700;
+        min-width: 0;
+        flex-shrink: 1;
+        flex-grow: 1;
+        max-width: 100%;
+    }
+
         .details-breadcrumb ol {
             display: flex;
             align-items: center;
@@ -2598,6 +2610,7 @@
             list-style: none;
             padding: 0;
             margin: 0;
+            flex-wrap: wrap;
         }
 
         .details-breadcrumb li {
@@ -2608,11 +2621,12 @@
         .details-breadcrumb a {
             color: var(--primary);
             text-decoration: none;
-            padding: 4px 10px;
+            padding: 3px 10px;
             border-radius: 8px;
             transition: background 0.15s, color 0.15s;
             font-weight: 700;
             background: rgba(99,102,241,0.07);
+            white-space: nowrap;
         }
 
             .details-breadcrumb a:hover {
@@ -2632,8 +2646,71 @@
             color: var(--text-secondary);
             font-weight: 900;
             background: none;
-            padding: 4px 10px;
+            padding: 3px 10px;
+            white-space: nowrap;
         }
+
+    .meta-bar-right {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        flex-shrink: 0;
+        font-size: 0.95rem;
+        font-weight: 500;
+        color: #475569; 
+    }
+
+        .meta-bar-right .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            background: none;
+            border-radius: 8px;
+            padding: 5px 14px;
+            font-size: 1.01rem;
+            font-weight: 700;
+            color: var(--primary-dark);
+            box-shadow: none;
+            white-space: nowrap;
+        }
+
+            .meta-bar-right .meta-item svg {
+                width: 16px;
+                height: 16px;
+                fill: #6366f1;
+                opacity: 0.6;
+            }
+
+        .meta-bar-right .meta-sep {
+            color: #cbd5f5;
+            font-weight: 400;
+            margin: 0 2px;
+        }
+
+    @@media (max-width: 900px) {
+        .product-meta-bar
+
+    {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.6rem;
+        padding: 0.6rem;
+    }
+
+    .meta-bar-right {
+        width: 100%;
+        gap: 0.4rem;
+        flex-wrap: wrap;
+    }
+
+    .details-breadcrumb {
+        width: 100%;
+        font-size: 0.9rem;
+    }
+
+    }
+
+    }
 
     @@media (max-width: 600px) {
         .details-breadcrumb {
@@ -2690,40 +2767,88 @@
             box-shadow: var(--shadow-md);
         }
 
+    .details-breadcrumb .breadcrumb-sep svg {
+        display: inline-block;
+        vertical-align: middle;
+    }
+
+    .product-meta-bar {
+        padding: 0.4rem 0.7rem;
+        gap: 0.7rem;
+        font-size: 0.97rem;
+    }
+
+    .details-breadcrumb,
+    .meta-breadcrumb {
+        font-size: 0.95rem;
+    }
+
+        .details-breadcrumb a,
+        .details-breadcrumb .active {
+            padding: 2px 7px;
+            font-size: 0.95rem;
+        }
+
+    .meta-bar-right {
+        font-size: 0.92rem;
+        gap: 0.3rem;
+    }
+
+        .meta-bar-right .meta-item {
+            padding: 2px 8px;
+            font-size: 0.92rem;
+        }
+
+            .meta-bar-right .meta-item svg {
+                width: 13px;
+                height: 13px;
+            }
+
+    .details-breadcrumb .breadcrumb-sep svg {
+        width: 10px;
+        height: 10px;
+    }
+
 </style>
 
 <div class="product-page-wrapper">
     <div class="product-container">
-        <div class="product-meta-bar" style="display:flex;align-items:center;justify-content:space-between;">
-            <div class="meta-breadcrumb-left" style="flex:1;min-width:0;">
-                <nav aria-label="breadcrumb" class="details-breadcrumb" style="margin-bottom:0;">
-                    <ol>
+        <div class="product-meta-bar" style="display:flex;align-items:center;justify-content:space-between;gap:1.5rem;">
+            <nav aria-label="breadcrumb" class="details-breadcrumb meta-breadcrumb">
+                <ol>
+                    <li>
+                        <a href="@Url.Action("Index", "Home")">
+                            <svg width="18" height="18" fill="none" viewBox="0 0 24 24" style="vertical-align:middle;margin-right:6px;">
+                                <path d="M3 12L12 4l9 8" stroke="#6366f1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                <path d="M5 10v10a1 1 0 001 1h4m4 0h4a1 1 0 001-1V10" stroke="#6366f1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                            მთავარი
+                        </a>
+                    </li>
+                    @if (Model.Category != null)
+                    {
                         <li>
-                            <a href="@Url.Action("Index", "Home")">
-                                <svg width="18" height="18" fill="none" viewBox="0 0 24 24" style="vertical-align:middle;margin-right:6px;">
-                                    <path d="M3 12L12 4l9 8" stroke="#6366f1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                                    <path d="M5 10v10a1 1 0 001 1h4m4 0h4a1 1 0 001-1V10" stroke="#6366f1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                            <span class="breadcrumb-sep" style="display:flex;align-items:center;">
+                                <svg width="13" height="13" viewBox="0 0 13 13" style="vertical-align:middle;">
+                                    <path d="M4 2l4.5 4.5L4 11" stroke="#a5b4fc" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" />
                                 </svg>
-                                მთავარი
+                            </span>
+                            <a href="@Url.Action("Index", "Home", new { categoryId = Model.Category.CategoryId })">
+                                @Model.Category.Name
                             </a>
                         </li>
-                        @if (Model.Category != null)
-                        {
-                            <li>
-                                <span class="breadcrumb-sep">/</span>
-                                <a href="@Url.Action("Index", "Home", new { categoryId = Model.Category.CategoryId })">
-                                    @Model.Category.Name
-                                </a>
-                            </li>
-                        }
-                        <li>
-                            <span class="breadcrumb-sep">/</span>
-                            <span class="active">@Model.Title</span>
-                        </li>
-                    </ol>
-                </nav>
-            </div>
-            <div class="meta-bar-right" style="display:flex;align-items:center;gap:1rem;flex-shrink:0;">
+                    }
+                    <li>
+                        <span class="breadcrumb-sep" style="display:flex;align-items:center;">
+                            <svg width="13" height="13" viewBox="0 0 13 13" style="vertical-align:middle;">
+                                <path d="M4 2l4.5 4.5L4 11" stroke="#a5b4fc" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                        </span>
+                        <span class="active">@Model.Title</span>
+                    </li>
+                </ol>
+            </nav>
+            <div class="meta-bar-right">
                 @if (Model.Id.HasValue)
                 {
                     <div class="meta-item">
@@ -2748,7 +2873,7 @@
                     </div>
                 }
             </div>
-            </div>
+        </div>
             <div class="product-grid">
 
                 <div class="gallery-card">
