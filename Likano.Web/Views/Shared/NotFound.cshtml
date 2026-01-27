@@ -151,14 +151,23 @@
         <h1 class="notfound-title">გვერდი არ არსებობს</h1>
         <p class="notfound-desc">სამწუხაროდ, თქვენ მიერ მოთხოვნილი გვერდი ვერ მოიძებნა.</p>
         <div class="notfound-btns">
-            <a href="/" class="btn-notfound btn-primary-notfound">
-                <i class="bi bi-house-door"></i>
-                მთავარ გვერდზე
-            </a>
-            <a href="javascript:history.back()" class="btn-notfound btn-secondary-notfound">
+            <a href="/" id="backBtn" class="btn-notfound btn-secondary-notfound">
                 <i class="bi bi-arrow-left"></i>
                 უკან დაბრუნება
             </a>
         </div>
     </div>
 </div>
+
+<script>
+    (function () {
+        const lastUrl = sessionStorage.getItem('lastInternalUrl');
+        const backBtn = document.getElementById('backBtn');
+
+        if (lastUrl) {
+            backBtn.href = lastUrl;
+        } else {
+            backBtn.href = '/';
+        }
+    })();
+</script>
