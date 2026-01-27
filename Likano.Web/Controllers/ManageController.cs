@@ -1065,6 +1065,14 @@ namespace Likano.Web.Controllers
             ViewBag.Brands = brands;
             ViewBag.Countries = countries;
 
+            ViewBag.ProductTypes = Enum.GetValues(typeof(Likano.Domain.Enums.ProductType))
+            .Cast<Likano.Domain.Enums.ProductType>()
+            .Select(pt => new
+            {
+                Value = (int)pt,
+                Name = pt.ToString()
+            }).ToList();
+
             return View("CreateProduct");
         }
 
