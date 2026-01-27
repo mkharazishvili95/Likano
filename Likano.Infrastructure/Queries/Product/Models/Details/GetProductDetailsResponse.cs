@@ -26,5 +26,6 @@ namespace Likano.Infrastructure.Queries.Product.Models.Details
         public string? Code { get; set; }
         public int? ViewCount { get; set; }
         public ProductType? Type { get; set; }
+        public string? IncludedComponents { get; set; }
     }
 }
