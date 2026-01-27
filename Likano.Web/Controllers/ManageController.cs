@@ -21,6 +21,7 @@ using Likano.Application.Features.Manage.ProducerCountry.Queries.GetAll;
 using Likano.Application.Features.Manage.Product.Commands.ChangeAvailableStatus;
 using Likano.Application.Features.Manage.Product.Commands.ChangeCategory;
 using Likano.Application.Features.Manage.Product.Commands.ChangeStatus;
+using Likano.Application.Features.Manage.Product.Commands.ChangeType;
 using Likano.Application.Features.Manage.Product.Commands.Create;
 using Likano.Application.Features.Manage.Product.Commands.Edit;
 using Likano.Application.Features.Manage.Product.Queries.Get;
@@ -1291,6 +1292,30 @@ namespace Likano.Web.Controllers
             TempData[(resp?.Success ?? false) ? "SuccessMessage" : "ErrorMessage"] = resp?.Message ?? "შეცდომა.";
 
             return RedirectToAction(nameof(Details), new { id });
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ChangeProductType(int productId, ProductType newType)
+        {
+            var apiUrl = $"{_baseUrl}/manage/change-product-type";
+            var command = new ChangeTypeCommand
+            {
+                ProductId = productId,
+                NewType = newType
+            };
+
+            var response = await _httpClient.PostAsJsonAsync(apiUrl, command);
+
+            if (!response.IsSuccessStatusCode)
+            {
+                TempData["ErrorMessage"] = "ტიპის ცვლილება ვერ მოხერხდა";
+                return RedirectToAction("Details", new { id = productId });
+            }
+
+            var result = await response.Content.ReadFromJsonAsync<ChangeTypeResponse>();
+            TempData[(bool)result!.Success ? "SuccessMessage" : "ErrorMessage"] = result.Message;
+
+            return RedirectToAction("Details", new { id = productId });
         }
 
         [HttpPost]
