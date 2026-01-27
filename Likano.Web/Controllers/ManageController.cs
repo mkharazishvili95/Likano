@@ -1081,7 +1081,7 @@ namespace Likano.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> CreateProduct(string title, string? description, decimal? price, int categoryId,
         int? brandId, int? producerCountryId, string? material, decimal? length, decimal? width,
-        decimal? height, string? color, List<IFormFile>? photos, int? mainPhotoIndex, string? code, string? seoTitle, ProductType? productType, CancellationToken ct)
+        decimal? height, string? color, List<IFormFile>? photos, int? mainPhotoIndex, string? code, string? seoTitle, ProductType? productType, string? includedComponents, CancellationToken ct)
         {
             if (string.IsNullOrWhiteSpace(title))
             {
@@ -1134,7 +1134,8 @@ namespace Likano.Web.Controllers
                 Images = photoPayloads,
                 Code = code,
                 SeoTitle = seoTitle,
-                ProductType = productType
+                ProductType = productType,
+                IncludedComponents = includedComponents
             };
 
             var apiUrl = $"{_baseUrl}/manage/product/create";
