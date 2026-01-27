@@ -22,6 +22,6 @@ namespace Likano.Application.Features.Manage.Product.Commands.Create
         public List<PhotoUploadDto>? Images { get; set; }
         public string? Code { get; set; }
         public string? SeoTitle { get; set; }
-        public ProductType? Type { get; set; }
+        public ProductType? ProductType { get; set; }
     }
 }

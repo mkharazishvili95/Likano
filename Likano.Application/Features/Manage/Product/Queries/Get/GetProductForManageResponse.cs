@@ -27,6 +27,6 @@ namespace Likano.Application.Features.Manage.Product.Queries.Get
         public string? ProducerCountryName { get; set; }
         public string? Code { get; set; }
         public string? SeoTitle { get; set; }
-        public ProductType? Type { get; set; }
+        public ProductType? ProductType { get; set; }
     }
 }

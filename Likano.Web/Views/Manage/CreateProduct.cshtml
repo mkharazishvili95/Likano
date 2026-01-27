@@ -106,25 +106,22 @@
                                 <option value="">აირჩიეთ</option>
                                 @foreach (var pt in ViewBag.ProductTypes)
                                 {
-                                    <option value="@pt.Value">
-                                        @{
-                                            string displayName = pt.Name switch
-                                            {
-                                                "BuiltIn" => "ჩასაშენებელი",
-                                                "Freestanding" => "დასადგამი",
-                                                "WallMounted" => "კედელზე დასაკიდი",
-                                                "CounterTop" => "ზედაპირზე / მაგიდაზე დასადგამი",
-                                                "FloorMounted" => "იატაკზე დასადგამი",
-                                                _ => pt.Name
-                                            };
-                                        }
-                                        @displayName
-                                    </option>
+                                    var displayName = pt.Name switch
+                                    {
+                                        "BuiltIn" => "ჩასაშენებელი",
+                                        "Freestanding" => "დასადგამი",
+                                        "WallMounted" => "კედელზე დასაკიდი",
+                                        "CounterTop" => "ზედაპირზე / მაგიდაზე დასადგამი",
+                                        "FloorMounted" => "იატაკზე დასადგამი",
+                                        _ => pt.Name
+                                    };
+
+                                    <option value="@pt.Value">@displayName</option>
                                 }
                             </select>
                             @Html.ValidationMessage("productType", new { @class = "text-danger small d-block mt-1" })
                         </div>
-                    </div>
+                        </div>
                     <div class="col-12 col-lg-4">
                         <div class="d-flex align-items-center justify-content-between mb-2">
                             <label class="form-label small fw-medium mb-0">ფოტოები (მაქს. 10)</label>
