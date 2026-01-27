@@ -39,7 +39,7 @@ namespace Likano.Web.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int? categoryId)
         {
             var categoriesUrl = $"{_baseUrl}/category/all";
             var categoriesRequest = new { Pagination = new { PageNumber = 1, PageSize = 1000 }, SearchString = (string?)null };
@@ -92,6 +92,8 @@ namespace Likano.Web.Controllers
             ViewBag.Categories = new SelectList(categories, "CategoryId", "Name");
             ViewBag.Brands = new SelectList(brands, "BrandId", "Name");
             ViewBag.ProducerCountries = new SelectList(countries, "ProducerCountryId", "Name");
+
+            ViewBag.SelectedCategoryId = categoryId;
 
             return View();
         }

@@ -543,7 +543,7 @@
                                 <i class="bi bi-grid"></i>
                                 კატეგორია
                             </label>
-                            <select name="CategoryId" class="form-select">
+                            <select id="categoryFilter" name="CategoryId" class="form-select">
                                 <option value="">ყველა კატეგორია</option>
                                 @foreach (var c in (SelectList)ViewBag.Categories)
                                 {
@@ -772,5 +772,18 @@
                 }
             });
         });
+    });
+
+    document.addEventListener('DOMContentLoaded', function() {
+        var selectedCategoryId = @(ViewBag.SelectedCategoryId ?? "null");
+        
+        if (selectedCategoryId) {
+            var categorySelect = document.getElementById('categoryFilter'); 
+            if (categorySelect) {
+                categorySelect.value = selectedCategoryId;
+            }
+            
+            applyFilters();
+        }
     });
 </script>
