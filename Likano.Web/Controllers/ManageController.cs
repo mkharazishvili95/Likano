@@ -1211,7 +1211,7 @@ namespace Likano.Web.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> EditProduct(int id, string title,  string? description, decimal? price, int categoryId, int? brandId, int? producerCountryId, 
-            string? material, decimal? length, decimal? width, decimal? height, string? color, List<IFormFile>? photos, int mainPhotoIndex, int? existingMainImageId, string? deletedImageIds, string? code, string? seoTitle, ProductType? productType, CancellationToken ct)
+            string? material, decimal? length, decimal? width, decimal? height, string? color, List<IFormFile>? photos, int mainPhotoIndex, int? existingMainImageId, string? deletedImageIds, string? code, string? seoTitle, ProductType? productType, string? includedComponents, CancellationToken ct)
         {
             if (id <= 0)
             {
@@ -1277,7 +1277,8 @@ namespace Likano.Web.Controllers
                 DeletedImageIds = deletedIds,
                 Code = code,
                 SeoTitle = seoTitle,
-                ProductType = productType
+                ProductType = productType,
+                IncludedComponents = includedComponents
             };
 
             var apiUrl = $"{_baseUrl}/manage/edit/product";

@@ -154,6 +154,13 @@
                             </select>
                             @Html.ValidationMessage("productType", new { @class = "text-danger small d-block mt-1" })
                         </div>
+                        <div class="mb-3">
+                            <label for="includedComponents" class="form-label small fw-medium">კომპლექტაცია</label>
+                            <textarea name="includedComponents" id="includedComponents" class="form-control" rows="3" placeholder="მაგ: სიფონი, ონკანი, სამონტაჟო კომპლექტი...">@product.IncludedComponents</textarea>
+                            <div class="form-text text-muted mt-1 small">
+                                მიუთითეთ პროდუქტთან ერთად მომავალი კომპონენტები/აქსესუარები
+                            </div>
+                        </div>
                     </div>
 
                     <div class="col-12 col-lg-4">
