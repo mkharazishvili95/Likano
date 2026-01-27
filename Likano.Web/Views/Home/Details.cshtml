@@ -2540,6 +2540,72 @@
         box-shadow: 0 1px 6px #6366f122;
     }
 
+    .details-breadcrumb {
+        margin-bottom: 2.2rem;
+        padding: 0;
+        background: transparent;
+        font-size: 1.08rem;
+        font-weight: 700;
+        letter-spacing: -0.2px;
+        user-select: none;
+    }
+
+        .details-breadcrumb ol {
+            display: flex;
+            align-items: center;
+            gap: 0.2rem;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .details-breadcrumb li {
+            display: flex;
+            align-items: center;
+        }
+
+        .details-breadcrumb a {
+            color: var(--primary);
+            text-decoration: none;
+            padding: 4px 10px;
+            border-radius: 8px;
+            transition: background 0.15s, color 0.15s;
+            font-weight: 700;
+            background: rgba(99,102,241,0.07);
+        }
+
+            .details-breadcrumb a:hover {
+                background: linear-gradient(90deg, #6366f1 0%, #ec4899 100%);
+                color: #fff;
+            }
+
+        .details-breadcrumb .breadcrumb-sep {
+            color: #a5b4fc;
+            font-size: 1.1em;
+            margin: 0 2px;
+            font-weight: 400;
+            user-select: none;
+        }
+
+        .details-breadcrumb .active {
+            color: var(--text-secondary);
+            font-weight: 900;
+            background: none;
+            padding: 4px 10px;
+        }
+    @@media (max-width: 600px) {
+        .details-breadcrumb
+
+    {
+        font-size: 0.98rem;
+    }
+
+    .details-breadcrumb a, .details-breadcrumb .active {
+        padding: 3px 7px;
+    }
+
+    }
+
     .spec-label-upgraded {
         font-size: 0.82rem;
         color: #64748b;
@@ -2591,19 +2657,29 @@
 <div class="product-page-wrapper">
     <div class="product-container">
 
-        <nav aria-label="breadcrumb" style="margin-bottom: 1.5rem;">
-            <ol class="breadcrumb" style="background:transparent;padding:0;margin:0;display:flex;gap:0.5rem;font-size:1.05rem;">
-                <li class="breadcrumb-item">
-                    <a href="@Url.Action("Index", "Home")" style="color:var(--primary);text-decoration:none;">მთავარი</a>
+        <nav aria-label="breadcrumb" class="details-breadcrumb">
+            <ol>
+                <li>
+                    <a href="@Url.Action("Index", "Home")">
+                        <svg width="18" height="18" fill="none" viewBox="0 0 24 24" style="vertical-align:middle;margin-right:6px;">
+                            <path d="M3 12L12 4l9 8" stroke="#6366f1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M5 10v10a1 1 0 001 1h4m4 0h4a1 1 0 001-1V10" stroke="#6366f1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                        მთავარი
+                    </a>
                 </li>
                 @if (Model.Category != null)
                 {
-                    <a href="@Url.Action("Index", "Home", new { categoryId = Model.Category.CategoryId })" style="color:var(--primary);text-decoration:none;">
-                        @Model.Category.Name
-                    </a>
+                    <li>
+                        <span class="breadcrumb-sep">/</span>
+                        <a href="@Url.Action("Index", "Home", new { categoryId = Model.Category.CategoryId })">
+                            @Model.Category.Name
+                        </a>
+                    </li>
                 }
-                <li class="breadcrumb-item active" aria-current="page" style="color:var(--text-secondary);font-weight:700;">
-                    @Model.Title
+                <li>
+                    <span class="breadcrumb-sep">/</span>
+                    <span class="active">@Model.Title</span>
                 </li>
             </ol>
         </nav>
