@@ -50,7 +50,7 @@
         z-index: 100;
         display: none;
     }
-    
+
     .product-page-wrapper {
         min-height: 80vh;
         background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
@@ -264,16 +264,13 @@
         }
 
     @@keyframes pulse {
-        0%, 100%
+        0%, 100% {
+            opacity: 1;
+        }
 
-    {
-        opacity: 1;
-    }
-
-    50% {
-        opacity: 0.5;
-    }
-
+        50% {
+            opacity: 0.5;
+        }
     }
 
     .specs-section {
@@ -292,15 +289,16 @@
         margin-bottom: 0.5rem;
     }
 
-    .section-title::before {
-        content: '';
-        display: none;
-    }
-    .section-title .icon {
-        display: inline-flex;
-        align-items: center;
-        margin-right: 0.5rem;
-    }
+        .section-title::before {
+            content: '';
+            display: none;
+        }
+
+        .section-title .icon {
+            display: inline-flex;
+            align-items: center;
+            margin-right: 0.5rem;
+        }
 
         .section-title::before {
             content: '';
@@ -739,9 +737,11 @@
             right: 0.5rem;
         }
     }
+
     .main-image-wrapper {
         position: relative;
     }
+
     .main-image-tooltip {
         display: none;
         position: absolute;
@@ -761,6 +761,7 @@
         transition: opacity 0.2s;
         opacity: 0;
     }
+
     .main-image-wrapper:hover .main-image-tooltip,
     .main-image:focus + .main-image-tooltip {
         display: block;
@@ -870,9 +871,17 @@
             }
 
     @@keyframes floatCard {
-        0% { transform: translateY(0); }
-        50% { transform: translateY(-10px); }
-        100% { transform: translateY(0); }
+        0% {
+            transform: translateY(0);
+        }
+
+        50% {
+            transform: translateY(-10px);
+        }
+
+        100% {
+            transform: translateY(0);
+        }
     }
 
     .similar-products-grid {
@@ -943,17 +952,15 @@
         box-shadow: 0 4px 16px #6366f144;
         animation: accentPulse 2.5s infinite alternate;
     }
+
     @@keyframes accentPulse {
-        0%
+        0% {
+            box-shadow: 0 4px 16px #6366f144;
+        }
 
-    {
-        box-shadow: 0 4px 16px #6366f144;
-    }
-
-    100% {
-        box-shadow: 0 8px 32px #ec489944;
-    }
-
+        100% {
+            box-shadow: 0 8px 32px #ec489944;
+        }
     }
 
     .specs-title {
@@ -1276,9 +1283,11 @@
             right: 0.5rem;
         }
     }
+
     .main-image-wrapper {
         position: relative;
     }
+
     .main-image-tooltip {
         display: none;
         position: absolute;
@@ -1298,6 +1307,7 @@
         transition: opacity 0.2s;
         opacity: 0;
     }
+
     .main-image-wrapper:hover .main-image-tooltip,
     .main-image:focus + .main-image-tooltip {
         display: block;
@@ -1407,9 +1417,17 @@
             }
 
     @@keyframes floatCard {
-        0% { transform: translateY(0); }
-        50% { transform: translateY(-10px); }
-        100% { transform: translateY(0); }
+        0% {
+            transform: translateY(0);
+        }
+
+        50% {
+            transform: translateY(-10px);
+        }
+
+        100% {
+            transform: translateY(0);
+        }
     }
 
     .similar-products-grid {
@@ -1773,9 +1791,11 @@
             right: 0.5rem;
         }
     }
+
     .main-image-wrapper {
         position: relative;
     }
+
     .main-image-tooltip {
         display: none;
         position: absolute;
@@ -1795,6 +1815,7 @@
         transition: opacity 0.2s;
         opacity: 0;
     }
+
     .main-image-wrapper:hover .main-image-tooltip,
     .main-image:focus + .main-image-tooltip {
         display: block;
@@ -1904,9 +1925,17 @@
             }
 
     @@keyframes floatCard {
-        0% { transform: translateY(0); }
-        50% { transform: translateY(-10px); }
-        100% { transform: translateY(0); }
+        0% {
+            transform: translateY(0);
+        }
+
+        50% {
+            transform: translateY(-10px);
+        }
+
+        100% {
+            transform: translateY(0);
+        }
     }
 
     .similar-products-grid {
@@ -2029,6 +2058,7 @@
             border-radius: 12px;
             background: #f3f4f6;
         }
+
     .spec-icon {
         font-size: 1.6rem;
         color: #6366f1;
@@ -2296,9 +2326,11 @@
             right: 0.5rem;
         }
     }
+
     .main-image-wrapper {
         position: relative;
     }
+
     .main-image-tooltip {
         display: none;
         position: absolute;
@@ -2318,6 +2350,7 @@
         transition: opacity 0.2s;
         opacity: 0;
     }
+
     .main-image-wrapper:hover .main-image-tooltip,
     .main-image:focus + .main-image-tooltip {
         display: block;
@@ -2427,9 +2460,17 @@
             }
 
     @@keyframes floatCard {
-        0% { transform: translateY(0); }
-        50% { transform: translateY(-10px); }
-        100% { transform: translateY(0); }
+        0% {
+            transform: translateY(0);
+        }
+
+        50% {
+            transform: translateY(-10px);
+        }
+
+        100% {
+            transform: translateY(0);
+        }
     }
 
     .similar-products-grid {
@@ -2593,17 +2634,15 @@
             background: none;
             padding: 4px 10px;
         }
+
     @@media (max-width: 600px) {
-        .details-breadcrumb
+        .details-breadcrumb {
+            font-size: 0.98rem;
+        }
 
-    {
-        font-size: 0.98rem;
-    }
-
-    .details-breadcrumb a, .details-breadcrumb .active {
-        padding: 3px 7px;
-    }
-
+            .details-breadcrumb a, .details-breadcrumb .active {
+                padding: 3px 7px;
+            }
     }
 
     .spec-label-upgraded {
@@ -2651,483 +2690,483 @@
             box-shadow: var(--shadow-md);
         }
 
-    
 </style>
 
 <div class="product-page-wrapper">
     <div class="product-container">
-
-        <nav aria-label="breadcrumb" class="details-breadcrumb">
-            <ol>
-                <li>
-                    <a href="@Url.Action("Index", "Home")">
-                        <svg width="18" height="18" fill="none" viewBox="0 0 24 24" style="vertical-align:middle;margin-right:6px;">
-                            <path d="M3 12L12 4l9 8" stroke="#6366f1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                            <path d="M5 10v10a1 1 0 001 1h4m4 0h4a1 1 0 001-1V10" stroke="#6366f1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                        </svg>
-                        მთავარი
-                    </a>
-                </li>
-                @if (Model.Category != null)
+        <div class="product-meta-bar" style="display:flex;align-items:center;justify-content:space-between;">
+            <div class="meta-breadcrumb-left" style="flex:1;min-width:0;">
+                <nav aria-label="breadcrumb" class="details-breadcrumb" style="margin-bottom:0;">
+                    <ol>
+                        <li>
+                            <a href="@Url.Action("Index", "Home")">
+                                <svg width="18" height="18" fill="none" viewBox="0 0 24 24" style="vertical-align:middle;margin-right:6px;">
+                                    <path d="M3 12L12 4l9 8" stroke="#6366f1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                    <path d="M5 10v10a1 1 0 001 1h4m4 0h4a1 1 0 001-1V10" stroke="#6366f1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                                მთავარი
+                            </a>
+                        </li>
+                        @if (Model.Category != null)
+                        {
+                            <li>
+                                <span class="breadcrumb-sep">/</span>
+                                <a href="@Url.Action("Index", "Home", new { categoryId = Model.Category.CategoryId })">
+                                    @Model.Category.Name
+                                </a>
+                            </li>
+                        }
+                        <li>
+                            <span class="breadcrumb-sep">/</span>
+                            <span class="active">@Model.Title</span>
+                        </li>
+                    </ol>
+                </nav>
+            </div>
+            <div class="meta-bar-right" style="display:flex;align-items:center;gap:1rem;flex-shrink:0;">
+                @if (Model.Id.HasValue)
                 {
-                    <li>
-                        <span class="breadcrumb-sep">/</span>
-                        <a href="@Url.Action("Index", "Home", new { categoryId = Model.Category.CategoryId })">
-                            @Model.Category.Name
-                        </a>
-                    </li>
+                    <div class="meta-item">
+                        <svg viewBox="0 0 20 20"><path d="M2 10a2 2 0 012-2h2V6a2 2 0 012-2h4a2 2 0 012 2v2h2a2 2 0 012 2v4a2 2 0 01-2 2h-2v2a2 2 0 01-2 2h-4a2 2 0 01-2-2v-2H4a2 2 0 01-2-2v-4zm4-4v2h8V6a1 1 0 00-1-1h-6a1 1 0 00-1 1zm10 4h-2v4h2v-4zm-4 6v-2H8v2h4zm-6-6H4v4h2v-4z" /></svg>
+                        ID - @Model.Id.Value.ToString("N0")
+                    </div>
+                    <span class="meta-sep">|</span>
                 }
-                <li>
-                    <span class="breadcrumb-sep">/</span>
-                    <span class="active">@Model.Title</span>
-                </li>
-            </ol>
-        </nav>
-
-        <div class="product-meta-bar">
-            @if (Model.Id.HasValue)
-            {
-                <div class="meta-item">
-                    <svg viewBox="0 0 20 20"><path d="M2 10a2 2 0 012-2h2V6a2 2 0 012-2h4a2 2 0 012 2v2h2a2 2 0 012 2v4a2 2 0 01-2 2h-2v2a2 2 0 01-2 2h-4a2 2 0 01-2-2v-2H4a2 2 0 01-2-2v-4zm4-4v2h8V6a1 1 0 00-1-1h-6a1 1 0 00-1 1zm10 4h-2v4h2v-4zm-4 6v-2H8v2h4zm-6-6H4v4h2v-4z" /></svg>
-                    ID - @Model.Id.Value.ToString("N0")
-                </div>
-                <span class="meta-sep">|</span>
-            }
-            @if (Model.ViewCount.HasValue)
-            {
-                <div class="meta-item">
-                    <svg viewBox="0 0 20 20"><path d="M10 3c-5 0-9 5.25-9 7s4 7 9 7 9-5.25 9-7-4-7-9-7zm0 12c-3.87 0-7-3.13-7-5s3.13-5 7-5 7 3.13 7 5-3.13 5-7 5zm0-8a3 3 0 100 6 3 3 0 000-6zm0 4.5A1.5 1.5 0 1110 7a1.5 1.5 0 010 3z" /></svg>
-                    @Model.ViewCount.Value.ToString("N0")
-                </div>
-                <span class="meta-sep">|</span>
-            }
-            @if (Model.CreateDate.HasValue)
-            {
-                <div class="meta-item">
-                    <svg viewBox="0 0 20 20"><path d="M6 2a1 1 0 012 0v1h4V2a1 1 0 112 0v1a3 3 0 013 3v10a3 3 0 01-3 3H6a3 3 0 01-3-3V6a3 3 0 013-3V2zm8 4H6a1 1 0 00-1 1v10a1 1 0 001 1h8a1 1 0 001-1V7a1 1 0 00-1-1zm-4 2a1 1 0 110 2 1 1 0 010-2z" /></svg>
-                    @Model.CreateDate.Value.ToString("dd MMM yy, HH:mm", new System.Globalization.CultureInfo("ka-GE"))
-                </div>
-            }
-        </div>
-
-        <div class="product-grid">
-
-            <div class="gallery-card">
-                <h1 class="product-title">@Model.Title</h1>
-                <span class="product-code">📦 კოდი: @Model.Code</span>
-
-                @if (Model.Images != null && Model.Images.Any())
+                @if (Model.ViewCount.HasValue)
                 {
-                    <div class="main-image-wrapper">
-                        <img id="mainImage"
-                             src="@Model.Images.First().FileUrl"
-                             class="main-image"
-                             alt="@Model.Title"
-                             tabindex="0"
-                             onclick="openModal(selectedIndex)"
-                             onmouseover="showTooltip()"
-                             onmouseout="hideTooltip()" />
-                        <div class="main-image-tooltip" id="mainImageTooltip">დააკლიკეთ გასადიდებლად 🔍</div>
+                    <div class="meta-item">
+                        <svg viewBox="0 0 20 20"><path d="M10 3c-5 0-9 5.25-9 7s4 7 9 7 9-5.25 9-7-4-7-9-7zm0 12c-3.87 0-7-3.13-7-5s3.13-5 7-5 7 3.13 7 5-3.13 5-7 5zm0-8a3 3 0 100 6 3 3 0 000-6zm0 4.5A1.5 1.5 0 1110 7a1.5 1.5 0 010 3z" /></svg>
+                        @Model.ViewCount.Value.ToString("N0")
+                    </div>
+                    <span class="meta-sep">|</span>
+                }
+                @if (Model.CreateDate.HasValue)
+                {
+                    <div class="meta-item">
+                        <svg viewBox="0 0 20 20"><path d="M6 2a1 1 0 012 0v1h4V2a1 1 0 112 0v1a3 3 0 013 3v10a3 3 0 01-3 3H6a3 3 0 01-3-3V6a3 3 0 013-3V2zm8 4H6a1 1 0 00-1 1v10a1 1 0 001 1h8a1 1 0 001-1V7a1 1 0 00-1-1zm-4 2a1 1 0 110 2 1 1 0 010-2z" /></svg>
+                        @Model.CreateDate.Value.ToString("dd MMM yy, HH:mm", new System.Globalization.CultureInfo("ka-GE"))
+                    </div>
+                }
+            </div>
+            </div>
+            <div class="product-grid">
+
+                <div class="gallery-card">
+                    <h1 class="product-title">@Model.Title</h1>
+                    <span class="product-code">📦 კოდი: @Model.Code</span>
+
+                    @if (Model.Images != null && Model.Images.Any())
+                    {
+                        <div class="main-image-wrapper">
+                            <img id="mainImage"
+                                 src="@Model.Images.First().FileUrl"
+                                 class="main-image"
+                                 alt="@Model.Title"
+                                 tabindex="0"
+                                 onclick="openModal(selectedIndex)"
+                                 onmouseover="showTooltip()"
+                                 onmouseout="hideTooltip()" />
+                            <div class="main-image-tooltip" id="mainImageTooltip">დააკლიკეთ გასადიდებლად 🔍</div>
+                        </div>
+
+                        @if (Model.Images.Count > 1)
+                        {
+                            <div class="thumbnail-grid">
+                                @for (int i = 0; i < Model.Images.Count; i++)
+                                {
+                                    var img = Model.Images[i];
+                                    <div class="thumbnail @(i == 0 ? "active" : "")"
+                                         data-index="@i"
+                                         onclick="changeImage(@i)">
+                                        <img src="@img.FileUrl" alt="@img.FileName" />
+                                    </div>
+                                }
+                            </div>
+                        }
+                    }
+                    else if (!string.IsNullOrEmpty(Model.ProductImageUrl))
+                    {
+                        <div class="main-image-wrapper">
+                            <img src="@Model.ProductImageUrl" class="main-image" alt="@Model.Title" />
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="no-image">
+                            <img src="https://ik.imagekit.io/rqxdk712q/products/733b35b7-b949-4a3c-9e64-1de44004c88e_NoImageLogo" class="main-image" alt="No image" />
+                        </div>
+                    }
+                </div>
+
+                <div class="info-card">
+
+                    <div class="price-availability">
+                        @if (Model.Price.HasValue && Model.Price > 0)
+                        {
+                            <div class="product-price">@Model.Price.Value.ToString("N2") ₾</div>
+                        }
+                        else
+                        {
+                            <div class="price-missing" style="margin-bottom:0;display:flex;align-items:center;">
+                                <i class="bi bi-exclamation-triangle"></i> ფასი არაა მითითებული
+                            </div>
+                        }
+                        @if (Model.IsAvailable == true)
+                        {
+                            <span class="availability-badge in-stock">მარაგშია</span>
+                        }
+                        else
+                        {
+                            <span class="availability-badge out-of-stock">არ არის მარაგში</span>
+                        }
                     </div>
 
-                    @if (Model.Images.Count > 1)
-                    {
-                        <div class="thumbnail-grid">
-                            @for (int i = 0; i < Model.Images.Count; i++)
+                    <div class="specs-section-upgraded">
+                        <div class="specs-header">
+                            <span class="specs-accent"></span>
+                            <span class="specs-title">
+                                <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
+                                    <path d="M7 20v-9M7 9V4M7 9h10M17 9v11M17 9V4M17 9H7" stroke="#6366f1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                                ტექნიკური მახასიათებლები
+                            </span>
+                        </div>
+                        <div class="specs-grid-upgraded">
+                            @if (Model.Category != null)
                             {
-                                var img = Model.Images[i];
-                                <div class="thumbnail @(i == 0 ? "active" : "")"
-                                     data-index="@i"
-                                     onclick="changeImage(@i)">
-                                    <img src="@img.FileUrl" alt="@img.FileName" />
+                                <div class="spec-card">
+                                    <div class="spec-icon"><i class="bi bi-layers"></i></div>
+                                    <div>
+                                        <div class="spec-label-upgraded">კატეგორია</div>
+                                        <div class="spec-value-upgraded">@Model.Category.Name</div>
+                                    </div>
+                                </div>
+                            }
+                            @if (Model.Brand != null)
+                            {
+                                <div class="spec-card">
+                                    <div class="spec-icon"><i class="bi bi-award"></i></div>
+                                    <div>
+                                        <div class="spec-label-upgraded">ბრენდი</div>
+                                        <div class="spec-value-upgraded">@Model.Brand.Name</div>
+                                    </div>
+                                </div>
+                            }
+                            @if (Model.Type != null)
+                            {
+                                <div class="spec-card">
+                                    <div class="spec-icon"><i class="bi bi-box"></i></div>
+                                    <div>
+                                        <div class="spec-label-upgraded">ტიპი</div>
+                                        <div class="spec-value-upgraded">@getGeorgianType(Model.Type.Value)</div>
+                                    </div>
+                                </div>
+                            }
+                            @if (!string.IsNullOrWhiteSpace(Model.Color))
+                            {
+                                <div class="spec-card">
+                                    <div class="spec-icon"><i class="bi bi-palette"></i></div>
+                                    <div>
+                                        <div class="spec-label-upgraded">ფერი</div>
+                                        <div class="spec-value-upgraded">@Model.Color</div>
+                                    </div>
+                                </div>
+                            }
+                            @if (Model.Length.HasValue)
+                            {
+                                <div class="spec-card">
+                                    <div class="spec-icon"><i class="bi bi-arrows-expand"></i></div>
+                                    <div>
+                                        <div class="spec-label-upgraded">სიგრძე</div>
+                                        <div class="spec-value-upgraded">@Model.Length მ</div>
+                                    </div>
+                                </div>
+                            }
+                            @if (Model.Width.HasValue)
+                            {
+                                <div class="spec-card">
+                                    <div class="spec-icon"><i class="bi bi-arrows-expand"></i></div>
+                                    <div>
+                                        <div class="spec-label-upgraded">სიგანე</div>
+                                        <div class="spec-value-upgraded">@Model.Width მ</div>
+                                    </div>
+                                </div>
+                            }
+                            @if (Model.Height.HasValue)
+                            {
+                                <div class="spec-card">
+                                    <div class="spec-icon"><i class="bi bi-arrows-expand-vertical"></i></div>
+                                    <div>
+                                        <div class="spec-label-upgraded">სიმაღლე</div>
+                                        <div class="spec-value-upgraded">@Model.Height მ</div>
+                                    </div>
+                                </div>
+                            }
+                            @if (Model.ProducerCountry != null)
+                            {
+                                <div class="spec-card">
+                                    <div class="spec-icon"><i class="bi bi-geo-alt"></i></div>
+                                    <div>
+                                        <div class="spec-label-upgraded">მწარმოებელი ქვეყანა</div>
+                                        <div class="spec-value-upgraded">@Model.ProducerCountry.Name</div>
+                                    </div>
                                 </div>
                             }
                         </div>
-                    }
-                }
-                else if (!string.IsNullOrEmpty(Model.ProductImageUrl))
-                {
-                    <div class="main-image-wrapper">
-                        <img src="@Model.ProductImageUrl" class="main-image" alt="@Model.Title" />
                     </div>
-                }
-                else
-                {
-                    <div class="no-image">
-                        <img src="https://ik.imagekit.io/rqxdk712q/products/733b35b7-b949-4a3c-9e64-1de44004c88e_NoImageLogo" class="main-image" alt="No image" />
-                    </div>
-                }
-            </div>
 
-            <div class="info-card">
-
-                <div class="price-availability">
-                    @if (Model.Price.HasValue && Model.Price > 0)
-                    {
-                        <div class="product-price">@Model.Price.Value.ToString("N2") ₾</div>
-                    }
-                    else
-                    {
-                        <div class="price-missing" style="margin-bottom:0;display:flex;align-items:center;">
-                            <i class="bi bi-exclamation-triangle"></i> ფასი არაა მითითებული
-                        </div>
-                    }
-                    @if (Model.IsAvailable == true)
-                    {
-                        <span class="availability-badge in-stock">მარაგშია</span>
-                    }
-                    else
-                    {
-                        <span class="availability-badge out-of-stock">არ არის მარაგში</span>
-                    }
-                </div>
-
-                <div class="specs-section-upgraded">
-                    <div class="specs-header">
-                        <span class="specs-accent"></span>
-                        <span class="specs-title">
-                            <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
-                                <path d="M7 20v-9M7 9V4M7 9h10M17 9v11M17 9V4M17 9H7" stroke="#6366f1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <div class="actions-section-upgraded">
+                        <a href="javascript:history.back()" class="btn-back-upgraded">
+                            <svg width="22" height="22" viewBox="0 0 20 20" fill="none">
+                                <path d="M7.707 16.707a1 1 0 0 1-1.414 0l-6-6a1 1 0 0 1 0-1.414l6-6a1 1 0 0 1 1.414 1.414L3.414 9H15a1 1 0 1 1 0 2H3.414l4.293 4.293a1 1 0 0 1 0 1.414z" fill="currentColor" />
                             </svg>
-                            ტექნიკური მახასიათებლები
-                        </span>
+                            უკან დაბრუნება
+                        </a>
                     </div>
-                    <div class="specs-grid-upgraded">
-                        @if (Model.Category != null)
-                        {
-                            <div class="spec-card">
-                                <div class="spec-icon"><i class="bi bi-layers"></i></div>
-                                <div>
-                                    <div class="spec-label-upgraded">კატეგორია</div>
-                                    <div class="spec-value-upgraded">@Model.Category.Name</div>
-                                </div>
-                            </div>
-                        }
-                        @if (Model.Brand != null)
-                        {
-                            <div class="spec-card">
-                                <div class="spec-icon"><i class="bi bi-award"></i></div>
-                                <div>
-                                    <div class="spec-label-upgraded">ბრენდი</div>
-                                    <div class="spec-value-upgraded">@Model.Brand.Name</div>
-                                </div>
-                            </div>
-                        }
-                        @if (Model.Type != null)
-                        {
-                            <div class="spec-card">
-                                <div class="spec-icon"><i class="bi bi-box"></i></div>
-                                <div>
-                                    <div class="spec-label-upgraded">ტიპი</div>
-                                    <div class="spec-value-upgraded">@getGeorgianType(Model.Type.Value)</div>
-                                </div>
-                            </div>
-                        }
-                        @if (!string.IsNullOrWhiteSpace(Model.Color))
-                        {
-                            <div class="spec-card">
-                                <div class="spec-icon"><i class="bi bi-palette"></i></div>
-                                <div>
-                                    <div class="spec-label-upgraded">ფერი</div>
-                                    <div class="spec-value-upgraded">@Model.Color</div>
-                                </div>
-                            </div>
-                        }
-                        @if (Model.Length.HasValue)
-                        {
-                            <div class="spec-card">
-                                <div class="spec-icon"><i class="bi bi-arrows-expand"></i></div>
-                                <div>
-                                    <div class="spec-label-upgraded">სიგრძე</div>
-                                    <div class="spec-value-upgraded">@Model.Length მ</div>
-                                </div>
-                            </div>
-                        }
-                        @if (Model.Width.HasValue)
-                        {
-                            <div class="spec-card">
-                                <div class="spec-icon"><i class="bi bi-arrows-expand"></i></div>
-                                <div>
-                                    <div class="spec-label-upgraded">სიგანე</div>
-                                    <div class="spec-value-upgraded">@Model.Width მ</div>
-                                </div>
-                            </div>
-                        }
-                        @if (Model.Height.HasValue)
-                        {
-                            <div class="spec-card">
-                                <div class="spec-icon"><i class="bi bi-arrows-expand-vertical"></i></div>
-                                <div>
-                                    <div class="spec-label-upgraded">სიმაღლე</div>
-                                    <div class="spec-value-upgraded">@Model.Height მ</div>
-                                </div>
-                            </div>
-                        }
-                        @if (Model.ProducerCountry != null)
-                        {
-                            <div class="spec-card">
-                                <div class="spec-icon"><i class="bi bi-geo-alt"></i></div>
-                                <div>
-                                    <div class="spec-label-upgraded">მწარმოებელი ქვეყანა</div>
-                                    <div class="spec-value-upgraded">@Model.ProducerCountry.Name</div>
-                                </div>
-                            </div>
-                        }
-                    </div>
-                </div>
-
-                <div class="actions-section-upgraded">
-                    <a href="javascript:history.back()" class="btn-back-upgraded">
-                        <svg width="22" height="22" viewBox="0 0 20 20" fill="none">
-                            <path d="M7.707 16.707a1 1 0 0 1-1.414 0l-6-6a1 1 0 0 1 0-1.414l6-6a1 1 0 0 1 1.414 1.414L3.414 9H15a1 1 0 1 1 0 2H3.414l4.293 4.293a1 1 0 0 1 0 1.414z" fill="currentColor" />
-                        </svg>
-                        უკან დაბრუნება
-                    </a>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
 @if (Model.Images != null && Model.Images.Any())
 {
-    <div id="modalBackdrop" class="modal-backdrop" onclick="closeModal(event)">
-        <div class="modal-content" onclick="event.stopPropagation()">
-            <button class="modal-close" onclick="closeModal(event)">&times;</button>
-            @if (Model.Images.Count > 1)
-            {
-                <button class="modal-arrow left" onclick="prevImage(event)">‹</button>
-                <button class="modal-arrow right" onclick="nextImage(event)">›</button>
-            }
-            <img id="modalMainImage" class="modal-main-image" src="" alt="Product image" />
-            <div id="zoomLens" class="zoom-lens"></div>
-            <div class="modal-thumbnails" id="modalThumbnails"></div>
+        <div id="modalBackdrop" class="modal-backdrop" onclick="closeModal(event)">
+            <div class="modal-content" onclick="event.stopPropagation()">
+                <button class="modal-close" onclick="closeModal(event)">&times;</button>
+                @if (Model.Images.Count > 1)
+                {
+                    <button class="modal-arrow left" onclick="prevImage(event)">‹</button>
+                    <button class="modal-arrow right" onclick="nextImage(event)">›</button>
+                }
+                <img id="modalMainImage" class="modal-main-image" src="" alt="Product image" />
+                <div id="zoomLens" class="zoom-lens"></div>
+                <div class="modal-thumbnails" id="modalThumbnails"></div>
+            </div>
         </div>
-    </div>
 }
 
 @section Scripts {
-    <script>
+        <script>
 
-        const modalMainImage = document.getElementById('modalMainImage');
-        const zoomLens = document.getElementById('zoomLens');
-        const isNoImage = modalMainImage?.closest('.no-image');
+            const modalMainImage = document.getElementById('modalMainImage');
+            const zoomLens = document.getElementById('zoomLens');
+            const isNoImage = modalMainImage?.closest('.no-image');
 
-        if (modalMainImage && zoomLens && !isNoImage) {
-            modalMainImage.addEventListener('mousemove', moveLens);
-            modalMainImage.addEventListener('mouseenter', showLens);
-            modalMainImage.addEventListener('mouseleave', hideLens);
+            if (modalMainImage && zoomLens && !isNoImage) {
+                modalMainImage.addEventListener('mousemove', moveLens);
+                modalMainImage.addEventListener('mouseenter', showLens);
+                modalMainImage.addEventListener('mouseleave', hideLens);
 
 
-            function showLens(e) {
-                zoomLens.style.display = 'block';
-                zoomLens.style.backgroundImage = `url('${modalMainImage.src}')`;
-            }
-
-            function hideLens(e) {
-                zoomLens.style.display = 'none';
-            }
-
-            function moveLens(e) {
-                const rect = modalMainImage.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-
-                const lensSize = zoomLens.offsetWidth / 2;
-                let lensX = x - lensSize;
-                let lensY = y - lensSize;
-
-                lensX = Math.max(0, Math.min(lensX, rect.width - zoomLens.offsetWidth));
-                lensY = Math.max(0, Math.min(lensY, rect.height - zoomLens.offsetHeight));
-
-                zoomLens.style.left = (modalMainImage.offsetLeft + lensX) + 'px';
-                zoomLens.style.top = (modalMainImage.offsetTop + lensY) + 'px';
-
-                const percentX = x / rect.width * 100;
-                const percentY = y / rect.height * 100;
-                zoomLens.style.backgroundPosition = `${percentX}% ${percentY}%`;
-                zoomLens.style.backgroundSize = `${rect.width * 2}px ${rect.height * 2}px`;
-            }
-        }
-
-        document.addEventListener('DOMContentLoaded', function () {
-            const carousel = document.getElementById('similarProductsCarouselFlex');
-            if (!carousel) return;
-            const cards = carousel.querySelectorAll('.similar-product-card');
-            if (cards.length <= 1) return;
-
-            const carouselOuter = carousel.parentElement;
-            const cardWidth = cards[0].offsetWidth + 32; 
-            const visibleCount = Math.floor(carouselOuter.offsetWidth / cardWidth);
-
-            let currentIndex = 0;
-
-            function scrollCarousel() {
-                if (currentIndex >= cards.length - visibleCount) {
-                    currentIndex = 0;
-                } else {
-                    currentIndex++;
-                }
-                carousel.style.transform = `translateX(-${currentIndex * cardWidth}px)`;
-            }
-
-            setInterval(scrollCarousel, 3000);
-        });
-
-        @if (Model.Images != null && Model.Images.Any())
-        {
-            @:var images = [
-            foreach (var img in Model.Images)
-            {
-                @:{ url: '@img.FileUrl', alt: '@img.FileName' },
-            }
-            @:];
-            @:var currentIndex = 0;
-            @:var selectedIndex = 0;
-        }
-
-        function showTooltip() {
-            var tooltip = document.getElementById('mainImageTooltip');
-            if (tooltip) tooltip.style.opacity = '1';
-        }
-        function hideTooltip() {
-            var tooltip = document.getElementById('mainImageTooltip');
-            if (tooltip) tooltip.style.opacity = '0';
-        }
-
-        function changeImage(index) {
-            const mainImg = document.getElementById('mainImage');
-            const thumbnails = document.querySelectorAll('.thumbnail');
-
-            if (mainImg && images && images[index]) {
-                mainImg.src = images[index].url;
-                thumbnails.forEach((thumb, i) => {
-                    thumb.classList.toggle('active', i === index);
-                });
-                selectedIndex = index; 
-            }
-        }
-
-        function openModal(idx) {
-            currentIndex = idx;
-            updateModal();
-            document.getElementById('modalBackdrop').classList.add('active');
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeModal(e) {
-            if (e) e.preventDefault();
-            document.getElementById('modalBackdrop').classList.remove('active');
-            document.body.style.overflow = '';
-        }
-
-        function updateModal() {
-            const mainImg = document.getElementById('modalMainImage');
-            const thumbs = document.getElementById('modalThumbnails');
-
-            if (!mainImg || !thumbs || !images) return;
-
-                mainImg.src = images[currentIndex].url;
-                mainImg.alt = images[currentIndex].alt;
-                if (zoomLens) {
-                    zoomLens.style.backgroundImage = `url('${images[currentIndex].url}')`;
+                function showLens(e) {
+                    zoomLens.style.display = 'block';
+                    zoomLens.style.backgroundImage = `url('${modalMainImage.src}')`;
                 }
 
-            thumbs.innerHTML = '';
-            images.forEach((img, i) => {
-                const thumb = document.createElement('img');
-                thumb.src = img.url;
-                thumb.alt = img.alt;
-                thumb.className = 'modal-thumbnail' + (i === currentIndex ? ' selected' : '');
-                thumb.onclick = () => { currentIndex = i; updateModal(); };
-                thumbs.appendChild(thumb);
+                function hideLens(e) {
+                    zoomLens.style.display = 'none';
+                }
+
+                function moveLens(e) {
+                    const rect = modalMainImage.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+
+                    const lensSize = zoomLens.offsetWidth / 2;
+                    let lensX = x - lensSize;
+                    let lensY = y - lensSize;
+
+                    lensX = Math.max(0, Math.min(lensX, rect.width - zoomLens.offsetWidth));
+                    lensY = Math.max(0, Math.min(lensY, rect.height - zoomLens.offsetHeight));
+
+                    zoomLens.style.left = (modalMainImage.offsetLeft + lensX) + 'px';
+                    zoomLens.style.top = (modalMainImage.offsetTop + lensY) + 'px';
+
+                    const percentX = x / rect.width * 100;
+                    const percentY = y / rect.height * 100;
+                    zoomLens.style.backgroundPosition = `${percentX}% ${percentY}%`;
+                    zoomLens.style.backgroundSize = `${rect.width * 2}px ${rect.height * 2}px`;
+                }
+            }
+
+            document.addEventListener('DOMContentLoaded', function () {
+                const carousel = document.getElementById('similarProductsCarouselFlex');
+                if (!carousel) return;
+                const cards = carousel.querySelectorAll('.similar-product-card');
+                if (cards.length <= 1) return;
+
+                const carouselOuter = carousel.parentElement;
+                const cardWidth = cards[0].offsetWidth + 32;
+                const visibleCount = Math.floor(carouselOuter.offsetWidth / cardWidth);
+
+                let currentIndex = 0;
+
+                function scrollCarousel() {
+                    if (currentIndex >= cards.length - visibleCount) {
+                        currentIndex = 0;
+                    } else {
+                        currentIndex++;
+                    }
+                    carousel.style.transform = `translateX(-${currentIndex * cardWidth}px)`;
+                }
+
+                setInterval(scrollCarousel, 3000);
             });
-        }
 
-        function prevImage(e) {
-            if (e) e.stopPropagation();
-            if (!images) return;
-            currentIndex = (currentIndex - 1 + images.length) % images.length;
-            updateModal();
-        }
-
-        function nextImage(e) {
-            if (e) e.stopPropagation();
-            if (!images) return;
-            currentIndex = (currentIndex + 1) % images.length;
-            updateModal();
-        }
-
-        document.addEventListener('keydown', (e) => {
-            const modal = document.getElementById('modalBackdrop');
-            if (!modal || !modal.classList.contains('active')) return;
-
-            if (e.key === 'Escape') closeModal(e);
-            if (e.key === 'ArrowLeft') prevImage(e);
-            if (e.key === 'ArrowRight') nextImage(e);
-        });
-
-        document.addEventListener('DOMContentLoaded', function () {
-            if (images && images.length > 0) {
-                document.getElementById('mainImage').src = images[0].url;
-                selectedIndex = 0;
+            @if (Model.Images != null && Model.Images.Any())
+            {
+                    @:var images = [
+                    foreach (var img in Model.Images)
+                    {
+                            @:{ url: '@img.FileUrl', alt: '@img.FileName' },
+                    }
+                            @:];
+                    @:var currentIndex = 0;
+                    @:var selectedIndex = 0;
             }
-        });
-    </script>
+
+            function showTooltip() {
+                var tooltip = document.getElementById('mainImageTooltip');
+                if (tooltip) tooltip.style.opacity = '1';
+            }
+            function hideTooltip() {
+                var tooltip = document.getElementById('mainImageTooltip');
+                if (tooltip) tooltip.style.opacity = '0';
+            }
+
+            function changeImage(index) {
+                const mainImg = document.getElementById('mainImage');
+                const thumbnails = document.querySelectorAll('.thumbnail');
+
+                if (mainImg && images && images[index]) {
+                    mainImg.src = images[index].url;
+                    thumbnails.forEach((thumb, i) => {
+                        thumb.classList.toggle('active', i === index);
+                    });
+                    selectedIndex = index;
+                }
+            }
+
+            function openModal(idx) {
+                currentIndex = idx;
+                updateModal();
+                document.getElementById('modalBackdrop').classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+
+            function closeModal(e) {
+                if (e) e.preventDefault();
+                document.getElementById('modalBackdrop').classList.remove('active');
+                document.body.style.overflow = '';
+            }
+
+            function updateModal() {
+                const mainImg = document.getElementById('modalMainImage');
+                const thumbs = document.getElementById('modalThumbnails');
+
+                if (!mainImg || !thumbs || !images) return;
+
+                    mainImg.src = images[currentIndex].url;
+                    mainImg.alt = images[currentIndex].alt;
+                    if (zoomLens) {
+                        zoomLens.style.backgroundImage = `url('${images[currentIndex].url}')`;
+                    }
+
+                thumbs.innerHTML = '';
+                images.forEach((img, i) => {
+                    const thumb = document.createElement('img');
+                    thumb.src = img.url;
+                    thumb.alt = img.alt;
+                    thumb.className = 'modal-thumbnail' + (i === currentIndex ? ' selected' : '');
+                    thumb.onclick = () => { currentIndex = i; updateModal(); };
+                    thumbs.appendChild(thumb);
+                });
+            }
+
+            function prevImage(e) {
+                if (e) e.stopPropagation();
+                if (!images) return;
+                currentIndex = (currentIndex - 1 + images.length) % images.length;
+                updateModal();
+            }
+
+            function nextImage(e) {
+                if (e) e.stopPropagation();
+                if (!images) return;
+                currentIndex = (currentIndex + 1) % images.length;
+                updateModal();
+            }
+
+            document.addEventListener('keydown', (e) => {
+                const modal = document.getElementById('modalBackdrop');
+                if (!modal || !modal.classList.contains('active')) return;
+
+                if (e.key === 'Escape') closeModal(e);
+                if (e.key === 'ArrowLeft') prevImage(e);
+                if (e.key === 'ArrowRight') nextImage(e);
+            });
+
+            document.addEventListener('DOMContentLoaded', function () {
+                if (images && images.length > 0) {
+                    document.getElementById('mainImage').src = images[0].url;
+                    selectedIndex = 0;
+                }
+            });
+        </script>
 }
 
 @{
     var similarProducts = (ViewBag.SimilarProducts as List<SimilarProductDto>)?.Where(x => x.Id != Model.Id).ToList();
 }
-<div class="similar-products-section" style="margin-top:3rem;">
-    <div style="display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem;">
-        <svg width="28" height="28" fill="none" viewBox="0 0 24 24">
-            <circle cx="12" cy="12" r="10" fill="#6366f1" fill-opacity="0.12" />
-            <path d="M8 12h8M12 8v8" stroke="#6366f1" stroke-width="2" stroke-linecap="round" />
-        </svg>
-        <h2 style="margin:0;font-size:1.5rem;font-weight:800;color:#6366f1;letter-spacing:-0.5px;">
-            მსგავსი პროდუქტები
-        </h2>
-        <div style="flex:1;height:2px;background:linear-gradient(90deg,#6366f1 0%,#ec4899 100%);border-radius:2px;"></div>
-    </div>
-    @if (similarProducts != null && similarProducts.Any())
-    {
-        <div class="similar-products-carousel-outer">
-            <div class="similar-products-carousel" id="similarProductsCarouselFlex">
-                @foreach (var product in similarProducts)
-                {
-                    <div class="similar-product-card">
-                        @if (string.IsNullOrWhiteSpace(product.ImageUrl))
-                        {
-                            <div class="no-image">
-                                <img src="https://ik.imagekit.io/rqxdk712q/products/733b35b7-b949-4a3c-9e64-1de44004c88e_NoImageLogo" class="main-image" alt="No image" />
-                            </div>
-                        }
-                        else
-                        {
-                            <img src="@product.ImageUrl" class="similar-product-image" alt="@product.Title" />
-                        }
-                        <h5>@product.Title</h5>
-                        @if (product.Price != null && product.Price > 0)
-                        {
-                            <div class="price-tag" style="color:#6366f1;font-weight:700;font-size:1.05rem;">
-                                @product.Price <span style="font-size:1.1rem;">₾</span>
-                            </div>
-                        }
-                        else
-                        {
-                            <div class="price-missing"> <i class="bi bi-exclamation-circle"></i> ფასი არაა მითითებული </div>
-                        }
-                        <a href="@Url.Action("ProductDetails", "Home", new { id = product.Id })" class="btn btn-primary" style="background:linear-gradient(90deg,#6366f1 0%,#ec4899 100%);border:none;">
-                            ნახვა
-                        </a>
-                    </div>
-                }
-            </div>
+    <div class="similar-products-section" style="margin-top:3rem;">
+        <div style="display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem;">
+            <svg width="28" height="28" fill="none" viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="10" fill="#6366f1" fill-opacity="0.12" />
+                <path d="M8 12h8M12 8v8" stroke="#6366f1" stroke-width="2" stroke-linecap="round" />
+            </svg>
+            <h2 style="margin:0;font-size:1.5rem;font-weight:800;color:#6366f1;letter-spacing:-0.5px;">
+                მსგავსი პროდუქტები
+            </h2>
+            <div style="flex:1;height:2px;background:linear-gradient(90deg,#6366f1 0%,#ec4899 100%);border-radius:2px;"></div>
         </div>
-    }
-    else
-    {
-        <div style="color:#64748b;font-size:1.1rem;">მსგავსი პროდუქტები ვერ მოიძებნა.</div>
-    }
-</div>
+        @if (similarProducts != null && similarProducts.Any())
+        {
+            <div class="similar-products-carousel-outer">
+                <div class="similar-products-carousel" id="similarProductsCarouselFlex">
+                    @foreach (var product in similarProducts)
+                    {
+                        <div class="similar-product-card">
+                            @if (string.IsNullOrWhiteSpace(product.ImageUrl))
+                            {
+                                <div class="no-image">
+                                    <img src="https://ik.imagekit.io/rqxdk712q/products/733b35b7-b949-4a3c-9e64-1de44004c88e_NoImageLogo" class="main-image" alt="No image" />
+                                </div>
+                            }
+                            else
+                            {
+                                <img src="@product.ImageUrl" class="similar-product-image" alt="@product.Title" />
+                            }
+                            <h5>@product.Title</h5>
+                            @if (product.Price != null && product.Price > 0)
+                            {
+                                <div class="price-tag" style="color:#6366f1;font-weight:700;font-size:1.05rem;">
+                                    @product.Price <span style="font-size:1.1rem;">₾</span>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="price-missing"> <i class="bi bi-exclamation-circle"></i> ფასი არაა მითითებული </div>
+                            }
+                            <a href="@Url.Action("ProductDetails", "Home", new { id = product.Id })" class="btn btn-primary" style="background:linear-gradient(90deg,#6366f1 0%,#ec4899 100%);border:none;">
+                                ნახვა
+                            </a>
+                        </div>
+                    }
+                </div>
+            </div>
+        }
+        else
+        {
+            <div style="color:#64748b;font-size:1.1rem;">მსგავსი პროდუქტები ვერ მოიძებნა.</div>
+        }
+    </div>
