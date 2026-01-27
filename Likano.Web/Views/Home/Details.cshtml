@@ -3138,98 +3138,118 @@
                 setInterval(scrollCarousel, 3000);
             });
 
-            @if (Model.Images != null && Model.Images.Any())
-            {
-                    @:var images = [
-                    foreach (var img in Model.Images)
-                    {
-                            @:{ url: '@img.FileUrl', alt: '@img.FileName' },
-                    }
-                            @:];
-                    @:var currentIndex = 0;
-                    @:var selectedIndex = 0;
-            }
+        const productId = '@Model.Id';
+        const storageKey = `product_selected_image_${productId}`;
 
-            function showTooltip() {
-                var tooltip = document.getElementById('mainImageTooltip');
-                if (tooltip) tooltip.style.opacity = '1';
-            }
-            function hideTooltip() {
-                var tooltip = document.getElementById('mainImageTooltip');
-                if (tooltip) tooltip.style.opacity = '0';
-            }
+        let selectedIndex = parseInt(localStorage.getItem(storageKey)) || 0;
+        let currentIndex = selectedIndex;
 
-            function changeImage(index) {
-                const mainImg = document.getElementById('mainImage');
-                const thumbnails = document.querySelectorAll('.thumbnail');
-
-                if (mainImg && images && images[index]) {
-                    mainImg.src = images[index].url;
-                    thumbnails.forEach((thumb, i) => {
-                        thumb.classList.toggle('active', i === index);
-                    });
-                    selectedIndex = index;
+        @if (Model.Images != null && Model.Images.Any())
+        {
+                @:var images = [
+                foreach (var img in Model.Images)
+                {
+                        @:{ url: '@img.FileUrl', alt: '@img.FileName' },
                 }
-            }
+                    @:];
+        }
 
-            function openModal(idx) {
-                currentIndex = idx;
-                updateModal();
-                document.getElementById('modalBackdrop').classList.add('active');
-                document.body.style.overflow = 'hidden';
-            }
-
-            function closeModal(e) {
-                if (e) e.preventDefault();
-                document.getElementById('modalBackdrop').classList.remove('active');
-                document.body.style.overflow = '';
-            }
-
-            function updateModal() {
-                const mainImg = document.getElementById('modalMainImage');
-                const thumbs = document.getElementById('modalThumbnails');
-
-                if (!mainImg || !thumbs || !images) return;
-
-                    mainImg.src = images[currentIndex].url;
-                    mainImg.alt = images[currentIndex].alt;
-                    if (zoomLens) {
-                        zoomLens.style.backgroundImage = `url('${images[currentIndex].url}')`;
-                    }
-
-                thumbs.innerHTML = '';
-                images.forEach((img, i) => {
-                    const thumb = document.createElement('img');
-                    thumb.src = img.url;
-                    thumb.alt = img.alt;
-                    thumb.className = 'modal-thumbnail' + (i === currentIndex ? ' selected' : '');
-                    thumb.onclick = () => { currentIndex = i; updateModal(); };
-                    thumbs.appendChild(thumb);
+        document.addEventListener('DOMContentLoaded', function () {
+            if (images && images.length > 0) {
+                document.getElementById('mainImage').src = images[selectedIndex].url;
+                const thumbnails = document.querySelectorAll('.thumbnail');
+                thumbnails.forEach((thumb, i) => {
+                    thumb.classList.toggle('active', i === selectedIndex);
                 });
             }
+        });
 
-            function prevImage(e) {
-                if (e) e.stopPropagation();
-                if (!images) return;
-                currentIndex = (currentIndex - 1 + images.length) % images.length;
-                updateModal();
+        function showTooltip() {
+            var tooltip = document.getElementById('mainImageTooltip');
+            if (tooltip) tooltip.style.opacity = '1';
+        }
+
+        function hideTooltip() {
+            var tooltip = document.getElementById('mainImageTooltip');
+            if (tooltip) tooltip.style.opacity = '0';
+        }
+
+        function changeImage(index) {
+            const mainImg = document.getElementById('mainImage');
+            const thumbnails = document.querySelectorAll('.thumbnail');
+
+            if (mainImg && images && images[index]) {
+                mainImg.src = images[index].url;
+                thumbnails.forEach((thumb, i) => {
+                    thumb.classList.toggle('active', i === index);
+                });
+                selectedIndex = index;
+                localStorage.setItem(storageKey, index);
+            }
+        }
+
+        function openModal(idx) {
+            currentIndex = idx;
+            updateModal();
+            document.getElementById('modalBackdrop').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal(e) {
+            if (e) e.preventDefault();
+
+            selectedIndex = currentIndex;
+            changeImage(selectedIndex);
+
+            document.getElementById('modalBackdrop').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        function updateModal() {
+            const mainImg = document.getElementById('modalMainImage');
+            const thumbs = document.getElementById('modalThumbnails');
+
+            if (!mainImg || !thumbs || !images) return;
+
+            mainImg.src = images[currentIndex].url;
+            mainImg.alt = images[currentIndex].alt;
+            if (typeof zoomLens !== 'undefined' && zoomLens) {
+                zoomLens.style.backgroundImage = `url('${images[currentIndex].url}')`;
             }
 
-            function nextImage(e) {
-                if (e) e.stopPropagation();
-                if (!images) return;
-                currentIndex = (currentIndex + 1) % images.length;
-                updateModal();
-            }
-
-            document.addEventListener('keydown', (e) => {
-                const modal = document.getElementById('modalBackdrop');
-                if (!modal || !modal.classList.contains('active')) return;
-
-                if (e.key === 'Escape') closeModal(e);
-                if (e.key === 'ArrowLeft') prevImage(e);
-                if (e.key === 'ArrowRight') nextImage(e);
+            thumbs.innerHTML = '';
+            images.forEach((img, i) => {
+                const thumb = document.createElement('img');
+                thumb.src = img.url;
+                thumb.alt = img.alt;
+                thumb.className = 'modal-thumbnail' + (i === currentIndex ? ' selected' : '');
+                thumb.onclick = () => { currentIndex = i; updateModal(); };
+                thumbs.appendChild(thumb);
             });
+        }
+
+        function prevImage(e) {
+            if (e) e.stopPropagation();
+            if (!images) return;
+            currentIndex = (currentIndex - 1 + images.length) % images.length;
+            updateModal();
+        }
+
+        function nextImage(e) {
+            if (e) e.stopPropagation();
+            if (!images) return;
+            currentIndex = (currentIndex + 1) % images.length;
+            updateModal();
+        }
+
+        document.addEventListener('keydown', (e) => {
+            const modal = document.getElementById('modalBackdrop');
+            if (!modal || !modal.classList.contains('active')) return;
+
+            if (e.key === 'Escape') closeModal(e);
+            if (e.key === 'ArrowLeft') prevImage(e);
+            if (e.key === 'ArrowRight') nextImage(e);
+        });
 
             document.addEventListener('DOMContentLoaded', function () {
                 if (images && images.length > 0) {
