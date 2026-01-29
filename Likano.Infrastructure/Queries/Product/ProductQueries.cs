@@ -1,5 +1,5 @@
-﻿using Likano.Application.Interfaces;
-using Likano.Domain.Entities;
+﻿using Likano.Application.Helpers;
+using Likano.Application.Interfaces;
 using Likano.Domain.Enums;
 using Likano.Infrastructure.Queries.Product.Models;
 using Likano.Infrastructure.Queries.Product.Models.Details;
@@ -13,7 +13,7 @@ namespace Likano.Infrastructure.Queries.Product
     {
         readonly IStatisticRepository _statisticRepository;
         readonly ILogger<ProductQueries> _logger;
-        public ProductQueries(IConfiguration configuration, IStatisticRepository statisticRepository, ILogger<ProductQueries> logger) : base(configuration) 
+        public ProductQueries(IConfiguration configuration, IStatisticRepository statisticRepository, ILogger<ProductQueries> logger) : base(configuration)
         {
             _statisticRepository = statisticRepository;
             _logger = logger;
@@ -76,7 +76,8 @@ namespace Likano.Infrastructure.Queries.Product
             ORDER BY {orderBy}
             OFFSET {offset} ROWS FETCH NEXT {request.Pagination.PageSize} ROWS ONLY";
 
-            var items = await GetMany(commandText, reader => {
+            var items = await GetMany(commandText, reader =>
+            {
                 var categoryIsActiveOrdinal = reader.GetOrdinal("CategoryIsActive");
                 var categoryIdOrdinal = reader.GetOrdinal("CategoryId");
                 bool? categoryIsActive = reader.IsDBNull(categoryIsActiveOrdinal) ? (bool?)null : reader.GetBoolean(categoryIsActiveOrdinal);
@@ -93,10 +94,12 @@ namespace Likano.Infrastructure.Queries.Product
                 if (brandId.HasValue && (brandIsActive == null || brandIsActive == false))
                     brandId = null;
 
+                var title = reader.IsDBNull(reader.GetOrdinal("Title")) ? null : reader.GetString(reader.GetOrdinal("Title"));
+
                 return new GetAllProductsForSearchItemsResponse
                 {
                     Id = reader.IsDBNull(reader.GetOrdinal("Id")) ? null : reader.GetInt32(reader.GetOrdinal("Id")),
-                    Title = reader.IsDBNull(reader.GetOrdinal("Title")) ? null : reader.GetString(reader.GetOrdinal("Title")),
+                    Title = title,
                     Description = reader.IsDBNull(reader.GetOrdinal("Description")) ? null : reader.GetString(reader.GetOrdinal("Description")),
                     Code = reader.IsDBNull(reader.GetOrdinal("Code")) ? null : reader.GetString(reader.GetOrdinal("Code")),
                     Price = reader.IsDBNull(reader.GetOrdinal("Price")) ? null : reader.GetDecimal(reader.GetOrdinal("Price")),
@@ -127,7 +130,8 @@ namespace Likano.Infrastructure.Queries.Product
                         Name = reader.IsDBNull(reader.GetOrdinal("BrandTitle")) ? null : reader.GetString(reader.GetOrdinal("BrandTitle")),
                         Logo = reader.IsDBNull(reader.GetOrdinal("BrandLogo")) ? null : reader.GetString(reader.GetOrdinal("BrandLogo"))
                     },
-                    HasPrice = !reader.IsDBNull(reader.GetOrdinal("Price")) && reader.GetDecimal(reader.GetOrdinal("Price")) > 0
+                    HasPrice = !reader.IsDBNull(reader.GetOrdinal("Price")) && reader.GetDecimal(reader.GetOrdinal("Price")) > 0,
+                    SeoTitle = UrlGenerator.Transliterate(title)
                 };
             });
 
@@ -213,7 +217,8 @@ namespace Likano.Infrastructure.Queries.Product
             LEFT JOIN Brands b ON b.Id = p.BrandId
             WHERE p.Id = {request.ProductId}";
 
-            var items = await GetMany(commandText, reader => {
+            var items = await GetMany(commandText, reader =>
+            {
                 var brandIsActiveOrdinal = reader.GetOrdinal("BrandIsActive");
                 var brandIdOrdinal = reader.GetOrdinal("BrandId");
                 bool? brandIsActive = reader.IsDBNull(brandIsActiveOrdinal) ? (bool?)null : reader.GetBoolean(brandIsActiveOrdinal);
@@ -228,10 +233,12 @@ namespace Likano.Infrastructure.Queries.Product
                 if (categoryId.HasValue && (categoryIsActive == null || categoryIsActive == false))
                     categoryId = null;
 
+                var title = reader.IsDBNull(reader.GetOrdinal("Title")) ? null : reader.GetString(reader.GetOrdinal("Title"));
+
                 return new GetProductDetailsResponse
                 {
                     Id = reader.IsDBNull(reader.GetOrdinal("Id")) ? null : reader.GetInt32(reader.GetOrdinal("Id")),
-                    Title = reader.IsDBNull(reader.GetOrdinal("Title")) ? null : reader.GetString(reader.GetOrdinal("Title")),
+                    Title = title,
                     Description = reader.IsDBNull(reader.GetOrdinal("Description")) ? null : reader.GetString(reader.GetOrdinal("Description")),
                     IncludedComponents = reader.IsDBNull(reader.GetOrdinal("IncludedComponents")) ? null : reader.GetString(reader.GetOrdinal("IncludedComponents")),
                     Price = reader.IsDBNull(reader.GetOrdinal("Price")) ? null : reader.GetDecimal(reader.GetOrdinal("Price")),
@@ -265,6 +272,7 @@ namespace Likano.Infrastructure.Queries.Product
                         Logo = reader.IsDBNull(reader.GetOrdinal("BrandLogo")) ? null : reader.GetString(reader.GetOrdinal("BrandLogo"))
                     },
                     ViewCount = reader.IsDBNull(reader.GetOrdinal("ViewCount")) ? null : reader.GetInt32(reader.GetOrdinal("ViewCount")),
+                    SeoTitle = UrlGenerator.Transliterate(title)
                 };
             });
 
@@ -379,7 +387,8 @@ namespace Likano.Infrastructure.Queries.Product
             AND p.Status = {(int)ProductStatus.Active}
             ORDER BY NEWID() ";
 
-            var items = await GetMany(commandText, reader => {
+            var items = await GetMany(commandText, reader =>
+            {
                 var categoryIsActiveOrdinal = reader.GetOrdinal("CategoryIsActive");
                 var categoryIdOrdinal = reader.GetOrdinal("CategoryId");
                 bool? categoryIsActive = reader.IsDBNull(categoryIsActiveOrdinal) ? (bool?)null : reader.GetBoolean(categoryIsActiveOrdinal);
@@ -394,10 +403,12 @@ namespace Likano.Infrastructure.Queries.Product
                 if (brandId.HasValue && (brandIsActive == null || brandIsActive == false))
                     brandId = null;
 
+                var title = reader.IsDBNull(reader.GetOrdinal("Title")) ? null : reader.GetString(reader.GetOrdinal("Title"));
+
                 return new GetSimilarProductsItemsResponse
                 {
                     Id = reader.IsDBNull(reader.GetOrdinal("Id")) ? null : reader.GetInt32(reader.GetOrdinal("Id")),
-                    Title = reader.IsDBNull(reader.GetOrdinal("Title")) ? null : reader.GetString(reader.GetOrdinal("Title")),
+                    Title = title,
                     Description = reader.IsDBNull(reader.GetOrdinal("Description")) ? null : reader.GetString(reader.GetOrdinal("Description")),
                     Price = reader.IsDBNull(reader.GetOrdinal("Price")) ? null : reader.GetDecimal(reader.GetOrdinal("Price")),
                     IsAvailable = reader.IsDBNull(reader.GetOrdinal("IsAvailable")) ? null : reader.GetBoolean(reader.GetOrdinal("IsAvailable")),
@@ -427,7 +438,8 @@ namespace Likano.Infrastructure.Queries.Product
                         BrandId = reader.GetInt32(reader.GetOrdinal("BrandId")),
                         Name = reader.IsDBNull(reader.GetOrdinal("BrandTitle")) ? null : reader.GetString(reader.GetOrdinal("BrandTitle")),
                         Logo = reader.IsDBNull(reader.GetOrdinal("BrandLogo")) ? null : reader.GetString(reader.GetOrdinal("BrandLogo"))
-                    }
+                    },
+                    SeoTitle = UrlGenerator.Transliterate(title)
                 };
             });
 
@@ -436,7 +448,7 @@ namespace Likano.Infrastructure.Queries.Product
             response.Message = "OK";
             response.TotalCount = items.Count;
             response.Items = items;
-            return response;    
+            return response;
         }
     }
 }
