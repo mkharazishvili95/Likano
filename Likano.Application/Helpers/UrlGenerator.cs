@@ -20,6 +20,7 @@
                 result = result.Replace('/', '-');
                 result = result.Replace('\\', '-');
                 result = result.Replace('#', '-');
+                result = result.Replace('%', '-');
             }
             return result;
         }
