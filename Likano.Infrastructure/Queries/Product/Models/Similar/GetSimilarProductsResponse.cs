@@ -27,5 +27,6 @@ namespace Likano.Infrastructure.Queries.Product.Models.Similar
         public int? BrandId { get; set; }
         public BrandDtoForSearch? Brand { get; set; }
         public string? Code { get; set; }
+        public string? SeoTitle { get; set; }
     }
 }

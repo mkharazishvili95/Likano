@@ -30,6 +30,7 @@ namespace Likano.Infrastructure.Queries.Product.Models
         public List<ImageDtoForSearch>? Images { get; set; }
         public string? Code { get; set; }
         public bool? HasPrice { get; set; }
+        public string? SeoTitle { get; set; }
     }
 
     public class BrandDtoForSearch
