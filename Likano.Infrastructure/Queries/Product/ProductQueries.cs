@@ -364,11 +364,13 @@ namespace Likano.Infrastructure.Queries.Product
             p.CategoryId,
             c.Name AS CategoryTitle,
             c.Logo AS CategoryLogo,
+            c.IsActive AS CategoryIsActive,
             p.ProducerCountryId,
             pc.Name AS ProducerCountryName,
             p.BrandId,
             b.Name AS BrandTitle,
-            b.Logo AS BrandLogo
+            b.Logo AS BrandLogo,
+            b.IsActive AS BrandIsActive
             FROM Products p
             LEFT JOIN Categories c ON c.Id = p.CategoryId
             LEFT JOIN ProducerCountries pc ON pc.Id = p.ProducerCountryId
@@ -377,40 +379,56 @@ namespace Likano.Infrastructure.Queries.Product
             AND p.Status = {(int)ProductStatus.Active}
             ORDER BY NEWID() ";
 
-            var items = await GetMany(commandText, reader => new GetSimilarProductsItemsResponse
-            {
-                Id = reader.IsDBNull(reader.GetOrdinal("Id")) ? null : reader.GetInt32(reader.GetOrdinal("Id")),
-                Title = reader.IsDBNull(reader.GetOrdinal("Title")) ? null : reader.GetString(reader.GetOrdinal("Title")),
-                Description = reader.IsDBNull(reader.GetOrdinal("Description")) ? null : reader.GetString(reader.GetOrdinal("Description")),
-                Price = reader.IsDBNull(reader.GetOrdinal("Price")) ? null : reader.GetDecimal(reader.GetOrdinal("Price")),
-                IsAvailable = reader.IsDBNull(reader.GetOrdinal("IsAvailable")) ? null : reader.GetBoolean(reader.GetOrdinal("IsAvailable")),
-                MainImage = reader.IsDBNull(reader.GetOrdinal("ImageUrl")) ? null : reader.GetString(reader.GetOrdinal("ImageUrl")),
-                CreateDate = reader.IsDBNull(reader.GetOrdinal("CreateDate")) ? null : reader.GetDateTime(reader.GetOrdinal("CreateDate")),
-                Length = reader.IsDBNull(reader.GetOrdinal("Length")) ? null : reader.GetDecimal(reader.GetOrdinal("Length")),
-                Width = reader.IsDBNull(reader.GetOrdinal("Width")) ? null : reader.GetDecimal(reader.GetOrdinal("Width")),
-                Height = reader.IsDBNull(reader.GetOrdinal("Height")) ? null : reader.GetDecimal(reader.GetOrdinal("Height")),
-                Color = reader.IsDBNull(reader.GetOrdinal("Color")) ? null : reader.GetString(reader.GetOrdinal("Color")),
-                Code = reader.IsDBNull(reader.GetOrdinal("Code")) ? null : reader.GetString(reader.GetOrdinal("Code")),
-                CategoryId = reader.IsDBNull(reader.GetOrdinal("CategoryId")) ? null : reader.GetInt32(reader.GetOrdinal("CategoryId")),
-                Category = reader.IsDBNull(reader.GetOrdinal("CategoryId")) ? null : new CategoryDtoForSearch
+            var items = await GetMany(commandText, reader => {
+                var categoryIsActiveOrdinal = reader.GetOrdinal("CategoryIsActive");
+                var categoryIdOrdinal = reader.GetOrdinal("CategoryId");
+                bool? categoryIsActive = reader.IsDBNull(categoryIsActiveOrdinal) ? (bool?)null : reader.GetBoolean(categoryIsActiveOrdinal);
+                int? categoryId = reader.IsDBNull(categoryIdOrdinal) ? null : reader.GetInt32(categoryIdOrdinal);
+                if (categoryId.HasValue && (categoryIsActive == null || categoryIsActive == false))
+                    categoryId = null;
+
+                var brandIsActiveOrdinal = reader.GetOrdinal("BrandIsActive");
+                var brandIdOrdinal = reader.GetOrdinal("BrandId");
+                bool? brandIsActive = reader.IsDBNull(brandIsActiveOrdinal) ? (bool?)null : reader.GetBoolean(brandIsActiveOrdinal);
+                int? brandId = reader.IsDBNull(brandIdOrdinal) ? null : reader.GetInt32(brandIdOrdinal);
+                if (brandId.HasValue && (brandIsActive == null || brandIsActive == false))
+                    brandId = null;
+
+                return new GetSimilarProductsItemsResponse
                 {
-                    CategoryId = reader.GetInt32(reader.GetOrdinal("CategoryId")),
-                    Name = reader.IsDBNull(reader.GetOrdinal("CategoryTitle")) ? null : reader.GetString(reader.GetOrdinal("CategoryTitle")),
-                    Logo = reader.IsDBNull(reader.GetOrdinal("CategoryLogo")) ? null : reader.GetString(reader.GetOrdinal("CategoryLogo"))
-                },
-                ProducerCountryId = reader.IsDBNull(reader.GetOrdinal("ProducerCountryId")) ? null : reader.GetInt32(reader.GetOrdinal("ProducerCountryId")),
-                ProducerCountry = reader.IsDBNull(reader.GetOrdinal("ProducerCountryId")) ? null : new ProducerCountryDtoForSearch
-                {
-                    ProducerCountryId = reader.GetInt32(reader.GetOrdinal("ProducerCountryId")),
-                    Name = reader.IsDBNull(reader.GetOrdinal("ProducerCountryName")) ? null : reader.GetString(reader.GetOrdinal("ProducerCountryName"))
-                },
-                BrandId = reader.IsDBNull(reader.GetOrdinal("BrandId")) ? null : reader.GetInt32(reader.GetOrdinal("BrandId")),
-                Brand = reader.IsDBNull(reader.GetOrdinal("BrandId")) ? null : new BrandDtoForSearch
-                {
-                    BrandId = reader.GetInt32(reader.GetOrdinal("BrandId")),
-                    Name = reader.IsDBNull(reader.GetOrdinal("BrandTitle")) ? null : reader.GetString(reader.GetOrdinal("BrandTitle")),
-                    Logo = reader.IsDBNull(reader.GetOrdinal("BrandLogo")) ? null : reader.GetString(reader.GetOrdinal("BrandLogo"))
-                }
+                    Id = reader.IsDBNull(reader.GetOrdinal("Id")) ? null : reader.GetInt32(reader.GetOrdinal("Id")),
+                    Title = reader.IsDBNull(reader.GetOrdinal("Title")) ? null : reader.GetString(reader.GetOrdinal("Title")),
+                    Description = reader.IsDBNull(reader.GetOrdinal("Description")) ? null : reader.GetString(reader.GetOrdinal("Description")),
+                    Price = reader.IsDBNull(reader.GetOrdinal("Price")) ? null : reader.GetDecimal(reader.GetOrdinal("Price")),
+                    IsAvailable = reader.IsDBNull(reader.GetOrdinal("IsAvailable")) ? null : reader.GetBoolean(reader.GetOrdinal("IsAvailable")),
+                    MainImage = reader.IsDBNull(reader.GetOrdinal("ImageUrl")) ? null : reader.GetString(reader.GetOrdinal("ImageUrl")),
+                    CreateDate = reader.IsDBNull(reader.GetOrdinal("CreateDate")) ? null : reader.GetDateTime(reader.GetOrdinal("CreateDate")),
+                    Length = reader.IsDBNull(reader.GetOrdinal("Length")) ? null : reader.GetDecimal(reader.GetOrdinal("Length")),
+                    Width = reader.IsDBNull(reader.GetOrdinal("Width")) ? null : reader.GetDecimal(reader.GetOrdinal("Width")),
+                    Height = reader.IsDBNull(reader.GetOrdinal("Height")) ? null : reader.GetDecimal(reader.GetOrdinal("Height")),
+                    Color = reader.IsDBNull(reader.GetOrdinal("Color")) ? null : reader.GetString(reader.GetOrdinal("Color")),
+                    Code = reader.IsDBNull(reader.GetOrdinal("Code")) ? null : reader.GetString(reader.GetOrdinal("Code")),
+                    CategoryId = categoryId,
+                    Category = categoryId == null ? null : new CategoryDtoForSearch
+                    {
+                        CategoryId = reader.GetInt32(reader.GetOrdinal("CategoryId")),
+                        Name = reader.IsDBNull(reader.GetOrdinal("CategoryTitle")) ? null : reader.GetString(reader.GetOrdinal("CategoryTitle")),
+                        Logo = reader.IsDBNull(reader.GetOrdinal("CategoryLogo")) ? null : reader.GetString(reader.GetOrdinal("CategoryLogo"))
+                    },
+                    ProducerCountryId = reader.IsDBNull(reader.GetOrdinal("ProducerCountryId")) ? null : reader.GetInt32(reader.GetOrdinal("ProducerCountryId")),
+                    ProducerCountry = reader.IsDBNull(reader.GetOrdinal("ProducerCountryId")) ? null : new ProducerCountryDtoForSearch
+                    {
+                        ProducerCountryId = reader.GetInt32(reader.GetOrdinal("ProducerCountryId")),
+                        Name = reader.IsDBNull(reader.GetOrdinal("ProducerCountryName")) ? null : reader.GetString(reader.GetOrdinal("ProducerCountryName"))
+                    },
+                    BrandId = brandId,
+                    Brand = brandId == null ? null : new BrandDtoForSearch
+                    {
+                        BrandId = reader.GetInt32(reader.GetOrdinal("BrandId")),
+                        Name = reader.IsDBNull(reader.GetOrdinal("BrandTitle")) ? null : reader.GetString(reader.GetOrdinal("BrandTitle")),
+                        Logo = reader.IsDBNull(reader.GetOrdinal("BrandLogo")) ? null : reader.GetString(reader.GetOrdinal("BrandLogo"))
+                    }
+                };
             });
 
             response.Success = true;
