@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="icon" type="image/png" sizes="32x25" href="https://ik.imagekit.io/rqxdk712q/products/92efa6d7-3b27-42ec-bfab-212e240b64d4_fav" />
+    <link href="https://fonts.googleapis.com/css2?family=BPG+Arial:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary: #2563eb;
@@ -25,23 +27,27 @@
 
         body {
             margin: 0;
-            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'BPG Arial', sans-serif;
             background: var(--bg);
-            color: var(--dark);
         }
 
         header {
-            background: var(--bg);
-            border-bottom: 1px solid var(--border-color);
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+            border-bottom: 2px solid var(--border-color);
+            box-shadow: 0 2px 12px rgba(15,23,42,0.04);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
         }
 
         .container-header {
             max-width: 1380px;
             margin: 0 auto;
-            padding: 16px 32px;
-            display: flex;
+            padding: 20px 32px;
+            display: grid;
+            grid-template-columns: auto 1fr auto;
             align-items: center;
-            justify-content: space-between;
+            gap: 32px;
         }
 
         .logo {
@@ -51,14 +57,42 @@
         }
 
             .logo img {
-                height: 96px;
-                max-height: 96px;
+                height: 85px;
                 width: auto;
-                transition: transform .25s ease;
+                transition: transform 0.3s ease;
+                filter: drop-shadow(0 2px 8px rgba(37,99,235,0.08));
             }
 
             .logo:hover img {
-                transform: scale(1.05) rotate(-2deg);
+                transform: scale(1.05) rotate(-1deg);
+            }
+
+        .slogan {
+            font-size: 1.15rem;
+            font-weight: 600;
+            background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-align: center;
+            letter-spacing: 0.5px;
+            line-height: 1.6;
+            padding: 4px 0;
+            position: relative;
+        }
+
+            .slogan::after {
+                content: '';
+                position: absolute;
+                bottom: -10px;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 160px;
+                height: 3px;
+                background: linear-gradient(90deg, #2563eb 0%, #ec4899 100%);
+                border-radius: 3px;
+                box-shadow: 0 2px 8px rgba(236,72,153,0.15);
+                transition: width 0.2s, height 0.2s;
             }
 
         .contact-group {
@@ -70,29 +104,46 @@
         .contact-btn {
             display: inline-flex;
             align-items: center;
-            gap: 8px;
-            padding: 10px 16px;
+            gap: 10px;
+            padding: 12px 20px;
             background: #fff;
-            border: 1px solid var(--border-color);
-            border-radius: 10px;
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
             color: var(--dark);
             text-decoration: none;
-            font-weight: 500;
-            font-size: 1.05rem;
-            transition: all 0.25s ease;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             white-space: nowrap;
+            position: relative;
+            overflow: hidden;
         }
 
-            .contact-btn:hover {
+            .contact-btn::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: -100%;
+                width: 100%;
+                height: 100%;
                 background: var(--primary-soft);
+                transition: left 0.3s;
+                z-index: -1;
+            }
+
+            .contact-btn:hover::before {
+                left: 0;
+            }
+
+            .contact-btn:hover {
                 color: var(--primary);
                 border-color: var(--primary);
-                transform: translateY(-2px);
-                box-shadow: 0 6px 16px rgba(37,99,235,0.12);
+                transform: translateY(-3px);
+                box-shadow: 0 8px 20px rgba(37,99,235,0.15);
             }
 
             .contact-btn i {
-                font-size: 1.3rem;
+                font-size: 1.2rem;
             }
 
             .contact-btn.phone i {
@@ -103,31 +154,96 @@
                 color: #ef4444;
             }
 
+        .facebook-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background: #fff;
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            color: #1877f2;
+            text-decoration: none;
+            font-size: 1.4rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+            .facebook-btn::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: -100%;
+                width: 100%;
+                height: 100%;
+                background: linear-gradient(135deg, #e7f3ff 0%, #cfe9ff 100%);
+                transition: left 0.3s;
+                z-index: -1;
+            }
+
+            .facebook-btn:hover::before {
+                left: 0;
+            }
+
+            .facebook-btn:hover {
+                color: #1877f2;
+                border-color: #1877f2;
+                transform: translateY(-3px) scale(1.05);
+                box-shadow: 0 8px 20px rgba(24,119,242,0.2);
+            }
+
         main {
             max-width: 1380px;
-            margin: 32px auto 48px;
-            padding: 0 24px;
+            margin: 40px auto 60px;
+            padding: 0 32px;
+            min-height: calc(100vh - 400px);
         }
 
         footer {
             text-align: center;
-            padding: 40px 0 20px;
-            font-size: 0.97rem;
+            padding: 48px 32px 24px;
+            font-size: 0.95rem;
             color: var(--slate);
-            background: var(--bg);
+            background: linear-gradient(135deg, #f8fafc 0%, #ffffff 100%);
+            border-top: 2px solid var(--border-color);
+            box-shadow: 0 -2px 12px rgba(15,23,42,0.04);
         }
+
+            footer a {
+                color: var(--primary);
+                text-decoration: none;
+                font-weight: 600;
+                transition: color 0.2s;
+            }
+
+                footer a:hover {
+                    color: var(--primary-hover);
+                    text-decoration: underline;
+                }
 
         @@media (max-width: 991px) {
             .container-header
 
         {
-            flex-direction: column;
+            grid-template-columns: 1fr;
             gap: 20px;
-            padding: 16px 20px;
+            padding: 20px;
+            text-align: center;
         }
 
-        .logo img {
-            height: 80px;
+        .logo {
+            justify-content: center;
+        }
+
+            .logo img {
+                height: 75px;
+            }
+
+        .slogan {
+            font-size: 1.1rem;
+            padding: 16px 24px;
         }
 
         .contact-group {
@@ -140,18 +256,51 @@
             width: 100%;
         }
 
+        .facebook-btn {
+            width: 100%;
+            height: 50px;
+        }
+
+        main {
+            padding: 0 20px;
+            margin: 32px auto 48px;
+        }
+
         }
 
         @@media (max-width: 576px) {
-            .logo img
+            .container-header
 
         {
-            height: 68px;
+            padding: 16px;
+        }
+
+        .logo img {
+            height: 65px;
+        }
+
+        .slogan {
+            font-size: 1rem;
+            padding: 14px 20px;
         }
 
         .contact-btn {
-            font-size: 0.98rem;
-            padding: 9px 14px;
+            font-size: 0.95rem;
+            padding: 11px 16px;
+        }
+
+            .contact-btn i {
+                font-size: 1.1rem;
+            }
+
+        main {
+            padding: 0 16px;
+            margin: 24px auto 40px;
+        }
+
+        footer {
+            padding: 36px 16px 20px;
+            font-size: 0.9rem;
         }
 
         }
@@ -161,20 +310,30 @@
 <body>
     <header>
         <div class="container-header">
-            <a class="logo" href="/">
+            <a class="logo" href="/" title="Likano.Ge - სამზარეულოს ტექნიკა">
                 <img src="https://ik.imagekit.io/rqxdk712q/products/17827bc1-7332-4122-b0aa-7e5adc3e229e_likanologo"
                      alt="Likano Logo" />
             </a>
+
+            <div class="slogan">
+                სამზარეულო იწყება სწორი ტექნიკით
+            </div>
 
             <div class="contact-group">
                 <a href="tel:+995599457950" class="contact-btn phone" title="დაკავშირება">
                     <i class="fas fa-phone-alt"></i>
                     599 45 79 50
                 </a>
-
                 <a href="/contact" class="contact-btn map" title="სრული მისამართი და რუკა">
                     <i class="fas fa-map-marker-alt"></i>
-                    თბილისი, აგლაძის #15
+                    თბილისი, აგლაძის ქ. №15
+                </a>
+                <a href="https://www.facebook.com/likanogeorgia"
+                   class="facebook-btn"
+                   title="ჩვენი Facebook გვერდი"
+                   target="_blank"
+                   rel="noopener noreferrer">
+                    <i class="fab fa-facebook-f"></i>
                 </a>
             </div>
         </div>
@@ -186,9 +345,32 @@
 
     <footer>
         © @DateTime.Now.Year Likano.Ge — ყველა უფლება დაცულია.
+        Developed by
+        <a href="https://ge.linkedin.com/in/mikheil-kharazishvili-b179a5269"
+           target="_blank">
+            Mikheil Kharazishvili
+        </a>
     </footer>
 
     @RenderSection("Scripts", required: false)
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
+
+
+<script>
+    (function () {
+        const path = window.location.pathname + window.location.search;
+
+        if (!path.startsWith('/error') && !path.includes('notfound')) {
+            sessionStorage.setItem('lastInternalUrl', path);
+        }
+    })();
+
+     (function () {
+        const path = window.location.pathname + window.location.search;
+        if (!path.includes('notfound') && !path.includes('/error')) {
+            sessionStorage.setItem('lastInternalUrl', path);
+        }
+    })();
+</script>

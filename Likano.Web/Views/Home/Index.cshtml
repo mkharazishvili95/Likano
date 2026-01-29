@@ -8,6 +8,8 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
 <style>
+    @@import url('https://fonts.googleapis.com/css2?family=BPG+Arial:wght@400;700&display=swap');
+
     :root {
         --primary: #6366f1;
         --primary-dark: #4f46e5;
@@ -28,7 +30,7 @@
 
     body {
         background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
-        font-family: 'Inter', sans-serif;
+        font-family: 'BPG Arial', sans-serif;
         color: var(--text-primary);
     }
 
@@ -60,6 +62,11 @@
         background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
+        background-clip: text;
+        padding-bottom: 0.2em;
+        line-height: 1.2;
+        box-decoration-break: clone;
+        -webkit-box-decoration-break: clone;
     }
 
     .filter-section-title {
@@ -150,7 +157,10 @@
         flex-direction: column;
         transition: var(--transition);
         box-shadow: var(--shadow-md);
-        overflow: hidden;
+    }
+
+    .mt-auto.d-flex.align-items-center {
+        overflow: visible;
     }
 
         .product-card:hover {
@@ -302,47 +312,55 @@
     .header-section {
         background: rgba(255, 255, 255, 0.95);
         backdrop-filter: blur(10px);
-        border-radius: 20px;
-        padding: 1.5rem 2rem;
-        margin-bottom: 2rem;
+        border-radius: 16px;
+        padding: 1rem 1.5rem;
+        margin-bottom: 1.5rem;
         box-shadow: var(--shadow-md);
         border: 1px solid var(--border);
         display: flex;
         justify-content: space-between;
         align-items: center;
         flex-wrap: wrap;
-        gap: 1.5rem;
+        gap: 1rem;
     }
 
     .page-title {
-        font-size: 2rem;
+        font-size: 1.5rem;
         font-weight: 900;
         margin: 0;
         background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
+        background-clip: text;
+        padding-bottom: 0.2em;
+        line-height: 1.2;
+        box-decoration-break: clone;
+        -webkit-box-decoration-break: clone;
     }
 
     .header-controls {
         display: flex;
-        gap: 1rem;
+        gap: 0.75rem;
         align-items: center;
+        flex-wrap: nowrap; 
     }
 
     .results-count {
-        padding: 0.75rem 1.5rem;
+        padding: 0.5rem 1.2rem;
         border-radius: 50px;
         font-weight: 700;
-        font-size: 0.95rem;
+        font-size: 0.85rem;
         background: linear-gradient(135deg, var(--text-primary) 0%, var(--text-secondary) 100%);
         color: white;
         box-shadow: var(--shadow-sm);
+        white-space: nowrap;
     }
 
     .form-select-sm {
-        padding: 0.75rem 1rem;
+        padding: 0.5rem 0.9rem;
         border-radius: 12px;
         font-weight: 600;
+        font-size: 0.85rem;
         border: 1px solid var(--border);
         background: var(--surface);
         transition: var(--transition);
@@ -380,6 +398,16 @@
         color: var(--primary);
     }
 
+        input[type=number]::-webkit-inner-spin-button,
+        input[type=number]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        input[type=number] {
+            -moz-appearance: textfield;
+        }
+
     @@media (max-width: 991px) {
         .filter-sidebar
 
@@ -396,6 +424,13 @@
         padding: 1.25rem 1.5rem;
     }
 
+    }
+
+    .header-left {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        flex-wrap: wrap;
     }
 
     @@media (max-width: 768px) {
@@ -423,6 +458,110 @@
     }
 
     }
+    .details-btn {
+        position: relative;
+    }
+
+    .details-text {
+        display: inline-block;
+        position: absolute;
+        left: 100%;
+        top: 50%;
+        transform: translateY(-50%) translateX(10px);
+        white-space: nowrap;
+        background: var(--primary);
+        color: #fff;
+        padding: 0.3rem 1rem;
+        border-radius: 12px;
+        font-size: 0.95rem;
+        font-weight: 600;
+        box-shadow: var(--shadow-md);
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.2s, transform 0.2s;
+        z-index: 10;
+    }
+
+    .details-btn:hover .details-text,
+    .details-btn:focus .details-text {
+        opacity: 1;
+        pointer-events: auto;
+        transform: translateY(-50%) translateX(20px);
+    }
+
+    .price-missing {
+        font-size: 0.85rem;
+        font-weight: 450;
+        color: #b42318;
+        background: #fef3f2;
+        border: 1px dashed #f5c2c7;
+        border-radius: 10px;
+        padding: 0.35rem 0.75rem;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        letter-spacing: -0.01em;
+        white-space: nowrap;
+    }
+
+        .price-missing i {
+            font-size: 1rem;
+            opacity: 0.85;
+        }
+
+    .img-container.no-image {
+        background: #f3f4f6;
+    }
+
+        .img-container.no-image .product-img {
+            cursor: default !important;
+            opacity: 0.5;
+            filter: grayscale(0.3);
+            pointer-events: none;
+        }
+
+        .img-container.no-image:hover {
+            transform: none !important;
+        }
+
+            .img-container.no-image:hover .product-img {
+                transform: none !important;
+            }
+
+    @@media (max-width: 768px) {
+        .header-left
+
+    {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .header-section {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    }
+
+    @@media (max-width: 576px) {
+        .page-title
+
+    {
+        font-size: 1.2rem;
+    }
+
+    .results-count {
+        font-size: 0.8rem;
+        padding: 0.4rem 1rem;
+    }
+
+    .form-select-sm {
+        font-size: 0.8rem;
+        padding: 0.4rem 0.8rem;
+    }
+
+    }
+
 </style>
 
 <div class="page-wrapper">
@@ -448,7 +587,7 @@
                                 <i class="bi bi-grid"></i>
                                 კატეგორია
                             </label>
-                            <select name="CategoryId" class="form-select">
+                            <select id="categoryFilter" name="CategoryId" class="form-select">
                                 <option value="">ყველა კატეგორია</option>
                                 @foreach (var c in (SelectList)ViewBag.Categories)
                                 {
@@ -477,11 +616,15 @@
                                 ფასი
                             </label>
                             <div class="d-flex gap-2">
-                                <input name="PriceFrom" class="form-control" placeholder="დან" type="number">
-                                <input name="PriceTo" class="form-control" placeholder="მდე" type="number">
+                                <input name="PriceFrom" class="form-control" placeholder="დან" type="number" min="0" step="any">
+                                <input name="PriceTo" class="form-control" placeholder="მდე" type="number" min="0" step="any">
                             </div>
                         </div>
-
+                        <div class="form-check form-switch mt-2">
+                            <input class="form-check-input" id="hasPriceCheck" name="HasPrice" type="checkbox" value="true">
+                            <label class="form-check-label" for="hasPriceCheck">მხოლოდ მითითებული ფასით</label>
+                        </div>
+                        
                         <div class="form-check form-switch">
                             <input class="form-check-input" id="stCheck" type="checkbox">
                             <label class="form-check-label" for="stCheck">მხოლოდ მარაგში არსებული</label>
@@ -492,12 +635,14 @@
 
             <main class="col-xl-9 col-lg-8">
                 <div class="header-section">
-                    <h2 class="page-title">პროდუქცია</h2>
+                    <div class="header-left">
+                        <h2 class="page-title">პროდუქცია</h2>
+                    </div>
                     <div class="header-controls">
-                        <span id="resultsCount" class="results-count">0 პროდუქტი</span>
+                        <span id="resultsCount" class="results-count">ნაპოვნია 0 პროდუქტი</span>
                         <select id="sortSelector" class="form-select form-select-sm">
                             <option value="CreateDateDesc">ახალი პროდუქტები</option>
-                            <option value="PopularityDesc">ყველაზე ნახვადი</option>
+                            <option value="PopularityDesc">პოპულარული</option>
                             <option value="PriceAsc">ფასი: ზრდადობით</option>
                             <option value="PriceDesc">ფასი: კლებადობით</option>
                         </select>
@@ -519,35 +664,47 @@
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script>
     const renderProduct = p => `
-        <div class="col-12 col-sm-6 col-xl-4">
-            <div class="product-card">
-                <div class="img-container">
-                    <span class="status-badge ${p.isAvailable ? 'in-stock' : 'out-of-stock'}">
-                        ${p.isAvailable ? 'მარაგშია' : 'არაა მარაგში'}
-                    </span>
-                    <img src="${p.images?.[0]?.fileUrl || 'https://ik.imagekit.io/rqxdk712q/products/733b35b7-b949-4a3c-9e64-1de44004c88e_NoImageLogo'}"
-                         class="product-img" alt="${p.title}">
-                </div>
-                <div class="card-body">
-                    <div>
-                        <span class="category-label">${p.category?.name || 'Likano'}</span>
-                        <h3 class="product-title">${p.title}</h3>
+       <div class="col-12 col-sm-6 col-xl-4">
+         <div class="product-card">
+             <div class="img-container ${!p.images?.[0]?.fileUrl ? 'no-image' : ''}">
+                 <span class="status-badge ${p.isAvailable ? 'in-stock' : 'out-of-stock'}">
+                     ${p.isAvailable ? 'მარაგშია' : 'არაა მარაგში'}
+                 </span>
+                 <img src="${p.images?.[0]?.fileUrl || 'https://ik.imagekit.io/rqxdk712q/products/733b35b7-b949-4a3c-9e64-1de44004c88e_NoImageLogo'}"
+                      class="product-img" alt="${p.title}">
+             </div>
+            <div class="card-body">
+                <div>
+                    <span class="category-label">${p.category?.name || 'Likano'}</span>
+                    <h3 class="product-title">${p.title}</h3>
+                    <div class="product-code" style="font-size:0.85rem;color:var(--text-secondary);font-weight:600;margin-bottom:0.5rem;">
+                        კოდი: ${p.code || '-'}
+                    </div>
+                    ${p.brand?.name ? `
                         <p class="brand-info">
-                            <i class="bi bi-award"></i> ${p.brand?.name || 'ბრენდი'}
+                            <i class="bi bi-award"></i> ${p.brand.name}
                         </p>
+                    ` : ''}
+                </div>
+                <div class="mt-auto d-flex align-items-center">
+                        ${p.price && p.price > 0 ? `
+                    <div class="price-tag">
+                        ${p.price.toLocaleString('ka-GE')} <span style="font-size: 1.1rem;">₾</span>
                     </div>
-                    <div class="mt-auto d-flex justify-content-between align-items-center">
-                        <div class="price-tag">
-                            ${(p.price || 0).toLocaleString('ka-GE')} <span style="font-size: 1.1rem;">₾</span>
-                        </div>
-                        <a href="/Details/${p.id}" class="btn-action">
-                            <i class="bi bi-chevron-right fs-5"></i>
-                        </a>
+                ` : `
+                    <div class="price-missing">
+                        <i class></i> ფასი არაა მითითებული
                     </div>
+                `}
+                    <a href="/Details/${p.id}" class="btn-action ms-auto details-btn">
+                        <i class="bi bi-chevron-right fs-5"></i>
+                        <span class="details-text">სრულად ნახვა</span>
+                    </a>
                 </div>
             </div>
         </div>
-    `;
+    </div>
+`;
 
     let page = 1;
     const pageSize = 9;
@@ -571,6 +728,7 @@
         });
 
         filters.IsAvailable = $('#stCheck').is(':checked') ? true : null;
+        filters.HasPrice = $('#hasPriceCheck').is(':checked') ? true : null;
 
         $.ajax({
             url: '/Home/SearchProducts',
@@ -583,7 +741,7 @@
 
                 if (response?.items?.length > 0) {
                     response.items.forEach(p => $grid.append(renderProduct(p)));
-                    $('#resultsCount').text(`${response.totalCount} პროდუქტი`);
+                            $('#resultsCount').text(`${response.totalCount} პროდუქტი`);
                 } else if (!append) {
                     $grid.html(`
                         <div class="col-12">
@@ -593,7 +751,7 @@
                             </div>
                         </div>
                     `);
-                    $('#resultsCount').text('0 პროდუქტი');
+                            $('#resultsCount').text('0 პროდუქტი');
                 }
 
                 hasMore = (response.items?.length === pageSize);
@@ -627,10 +785,18 @@
             loadProducts();
         });
 
+
+        $('#hasPriceCheck').on('change', function () {
+            page = 1;
+            hasMore = true;
+            loadProducts();
+        });
+
         $('#resetFilters').on('click', function () {
             $('#searchForm')[0].reset();
             $('#sortSelector').val('CreateDateDesc');
             $('#stCheck').prop('checked', false);
+            $('#hasPriceCheck').prop('checked', false);
             page = 1;
             hasMore = true;
             loadProducts();
@@ -641,5 +807,29 @@
                 loadProducts(true);
             }
         });
+    });
+
+       document.addEventListener('DOMContentLoaded', function () {
+        const priceInputs = document.querySelectorAll('input[name="PriceFrom"], input[name="PriceTo"]');
+        priceInputs.forEach(input => {
+            input.addEventListener('input', function () {
+                if (this.value && parseFloat(this.value) < 0) {
+                    this.value = '';
+                }
+            });
+        });
+    });
+
+    document.addEventListener('DOMContentLoaded', function() {
+        var selectedCategoryId = @(ViewBag.SelectedCategoryId ?? "null");
+        
+        if (selectedCategoryId) {
+            var categorySelect = document.getElementById('categoryFilter'); 
+            if (categorySelect) {
+                categorySelect.value = selectedCategoryId;
+            }
+            
+            applyFilters();
+        }
     });
 </script>

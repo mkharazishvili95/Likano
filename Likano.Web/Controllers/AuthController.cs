@@ -215,8 +215,8 @@ namespace Likano.Web.Controllers
                 Response.Cookies.Delete("refresh_token");
 
                 TempData["SuccessMessage"] = resp.IsSuccessStatusCode
-                    ? "გამოსვლა შესრულებულია."
-                    : "მოხდა შეცდომა.";
+                    ? "თქვენ გამოხვედით სისტემიდან"
+                    : "თქვენ გამოხვედით სისტემიდან";
             }
             catch
             {
@@ -225,7 +225,7 @@ namespace Likano.Web.Controllers
                 TempData["ErrorMessage"] = "Logout ვერ შესრულდა სრულად, ლოკალური გამოსვლა დასრულებულია.";
             }
 
-            return RedirectToAction(nameof(Register));
+            return RedirectToAction(nameof(Login));
         }
     }
 }

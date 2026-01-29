@@ -98,6 +98,7 @@ app.UseRouting();
 
 app.UseAuthentication();
 app.UseAuthorization();
+app.UseStatusCodePagesWithReExecute("/Shared/NotFound");
 
 app.MapControllerRoute(
     name: "default",

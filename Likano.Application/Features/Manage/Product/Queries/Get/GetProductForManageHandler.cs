@@ -45,6 +45,8 @@ namespace Likano.Application.Features.Manage.Product.Queries.Get
                 SeoTitle = product.SeoTitle,
                 ProducerCountryId = product.ProducerCountryId,
                 ProducerCountryName = product.ProducerCountry?.Name,
+                ProductType = product.Type,
+                IncludedComponents = product.IncludedComponents,
                 Success = true,
                 StatusCode = 200
             };

@@ -17,6 +17,7 @@ namespace Likano.Application.Features.Manage.Product.Queries.GetAll
                 (!request.PriceFrom.HasValue || (p.Price.HasValue && p.Price.Value >= request.PriceFrom.Value)) &&
                 (!request.PriceTo.HasValue || (p.Price.HasValue && p.Price.Value <= request.PriceTo.Value)) &&
                 (!request.WidthFrom.HasValue || (p.Width.HasValue && p.Width.Value >= request.WidthFrom.Value)) &&
+                (!request.Type.HasValue || (p.Type.HasValue && p.Type.Value == request.Type.Value)) &&
                 (!request.WidthTo.HasValue || (p.Width.HasValue && p.Width.Value <= request.WidthTo.Value)) &&
                 (!request.LengthFrom.HasValue || (p.Length.HasValue && p.Length.Value >= request.LengthFrom.Value)) &&
                 (!request.LengthTo.HasValue || (p.Length.HasValue && p.Length.Value <= request.LengthTo.Value)) &&

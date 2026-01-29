@@ -132,6 +132,35 @@
                             <label for="color" class="form-label small fw-medium">ფერი</label>
                             <input name="color" id="color" class="form-control" value="@product.Color" />
                         </div>
+                        <div class="mb-3">
+                            <label for="productType" class="form-label small fw-medium">პროდუქტის ტიპი <span class="text-danger">(სასურველია *)</span></label>
+                            <select name="productType" id="productType" class="form-control">
+                                <option value="">აირჩიეთ</option>
+                                @foreach (var pt in ViewBag.ProductTypes)
+                                {
+                                    var isSelected = product.ProductType == (Likano.Domain.Enums.ProductType)pt.Value;
+                                    var displayName = pt.Name switch
+                                    {
+                                        "BuiltIn" => "ჩასაშენებელი",
+                                        "Freestanding" => "დასადგამი",
+                                        "WallMounted" => "კედელზე დასაკიდი",
+                                        "CounterTop" => "ზედაპირზე / მაგიდაზე დასადგამი",
+                                        "FloorMounted" => "იატაკზე დასადგამი",
+                                        _ => pt.Name
+                                    };
+
+                                    <option value="@pt.Value" selected="@isSelected">@displayName</option>
+                                }
+                            </select>
+                            @Html.ValidationMessage("productType", new { @class = "text-danger small d-block mt-1" })
+                        </div>
+                        <div class="mb-3">
+                            <label for="includedComponents" class="form-label small fw-medium">კომპლექტაცია</label>
+                            <textarea name="includedComponents" id="includedComponents" class="form-control" rows="3" placeholder="მაგ: სიფონი, ონკანი, სამონტაჟო კომპლექტი...">@product.IncludedComponents</textarea>
+                            <div class="form-text text-muted mt-1 small">
+                                მიუთითეთ პროდუქტთან ერთად მომავალი კომპონენტები/აქსესუარები
+                            </div>
+                        </div>
                     </div>
 
                     <div class="col-12 col-lg-4">

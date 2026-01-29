@@ -34,6 +34,8 @@ namespace Likano.Application.Features.Manage.Product.Commands.Edit
             product.UpdateDate = DateTime.UtcNow.AddHours(4);
             product.Code = request.Code;
             product.SeoTitle = request.SeoTitle;
+            product.Type = request.ProductType;
+            product.IncludedComponents = request.IncludedComponents;
 
             await _repository.UpdateProductAsync(product);
 

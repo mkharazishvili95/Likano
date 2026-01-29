@@ -1,4 +1,5 @@
 ﻿using Likano.Application.Common.Models;
+using Likano.Domain.Enums;
 
 namespace Likano.Infrastructure.Queries.Product.Models.Details
 {
@@ -24,5 +25,7 @@ namespace Likano.Infrastructure.Queries.Product.Models.Details
         public List<ImageDtoForSearch>? Images { get; set; }
         public string? Code { get; set; }
         public int? ViewCount { get; set; }
+        public ProductType? Type { get; set; }
+        public string? IncludedComponents { get; set; }
     }
 }

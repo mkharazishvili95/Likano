@@ -21,6 +21,7 @@ using Likano.Application.Features.Manage.ProducerCountry.Queries.GetAll;
 using Likano.Application.Features.Manage.Product.Commands.ChangeAvailableStatus;
 using Likano.Application.Features.Manage.Product.Commands.ChangeCategory;
 using Likano.Application.Features.Manage.Product.Commands.ChangeStatus;
+using Likano.Application.Features.Manage.Product.Commands.ChangeType;
 using Likano.Application.Features.Manage.Product.Commands.Create;
 using Likano.Application.Features.Manage.Product.Commands.Edit;
 using Likano.Application.Features.Manage.Product.Queries.Get;
@@ -84,7 +85,8 @@ namespace Likano.Web.Controllers
                 HeightTo = filter.HeightTo,
                 Color = string.IsNullOrWhiteSpace(filter.Color) ? null : filter.Color.Trim(),
                 ProducerCountryId = filter.ProducerCountryId,
-                Code = string.IsNullOrWhiteSpace(filter.Code) ? null : filter.Code.Trim()
+                Code = string.IsNullOrWhiteSpace(filter.Code) ? null : filter.Code.Trim(),
+                Type = filter.Type
             };
 
             var apiUrl = $"{_baseUrl}/manage/products";
@@ -1064,6 +1066,14 @@ namespace Likano.Web.Controllers
             ViewBag.Brands = brands;
             ViewBag.Countries = countries;
 
+            ViewBag.ProductTypes = Enum.GetValues(typeof(Likano.Domain.Enums.ProductType))
+            .Cast<Likano.Domain.Enums.ProductType>()
+            .Select(pt => new
+            {
+                Value = (int)pt,
+                Name = pt.ToString()
+            }).ToList();
+
             return View("CreateProduct");
         }
 
@@ -1071,7 +1081,7 @@ namespace Likano.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> CreateProduct(string title, string? description, decimal? price, int categoryId,
         int? brandId, int? producerCountryId, string? material, decimal? length, decimal? width,
-        decimal? height, string? color, List<IFormFile>? photos, int? mainPhotoIndex, string? code, string? seoTitle, CancellationToken ct)
+        decimal? height, string? color, List<IFormFile>? photos, int? mainPhotoIndex, string? code, string? seoTitle, ProductType? productType, string? includedComponents, CancellationToken ct)
         {
             if (string.IsNullOrWhiteSpace(title))
             {
@@ -1123,7 +1133,9 @@ namespace Likano.Web.Controllers
                 Color = color,
                 Images = photoPayloads,
                 Code = code,
-                SeoTitle = seoTitle
+                SeoTitle = seoTitle,
+                ProductType = productType,
+                IncludedComponents = includedComponents
             };
 
             var apiUrl = $"{_baseUrl}/manage/product/create";
@@ -1176,6 +1188,14 @@ namespace Likano.Web.Controllers
             var brands = await LoadBrands();
             var countries = await LoadCountries();
 
+            ViewBag.ProductTypes = Enum.GetValues(typeof(Likano.Domain.Enums.ProductType))
+            .Cast<Likano.Domain.Enums.ProductType>()
+            .Select(pt => new
+            {
+                Value = (int)pt,
+                Name = pt.ToString()
+            }).ToList();
+
             var vm = new EditProductViewModel
             {
                 Product = product,
@@ -1191,7 +1211,7 @@ namespace Likano.Web.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> EditProduct(int id, string title,  string? description, decimal? price, int categoryId, int? brandId, int? producerCountryId, 
-            string? material, decimal? length, decimal? width, decimal? height, string? color, List<IFormFile>? photos, int mainPhotoIndex, int? existingMainImageId, string? deletedImageIds, string? code, string? seoTitle, CancellationToken ct)
+            string? material, decimal? length, decimal? width, decimal? height, string? color, List<IFormFile>? photos, int mainPhotoIndex, int? existingMainImageId, string? deletedImageIds, string? code, string? seoTitle, ProductType? productType, string? includedComponents, CancellationToken ct)
         {
             if (id <= 0)
             {
@@ -1256,7 +1276,9 @@ namespace Likano.Web.Controllers
                 MainImageId = existingMainImageId,
                 DeletedImageIds = deletedIds,
                 Code = code,
-                SeoTitle = seoTitle
+                SeoTitle = seoTitle,
+                ProductType = productType,
+                IncludedComponents = includedComponents
             };
 
             var apiUrl = $"{_baseUrl}/manage/edit/product";
@@ -1272,6 +1294,30 @@ namespace Likano.Web.Controllers
             TempData[(resp?.Success ?? false) ? "SuccessMessage" : "ErrorMessage"] = resp?.Message ?? "შეცდომა.";
 
             return RedirectToAction(nameof(Details), new { id });
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ChangeProductType(int productId, ProductType newType)
+        {
+            var apiUrl = $"{_baseUrl}/manage/change-product-type";
+            var command = new ChangeTypeCommand
+            {
+                ProductId = productId,
+                NewType = newType
+            };
+
+            var response = await _httpClient.PostAsJsonAsync(apiUrl, command);
+
+            if (!response.IsSuccessStatusCode)
+            {
+                TempData["ErrorMessage"] = "ტიპის ცვლილება ვერ მოხერხდა";
+                return RedirectToAction("Details", new { id = productId });
+            }
+
+            var result = await response.Content.ReadFromJsonAsync<ChangeTypeResponse>();
+            TempData[(bool)result!.Success ? "SuccessMessage" : "ErrorMessage"] = result.Message;
+
+            return RedirectToAction("Details", new { id = productId });
         }
 
         [HttpPost]

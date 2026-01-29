@@ -20,6 +20,12 @@ namespace Likano.Web.Controllers
             _httpClient = httpClientFactory.CreateClient("API");
             _baseUrl = configuration["ApiSettings:BaseUrl"]!;
         }
+        //not found default page:
+        [Route("Shared/NotFound")]
+        public IActionResult NotFoundPage()
+        {
+            return View("NotFound");
+        }
 
         [HttpPost]
         public async Task<IActionResult> SearchProducts([FromBody] GetAllProductsForSearchQuery query)
@@ -33,7 +39,7 @@ namespace Likano.Web.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int? categoryId)
         {
             var categoriesUrl = $"{_baseUrl}/category/all";
             var categoriesRequest = new { Pagination = new { PageNumber = 1, PageSize = 1000 }, SearchString = (string?)null };
@@ -86,6 +92,8 @@ namespace Likano.Web.Controllers
             ViewBag.Categories = new SelectList(categories, "CategoryId", "Name");
             ViewBag.Brands = new SelectList(brands, "BrandId", "Name");
             ViewBag.ProducerCountries = new SelectList(countries, "ProducerCountryId", "Name");
+
+            ViewBag.SelectedCategoryId = categoryId;
 
             return View();
         }

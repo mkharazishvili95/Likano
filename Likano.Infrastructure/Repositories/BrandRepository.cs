@@ -15,6 +15,6 @@ namespace Likano.Infrastructure.Repositories
 
         public async Task<Brand?> Get(int id) => await _db.Brands.FindAsync(id);
 
-        public async Task<List<Brand>?> GetAll() => await _db.Brands.AsNoTracking().ToListAsync();
+        public async Task<List<Brand>?> GetAll() => await _db.Brands.AsNoTracking().Where(x => x.IsActive).ToListAsync();
     }
 }

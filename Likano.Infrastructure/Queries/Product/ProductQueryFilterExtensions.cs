@@ -18,6 +18,7 @@ namespace Likano.Infrastructure.Queries.Product
                 !string.IsNullOrEmpty(request.SearchString)
             );
             Add($"p.Title LIKE '%{request.Title}%'", !string.IsNullOrEmpty(request.Title));
+            Add($"p.Code LIKE '%{request.Code}%'", !string.IsNullOrEmpty(request.Code));
             Add($"p.Price >= {request.PriceFrom}", request.PriceFrom.HasValue);
             Add($"p.Price <= {request.PriceTo}", request.PriceTo.HasValue);
             Add("p.IsAvailable = 1", request.IsAvailable == true);
@@ -26,6 +27,7 @@ namespace Likano.Infrastructure.Queries.Product
             Add($"p.ProducerCountryId = {request.ProducerCountryId}", request.ProducerCountryId.HasValue);
             Add($"p.Length >= {request.LengthFrom}", request.LengthFrom.HasValue);
             Add($"p.Length <= {request.LengthTo}", request.LengthTo.HasValue);
+            Add(request.HasPrice == true ? "p.Price > 0" : "(p.Price IS NULL OR p.Price = 0)", request.HasPrice.HasValue);
             Add($"p.Width >= {request.WidthFrom}", request.WidthFrom.HasValue);
             Add($"p.Width <= {request.WidthTo}", request.WidthTo.HasValue);
             Add($"p.Height >= {request.HeightFrom}", request.HeightFrom.HasValue);

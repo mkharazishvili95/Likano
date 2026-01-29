@@ -1,4 +1,5 @@
 using Likano.Application.DTOs;
+using Likano.Domain.Enums;
 using MediatR;
 
 namespace Likano.Application.Features.Manage.Product.Commands.Create
@@ -21,5 +22,7 @@ namespace Likano.Application.Features.Manage.Product.Commands.Create
         public List<PhotoUploadDto>? Images { get; set; }
         public string? Code { get; set; }
         public string? SeoTitle { get; set; }
+        public ProductType? ProductType { get; set; }
+        public string? IncludedComponents { get; set; }
     }
 }

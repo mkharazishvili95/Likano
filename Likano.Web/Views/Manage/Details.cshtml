@@ -9,6 +9,16 @@
     var brands = Model.Brands;
     var countries = Model.Countries;
 
+ 
+    var typeText = product?.ProductType switch
+    {
+        ProductType.BuiltIn => "ჩასაშენებელი",
+        ProductType.Freestanding => "დასადგამი",
+        ProductType.WallMounted => "კედელზე დასაკიდი",
+        ProductType.CounterTop => "ზედაპირზე / მაგიდაზე დასადგამი",
+        ProductType.FloorMounted => "იატაკზე დასადგამი",
+        _ => "—"
+    };
     var statusText = product?.Status switch
     {
         ProductStatus.Active => "აქტიური",
@@ -287,6 +297,15 @@
 
                         <div class="col-md-6">
                             <div class="d-flex">
+                                <strong class="text-muted me-3" style="min-width: 120px;">კომპლექტაცია:</strong>
+                                <span>
+                                    @(string.IsNullOrWhiteSpace(product.IncludedComponents) ? "—" : product.IncludedComponents)
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="d-flex">
                                 <strong class="text-muted me-3" style="min-width: 120px;">სიგრძე:</strong>
                                 <span>@(product.Length.HasValue ? $"{product.Length:0.##} სმ" : "—")</span>
                             </div>
@@ -305,6 +324,71 @@
                                 <span>@(product.Height.HasValue ? $"{product.Height:0.##} სმ" : "—")</span>
                             </div>
                         </div>
+
+                        <div class="col-md-6">
+    <div class="d-flex justify-content-between align-items-center">
+        <div class="d-flex align-items-center">
+            <strong class="text-muted me-3" style="min-width: 120px;">ტიპი:</strong>
+            <span class="badge rounded-pill @statusClass px-3 py-2">
+                @typeText
+            </span>
+        </div>
+        <button type="button"
+                class="btn btn-outline-primary btn-sm"
+                data-bs-toggle="collapse"
+                data-bs-target="#changeTypePanel"
+                aria-expanded="false"
+                aria-controls="changeTypePanel">
+            <i class="fas fa-exchange-alt me-1"></i>ტიპის შეცვლა
+        </button>
+    </div>
+
+    <div id="changeTypePanel" class="collapse mt-2">
+        <div class="card border-0 shadow-sm">
+            <div class="card-body py-3">
+                <form asp-controller="Manage" asp-action="ChangeProductType" method="post" class="row g-3">
+                    <input type="hidden" name="productId" value="@product.Id" />
+                    <div class="col-12 col-md-8">
+                        <label for="newType" class="form-label fw-medium mb-1">ახალი ტიპი</label>
+                        <select id="newType" name="newType" class="form-select form-select-sm" required style="min-height: 32px;">
+                            <option value="">-- აირჩიეთ ტიპი --</option>
+                                                    @foreach (ProductType pt in Enum.GetValues(typeof(ProductType)))
+                                                    {
+                                                        <option value="@( (int)pt )" selected="@(product.ProductType == pt)">
+                                                            @(
+                                                              pt switch
+                                                              {
+                                                               ProductType.BuiltIn => "ჩასაშენებელი",
+                                                               ProductType.Freestanding => "დასადგამი",
+                                                               ProductType.WallMounted => "კედელზე დასაკიდი",
+                                                               ProductType.CounterTop => "ზედაპირზე / მაგიდაზე დასადგამი",
+                                                               ProductType.FloorMounted => "იატაკზე დასადგამი",
+                                                               _ => pt.ToString()
+                                                               }
+                                                                )
+                                                    </option>
+            }
+
+                        </select>
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <div class="d-flex flex-wrap gap-2">
+                            <button type="submit" class="btn btn-success btn-sm flex-grow-1">
+                                <i class="fas fa-check me-1"></i>დადასტურება
+                            </button>
+                            <button type="button"
+                                    class="btn btn-secondary btn-sm flex-grow-1"
+                                    data-bs-toggle="collapse"
+                                    data-bs-target="#changeTypePanel">
+                                <i class="fas fa-times me-1"></i>გაუქმება
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
                         <div class="col-md-6">
                             <div class="d-flex justify-content-between align-items-center">
@@ -439,6 +523,10 @@
                                 <i class="fas fa-edit me-2"></i>რედაქტირება
                             </a>
                         }
+                        <a asp-controller="Home" asp-action="ProductDetails" asp-route-id="@product.Id"
+                           class="btn btn-outline-success shadow-sm me-2" target="_blank">
+                            <i class="fas fa-external-link-alt me-2"></i> ნახვა ვებ-გვერდზე
+                        </a>
 
                         <a asp-controller="Manage" asp-action="Products"
                            class="btn btn-secondary shadow-sm">

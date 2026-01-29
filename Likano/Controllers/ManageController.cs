@@ -18,6 +18,7 @@ using Likano.Application.Features.Manage.ProducerCountry.Queries.GetAll;
 using Likano.Application.Features.Manage.Product.Commands.ChangeAvailableStatus;
 using Likano.Application.Features.Manage.Product.Commands.ChangeCategory;
 using Likano.Application.Features.Manage.Product.Commands.ChangeStatus;
+using Likano.Application.Features.Manage.Product.Commands.ChangeType;
 using Likano.Application.Features.Manage.Product.Commands.Create;
 using Likano.Application.Features.Manage.Product.Commands.Edit;
 using Likano.Application.Features.Manage.Product.Queries.Get;
@@ -152,5 +153,8 @@ namespace Likano.Controllers
             }).ToList();
             return Ok(result);
         }
+
+        [HttpPost("change-product-type")]
+        public async Task<ChangeTypeResponse> ChangeProductType([FromBody] ChangeTypeCommand command) => await _mediator.Send(command);
     }
 }
