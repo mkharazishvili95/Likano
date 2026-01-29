@@ -649,7 +649,28 @@
                     </div>
                 </div>
 
-                <div id="productsGrid" class="row g-4"></div>
+                <div id="productsGrid" class="row g-4">
+                @if (Model?.Items != null && Model.Items.Any())
+                {
+                    foreach (var product in Model.Items)
+                    {
+                        <div class="col-12 col-sm-6 col-xl-4">
+                            <a asp-page="/Details" asp-route-seoTitle="@product.SeoTitle" asp-route-id="@product.Id">
+                                @product.Title
+                            </a>
+                        </div>
+                    }
+                }
+                else
+                {
+                    <div class="col-12">
+                        <div class="empty-state">
+                            <i class="bi bi-search"></i>
+                            <p>პროდუქტები ვერ მოიძებნა</p>
+                        </div>
+                    </div>
+                }
+            </div>
 
                 <div id="loadingMore" class="text-center py-5 d-none">
                     <div class="spinner-border" role="status">
@@ -696,7 +717,7 @@
                         <i class></i> ფასი არაა მითითებული
                     </div>
                 `}
-                    <a href="/Details/${p.id}" class="btn-action ms-auto details-btn">
+                        <a href="/Details/${p.seoTitle}-${p.id}" class="btn-action ms-auto details-btn">
                         <i class="bi bi-chevron-right fs-5"></i>
                         <span class="details-text">სრულად ნახვა</span>
                     </a>

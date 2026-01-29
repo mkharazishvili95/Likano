@@ -22,6 +22,12 @@ builder.Services.AddHttpClient("API", client =>
 // Add services to the container.
 var mvcBuilder = builder.Services.AddControllersWithViews();
 
+builder.Services.AddRazorPages()
+    .AddRazorPagesOptions(options =>
+    {
+        options.RootDirectory = "/Views/Home";
+    });
+
 mvcBuilder.PartManager.ApplicationParts.Remove(
     mvcBuilder.PartManager.ApplicationParts
         .FirstOrDefault(p => p.Name == "Likano"));
@@ -103,5 +109,7 @@ app.UseStatusCodePagesWithReExecute("/Shared/NotFound");
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+app.MapRazorPages();
 
 app.Run();
