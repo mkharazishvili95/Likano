@@ -88,7 +88,7 @@
                 left: 50%;
                 transform: translateX(-50%);
                 width: 160px;
-                height: 3px; 
+                height: 3px;
                 background: linear-gradient(90deg, #2563eb 0%, #ec4899 100%);
                 border-radius: 3px;
                 box-shadow: 0 2px 8px rgba(236,72,153,0.15);
@@ -154,6 +154,46 @@
                 color: #ef4444;
             }
 
+        .facebook-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background: #fff;
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            color: #1877f2;
+            text-decoration: none;
+            font-size: 1.4rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+            .facebook-btn::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: -100%;
+                width: 100%;
+                height: 100%;
+                background: linear-gradient(135deg, #e7f3ff 0%, #cfe9ff 100%);
+                transition: left 0.3s;
+                z-index: -1;
+            }
+
+            .facebook-btn:hover::before {
+                left: 0;
+            }
+
+            .facebook-btn:hover {
+                color: #1877f2;
+                border-color: #1877f2;
+                transform: translateY(-3px) scale(1.05);
+                box-shadow: 0 8px 20px rgba(24,119,242,0.2);
+            }
+
         main {
             max-width: 1380px;
             margin: 40px auto 60px;
@@ -214,6 +254,11 @@
         .contact-btn {
             justify-content: center;
             width: 100%;
+        }
+
+        .facebook-btn {
+            width: 100%;
+            height: 50px;
         }
 
         main {
@@ -282,6 +327,13 @@
                 <a href="/contact" class="contact-btn map" title="სრული მისამართი და რუკა">
                     <i class="fas fa-map-marker-alt"></i>
                     თბილისი, აგლაძის ქ. №15
+                </a>
+                <a href="https://www.facebook.com/likanogeorgia"
+                   class="facebook-btn"
+                   title="ჩვენი Facebook გვერდი"
+                   target="_blank"
+                   rel="noopener noreferrer">
+                    <i class="fab fa-facebook-f"></i>
                 </a>
             </div>
         </div>
