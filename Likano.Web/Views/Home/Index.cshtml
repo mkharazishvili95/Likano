@@ -312,20 +312,20 @@
     .header-section {
         background: rgba(255, 255, 255, 0.95);
         backdrop-filter: blur(10px);
-        border-radius: 20px;
-        padding: 1.5rem 2rem;
-        margin-bottom: 2rem;
+        border-radius: 16px;
+        padding: 1rem 1.5rem;
+        margin-bottom: 1.5rem;
         box-shadow: var(--shadow-md);
         border: 1px solid var(--border);
         display: flex;
         justify-content: space-between;
         align-items: center;
         flex-wrap: wrap;
-        gap: 1.5rem;
+        gap: 1rem;
     }
 
     .page-title {
-        font-size: 2rem;
+        font-size: 1.5rem;
         font-weight: 900;
         margin: 0;
         background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
@@ -340,24 +340,27 @@
 
     .header-controls {
         display: flex;
-        gap: 1rem;
+        gap: 0.75rem;
         align-items: center;
+        flex-wrap: nowrap; 
     }
 
     .results-count {
-        padding: 0.75rem 1.5rem;
+        padding: 0.5rem 1.2rem;
         border-radius: 50px;
         font-weight: 700;
-        font-size: 0.95rem;
+        font-size: 0.85rem;
         background: linear-gradient(135deg, var(--text-primary) 0%, var(--text-secondary) 100%);
         color: white;
         box-shadow: var(--shadow-sm);
+        white-space: nowrap;
     }
 
     .form-select-sm {
-        padding: 0.75rem 1rem;
+        padding: 0.5rem 0.9rem;
         border-radius: 12px;
         font-weight: 600;
+        font-size: 0.85rem;
         border: 1px solid var(--border);
         background: var(--surface);
         transition: var(--transition);
@@ -421,6 +424,13 @@
         padding: 1.25rem 1.5rem;
     }
 
+    }
+
+    .header-left {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        flex-wrap: wrap;
     }
 
     @@media (max-width: 768px) {
@@ -518,6 +528,40 @@
                 transform: none !important;
             }
 
+    @@media (max-width: 768px) {
+        .header-left
+
+    {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .header-section {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    }
+
+    @@media (max-width: 576px) {
+        .page-title
+
+    {
+        font-size: 1.2rem;
+    }
+
+    .results-count {
+        font-size: 0.8rem;
+        padding: 0.4rem 1rem;
+    }
+
+    .form-select-sm {
+        font-size: 0.8rem;
+        padding: 0.4rem 0.8rem;
+    }
+
+    }
+
 </style>
 
 <div class="page-wrapper">
@@ -591,9 +635,11 @@
 
             <main class="col-xl-9 col-lg-8">
                 <div class="header-section">
-                    <h2 class="page-title">პროდუქცია</h2>
+                    <div class="header-left">
+                        <h2 class="page-title">პროდუქცია</h2>
+                    </div>
                     <div class="header-controls">
-                        <span id="resultsCount" class="results-count">0 პროდუქტი</span>
+                        <span id="resultsCount" class="results-count">ნაპოვნია 0 პროდუქტი</span>
                         <select id="sortSelector" class="form-select form-select-sm">
                             <option value="CreateDateDesc">ახალი პროდუქტები</option>
                             <option value="PopularityDesc">პოპულარული</option>
@@ -695,7 +741,7 @@
 
                 if (response?.items?.length > 0) {
                     response.items.forEach(p => $grid.append(renderProduct(p)));
-                    $('#resultsCount').text(`${response.totalCount} პროდუქტი`);
+                            $('#resultsCount').text(`${response.totalCount} პროდუქტი`);
                 } else if (!append) {
                     $grid.html(`
                         <div class="col-12">
@@ -705,7 +751,7 @@
                             </div>
                         </div>
                     `);
-                    $('#resultsCount').text('0 პროდუქტი');
+                            $('#resultsCount').text('0 პროდუქტი');
                 }
 
                 hasMore = (response.items?.length === pageSize);
