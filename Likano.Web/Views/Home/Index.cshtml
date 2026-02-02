@@ -45,9 +45,12 @@
         border-radius: 24px;
         padding: 2.5rem;
         position: sticky;
-        top: 1.5rem;
+        top: calc(140px + 1.5rem);
+        max-height: calc(100vh - 140px - 3rem);
+        overflow-y: auto;
         box-shadow: var(--shadow-lg);
         transition: var(--transition);
+        z-index: 100;
     }
 
         .filter-sidebar:hover {
@@ -409,12 +412,12 @@
         }
 
     @@media (max-width: 991px) {
-        .filter-sidebar
-
-    {
-        position: static;
-        margin-bottom: 2rem;
-    }
+        .filter-sidebar {
+            position: static;
+            margin-bottom: 2rem;
+            max-height: none;
+            top: auto;
+        }
 
     .page-title {
         font-size: 1.5rem;
