@@ -155,7 +155,8 @@
         background: var(--surface);
         border-radius: 20px;
         border: 1px solid var(--border);
-        height: 100%;
+        height: auto;
+        min-height: 100%; 
         display: flex;
         flex-direction: column;
         transition: var(--transition);
@@ -181,6 +182,7 @@
         position: relative;
         background: var(--surface-alt);
         border-bottom: 1px solid var(--border);
+        flex-shrink: 0;
     }
 
     .product-img {
@@ -229,23 +231,20 @@
         }
 
     @@keyframes pulse {
-        0%, 100%
-
-    {
-        opacity: 1;
-    }
-
-    50% {
-        opacity: 0.5;
-    }
-
+        0%, 100% {
+            opacity: 1;
+        }
+        50% {
+            opacity: 0.5;
+        }
     }
 
     .card-body {
         padding: 1.5rem;
         display: flex;
         flex-direction: column;
-        flex: 1;
+        flex: 1 1 auto; 
+        gap: 1rem; 
     }
 
     .category-label {
@@ -262,12 +261,12 @@
         font-weight: 700;
         line-height: 1.4;
         margin: 0.5rem 0 0.75rem;
-        min-height: 3rem;
+        min-height: auto; 
         color: var(--text-primary);
-        overflow: hidden;
-        display: -webkit-box;
-        -webkit-line-clamp: 2;
-        -webkit-box-orient: vertical;
+        overflow: visible;
+        display: block; 
+        word-wrap: break-word; 
+        overflow-wrap: break-word; 
     }
 
     .brand-info {
@@ -582,7 +581,7 @@
                     <form id="searchForm">
                         <div class="mb-3 position-relative">
                             <i class="bi bi-search position-absolute top-50 start-0 translate-middle-y ms-3 text-muted"></i>
-                            <input name="SearchString" class="form-control ps-5" placeholder="ძებნა პროდუქტის მიხედვით...">
+                            <input name="SearchString" class="form-control ps-5" placeholder="ნიჟარა, ონკანი...">
                         </div>
 
                         <div class="mb-3">
