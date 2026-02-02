@@ -101,6 +101,15 @@ namespace Likano.Web.Controllers
         [HttpGet("Details/{seoTitle}-{id:int}")]
         public async Task<IActionResult> ProductDetails(int id, string seoTitle)
         {
+            return await LoadProductDetails(id);
+        }
+        [HttpGet("Details/{id:int}")]
+        public async Task<IActionResult> ProductDetailsById(int id)
+        {
+            return await LoadProductDetails(id);
+        }
+        private async Task<IActionResult> LoadProductDetails(int id)
+        {
             var response = await _httpClient.GetAsync($"{_baseUrl}/Product/details/{id}");
             if (!response.IsSuccessStatusCode)
                 return StatusCode((int)response.StatusCode);
