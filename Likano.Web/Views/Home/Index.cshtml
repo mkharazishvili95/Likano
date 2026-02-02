@@ -664,46 +664,46 @@
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script>
     const renderProduct = p => `
-       <div class="col-12 col-sm-6 col-xl-4">
-         <div class="product-card">
-             <div class="img-container ${!p.images?.[0]?.fileUrl ? 'no-image' : ''}">
-                 <span class="status-badge ${p.isAvailable ? 'in-stock' : 'out-of-stock'}">
-                     ${p.isAvailable ? 'მარაგშია' : 'არაა მარაგში'}
-                 </span>
-                 <img src="${p.images?.[0]?.fileUrl || 'https://ik.imagekit.io/rqxdk712q/products/733b35b7-b949-4a3c-9e64-1de44004c88e_NoImageLogo'}"
-                      class="product-img" alt="${p.title}">
-             </div>
-            <div class="card-body">
-                <div>
-                    <span class="category-label">${p.category?.name || 'Likano'}</span>
-                    <h3 class="product-title">${p.title}</h3>
-                    <div class="product-code" style="font-size:0.85rem;color:var(--text-secondary);font-weight:600;margin-bottom:0.5rem;">
-                        კოდი: ${p.code || '-'}
-                    </div>
-                    ${p.brand?.name ? `
-                        <p class="brand-info">
-                            <i class="bi bi-award"></i> ${p.brand.name}
-                        </p>
-                    ` : ''}
+   <div class="col-12 col-sm-6 col-xl-4">
+     <div class="product-card">
+         <div class="img-container ${!p.images?.[0]?.fileUrl ? 'no-image' : ''}">
+             <span class="status-badge ${p.isAvailable ? 'in-stock' : 'out-of-stock'}">
+                 ${p.isAvailable ? 'მარაგშია' : 'არაა მარაგში'}
+             </span>
+             <img src="${p.images?.[0]?.fileUrl || 'https://ik.imagekit.io/rqxdk712q/products/733b35b7-b949-4a3c-9e64-1de44004c88e_NoImageLogo'}"
+                  class="product-img" alt="${p.title}">
+         </div>
+        <div class="card-body">
+            <div>
+                <span class="category-label">${p.category?.name || 'Likano'}</span>
+                <h3 class="product-title">${p.title}</h3>
+                <div class="product-code" style="font-size:0.85rem;color:var(--text-secondary);font-weight:600;margin-bottom:0.5rem;">
+                    კოდი: ${p.code || '-'}
                 </div>
-                <div class="mt-auto d-flex align-items-center">
-                        ${p.price && p.price > 0 ? `
-                    <div class="price-tag">
-                        ${p.price.toLocaleString('ka-GE')} <span style="font-size: 1.1rem;">₾</span>
-                    </div>
-                ` : `
-                    <div class="price-missing">
-                        <i class></i> ფასი არაა მითითებული
-                    </div>
-                `}
-                    <a href="/Details/${p.id}" class="btn-action ms-auto details-btn">
-                        <i class="bi bi-chevron-right fs-5"></i>
-                        <span class="details-text">სრულად ნახვა</span>
-                    </a>
+                ${p.brand?.name ? `
+                    <p class="brand-info">
+                        <i class="bi bi-award"></i> ${p.brand.name}
+                    </p>
+                ` : ''}
+            </div>
+            <div class="mt-auto d-flex align-items-center">
+                    ${p.price && p.price > 0 ? `
+                <div class="price-tag">
+                    ${p.price.toLocaleString('ka-GE')} <span style="font-size: 1.1rem;">₾</span>
                 </div>
+            ` : `
+                <div class="price-missing">
+                    <i class></i> ფასი არაა მითითებული
+                </div>
+            `}
+                    <a href="/Details/${p.seoTitle || 'product'}-${p.id}" class="btn-action ms-auto details-btn">
+                    <i class="bi bi-chevron-right fs-5"></i>
+                    <span class="details-text">სრულად ნახვა</span>
+                </a>
             </div>
         </div>
     </div>
+</div>
 `;
 
     let page = 1;
@@ -784,7 +784,6 @@
             hasMore = true;
             loadProducts();
         });
-
 
         $('#hasPriceCheck').on('change', function () {
             page = 1;

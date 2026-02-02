@@ -98,8 +98,8 @@ namespace Likano.Web.Controllers
             return View();
         }
 
-        [HttpGet("details/{id}")]
-        public async Task<IActionResult> ProductDetails(int id)
+        [HttpGet("Details/{seoTitle}-{id:int}")]
+        public async Task<IActionResult> ProductDetails(int id, string seoTitle)
         {
             var response = await _httpClient.GetAsync($"{_baseUrl}/Product/details/{id}");
             if (!response.IsSuccessStatusCode)
@@ -111,6 +111,7 @@ namespace Likano.Web.Controllers
 
             var similarsResponse = await _httpClient.GetAsync($"{_baseUrl}/Product/similars?productId={id}");
             var similars = new List<SimilarProductDto>();
+
             if (similarsResponse.IsSuccessStatusCode)
             {
                 var similarsResult = await similarsResponse.Content.ReadFromJsonAsync<GetSimilarProductsResponse>();
@@ -127,7 +128,6 @@ namespace Likano.Web.Controllers
             }
 
             ViewBag.SimilarProducts = similars;
-
             return View("Details", result);
         }
 
