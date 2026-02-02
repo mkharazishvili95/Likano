@@ -122,7 +122,8 @@ namespace Likano.Web.Controllers
                             Id = (int)x.Id,
                             Title = (string?)x.Title,
                             ImageUrl = (string?)x.MainImage,
-                            Price = (decimal?)x.Price
+                            Price = (decimal?)x.Price,
+                            SeoTitle = (string?)x.SeoTitle
                         })
                         .ToList();
             }

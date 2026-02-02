@@ -3326,7 +3326,7 @@
                             {
                                 <div class="price-missing"> <i class="bi bi-exclamation-circle"></i> ფასი არაა მითითებული </div>
                             }
-                            <a href="@Url.Action("ProductDetails", "Home", new { id = product.Id })" class="btn btn-primary" style="background:linear-gradient(90deg,#6366f1 0%,#ec4899 100%);border:none;">
+                        <a href="/Details/@(product.SeoTitle ?? "product")-@product.Id" class="btn btn-primary" style="background:linear-gradient(90deg,#6366f1 0%,#ec4899 100%);border:none;">
                                 ნახვა
                             </a>
                         </div>
