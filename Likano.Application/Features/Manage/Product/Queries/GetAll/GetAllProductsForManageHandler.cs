@@ -57,7 +57,6 @@ namespace Likano.Application.Features.Manage.Product.Queries.GetAll
                     Code = p.Code,
                     ProducerCountryId = p.ProducerCountryId,
                     BrandId = p.BrandId,
-                    SeoTitle = p.SeoTitle,
                     Type = p.Type
                 }).ToList()
             };

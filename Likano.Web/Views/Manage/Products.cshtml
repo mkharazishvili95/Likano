@@ -20,7 +20,6 @@
         ImageUrl = Model.Filter.ImageUrl,
         Material = Model.Filter.Material,
         Code = Model.Filter.Code,
-        SeoTitle = Model.Filter.SeoTitle,
         LengthFrom = Model.Filter.LengthFrom,
         LengthTo = Model.Filter.LengthTo,
         WidthFrom = Model.Filter.WidthFrom,
@@ -206,12 +205,6 @@
                 </div>
 
                 <div class="col-6 col-md-2">
-                    <label class="form-label small fw-medium">SEO TITLE</label>
-                    <input type="text" name="SeoTitle" value="@Model.Filter.SeoTitle"
-                           class="form-control form-control-sm" placeholder="სეო" />
-                </div>
-
-                <div class="col-6 col-md-2">
                     <label class="form-label small fw-medium">სიგრძე (დან)</label>
                     <input type="number" step="0.01" name="LengthFrom"
                            value="@(Model.Filter.LengthFrom?.ToString(System.Globalization.CultureInfo.InvariantCulture))"
@@ -285,7 +278,6 @@
                             <th>ბრენდი</th>
                             <th>მასალა</th>
                             <td>კოდი</td>
-                            <td>სეო</td>
                             <th>სიგრძე</th>
                             <th>სიგანე</th>
                             <th>სიმაღლე</th>
@@ -338,7 +330,6 @@
                                     <td>@brandName</td>
                                     <td>@p.Material</td>
                                     <td>@p.Code</td>
-                                    <td>@p.SeoTitle</td>
                                     <td>@p.Length</td>
                                     <td>@p.Width</td>
                                     <td>@p.Height</td>

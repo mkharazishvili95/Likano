@@ -26,7 +26,6 @@ namespace Likano.Domain.Entities
         public int? ProducerCountryId { get; set; }
         public ICollection<Likano.Domain.Entities.File>? Images { get; set; }
         public string? Code { get; set; }
-        public string? SeoTitle { get; set; }
         public int? ViewCount { get; set; }
         public ProductType? Type { get; set; }
         public string? IncludedComponents { get; set; } //კომპლექტში შედის
