@@ -2889,12 +2889,12 @@
                             <img id="mainImage"
                                  src="@Model.Images.First().FileUrl"
                                  class="main-image"
-                                 alt="@Model.Title - პროდუქტის სურათი"
+                                 alt="@Model.Title - პროდუქტის ფოტო"
                                  tabindex="0"
                                  onclick="openModal(selectedIndex)"
                                  onmouseover="showTooltip()"
                                  onmouseout="hideTooltip()" />
-                            <div class="main-image-tooltip" id="mainImageTooltip">დააკლიკეთ გასადიდებლად 🔍</div>
+                            <div class="main-image-tooltip" id="mainImageTooltip">დააკლიკეთ გაადიდებლად 🔍</div>
                         </div>
 
                         @if (Model.Images.Count > 1)
@@ -3078,7 +3078,7 @@
                     <button class="modal-arrow left" onclick="prevImage(event)">‹</button>
                     <button class="modal-arrow right" onclick="nextImage(event)">›</button>
                 }
-                <img id="modalMainImage" class="modal-main-image" src="" alt="Product image" />
+                <img id="modalMainImage" class="modal-main-image" src="" alt="@Model.Title - გადიდებული ფოტო" />
                 <div id="zoomLens" class="zoom-lens"></div>
                 <div class="modal-thumbnails" id="modalThumbnails"></div>
             </div>
