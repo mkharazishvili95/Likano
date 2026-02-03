@@ -3090,15 +3090,64 @@
                 "@@context": "https://schema.org",
                 "@@type": "Product",
                 "name": "@Model.Title",
-                "description": "@Model.Description",
-                "image": "@Model.ProductImageUrl",
-                "brand": "@Model.Brand",
+                "description": "@(Model.Description ?? $"{Model.Title} - სამზარეულოს ტექნიკა Likano.Ge-ზე")",
+                "image": "@(Model.Images?.FirstOrDefault()?.FileUrl ?? Model.ProductImageUrl ?? "")",
+                "sku": "@Model.Code",
+                "brand": {
+                    "@@type": "Brand",
+                    "name": "@(Model.Brand?.Name ?? "Likano")"
+                },
                 "offers": {
                     "@@type": "Offer",
-                    "price": "@Model.Price",
+                    "price": "@(Model.Price?.ToString("F2", System.Globalization.CultureInfo.InvariantCulture) ?? "0")",
                     "priceCurrency": "GEL",
-                    "availability": "@((bool)Model.IsAvailable.HasValue && Model.IsAvailable == true ? "https://schema.org/InStock" : "https://schema.org/OutOfStock")"
+                    "availability": "@(Model.IsAvailable == true ? "https://schema.org/InStock" : "https://schema.org/OutOfStock")",
+                    "seller": {
+                        "@@type": "Organization",
+                        "name": "Likano.Ge"
+                    }
                 }
+            }
+        </script>
+
+        <script type="application/ld+json">
+            {
+                "@@context": "https://schema.org",
+                "@@type": "BreadcrumbList",
+                "itemListElement": [
+                    {
+                        "@@type": "ListItem",
+                        "position": 1,
+                        "name": "მთავარი",
+                        "item": "@($"{Context.Request.Scheme}://{Context.Request.Host}/")"
+                    }
+                    @if (Model.Category != null)
+                    {
+                            <text>,
+                            {
+                                "@@type": "ListItem",
+                                "position": 2,
+                                "name": "@Model.Category.Name",
+                                "item": "@($"{Context.Request.Scheme}://{Context.Request.Host}/?categoryId={Model.Category.CategoryId}")"
+                            },
+                            {
+                                "@@type": "ListItem",
+                                "position": 3,
+                                "name": "@Model.Title"
+                            }
+                            </text>
+                    }
+                    else
+                    {
+                            <text>,
+                            {
+                                "@@type": "ListItem",
+                                "position": 2,
+                                "name": "@Model.Title"
+                            }
+                            </text>
+                    }
+                ]
             }
         </script>
 }
