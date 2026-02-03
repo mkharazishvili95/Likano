@@ -306,13 +306,49 @@
         }
     </style>
     @RenderSection("Styles", required: false)
+
+    <meta name="description" content="@(ViewData["Description"] ?? Likano.Web.Helpers.SeoHelper.Descriptions.HomePage)" />
+    <meta name="keywords" content="@(ViewData["Keywords"] ?? Likano.Web.Helpers.SeoHelper.Keywords.All)" />
+    <meta name="author" content="Likano.ge" />
+    <meta name="robots" content="index, follow" />
+    <meta name="language" content="Georgian" />
+    <meta name="revisit-after" content="7 days" />
+
+    <link rel="canonical" href="@(ViewData["CanonicalUrl"] ?? $"https://www.likano.ge{Context.Request.Path}")" />
+
+    <meta property="og:type" content="@(ViewData["OgType"] ?? "website")" />
+    <meta property="og:url" content="@(ViewData["CanonicalUrl"] ?? $"https://www.likano.ge{Context.Request.Path}")" />
+    <meta property="og:title" content="@(ViewData["Title"] ?? "Likano.ge - სამზარეულოს ტექნიკა")" />
+    <meta property="og:description" content="@(ViewData["Description"] ?? Likano.Web.Helpers.SeoHelper.Descriptions.HomePage)" />
+    <meta property="og:image" content="@(ViewData["OgImage"] ?? "https://ik.imagekit.io/rqxdk712q/products/17827bc1-7332-4122-b0aa-7e5adc3e229e_likanologo")" />
+    <meta property="og:site_name" content="Likano.ge" />
+    <meta property="og:locale" content="ka_GE" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="@(ViewData["CanonicalUrl"] ?? $"https://www.likano.ge{Context.Request.Path}")" />
+    <meta name="twitter:title" content="@(ViewData["Title"] ?? "Likano.ge - სამზარეულოს ტექნიკა")" />
+    <meta name="twitter:description" content="@(ViewData["Description"] ?? Likano.Web.Helpers.SeoHelper.Descriptions.HomePage)" />
+    <meta name="twitter:image" content="@(ViewData["OgImage"] ?? "https://ik.imagekit.io/rqxdk712q/products/17827bc1-7332-4122-b0aa-7e5adc3e229e_likanologo")" />
+
+    @if (ViewData["Schema"] != null)
+    {
+        <script type="application/ld+json">
+            @Html.Raw(ViewData["Schema"])
+        </script>
+    }
+    else
+    {
+        <script type="application/ld+json">
+            @Html.Raw(Likano.Web.Helpers.SeoHelper.GenerateOrganizationSchema())
+        </script>
+    }
 </head>
 <body>
     <header>
         <div class="container-header">
             <a class="logo" href="/" title="Likano.Ge - სამზარეულოს ტექნიკა">
                 <img src="https://ik.imagekit.io/rqxdk712q/products/17827bc1-7332-4122-b0aa-7e5adc3e229e_likanologo"
-                     alt="Likano Logo" />
+                     alt="Likano Logo - სამზარეულოს ტექნიკა საბითუმო ფასად" />
             </a>
 
             <div class="slogan">
