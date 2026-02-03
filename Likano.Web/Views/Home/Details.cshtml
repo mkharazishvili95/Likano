@@ -8,6 +8,7 @@
     ViewData["Description"] = $"{Model.Title} - {Model.Brand?.Name ?? ""} {Model.Category?.Name ?? "სამზარეულოს ტექნიკა"}. იყიდე Likano.Ge-ზე საუკეთესო ფასად.";
     ViewData["Keywords"] = $"{Model.Title}, {Model.Brand?.Name}, {Model.Category?.Name}, სამზარეულოს ტექნიკა, Likano";
     ViewData["CanonicalUrl"] = $"{Context.Request.Scheme}://{Context.Request.Host}/Details/{Model.SeoTitle ?? "product"}-{Model.Id}";
+    ViewData["OgImage"] = Model.Images?.FirstOrDefault()?.FileUrl ?? Model.ProductImageUrl ?? "https://ik.imagekit.io/rqxdk712q/products/17827bc1-7332-4122-b0aa-7e5adc3e229e_likanologo";
 }
 @{
     Func<ProductType, string> getGeorgianType = type => type switch
