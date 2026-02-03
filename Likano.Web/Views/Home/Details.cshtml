@@ -5,6 +5,9 @@
 @{
     Layout = "_Layout";
     ViewData["Title"] = Model.Title ?? "პროდუქტის დეტალები";
+    ViewData["Description"] = $"{Model.Title} - {Model.Brand?.Name ?? ""} {Model.Category?.Name ?? "სამზარეულოს ტექნიკა"}. იყიდე Likano.Ge-ზე საუკეთესო ფასად.";
+    ViewData["Keywords"] = $"{Model.Title}, {Model.Brand?.Name}, {Model.Category?.Name}, სამზარეულოს ტექნიკა, Likano";
+    ViewData["CanonicalUrl"] = $"{Context.Request.Scheme}://{Context.Request.Host}/Details/{Model.SeoTitle ?? "product"}-{Model.Id}";
 }
 @{
     Func<ProductType, string> getGeorgianType = type => type switch
@@ -2886,7 +2889,7 @@
                             <img id="mainImage"
                                  src="@Model.Images.First().FileUrl"
                                  class="main-image"
-                                 alt="@Model.Title"
+                                 alt="@Model.Title - პროდუქტის სურათი"
                                  tabindex="0"
                                  onclick="openModal(selectedIndex)"
                                  onmouseover="showTooltip()"
@@ -2912,7 +2915,7 @@
                     else if (!string.IsNullOrEmpty(Model.ProductImageUrl))
                     {
                         <div class="main-image-wrapper">
-                            <img src="@Model.ProductImageUrl" class="main-image" alt="@Model.Title" />
+                        <img src="@Model.ProductImageUrl" class="main-image" alt="@Model.Title - პროდუქტის ფოტო" />
                         </div>
                     }
                     else
@@ -3081,7 +3084,24 @@
             </div>
         </div>
 }
-
+@section StructuredData {
+        <script type="application/ld+json">
+            {
+                "@@context": "https://schema.org",
+                "@@type": "Product",
+                "name": "@Model.Title",
+                "description": "@Model.Description",
+                "image": "@Model.ProductImageUrl",
+                "brand": "@Model.Brand",
+                "offers": {
+                    "@@type": "Offer",
+                    "price": "@Model.Price",
+                    "priceCurrency": "GEL",
+                    "availability": "@((bool)Model.IsAvailable.HasValue && Model.IsAvailable == true ? "https://schema.org/InStock" : "https://schema.org/OutOfStock")"
+                }
+            }
+        </script>
+}
 @section Scripts {
         <script>
 
@@ -3308,12 +3328,12 @@
                             @if (string.IsNullOrWhiteSpace(product.ImageUrl))
                             {
                                 <div class="no-image">
-                                    <img src="https://ik.imagekit.io/rqxdk712q/products/733b35b7-b949-4a3c-9e64-1de44004c88e_NoImageLogo" class="main-image" alt="No image" />
+                                    <img src="https://ik.imagekit.io/rqxdk712q/products/733b35b7-b949-4a3c-9e64-1de44004c88e_NoImageLogo" class="main-image" alt="ფოტო არ არის ხელმისაწვდომი" />
                                 </div>
                             }
                             else
                             {
-                                <img src="@product.ImageUrl" class="similar-product-image" alt="@product.Title" />
+                                <img src="@product.ImageUrl" class="similar-product-image" alt="@product.Title - მსგავსი პროდუქტი" />
                             }
                             <h5>@product.Title</h5>
                             @if (product.Price != null && product.Price > 0)
