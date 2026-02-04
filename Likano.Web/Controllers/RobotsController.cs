@@ -14,6 +14,8 @@ namespace Likano.Web.Controllers
             sb.AppendLine("Allow: /");
             sb.AppendLine("Disallow: /Manage/");
             sb.AppendLine("Disallow: /Error/");
+            sb.AppendLine("Disallow: /Auth/");      
+            sb.AppendLine("Disallow: /Shared/");     
             sb.AppendLine();
             sb.AppendLine("Sitemap: https://www.likano.ge/sitemap.xml");
 
