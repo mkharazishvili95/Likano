@@ -3,58 +3,55 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    
+
     <title>@ViewData["Title"] - Likano.Ge</title>
-    <meta name="description" content="@(ViewData["Description"] ?? "Likano.Ge - სამზარეულოს ტექნიკის მაღაზია თბილისში. ხარისხიანი სამზარეულოს აპარატურა საუკეთესო ფასებით.")" />
-    <meta name="keywords" content="@(ViewData["Keywords"] ?? "სამზარეულოს ტექნიკა, თბილისი, Likano, კულინარიული აპარატურა")" />
-    <meta name="author" content="Likano.Ge" />
+    <meta name="description" content="@(ViewData["Description"] ?? Likano.Web.Helpers.SeoHelper.Descriptions.HomePage)" />
+    <meta name="keywords" content="@(ViewData["Keywords"] ?? Likano.Web.Helpers.SeoHelper.Keywords.All)" />
+    <meta name="author" content="Likano.ge" />
     <meta name="robots" content="index, follow" />
-    
-    <link rel="canonical" href="@(ViewData["CanonicalUrl"] ?? $"{Context.Request.Scheme}://{Context.Request.Host}{Context.Request.Path}")" />
-    
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content="@ViewData["Title"] - Likano.Ge" />
-    <meta property="og:description" content="@(ViewData["Description"] ?? "სამზარეულოს ტექნიკის მაღაზია თბილისში")" />
-    <meta property="og:url" content="@($"{Context.Request.Scheme}://{Context.Request.Host}{Context.Request.Path}")" />
+    <meta name="language" content="Georgian" />
+    <meta name="revisit-after" content="7 days" />
+
+    <link rel="canonical" href="@(ViewData["CanonicalUrl"] ?? $"https://www.likano.ge{Context.Request.Path}")" />
+
+    <meta property="og:type" content="@(ViewData["OgType"] ?? "website")" />
+    <meta property="og:title" content="@(ViewData["Title"] ?? "Likano.ge - სამზარეულოს ტექნიკა")" />
+    <meta property="og:description" content="@(ViewData["Description"] ?? Likano.Web.Helpers.SeoHelper.Descriptions.HomePage)" />
+    <meta property="og:url" content="@(ViewData["CanonicalUrl"] ?? $"https://www.likano.ge{Context.Request.Path}")" />
     <meta property="og:image" content="@(ViewData["OgImage"] ?? "https://ik.imagekit.io/rqxdk712q/products/17827bc1-7332-4122-b0aa-7e5adc3e229e_likanologo")" />
-    <meta property="og:site_name" content="Likano.Ge" />
+    <meta property="og:site_name" content="Likano.ge" />
     <meta property="og:locale" content="ka_GE" />
-    
+
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="@ViewData["Title"] - Likano.Ge" />
-    <meta name="twitter:description" content="@(ViewData["Description"] ?? "სამზარეულოს ტექნიკის მაღაზია თბილისში")" />
+    <meta name="twitter:title" content="@(ViewData["Title"] ?? "Likano.ge - სამზარეულოს ტექნიკა")" />
+    <meta name="twitter:description" content="@(ViewData["Description"] ?? Likano.Web.Helpers.SeoHelper.Descriptions.HomePage)" />
+    <meta name="twitter:url" content="@(ViewData["CanonicalUrl"] ?? $"https://www.likano.ge{Context.Request.Path}")" />
     <meta name="twitter:image" content="@(ViewData["OgImage"] ?? "https://ik.imagekit.io/rqxdk712q/products/17827bc1-7332-4122-b0aa-7e5adc3e229e_likanologo")" />
-    
+
     <meta name="geo.region" content="GE-TB" />
     <meta name="geo.placename" content="Tbilisi" />
-    
-    <script type="application/ld+json">
+
+    @if (ViewData["Schema"] != null)
     {
-        "@@context": "https://schema.org",
-        "@@type": "LocalBusiness",
-        "name": "Likano.Ge",
-        "description": "სამზარეულოს ტექნიკის მაღაზია",
-        "url": "https://likano.ge",
-        "telephone": "+995599457950",
-        "address": {
-            "@@type": "PostalAddress",
-            "streetAddress": "აგლაძის ქ. №15",
-            "addressLocality": "თბილისი",
-            "addressCountry": "GE"
-        },
-        "image": "https://ik.imagekit.io/rqxdk712q/products/17827bc1-7332-4122-b0aa-7e5adc3e229e_likanologo",
-        "sameAs": [
-            "https://www.facebook.com/likanogeorgia"
-        ]
+        <script type="application/ld+json">
+            @Html.Raw(ViewData["Schema"])
+        </script>
     }
-    </script>
+    else
+    {
+        <script type="application/ld+json">
+            @Html.Raw(Likano.Web.Helpers.SeoHelper.GenerateOrganizationSchema())
+        </script>
+    }
+
     @RenderSection("StructuredData", required: false)
-    
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=BPG+Arial:wght@400;700&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link rel="icon" type="image/png" sizes="32x25" href="https://ik.imagekit.io/rqxdk712q/products/92efa6d7-3b27-42ec-bfab-212e240b64d4_fav" />
-    <link href="https://fonts.googleapis.com/css2?family=BPG+Arial:wght@400;700&display=swap" rel="stylesheet">
+
     <style>
         :root {
             --primary: #2563eb;
@@ -352,42 +349,6 @@
         }
     </style>
     @RenderSection("Styles", required: false)
-
-    <meta name="description" content="@(ViewData["Description"] ?? Likano.Web.Helpers.SeoHelper.Descriptions.HomePage)" />
-    <meta name="keywords" content="@(ViewData["Keywords"] ?? Likano.Web.Helpers.SeoHelper.Keywords.All)" />
-    <meta name="author" content="Likano.ge" />
-    <meta name="robots" content="index, follow" />
-    <meta name="language" content="Georgian" />
-    <meta name="revisit-after" content="7 days" />
-
-    <link rel="canonical" href="@(ViewData["CanonicalUrl"] ?? $"https://www.likano.ge{Context.Request.Path}")" />
-
-    <meta property="og:type" content="@(ViewData["OgType"] ?? "website")" />
-    <meta property="og:url" content="@(ViewData["CanonicalUrl"] ?? $"https://www.likano.ge{Context.Request.Path}")" />
-    <meta property="og:title" content="@(ViewData["Title"] ?? "Likano.ge - სამზარეულოს ტექნიკა")" />
-    <meta property="og:description" content="@(ViewData["Description"] ?? Likano.Web.Helpers.SeoHelper.Descriptions.HomePage)" />
-    <meta property="og:image" content="@(ViewData["OgImage"] ?? "https://ik.imagekit.io/rqxdk712q/products/17827bc1-7332-4122-b0aa-7e5adc3e229e_likanologo")" />
-    <meta property="og:site_name" content="Likano.ge" />
-    <meta property="og:locale" content="ka_GE" />
-
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:url" content="@(ViewData["CanonicalUrl"] ?? $"https://www.likano.ge{Context.Request.Path}")" />
-    <meta name="twitter:title" content="@(ViewData["Title"] ?? "Likano.ge - სამზარეულოს ტექნიკა")" />
-    <meta name="twitter:description" content="@(ViewData["Description"] ?? Likano.Web.Helpers.SeoHelper.Descriptions.HomePage)" />
-    <meta name="twitter:image" content="@(ViewData["OgImage"] ?? "https://ik.imagekit.io/rqxdk712q/products/17827bc1-7332-4122-b0aa-7e5adc3e229e_likanologo")" />
-
-    @if (ViewData["Schema"] != null)
-    {
-        <script type="application/ld+json">
-            @Html.Raw(ViewData["Schema"])
-        </script>
-    }
-    else
-    {
-        <script type="application/ld+json">
-            @Html.Raw(Likano.Web.Helpers.SeoHelper.GenerateOrganizationSchema())
-        </script>
-    }
 </head>
 <body>
     <header>
@@ -436,23 +397,14 @@
 
     @RenderSection("Scripts", required: false)
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        (function () {
+            const path = window.location.pathname + window.location.search;
+            if (!path.startsWith('/error') && !path.includes('notfound')) {
+                sessionStorage.setItem('lastInternalUrl', path);
+            }
+        })();
+    </script>
 </body>
 </html>
-
-
-<script>
-    (function () {
-        const path = window.location.pathname + window.location.search;
-
-        if (!path.startsWith('/error') && !path.includes('notfound')) {
-            sessionStorage.setItem('lastInternalUrl', path);
-        }
-    })();
-
-     (function () {
-        const path = window.location.pathname + window.location.search;
-        if (!path.includes('notfound') && !path.includes('/error')) {
-            sessionStorage.setItem('lastInternalUrl', path);
-        }
-    })();
-</script>
