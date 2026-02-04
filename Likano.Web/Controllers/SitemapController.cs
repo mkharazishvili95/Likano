@@ -29,6 +29,27 @@ namespace Likano.Web.Controllers
 
             try
             {
+                var categoriesResponse = await _httpClient.GetAsync($"{_baseUrl}/Category/all");
+                if (categoriesResponse.IsSuccessStatusCode)
+                {
+                    var categories = await categoriesResponse.Content.ReadFromJsonAsync<List<dynamic>>();
+                    if (categories != null)
+                    {
+                        foreach (var category in categories)
+                        {
+                            if (category?.id != null)
+                            {
+                                sitemapItems.Add(new SitemapItem
+                                {
+                                    Url = $"{baseUrl}/?categoryId={category.id}",
+                                    Priority = 0.8,
+                                    ChangeFrequency = "weekly"
+                                });
+                            }
+                        }
+                    }
+                }
+
                 var productsRequest = new
                 {
                     Pagination = new { PageNumber = 1, PageSize = 10000 },
