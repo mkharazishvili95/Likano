@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Disallow: /Manage/
+Disallow: /Admin/
+Disallow: /error/
+Disallow: /api/
+
+Sitemap: https://www.likano.ge/sitemap.xml
