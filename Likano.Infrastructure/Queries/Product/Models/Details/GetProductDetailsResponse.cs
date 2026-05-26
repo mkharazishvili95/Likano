@@ -28,5 +28,6 @@ namespace Likano.Infrastructure.Queries.Product.Models.Details
         public ProductType? Type { get; set; }
         public string? IncludedComponents { get; set; }
         public string? SeoTitle { get; set; }
+        public TextLocalization? SeoTitleWith3Languages { get; set; }
     }
 }

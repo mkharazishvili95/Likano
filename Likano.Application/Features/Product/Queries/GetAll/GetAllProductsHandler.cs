@@ -58,7 +58,10 @@ namespace Likano.Application.Features.Product.Queries.GetAll
                     ImageUrl = p.ImageUrl,
                     CategoryId = p.CategoryId,
                     CreateDate = p.CreateDate,
-                    UpdateDate = p.UpdateDate
+                    UpdateDate = p.UpdateDate,
+                    SeoTitle = p.SeoTitle != null
+                    ? new TextLocalization(p.SeoTitle)
+                    : null
                 }).ToList()
             };
         }

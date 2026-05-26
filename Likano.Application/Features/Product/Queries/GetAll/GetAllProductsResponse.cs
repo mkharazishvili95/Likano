@@ -19,5 +19,6 @@ namespace Likano.Application.Features.Product.Queries.GetAll
         public int CategoryId { get; set; }
         public DateTime? CreateDate { get; set; }
         public DateTime? UpdateDate { get; set; }
+        public TextLocalization? SeoTitle { get; set; }
     }
 }

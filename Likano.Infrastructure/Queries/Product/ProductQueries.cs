@@ -206,6 +206,7 @@ namespace Likano.Infrastructure.Queries.Product
             c.IsActive AS CategoryIsActive,
             p.ProducerCountryId,
             p.ViewCount, 
+            p.SeoTitle,
             pc.Name AS ProducerCountryName,
             p.BrandId,
             b.Name AS BrandTitle,
@@ -234,6 +235,9 @@ namespace Likano.Infrastructure.Queries.Product
                     categoryId = null;
 
                 var title = reader.IsDBNull(reader.GetOrdinal("Title")) ? null : reader.GetString(reader.GetOrdinal("Title"));
+
+                var seoTitleRaw = reader.IsDBNull(reader.GetOrdinal("SeoTitle")) ? null : reader.GetString(reader.GetOrdinal("SeoTitle"));
+                var seoTitleWith3Languages = seoTitleRaw != null ? new TextLocalization(seoTitleRaw) : null;
 
                 return new GetProductDetailsResponse
                 {
@@ -272,7 +276,8 @@ namespace Likano.Infrastructure.Queries.Product
                         Logo = reader.IsDBNull(reader.GetOrdinal("BrandLogo")) ? null : reader.GetString(reader.GetOrdinal("BrandLogo"))
                     },
                     ViewCount = reader.IsDBNull(reader.GetOrdinal("ViewCount")) ? null : reader.GetInt32(reader.GetOrdinal("ViewCount")),
-                    SeoTitle = UrlGenerator.Transliterate(title)
+                    SeoTitle = UrlGenerator.Transliterate(title),
+                    SeoTitleWith3Languages = seoTitleWith3Languages
                 };
             });
 
