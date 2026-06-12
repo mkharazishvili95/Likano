@@ -24,7 +24,9 @@
       "dotnetRunMessages": true,
       "launchBrowser": true,
       "launchUrl": "swagger",
-      "applicationUrl": "https://localhost:7063;http://localhost:5166",
+      //TODO: try it!
+      "applicationUrl": "https://xarazavar-001-site1.dtempurl.com",
+      //"applicationUrl": "https://localhost:7063;http://localhost:5166",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
