@@ -41,7 +41,7 @@ namespace Likano.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> Index(int? categoryId)
         {
-            return View("TestMainPage");
+            //return View("TestMainPage");
             var categoriesUrl = $"{_baseUrl}/category/all";
             var categoriesRequest = new { Pagination = new { PageNumber = 1, PageSize = 1000 }, SearchString = (string?)null };
             var categoriesResponse = await _httpClient.PostAsJsonAsync(categoriesUrl, categoriesRequest);
