@@ -21,7 +21,7 @@ namespace Likano.Application.Features.Manage.Product.Commands.Create
                 Title = request.Title,
                 Description = request.Description,
                 Price = request.Price,
-                IsAvailable = true,
+                IsAvailable = request.IsAvailable ?? true,
                 ImageUrl = null,
                 Material = request.Material,
                 Length = request.Length,
